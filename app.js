@@ -1,3 +1,8 @@
+// Ensure Buffer is defined (especially for mobile Phantom)
+if (typeof Buffer === "undefined" && typeof window.buffer !== "undefined") {
+  window.Buffer = window.buffer.Buffer;
+}
+
 const connectBtn = document.getElementById("connect");
 const buyBtn = document.getElementById("buy");
 const solAmountInput = document.getElementById("solAmount");
@@ -8,7 +13,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.0001;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Ganti dengan wallet penerima token
+const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Wallet tujuan
 
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
@@ -32,7 +37,7 @@ function updatePurchaseRecord(amount) {
   totalBought.textContent = updated.toLocaleString();
 }
 
-// Connect Wallet
+// Connect Phantom wallet
 connectBtn.onclick = async () => {
   try {
     if (!window.solana || !window.solana.isPhantom) {
@@ -53,18 +58,23 @@ connectBtn.onclick = async () => {
   }
 };
 
-// Kalkulasi jumlah token
+// Hitung jumlah token dari input SOL
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// Proses beli
+// Tombol beli token
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   if (!sol || sol <= 0) {
     alert("⚠️ Please enter a valid amount of SOL.");
+    return;
+  }
+
+  if (!window.solanaWeb3) {
+    alert("❌ Solana Web3 not available. Make sure it is loaded.");
     return;
   }
 
