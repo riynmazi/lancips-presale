@@ -6,26 +6,33 @@
   <title>LANCIPS Presale</title>
   <link rel="stylesheet" href="style.css" />
 
-  <!-- ✅ Buffer Polyfill Aman -->
+  <!-- ✅ BUFFER POLYFILL BEFORE WEB3.JS -->
   <script>
-    window.Buffer = {
-      from: function (str, encoding) {
-        if (encoding === "base64") {
-          const binary = atob(str);
-          const len = binary.length;
-          const bytes = new Uint8Array(len);
-          for (let i = 0; i < len; i++) {
-            bytes[i] = binary.charCodeAt(i);
-          }
-          return bytes;
-        } else if (encoding === "utf8" || encoding === "utf-8") {
-          const encoder = new TextEncoder();
-          return encoder.encode(str);
-        } else {
+    // Buffer polyfill ringan, support base64 dan utf8
+    ;(function() {
+      function base64ToBytes(str) {
+        const binary = atob(str);
+        const len = binary.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        return bytes;
+      }
+
+      function utf8ToBytes(str) {
+        const encoder = new TextEncoder();
+        return encoder.encode(str);
+      }
+
+      window.Buffer = {
+        from: function (str, encoding) {
+          if (encoding === "base64") return base64ToBytes(str);
+          if (encoding === "utf8" || encoding === "utf-8") return utf8ToBytes(str);
           throw new Error("Unsupported encoding: " + encoding);
         }
-      }
-    };
+      };
+    })();
   </script>
 
   <!-- ✅ Solana Web3.js -->
@@ -36,19 +43,12 @@
     <img src="logo.png" alt="Lancips Logo" class="logo" />
     <h1>LANCIPS Presale 🔥🔥🔥</h1>
 
-    <!-- Countdown Timer -->
     <p id="countdown" class="countdown">⏳ Calculating presale time...</p>
 
-    <!-- Meme Coin Philosophy Description -->
     <div class="description">
       <p>
         <strong>LANCIPS</strong> is a meme coin born out of disappointment,
-        a safe zone in a crypto world full of broken promises, vanished projects, and anonymous founders.
-        We’re not promising the moon, but at least we won’t disappear tomorrow.
-      </p>
-      <p>
-        In a sea of hype and rugpulls, <strong>LANCIPS</strong> exists for the survivors,
-        the ones who’ve been dumped on, ghosted, and left holding the bag.
+        a safe zone in a crypto world full of broken promises.
       </p>
       <p>
         We don’t promise revolutions. We promise honesty, fun, and a meme that sticks around even when charts bleed.
@@ -60,7 +60,7 @@
     <p><strong>Total Tokens for Presale:</strong> 20,000,000 LANCIPS</p>
     <p><strong>Token Price:</strong> 0.0001 SOL per LANCIPS</p>
     <p><strong>Network:</strong> Solana</p>
-    <p><strong>Token Address (Mint):</strong>
+    <p><strong>Token Address:</strong>
       <a href="https://solscan.io/token/3JRga3BSxpYgWASirwo77SWH2FdBSG1jkCwRpDMi8hmY" target="_blank">
         3JRga3BSxpYgWASirwo77SWH2FdBSG1jkCwRpDMi8hmY
       </a>
@@ -83,7 +83,7 @@
     </div>
   </div>
 
-  <!-- Countdown Script -->
+  <!-- Countdown -->
   <script>
     const endTime = new Date("2025-06-30T23:59:59").getTime();
 
@@ -110,7 +110,7 @@
     updateCountdown();
   </script>
 
-  <!-- ✅ Main App Logic (dimuat terakhir setelah semua siap) -->
+  <!-- ✅ App Logic -->
   <script src="app.js"></script>
 </body>
 </html>
