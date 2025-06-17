@@ -37,7 +37,7 @@ const statusMsg = document.getElementById("status-message");
 const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
-const PRICE_PER_TOKEN = 0.0001;
+const PRICE_PER_TOKEN = 0.000005;
 const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Ganti sesuai wallet kamu
 
 window.addEventListener("load", () => {
@@ -84,7 +84,7 @@ connectBtn.onclick = async () => {
   }
 };
 
-// 💰 Kalkulasi Token
+// 💰 Calculator
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
