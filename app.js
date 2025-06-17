@@ -45,8 +45,8 @@ connectBtn.onclick = async () => {
     buyBtn.disabled = false;
     loadPurchaseData();
   } catch (err) {
-    alert("❌ Wallet connection failed. Please try again.");
-    statusMsg.textContent = "❌ Wallet connection failed.";
+    alert("❌ Wallet connection failed. Please try again via Phantom DApp browser.");
+    statusMsg.textContent = "❌ Please try again via Phantom DApp browser.";
     buyBtn.disabled = true;
   }
 };
