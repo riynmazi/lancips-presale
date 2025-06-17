@@ -38,7 +38,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.000005;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Ganti sesuai wallet kamu
+const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // change
 
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
