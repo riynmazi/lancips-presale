@@ -1,6 +1,23 @@
-// Ensure Buffer is defined (especially for mobile Phantom)
-if (typeof Buffer === "undefined" && typeof window.buffer !== "undefined") {
-  window.Buffer = window.buffer.Buffer;
+// ✅ Full Buffer polyfill in case HTML tidak mendefinisikannya
+if (typeof Buffer === "undefined") {
+  window.Buffer = {
+    from: function (str, encoding) {
+      if (encoding === "base64") {
+        const binary = atob(str);
+        const len = binary.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        return bytes;
+      }
+      if (encoding === "utf8" || encoding === "utf-8") {
+        const encoder = new TextEncoder();
+        return encoder.encode(str);
+      }
+      throw new Error("Unsupported encoding: " + encoding);
+    },
+  };
 }
 
 const connectBtn = document.getElementById("connect");
@@ -13,7 +30,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.0001;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Wallet tujuan
+const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8";
 
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
@@ -37,7 +54,7 @@ function updatePurchaseRecord(amount) {
   totalBought.textContent = updated.toLocaleString();
 }
 
-// Connect Phantom wallet
+// ✅ Connect Phantom Wallet
 connectBtn.onclick = async () => {
   try {
     if (!window.solana || !window.solana.isPhantom) {
@@ -58,14 +75,14 @@ connectBtn.onclick = async () => {
   }
 };
 
-// Hitung jumlah token dari input SOL
+// ✅ Real-time kalkulasi token
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// Tombol beli token
+// ✅ Buy Token
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   if (!sol || sol <= 0) {
