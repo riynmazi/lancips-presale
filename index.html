@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LANCIPS Presale</title>
   <link rel="stylesheet" href="style.css" />
-  
-  <!-- Solana Web3.js -->
-  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
 
-  <!-- Buffer Polyfill -->
+  <!-- Buffer Polyfill (MUST load BEFORE Solana Web3.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/buffer/6.0.3/buffer.min.js"></script>
   <script>
     window.Buffer = buffer.Buffer;
   </script>
+
+  <!-- Solana Web3.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -94,7 +94,7 @@
     updateCountdown();
   </script>
 
-  <!-- MAIN APP LOGIC - DI LOAD TERAKHIR -->
+  <!-- Your app logic (buy/connect/etc) -->
   <script src="app.js"></script>
 </body>
 </html>
