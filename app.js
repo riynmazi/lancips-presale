@@ -1,9 +1,9 @@
-// ✅ Full Buffer polyfill in case HTML tidak mendefinisikannya
+// ✅ Polyfill Buffer untuk dukung "hex", "base64", dan "utf8"
 if (typeof Buffer === "undefined") {
   window.Buffer = {
-    from: function (str, encoding) {
+    from: function (input, encoding) {
       if (encoding === "base64") {
-        const binary = atob(str);
+        const binary = atob(input);
         const len = binary.length;
         const bytes = new Uint8Array(len);
         for (let i = 0; i < len; i++) {
@@ -13,13 +13,21 @@ if (typeof Buffer === "undefined") {
       }
       if (encoding === "utf8" || encoding === "utf-8") {
         const encoder = new TextEncoder();
-        return encoder.encode(str);
+        return encoder.encode(input);
+      }
+      if (encoding === "hex") {
+        const bytes = new Uint8Array(input.length / 2);
+        for (let i = 0; i < input.length; i += 2) {
+          bytes[i / 2] = parseInt(input.substr(i, 2), 16);
+        }
+        return bytes;
       }
       throw new Error("Unsupported encoding: " + encoding);
-    },
+    }
   };
 }
 
+// 🧠 DOM Element
 const connectBtn = document.getElementById("connect");
 const buyBtn = document.getElementById("buy");
 const solAmountInput = document.getElementById("solAmount");
@@ -30,7 +38,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.0001;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8";
+const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Ganti sesuai wallet kamu
 
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
@@ -38,6 +46,7 @@ window.addEventListener("load", () => {
   tokenAmountSpan.textContent = "0";
 });
 
+// Load Total Bought
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -54,7 +63,7 @@ function updatePurchaseRecord(amount) {
   totalBought.textContent = updated.toLocaleString();
 }
 
-// ✅ Connect Phantom Wallet
+// ✅ Connect Wallet
 connectBtn.onclick = async () => {
   try {
     if (!window.solana || !window.solana.isPhantom) {
@@ -75,23 +84,18 @@ connectBtn.onclick = async () => {
   }
 };
 
-// ✅ Real-time kalkulasi token
+// 💰 Kalkulasi Token
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// ✅ Buy Token
+// ✅ Buy LANCIPS
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   if (!sol || sol <= 0) {
     alert("⚠️ Please enter a valid amount of SOL.");
-    return;
-  }
-
-  if (!window.solanaWeb3) {
-    alert("❌ Solana Web3 not available. Make sure it is loaded.");
     return;
   }
 
@@ -103,7 +107,7 @@ buyBtn.onclick = async () => {
   try {
     const provider = window.solana;
     const connection = new solanaWeb3.Connection(
-      solanaWeb3.clusterApiUrl("mainnet-beta"),
+      "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487ab1e2",
       "confirmed"
     );
 
