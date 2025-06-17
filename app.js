@@ -8,7 +8,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.0001;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Ganti sesuai walletmu
+const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Ganti dengan wallet penerima token
 
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
@@ -16,7 +16,6 @@ window.addEventListener("load", () => {
   tokenAmountSpan.textContent = "0";
 });
 
-// Load total pembelian user dari localStorage
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -25,7 +24,6 @@ function loadPurchaseData() {
   }
 }
 
-// Simpan pembelian user ke localStorage
 function updatePurchaseRecord(amount) {
   const key = `lancips-${wallet}`;
   const current = parseFloat(localStorage.getItem(key)) || 0;
@@ -34,7 +32,7 @@ function updatePurchaseRecord(amount) {
   totalBought.textContent = updated.toLocaleString();
 }
 
-// Deteksi koneksi Phantom
+// Connect Wallet
 connectBtn.onclick = async () => {
   try {
     if (!window.solana || !window.solana.isPhantom) {
@@ -55,14 +53,14 @@ connectBtn.onclick = async () => {
   }
 };
 
-// Kalkulasi token yang diterima
+// Kalkulasi jumlah token
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// Proses pembelian token
+// Proses beli
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   if (!sol || sol <= 0) {
@@ -82,16 +80,20 @@ buyBtn.onclick = async () => {
       "confirmed"
     );
 
+    const fromPubkey = new solanaWeb3.PublicKey(wallet);
+    const toPubkey = new solanaWeb3.PublicKey(OWNER_WALLET);
+
     const transaction = new solanaWeb3.Transaction().add(
       solanaWeb3.SystemProgram.transfer({
-        fromPubkey: new solanaWeb3.PublicKey(wallet),
-        toPubkey: new solanaWeb3.PublicKey(OWNER_WALLET),
+        fromPubkey,
+        toPubkey,
         lamports: Math.floor(sol * solanaWeb3.LAMPORTS_PER_SOL),
       })
     );
 
-    transaction.feePayer = new solanaWeb3.PublicKey(wallet);
-    transaction.recentBlockhash = (await connection.getRecentBlockhash()).blockhash;
+    transaction.feePayer = fromPubkey;
+    const { blockhash } = await connection.getLatestBlockhash();
+    transaction.recentBlockhash = blockhash;
 
     const signed = await provider.signTransaction(transaction);
     const signature = await connection.sendRawTransaction(signed.serialize());
