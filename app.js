@@ -10,14 +10,14 @@ let wallet = null;
 const PRICE_PER_TOKEN = 0.0001;
 const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8";
 
-// Disable tombol buy saat awal
+
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
   statusMsg.textContent = "Connect your wallet to get started";
   tokenAmountSpan.textContent = "0";
 });
 
-// Load pembelian dari localStorage
+
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -26,7 +26,7 @@ function loadPurchaseData() {
   }
 }
 
-// Simpan pembelian baru
+
 function updatePurchaseRecord(amount) {
   const key = `lancips-${wallet}`;
   const current = parseFloat(localStorage.getItem(key)) || 0;
@@ -51,14 +51,14 @@ connectBtn.onclick = async () => {
   }
 };
 
-// Hitung jumlah token otomatis saat input SOL
+
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// Proses pembelian
+
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   if (!sol || sol <= 0) {
@@ -74,7 +74,7 @@ buyBtn.onclick = async () => {
   try {
     const provider = window.solana;
     const connection = new solanaWeb3.Connection(
-      solanaWeb3.clusterApiUrl("mainnet-beta") // ganti ke 'devnet' untuk testing
+      solanaWeb3.clusterApiUrl("mainnet-beta") 
     );
 
     const transaction = new solanaWeb3.Transaction().add(
