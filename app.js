@@ -8,8 +8,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.0001;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8";
-
+const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Ganti sesuai walletmu
 
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
@@ -17,7 +16,7 @@ window.addEventListener("load", () => {
   tokenAmountSpan.textContent = "0";
 });
 
-
+// Load total pembelian user dari localStorage
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -26,7 +25,7 @@ function loadPurchaseData() {
   }
 }
 
-
+// Simpan pembelian user ke localStorage
 function updatePurchaseRecord(amount) {
   const key = `lancips-${wallet}`;
   const current = parseFloat(localStorage.getItem(key)) || 0;
@@ -35,9 +34,14 @@ function updatePurchaseRecord(amount) {
   totalBought.textContent = updated.toLocaleString();
 }
 
-// Connect Wallet
+// Deteksi koneksi Phantom
 connectBtn.onclick = async () => {
   try {
+    if (!window.solana || !window.solana.isPhantom) {
+      alert("⚠️ Phantom Wallet not found. Please install it from https://phantom.app");
+      return;
+    }
+
     const resp = await window.solana.connect();
     wallet = resp.publicKey.toString();
     walletAddressText.textContent = "✅ Connected: " + wallet;
@@ -45,24 +49,24 @@ connectBtn.onclick = async () => {
     buyBtn.disabled = false;
     loadPurchaseData();
   } catch (err) {
-    alert("❌ Wallet connection failed. Please try again via Phantom DApp browser.");
-    statusMsg.textContent = "❌ Please try again via Phantom DApp browser.";
+    alert("❌ Wallet connection failed.\n\nTry using Phantom browser or mobile app.");
+    statusMsg.textContent = "❌ Wallet connection failed.";
     buyBtn.disabled = true;
   }
 };
 
-
+// Kalkulasi token yang diterima
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-
+// Proses pembelian token
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   if (!sol || sol <= 0) {
-    alert("⚠ Please enter a valid amount of SOL.");
+    alert("⚠️ Please enter a valid amount of SOL.");
     return;
   }
 
@@ -74,19 +78,24 @@ buyBtn.onclick = async () => {
   try {
     const provider = window.solana;
     const connection = new solanaWeb3.Connection(
-      solanaWeb3.clusterApiUrl("mainnet-beta") 
+      solanaWeb3.clusterApiUrl("mainnet-beta"),
+      "confirmed"
     );
 
     const transaction = new solanaWeb3.Transaction().add(
       solanaWeb3.SystemProgram.transfer({
         fromPubkey: new solanaWeb3.PublicKey(wallet),
         toPubkey: new solanaWeb3.PublicKey(OWNER_WALLET),
-        lamports: sol * solanaWeb3.LAMPORTS_PER_SOL,
+        lamports: Math.floor(sol * solanaWeb3.LAMPORTS_PER_SOL),
       })
     );
 
-    const { signature } = await provider.signAndSendTransaction(transaction);
-    await connection.confirmTransaction(signature);
+    transaction.feePayer = new solanaWeb3.PublicKey(wallet);
+    transaction.recentBlockhash = (await connection.getRecentBlockhash()).blockhash;
+
+    const signed = await provider.signTransaction(transaction);
+    const signature = await connection.sendRawTransaction(signed.serialize());
+    await connection.confirmTransaction(signature, "confirmed");
 
     alert("✅ Transaction successful!\n\nTX Hash:\n" + signature);
     statusMsg.textContent = "✅ Transaction successful!";
@@ -95,6 +104,7 @@ buyBtn.onclick = async () => {
     solAmountInput.value = "";
     tokenAmountSpan.textContent = "0";
   } catch (e) {
+    console.error(e);
     alert("❌ Transaction failed:\n" + e.message);
     statusMsg.textContent = "❌ Transaction failed.";
   } finally {
