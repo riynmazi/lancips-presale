@@ -1,10 +1,22 @@
+/* Anti-scroll horizontal fix */
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #0f172a;
   color: #fff;
-  margin: 0;
   padding: 20px;
   text-align: center;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 .container {
