@@ -8,8 +8,7 @@ html, body {
 }
 
 body {
-  font-family: 'Baloo 2', cursive;
-  ...
+  font-family: 'Baloo 2', sans-serif;
 }
 
 *, *::before, *::after {
