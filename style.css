@@ -15,10 +15,10 @@ body {
   text-align: center;
 }
 
-/* Style */
 h1 {
   color: white;
-  text-shadow: 2px 2px 5px yellow;
+  -webkit-text-stroke: 1.2px yellow; /* Outline kuning */
+  text-shadow: none; /* Hilangkan bayangan kalau ada */
 }
 
 *, *::before, *::after {
