@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LANCIPS Presale</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- ✅ Polyfill for Buffer (base64/hex/utf8 support) -->
-  <script>
+  <link rel="stylesheet" href="style.css" />  <script>
     (function () {
       function base64ToBytes(str) {
         const binary = atob(str);
@@ -41,82 +37,67 @@
         }
       };
     })();
-  </script>
-
-  <!-- ✅ Include Solana Web3 library -->
-  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
-</head>
+  </script>  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script></head>
 <body>
   <div class="container">
     <img src="logo.png" alt="Lancips Logo" class="logo" />
     <h1>LANCIPS Presale 🔥🔥🔥</h1>
-    <p id="countdown" class="countdown">⏳ Calculating presale time...</p>
+    <p id="countdown" class="countdown">⏳ Calculating presale time...</p><div class="description fade-in-up">
+  <p><strong>LANCIPS</strong> is a meme coin born out of pure disappointment — the kind you feel when your favorite token rugs, your bags go to zero, or your friend disappears after shilling a project.
 
-    <div class="description">
-      <p><strong>LANCIPS</strong> is a meme coin born out of pure disappointment — the kind you feel when your favorite token rugs, your bags go to zero, or your friend disappears after shilling a project.        
-It's not just a coin, it’s a coping mechanism.
-Fueled by irony, frustration, and just enough hope to click “Buy.”</p>
-    </div>
+It's not just a coin, it’s a coping mechanism. Fueled by irony, frustration, and just enough hope to click “Buy.”</p> </div>
 
-    <!-- ✅ Token info -->
-    <p><strong>Max Supply:</strong> 100,000,000 LANCIPS</p>
-    <p><strong>Total Tokens for Presale:</strong> 20,000,000 LANCIPS</p>
-    <p><strong>Token Price:</strong> 0.000005 SOL</p>
-    <p><strong>Network:</strong> Solana</p>
-    <p><strong>Token Address:</strong> 
-      <a href="https://solscan.io/token/8KigeQfhBc9Xw8mJ3pbuhUsyCh9N1AUbhAPwHfuBUrzm" target="_blank">
-        8KigeQfhBc9Xw...
-      </a>
-    </p>
+<p><strong>Max Supply:</strong> 100,000,000 LANCIPS</p>
+<p><strong>Total Tokens for Presale:</strong> 20,000,000 LANCIPS</p>
+<p><strong>Token Price:</strong> 0.000005 SOL</p>
+<p><strong>Network:</strong> Solana</p>
+<p><strong>Token Address:</strong> 
+  <a href="https://solscan.io/token/8KigeQfhBc9Xw8mJ3pbuhUsyCh9N1AUbhAPwHfuBUrzm" target="_blank">
+    8KigeQfhBc9Xw...
+  </a>
+</p>
 
-    <!-- ✅ Wallet connection -->
-    <div class="wallet">
-      <button id="connect">Connect with Phantom Wallet</button>
-      <p id="wallet-address">Wallet not connected</p>
-    </div>
+<div class="wallet fade-in-up">
+  <button id="connect">Connect with Phantom Wallet</button>
+  <p id="wallet-address">Wallet not connected</p>
+</div>
 
-    <!-- ✅ Token purchase form -->
-    <div class="form">
-      <input type="number" id="solAmount" placeholder="Enter amount in SOL" />
-      <p>You will receive: <span id="tokenAmount">0</span> LANCIPS</p>
-      <button id="buy" disabled>Buy LANCIPS</button>
-    </div>
+<div class="form fade-in-up">
+  <input type="number" id="solAmount" placeholder="Enter amount in SOL" />
+  <p>You will receive: <span id="tokenAmount">0</span> LANCIPS</p>
+  <button id="buy" disabled>Buy LANCIPS</button>
+</div>
 
-    <!-- ✅ Purchase status -->
-    <div class="status">
-      <p id="status-message">Connect your wallet to get started</p>
-      <p><strong>Total Purchased:</strong> <span id="total-bought">0</span> LANCIPS</p>
-    </div>
+<div class="status fade-in-up">
+  <p id="status-message">Connect your wallet to get started</p>
+  <p><strong>Total Purchased:</strong> <span id="total-bought">0</span> LANCIPS</p>
+</div>
 
-    <!-- ✅ Roadmap Section -->
-    <div class="roadmap">
-      <h2>🗺️ Roadmap</h2>
-      <ul>
-        <li><strong>Phase 1:</strong> Launch Website, Deploy Token, Start Presale</li>
-        <li><strong>Phase 2:</strong> Community Building, Listings, Meme Contests</li>
-        <li><strong>Phase 3:</strong> CEX Listings, Big Meme Partnerships, World Domination (maybe)</li>
-        <li><strong>Phase 4:</strong> Lancips to the Moon 🚀</li>
-      </ul>
-    </div>
+<div class="roadmap fade-in-up">
+  <h2>🗺️ Roadmap</h2>
+  <ul>
+    <li><strong>Phase 1:</strong> Launch Website, Deploy Token, Start Presale</li>
+    <li><strong>Phase 2:</strong> Community Building, Listings, Meme Contests</li>
+    <li><strong>Phase 3:</strong> CEX Listings, Big Meme Partnerships, World Domination (maybe)</li>
+    <li><strong>Phase 4:</strong> Lancips to the Moon 🚀</li>
+  </ul>
+</div>
 
-    <!-- ✅ Tokenomics Section -->
-    <div class="tokenomics">
-      <h2>📊 Tokenomics</h2>
-      <img src="tokenomics-pie.png" alt="Lancips Tokenomics" class="tokenomics-chart" />
-      <ul>
-        <li><strong>20%</strong> Presale</li>
-        <li><strong>10%</strong> Liquidity Pool</li>
-        <li><strong>10%</strong> Marketing</li>
-        <li><strong>10%</strong> Team (locked)</li>
-        <li><strong>50%</strong> Meme Reserve 🐸</li>
-      </ul>
-    </div>
-  </div>
+<div class="tokenomics fade-in-up">
+  <h2>📊 Tokenomics</h2>
+  <img src="tokenomics-pie.png" alt="Lancips Tokenomics" class="tokenomics-chart" />
+  <ul>
+    <li><strong>20%</strong> Presale</li>
+    <li><strong>10%</strong> Liquidity Pool</li>
+    <li><strong>10%</strong> Marketing</li>
+    <li><strong>10%</strong> Team (locked)</li>
+    <li><strong>50%</strong> Meme Reserve 🐸</li>
+  </ul>
+</div>
 
-  <!-- ✅ Countdown Timer: Ends 30 days from page load -->
-  <script>
+  </div>  <script>
     const endTime = new Date();
-    endTime.setDate(endTime.getDate() + 30); // Add 30 days from today
+    endTime.setDate(endTime.getDate() + 30);
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -139,9 +120,5 @@ Fueled by irony, frustration, and just enough hope to click “Buy.”</p>
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
-  </script>
-
-  <!-- ✅ Main app script (handles wallet interaction and purchase) -->
-  <script src="app.js"></script>
-</body>
+  </script>  <script src="app.js"></script></body>
 </html>
