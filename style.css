@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
   background-color: #0f172a;
   color: #fff;
   padding: 20px;
@@ -20,12 +20,13 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 50px auto;
   background-color: #1e293b;
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 1s ease-out forwards;
 }
 
 .logo {
@@ -43,42 +44,40 @@ body {
 .description {
   background-color: #334155;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 20px;
   font-size: 14px;
   line-height: 1.6;
   color: #e2e8f0;
   text-align: left;
-}
-
-.description em {
-  color: #38bdf8;
-  font-style: italic;
+  animation: fadeInUp 1s ease-out forwards;
 }
 
 input[type="number"] {
   padding: 10px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   width: 80%;
   margin-top: 10px;
+  font-size: 16px;
 }
 
 button {
   background-color: #38bdf8;
   color: #000;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 10px 20px;
   font-weight: bold;
   margin-top: 15px;
   cursor: pointer;
+  font-size: 15px;
   transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
   background-color: #0ea5e9;
-  transform: scale(1.05);
+  transform: translateY(-2px);
 }
 
 .status {
@@ -87,41 +86,52 @@ button:hover {
   color: #94a3b8;
 }
 
-/* ✅ Roadmap dan Tokenomics Style */
-.roadmap, .tokenomics {
-  background-color: #1e293b;
-  border-radius: 10px;
-  padding: 20px;
+.roadmap,
+.tokenomics {
   margin-top: 40px;
-  animation: fadeInUp 1s ease-out;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
   text-align: left;
+  background-color: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1s ease-out forwards;
 }
 
-.roadmap h2, .tokenomics h2 {
+.roadmap h2,
+.tokenomics h2 {
   color: #facc15;
-  font-size: 20px;
+  text-align: center;
+}
+
+.roadmap ul,
+.tokenomics ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.roadmap li,
+.tokenomics li {
   margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 15px;
+  color: #e2e8f0;
 }
 
-.tokenomics img.tokenomics-chart {
-  width: 100%;
-  max-width: 300px;
-  margin: 20px auto;
+.tokenomics-chart {
   display: block;
-  border-radius: 10px;
-  border: 2px solid #334155;
+  max-width: 100%;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000;
 }
 
-/* ✅ Animasi */
+/* Animation */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out forwards;
+}
+
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
   to {
     opacity: 1;
     transform: translateY(0);
