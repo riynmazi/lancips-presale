@@ -8,11 +8,8 @@ html, body {
 }
 
 body {
-  font-family: 'Chewy', cursive;
-  background-color: #0f172a;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
+  font-family: 'Baloo 2', cursive;
+  ...
 }
 
 *, *::before, *::after {
