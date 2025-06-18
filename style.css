@@ -73,11 +73,12 @@ button {
   font-weight: bold;
   margin-top: 15px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
   background-color: #0ea5e9;
+  transform: scale(1.05);
 }
 
 .status {
@@ -86,66 +87,43 @@ button:hover {
   color: #94a3b8;
 }
 
-/* ✅ Roadmap styling */
-.roadmap {
-  background-color: #475569;
+/* ✅ Roadmap dan Tokenomics Style */
+.roadmap, .tokenomics {
+  background-color: #1e293b;
   border-radius: 10px;
   padding: 20px;
   margin-top: 40px;
+  animation: fadeInUp 1s ease-out;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
   text-align: left;
 }
 
-.roadmap h2 {
-  color: #fcd34d;
-  margin-bottom: 15px;
+.roadmap h2, .tokenomics h2 {
+  color: #facc15;
   font-size: 20px;
-}
-
-.roadmap ul {
-  padding-left: 20px;
-  list-style-type: "🚀 ";
-  color: #e2e8f0;
-}
-
-.roadmap li {
   margin-bottom: 10px;
-  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* ✅ Tokenomics styling */
-.tokenomics {
-  background-color: #475569;
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 40px;
-  text-align: center;
-}
-
-.tokenomics h2 {
-  color: #34d399;
-  margin-bottom: 15px;
-  font-size: 20px;
-}
-
-.tokenomics-chart {
+.tokenomics img.tokenomics-chart {
   width: 100%;
   max-width: 300px;
-  margin: 0 auto 15px auto;
+  margin: 20px auto;
+  display: block;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  border: 2px solid #334155;
 }
 
-.tokenomics ul {
-  list-style: none;
-  padding: 0;
-  color: #e2e8f0;
-  font-size: 14px;
-  text-align: left;
-  max-width: 250px;
-  margin: 0 auto;
-}
-
-.tokenomics li {
-  margin-bottom: 8px;
-  line-height: 1.4;
+/* ✅ Animasi */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
