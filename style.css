@@ -16,9 +16,8 @@ body {
 }
 
 h1 {
-  color: white;
-  -webkit-text-stroke: 1.2px yellow; /* Outline kuning */
-  text-shadow: none; /* Hilangkan bayangan kalau ada */
+  color: #00ffc8; /* hijau tosca */
+  -webkit-text-stroke: 1.2px #FFD700;
 }
 
 *, *::before, *::after {
