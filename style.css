@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+/* Import font Comic Neue dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
 
 /* Anti-scroll horizontal fix */
 html, body {
@@ -88,6 +89,7 @@ button:hover {
   color: #94a3b8;
 }
 
+/* Roadmap dan Tokenomics Card */
 .roadmap,
 .tokenomics {
   margin-top: 40px;
@@ -99,24 +101,26 @@ button:hover {
   animation: fadeInUp 1s ease-out forwards;
 }
 
+/* Judul Roadmap dan Tokenomics pakai Comic Neue */
 .roadmap h2,
 .tokenomics h2 {
   color: #facc15;
   text-align: center;
+  font-family: 'Comic Neue', cursive;
 }
 
-/* FONT komik hanya untuk isi roadmap dan tokenomics */
+/* Isi Roadmap dan Tokenomics pakai Comic Neue */
 .roadmap ul,
 .tokenomics ul {
   list-style-type: none;
   padding-left: 0;
-  font-family: 'Chewy', cursive;
-  font-size: 16px;
+  font-family: 'Comic Neue', cursive;
 }
 
 .roadmap li,
 .tokenomics li {
   margin-bottom: 10px;
+  font-size: 15px;
   color: #e2e8f0;
 }
 
