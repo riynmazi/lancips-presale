@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap');
+
 /* Anti-scroll horizontal fix */
 html, body {
   overflow-x: hidden;
@@ -103,10 +105,13 @@ button:hover {
   text-align: center;
 }
 
+/* FONT khusus untuk isi roadmap dan tokenomics */
 .roadmap ul,
 .tokenomics ul {
   list-style-type: none;
   padding-left: 0;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 600;
 }
 
 .roadmap li,
