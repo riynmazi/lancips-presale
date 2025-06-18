@@ -15,11 +15,6 @@ body {
   text-align: center;
 }
 
-h1 {
-  color: #00ffc8; /* hijau tosca */
-  -webkit-text-stroke: 1.2px black;
-}
-
 *, *::before, *::after {
   box-sizing: inherit;
 }
