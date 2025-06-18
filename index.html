@@ -6,7 +6,7 @@
   <title>LANCIPS Presale</title>
   <link rel="stylesheet" href="style.css" />
 
-  <!-- ✅ Buffer Polyfill untuk hex/base64/utf8 -->
+  <!-- ✅ Polyfill for Buffer (base64/hex/utf8 support) -->
   <script>
     (function () {
       function base64ToBytes(str) {
@@ -43,7 +43,7 @@
     })();
   </script>
 
-  <!-- ✅ Solana Web3 -->
+  <!-- ✅ Include Solana Web3 library -->
   <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
 </head>
 <body>
@@ -53,45 +53,50 @@
     <p id="countdown" class="countdown">⏳ Calculating presale time...</p>
 
     <div class="description">
-      <p><strong>LANCIPS</strong> is a meme coin born out of pure disappointment, the kind you feel when your favorite token rugs, your bag goes to zero, or your friend shills a coin then disappears.        
+      <p><strong>LANCIPS</strong> is a meme coin born out of pure disappointment — the kind you feel when your favorite token rugs, your bags go to zero, or your friend disappears after shilling a project.        
 It's not just a coin, it’s a coping mechanism.
-Powered by irony, frustration, and just enough hope to click “Buy.”</p>
+Fueled by irony, frustration, and just enough hope to click “Buy.”</p>
     </div>
 
+    <!-- ✅ Token info -->
     <p><strong>Max Supply:</strong> 100,000,000 LANCIPS</p>
     <p><strong>Total Tokens for Presale:</strong> 20,000,000 LANCIPS</p>
     <p><strong>Token Price:</strong> 0.000005 SOL</p>
     <p><strong>Network:</strong> Solana</p>
     <p><strong>Token Address:</strong> 
       <a href="https://solscan.io/token/8KigeQfhBc9Xw8mJ3pbuhUsyCh9N1AUbhAPwHfuBUrzm" target="_blank">
-        3JRga3BS...
+        8KigeQfhBc9Xw...
       </a>
     </p>
 
+    <!-- ✅ Wallet connection -->
     <div class="wallet">
       <button id="connect">Connect with Phantom Wallet</button>
       <p id="wallet-address">Wallet not connected</p>
     </div>
 
+    <!-- ✅ Token purchase form -->
     <div class="form">
       <input type="number" id="solAmount" placeholder="Enter amount in SOL" />
       <p>You will receive: <span id="tokenAmount">0</span> LANCIPS</p>
       <button id="buy" disabled>Buy LANCIPS</button>
     </div>
 
+    <!-- ✅ Purchase status -->
     <div class="status">
       <p id="status-message">Connect your wallet to get started</p>
       <p><strong>Total Purchased:</strong> <span id="total-bought">0</span> LANCIPS</p>
     </div>
   </div>
 
-  <!-- ⏳ Countdown Presale -->
+  <!-- ✅ Countdown Timer: Ends 30 days from page load -->
   <script>
-    const endTime = new Date("2025-06-30T23:59:59Z").getTime();
+    const endTime = new Date();
+    endTime.setDate(endTime.getDate() + 30); // Add 30 days from today
 
     function updateCountdown() {
       const now = new Date().getTime();
-      const distance = endTime - now;
+      const distance = endTime.getTime() - now;
       const countdown = document.getElementById("countdown");
 
       if (distance <= 0) {
@@ -112,7 +117,7 @@ Powered by irony, frustration, and just enough hope to click “Buy.”</p>
     updateCountdown();
   </script>
 
-  <!-- ✅ Script Utama -->
+  <!-- ✅ Main app script (handles wallet interaction and purchase) -->
   <script src="app.js"></script>
 </body>
 </html>
