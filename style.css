@@ -10,11 +10,11 @@ html, body {
 body {
   font-family: 'Baloo 2', sans-serif;
   background-image: url('background-dekstop.png');
-  background-size: cover; /* update: isi penuh layar */
+  background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: #058b9d; /* fallback */
+  background-color: #058b9d;
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -166,4 +166,15 @@ button:hover {
   background-color: #1e293b;
   text-align: center;
   border-top: 1px solid #334155;
+}
+
+/* RESPONSIVE: Mobile */
+@media (max-width: 768px) {
+  body {
+    background-image: url('background-mobile.png');
+    background-size: contain;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
 }
