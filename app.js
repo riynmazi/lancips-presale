@@ -1,4 +1,4 @@
-// ✅ Polyfill Buffer untuk dukung "hex", "base64", dan "utf8"
+// ✅ Polyfill Buffer "hex", "base64", dan "utf8"
 if (typeof Buffer === "undefined") {
   window.Buffer = {
     from: function (input, encoding) {
