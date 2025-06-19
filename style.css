@@ -169,6 +169,11 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-  background-image: url('background-mobile.png');
-  
+body {
+background-image: url('background-mobile.png');
+background-size: contain;
+background-position: top center;
+background-repeat: no-repeat;
+background-attachment: scroll;
+}
 }
