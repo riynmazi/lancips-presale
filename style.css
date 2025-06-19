@@ -1,4 +1,4 @@
-/* ✅ Anti-scroll horizontal fix */
+/* Anti-scroll horizontal fix */
 html, body {
   overflow-x: hidden;
   margin: 0;
@@ -10,17 +10,14 @@ html, body {
 body {
   font-family: 'Baloo 2', sans-serif;
   background-image: url('background-desktop.png');
-  background-size: cover;
+  background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* parallax effect */
-  background-color: #058b9d; /* fallback */
+  background-attachment: fixed;
+  background-color: #058b9d;
   color: #fff;
   padding: 20px;
   text-align: center;
-
-  backface-visibility: hidden;
-  transform: translateZ(0); /* anti-glitch */
 }
 
 *, *::before, *::after {
@@ -132,7 +129,7 @@ button:hover {
   box-shadow: 0 0 10px #000;
 }
 
-/* 🔄 Animasi Fade In */
+/* Animation */
 .fade-in-up {
   opacity: 0;
   transform: translateY(20px);
@@ -146,7 +143,6 @@ button:hover {
   }
 }
 
-/* 💖 Tombol Pinksale */
 .pinksale-btn {
   background-color: #ff69b4;
   color: white;
@@ -162,7 +158,6 @@ button:hover {
   background-color: #ff85c2;
 }
 
-/* 📍 Footer */
 .site-footer {
   margin-top: 50px;
   padding: 20px 10px;
@@ -173,12 +168,13 @@ button:hover {
   border-top: 1px solid #334155;
 }
 
-/* 📱 Mobile Background Override */
+/* RESPONSIVE: Mobile */
 @media (max-width: 768px) {
   body {
     background-image: url('background-mobile.png');
-    background-size: cover;
-    background-position: center top;
-    background-attachment: scroll; /* Avoid fixed issue on mobile */
+    background-size: contain;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
   }
 }
