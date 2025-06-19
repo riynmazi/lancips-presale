@@ -7,17 +7,18 @@ html, body {
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Baloo 2', sans-serif;
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-image: url('background-desktop.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-color: #058b9d;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
+  z-index: -1;
+  pointer-events: none;
 }
 
 *, *::before, *::after {
@@ -169,12 +170,7 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-  body {
-    background-image: url('background-mobile.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    min-height:100vh;
+  .bg-image {
+    background-image: url('background-desktop.png'); /* tetap desktop, jika kamu tidak mau beda */
   }
 }
