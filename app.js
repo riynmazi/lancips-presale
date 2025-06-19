@@ -38,7 +38,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.000005;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // ganti dengan wallet kamu
+const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // Ganti dengan wallet kamu
 
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
@@ -91,7 +91,7 @@ solAmountInput.oninput = () => {
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// ✅ Buy LANCIPS (dengan validasi max 15 juta)
+// ✅ Buy LANCIPS (dengan validasi min dan max per wallet)
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   const tokens = sol / PRICE_PER_TOKEN;
@@ -105,7 +105,7 @@ buyBtn.onclick = async () => {
   }
 
   if (newTotal > 15000000) {
-    alert("❌ You can only purchase up to 15,000,000 LANCIPS in total.");
+    alert("❌ Limit exceeded: Max purchase per wallet is 15,000,000 LANCIPS.");
     return;
   }
 
