@@ -11,8 +11,9 @@ body {
   font-family: 'Baloo 2', sans-serif;
   background-image: url('background-desktop.png');
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed; /* opsional: untuk efek parallax */
   background-color: #058b9d;
   color: #fff;
   padding: 20px;
@@ -170,5 +171,7 @@ button:hover {
 @media (max-width: 768px) {
   body {
     background-image: url('background-mobile.png');
+    background-size: cover; /* change contain if needed */
+    background-position: center top;
   }
 }
