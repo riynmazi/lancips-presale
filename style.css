@@ -158,6 +158,21 @@ button:hover {
   background-color: #ff85c2;
 }
 
+.whitepaper-btn {
+  background-color: #21abb4;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.whitepaper-btn:hover {
+  background-color: #ff85c2;
+}
+
 .site-footer {
   margin-top: 50px;
   padding: 20px 10px;
