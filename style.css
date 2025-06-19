@@ -8,11 +8,16 @@ html, body {
 }
 
 body {
-  background-image: url('background-desktop.png');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+font-family: 'Baloo 2', sans-serif;
+background-image: url('background-desktop.png');
+background-size: contain;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-color: #058b9d;
+color: #fff;
+padding: 20px;
+text-align: center;
 }
 
 *, *::before, *::after {
