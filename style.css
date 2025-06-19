@@ -1,4 +1,4 @@
-/* Anti-scroll horizontal fix */
+up/* Anti-scroll horizontal fix */
 html, body {
   overflow-x: hidden;
   margin: 0;
@@ -167,6 +167,6 @@ button:hover {
 
 @media (max-width: 768px) {
   .bg-image {
-    background-image: url('background-desktop.png'); /* tetap desktop, jika kamu tidak mau beda */
+    background-image: url('background-mobile.png'); /* tetap desktop, jika kamu tidak mau beda */
   }
 }
