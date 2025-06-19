@@ -9,7 +9,11 @@ html, body {
 
 body {
   font-family: 'Baloo 2', sans-serif;
-  background-color: #058b9d;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #058b9d; /* fallback if fail to load */
   color: #fff;
   padding: 20px;
   text-align: center;
