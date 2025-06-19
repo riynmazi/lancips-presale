@@ -137,3 +137,18 @@ button:hover {
     transform: translateY(0);
   }
 }
+
+.pinksale-btn {
+  background-color: #ff69b4; /* warna pink */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.pinksale-btn:hover {
+  background-color: #ff85c2; /* pink lebih terang saat di-hover */
+}
