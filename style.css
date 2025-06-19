@@ -1,4 +1,4 @@
-/* Anti-scroll horizontal fix */
+/* ✅ Anti-scroll horizontal fix */
 html, body {
   overflow-x: hidden;
   margin: 0;
@@ -13,11 +13,14 @@ body {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* opsional: untuk efek parallax */
-  background-color: #058b9d;
+  background-attachment: fixed; /* parallax effect */
+  background-color: #058b9d; /* fallback */
   color: #fff;
   padding: 20px;
   text-align: center;
+
+  backface-visibility: hidden;
+  transform: translateZ(0); /* anti-glitch */
 }
 
 *, *::before, *::after {
@@ -129,7 +132,7 @@ button:hover {
   box-shadow: 0 0 10px #000;
 }
 
-/* Animation */
+/* 🔄 Animasi Fade In */
 .fade-in-up {
   opacity: 0;
   transform: translateY(20px);
@@ -143,8 +146,9 @@ button:hover {
   }
 }
 
+/* 💖 Tombol Pinksale */
 .pinksale-btn {
-  background-color: #ff69b4; /*  pink */
+  background-color: #ff69b4;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -155,9 +159,10 @@ button:hover {
 }
 
 .pinksale-btn:hover {
-  background-color: #ff85c2; /* pink */
+  background-color: #ff85c2;
 }
 
+/* 📍 Footer */
 .site-footer {
   margin-top: 50px;
   padding: 20px 10px;
@@ -168,10 +173,12 @@ button:hover {
   border-top: 1px solid #334155;
 }
 
+/* 📱 Mobile Background Override */
 @media (max-width: 768px) {
   body {
     background-image: url('background-mobile.png');
-    background-size: cover; /* change contain if needed */
+    background-size: cover;
     background-position: center top;
+    background-attachment: scroll; /* Avoid fixed issue on mobile */
   }
 }
