@@ -36,33 +36,9 @@ const walletAddressText = document.getElementById("wallet-address");
 const statusMsg = document.getElementById("status-message");
 const totalBought = document.getElementById("total-bought");
 
-// Timer Tetap: 30 Juli 2025 pukul 23:59:59 GMT+0
-const endTime = new Date("2025-07-30T23:59:59Z").getTime();
-
-function updateCountdown() {
-  const now = new Date().getTime();
-  const distance = endTime - now;
-  const countdown = document.getElementById("countdown");
-
-  if (distance <= 0) {
-    countdown.textContent = "⛔ Presale has ended.";
-    buyBtn.disabled = true;
-    return;
-  }
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  countdown.textContent = `⏳ Presale ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
 let wallet = null;
 const PRICE_PER_TOKEN = 0.000005;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8";
+const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8"; // ganti dengan wallet kamu
 
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
@@ -115,15 +91,24 @@ solAmountInput.oninput = () => {
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// ✅ Buy LANCIPS
+// ✅ Buy LANCIPS (dengan validasi max 15 juta)
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
-  if (!sol || sol <= 0) {
+  const tokens = sol / PRICE_PER_TOKEN;
+
+  const currentBought = parseFloat(localStorage.getItem(`lancips-${wallet}`)) || 0;
+  const newTotal = currentBought + tokens;
+
+  if (!sol || sol <= 0 || tokens <= 0) {
     alert("⚠️ Please enter a valid amount of SOL.");
     return;
   }
 
-  const tokens = sol / PRICE_PER_TOKEN;
+  if (newTotal > 15000000) {
+    alert("❌ You can only purchase up to 15,000,000 LANCIPS in total.");
+    return;
+  }
+
   buyBtn.disabled = true;
   buyBtn.textContent = "Processing...";
   statusMsg.textContent = "⏳ Sending transaction...";
