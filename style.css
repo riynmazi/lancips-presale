@@ -1,4 +1,4 @@
-up/* Anti-scroll horizontal fix */
+/* Anti-scroll horizontal fix */
 html, body {
   overflow-x: hidden;
   margin: 0;
