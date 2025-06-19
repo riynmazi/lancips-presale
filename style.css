@@ -168,12 +168,11 @@ button:hover {
   border-top: 1px solid #334155;
 }
 
-/* RESPONSIVE: Mobile */
 @media (max-width: 768px) {
   body {
     background-image: url('background-mobile.png');
-    background-size: contain;
-    background-position: top center;
+    background-size: cover;
+    background-position: center top;
     background-repeat: no-repeat;
     background-attachment: scroll;
   }
