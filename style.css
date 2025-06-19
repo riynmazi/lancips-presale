@@ -10,10 +10,11 @@ html, body {
 body {
   font-family: 'Baloo 2', sans-serif;
   background-image: url('background.png');
-  background-size: cover;
-  background-position: center;
+  background-size: cover; /* Menyesuaikan layar */
+  background-position: center center;
   background-repeat: no-repeat;
-  background-color: #058b9d; /* fallback if fail to load */
+  background-attachment: fixed; /* opsional agar gambar tetap saat scroll */
+  background-color: #058b9d; /* fallback warna */
   color: #fff;
   padding: 20px;
   text-align: center;
