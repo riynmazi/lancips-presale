@@ -7,14 +7,12 @@ html, body {
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  body {
-    background-image: url('background-mobile.png');
-    background-size: contain;
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-  }
+body {
+  background-image: url('background-desktop.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 *, *::before, *::after {
