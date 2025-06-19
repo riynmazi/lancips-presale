@@ -139,7 +139,7 @@ button:hover {
 }
 
 .pinksale-btn {
-  background-color: #ff69b4; /* warna pink */
+  background-color: #ff69b4; /*  pink */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -150,5 +150,15 @@ button:hover {
 }
 
 .pinksale-btn:hover {
-  background-color: #ff85c2; /* pink lebih terang saat di-hover */
+  background-color: #ff85c2; /* pink */
+}
+
+.site-footer {
+  margin-top: 50px;
+  padding: 20px 10px;
+  font-size: 13px;
+  color: #94a3b8;
+  background-color: #1e293b;
+  text-align: center;
+  border-top: 1px solid #334155;
 }
