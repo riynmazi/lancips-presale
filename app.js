@@ -1,4 +1,4 @@
-// ✅ Polyfill Buffer "hex", "base64", dan "utf8"
+// ✅ Buffer Polyfill (hex, base64, utf8)
 if (typeof Buffer === "undefined") {
   window.Buffer = {
     from: function (input, encoding) {
@@ -12,8 +12,7 @@ if (typeof Buffer === "undefined") {
         return bytes;
       }
       if (encoding === "utf8" || encoding === "utf-8") {
-        const encoder = new TextEncoder();
-        return encoder.encode(input);
+        return new TextEncoder().encode(input);
       }
       if (encoding === "hex") {
         const bytes = new Uint8Array(input.length / 2);
@@ -27,7 +26,7 @@ if (typeof Buffer === "undefined") {
   };
 }
 
-// 🧠 DOM Element
+// 🧠 DOM Elements
 const connectBtn = document.getElementById("connect");
 const buyBtn = document.getElementById("buy");
 const solAmountInput = document.getElementById("solAmount");
@@ -38,7 +37,6 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.000005;
-const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8";
 
 // Saat halaman dimuat
 window.addEventListener("load", () => {
@@ -47,7 +45,7 @@ window.addEventListener("load", () => {
   tokenAmountSpan.textContent = "0";
 });
 
-// Load pembelian dari localStorage
+// Load pembelian
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -114,15 +112,26 @@ buyBtn.onclick = async () => {
   statusMsg.textContent = "⏳ Sending transaction...";
 
   try {
-    const provider = window.solana;
-    const connection = new solanaWeb3.Connection(
-      "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487ab1e2",
-      "confirmed"
-    );
+    // ✅ Kirim ke backend untuk generate wallet tujuan dan validasi
+    const backendURL = "https://backendlancips-production.up.railway.app/buy";
+    const backendRes = await fetch(backendURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        walletAddress: wallet,
+        amount: tokens
+      })
+    });
 
+    const result = await backendRes.json();
+    if (!backendRes.ok) {
+      throw new Error(result.error || "Backend error");
+    }
+
+    // ✅ Kirim transaksi dari user ke wallet backend
+    const toPubkey = new solanaWeb3.PublicKey(result.payTo);
     const fromPubkey = new solanaWeb3.PublicKey(wallet);
-    const toPubkey = new solanaWeb3.PublicKey(OWNER_WALLET);
-
+    const connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
     const transaction = new solanaWeb3.Transaction().add(
       solanaWeb3.SystemProgram.transfer({
         fromPubkey,
@@ -135,33 +144,15 @@ buyBtn.onclick = async () => {
     const { blockhash } = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhash;
 
-    const signed = await provider.signTransaction(transaction);
+    const signed = await window.solana.signTransaction(transaction);
     const signature = await connection.sendRawTransaction(signed.serialize());
     await connection.confirmTransaction(signature, "confirmed");
 
-    statusMsg.textContent = "✅ Transaction successful!";
     alert("✅ Transaction successful!\nTX Hash:\n" + signature);
-
-    // ✅ Kirim data ke backend
-    const backendURL = "https://backendlancips-production.up.railway.app/buy";
-    const backendResponse = await fetch(backendURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        walletAddress: wallet,
-        amount: tokens
-      })
-    });
-
-    const result = await backendResponse.json();
-    if (!backendResponse.ok) {
-      throw new Error(result.error || "Backend error");
-    }
-
+    statusMsg.textContent = "✅ Purchase complete!";
     updatePurchaseRecord(tokens);
     solAmountInput.value = "";
     tokenAmountSpan.textContent = "0";
-    alert("✅ Purchase recorded in backend.");
   } catch (e) {
     console.error(e);
     alert("❌ Error:\n" + e.message);
