@@ -40,13 +40,14 @@ let wallet = null;
 const PRICE_PER_TOKEN = 0.000005;
 const OWNER_WALLET = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8";
 
+// Saat halaman dimuat
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
   statusMsg.textContent = "Connect your wallet to get started";
   tokenAmountSpan.textContent = "0";
 });
 
-// Load Total Bought
+// Load pembelian dari localStorage
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -84,18 +85,17 @@ connectBtn.onclick = async () => {
   }
 };
 
-// 💰 Calculator
+// 💰 Kalkulator
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// ✅ Buy LANCIPS (dengan validasi min dan max per wallet)
+// ✅ Proses Beli
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   const tokens = sol / PRICE_PER_TOKEN;
-
   const currentBought = parseFloat(localStorage.getItem(`lancips-${wallet}`)) || 0;
   const newTotal = currentBought + tokens;
 
@@ -139,15 +139,32 @@ buyBtn.onclick = async () => {
     const signature = await connection.sendRawTransaction(signed.serialize());
     await connection.confirmTransaction(signature, "confirmed");
 
-    alert("✅ Transaction successful!\n\nTX Hash:\n" + signature);
     statusMsg.textContent = "✅ Transaction successful!";
-    updatePurchaseRecord(tokens);
+    alert("✅ Transaction successful!\nTX Hash:\n" + signature);
 
+    // ✅ Kirim data ke backend
+    const backendURL = "https://backendlancips-production.up.railway.app/buy";
+    const backendResponse = await fetch(backendURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        walletAddress: wallet,
+        amount: tokens
+      })
+    });
+
+    const result = await backendResponse.json();
+    if (!backendResponse.ok) {
+      throw new Error(result.error || "Backend error");
+    }
+
+    updatePurchaseRecord(tokens);
     solAmountInput.value = "";
     tokenAmountSpan.textContent = "0";
+    alert("✅ Purchase recorded in backend.");
   } catch (e) {
     console.error(e);
-    alert("❌ Transaction failed:\n" + e.message);
+    alert("❌ Error:\n" + e.message);
     statusMsg.textContent = "❌ Transaction failed.";
   } finally {
     buyBtn.disabled = false;
