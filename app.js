@@ -37,15 +37,16 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.000005;
+const BACKEND_URL = "https://backendlancips-production.up.railway.app/buy";
+const RPC_URL = "https://rpc.ankr.com/solana";
 
-// load
+// on Load
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
   statusMsg.textContent = "Connect your wallet to get started";
   tokenAmountSpan.textContent = "0";
 });
 
-// Load
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -83,14 +84,14 @@ connectBtn.onclick = async () => {
   }
 };
 
-// 💰 calculate
+// 💰 calculate token amount
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// ✅ buy
+// ✅ Buy button
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   const tokens = sol / PRICE_PER_TOKEN;
@@ -112,9 +113,8 @@ buyBtn.onclick = async () => {
   statusMsg.textContent = "⏳ Sending transaction...";
 
   try {
-    // ✅ to backend
-    const backendURL = "https://backendlancips-production.up.railway.app/buy";
-    const backendRes = await fetch(backendURL, {
+    // Step 1: Request backend to record purchase
+    const res = await fetch(BACKEND_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -123,15 +123,25 @@ buyBtn.onclick = async () => {
       })
     });
 
-    const result = await backendRes.json();
-    if (!backendRes.ok) {
+    const result = await res.json();
+    if (!res.ok) {
       throw new Error(result.error || "Backend error");
     }
 
-    // ✅ sending transaction to wallet backend
+    // Step 2: Transfer SOL to presale address
     const toPubkey = new solanaWeb3.PublicKey(result.payTo);
     const fromPubkey = new solanaWeb3.PublicKey(wallet);
-    const connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
+    const connection = new solanaWeb3.Connection(RPC_URL, "confirmed");
+
+    // ❗ get blockhash with fallback
+    let blockhash;
+    try {
+      const latest = await connection.getLatestBlockhash();
+      blockhash = latest.blockhash;
+    } catch (e) {
+      throw new Error("❌ Failed to get latest blockhash. Try again.");
+    }
+
     const transaction = new solanaWeb3.Transaction().add(
       solanaWeb3.SystemProgram.transfer({
         fromPubkey,
@@ -141,7 +151,6 @@ buyBtn.onclick = async () => {
     );
 
     transaction.feePayer = fromPubkey;
-    const { blockhash } = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhash;
 
     const signed = await window.solana.signTransaction(transaction);
