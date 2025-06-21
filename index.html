@@ -51,30 +51,37 @@
 
   <!-- ✅ Solana Web3 -->
   <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
-
-<!--Banner presale -->
-<div style="background-color:#fff3cd; color:#856404; padding:15px; border:1px solid #ffeeba; border-radius:10px; font-size:16px; margin-bottom:20px;">
-  <strong>🔥 Early Sale Now Live!</strong><br>
-  🟢 <b>Current Price:</b> 0.000005 SOL<br>
-  🔴 <b>PinkSale Price:</b> 0.00005 SOL (10x higher)<br><br>
-  This early price is for our supporters — only 15 million tokens available.<br>
-  On PinkSale, the price will be higher, but you're still early.<br><br>
-  <em>No promises, but we don’t lie.</em>
-</div>
-
-
 </head>
 
 <body>
-    <div class="bubbles">
-     <div class="bubble"></div>
-     <div class="bubble"></div>
-     <div class="bubble"></div>
-     <div class="bubble"></div>
-     <div class="bubble"></div>
-     <div class="bubble"></div>
-    </div>
+  <!-- Bubble background -->
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
 
+  <!-- 🔝 Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="#buy">Buy</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#tokenomics">Tokenomics</a></li>
+      <li><a href="#whitepaper">Whitepaper</a></li>
+    </ul>
+  </nav>
+
+  <!-- Banner -->
+  <div style="background-color:#fff3cd; color:#856404; padding:15px; border:1px solid #ffeeba; border-radius:10px; font-size:16px; margin:20px;">
+    <strong>🔥 Early Sale Now Live!</strong><br>
+    🟢 <b>Current Price:</b> 0.000005 SOL<br>
+    🔴 <b>PinkSale Price:</b> 0.00005 SOL (10x higher)<br><br>
+    This early price is for our supporters — only 15 million tokens available.<br><br>
+    <em>No promises, but we don’t lie.</em>
+  </div>
 
   <div class="container fade-in-up">
     <img src="logo.png" alt="Lancips Logo" class="logo" />
@@ -96,22 +103,24 @@
       </a>
     </p>
 
-    <!-- Button Pinksale -->
+    <!-- Pinksale Button -->
     <div class="pinksale">
       <button class="pinksale-btn" onclick="window.open('https://www.pinksale.finance/', '_blank')">
         Pinksale (coming soon)
       </button>
     </div>
 
-    <div class="wallet">
+    <!-- Wallet connect -->
+    <div class="wallet" id="buy">
       <button id="connect">Connect with Phantom Wallet</button>
       <p id="wallet-address">Wallet not connected</p>
     </div>
 
+    <!-- Buy Form -->
     <div class="form">
       <input type="number" id="solAmount" placeholder="Enter amount in SOL" />
       <p>You will receive: <span id="tokenAmount">0</span> LANCIPS</p>
-      <button id="buy" disabled>Buy LANCIPS</button>
+      <button id="buyBtn" disabled>Buy LANCIPS</button>
     </div>
 
     <div class="status">
@@ -119,7 +128,8 @@
       <p><strong>Total Purchased:</strong> <span id="total-bought">0</span> LANCIPS</p>
     </div>
 
-    <div class="roadmap">
+    <!-- Roadmap -->
+    <div class="roadmap" id="roadmap">
       <h2>🗺️ Roadmap</h2>
       <ul>
         <li><strong>Step 1:</strong> Launch Presale</li>
@@ -129,31 +139,33 @@
       </ul>
     </div>
 
-    <div class="tokenomics">
+    <!-- Tokenomics -->
+    <div class="tokenomics" id="tokenomics">
       <h2>📊 Tokenomic</h2>
       <ul>
         <li><strong>15%</strong> 🛒Presale web</li>
         <li><strong>20%</strong> 🌐Pinksale presale</li>
         <li><strong>20%</strong> 💧Liquidity</li>
-        <li><strong>15%</strong> 👥
-Team & Marketing</li>
+        <li><strong>15%</strong> 👥Team & Marketing</li>
         <li><strong>15%</strong> 🧑‍🤝‍🧑Community and staking</li>
-        <li><strong>15%</strong> 🔥
-Burn/reserve</li>
+        <li><strong>15%</strong> 🔥Burn/reserve</li>
       </ul>
     </div>
-  </div>
 
-    <div class="whitepaper">
+    <!-- Whitepaper -->
+    <div class="whitepaper" id="whitepaper">
       <button class="whitepaper-btn" onclick="window.open('https://drive.google.com/file/d/1PwgTzk3bTD8z6f__kGux3ygiR0Y6ctez/view?usp=drivesdk', '_blank')">
         WHITEPAPER BRO !
       </button>
     </div>
+  </div>
 
-  <!-- ✅ Static Countdown -->
+  <!-- Toggle Theme -->
+  <div class="dark-toggle" onclick="toggleDarkMode()">🌓 Toggle Mode</div>
+
+  <!-- Countdown Timer -->
   <script>
     const endTime = new Date("2025-07-30T23:59:59Z").getTime();
-
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = endTime - now;
@@ -161,7 +173,7 @@ Burn/reserve</li>
 
       if (distance <= 0) {
         countdown.textContent = "⛔ Presale has ended.";
-        document.getElementById("buy").disabled = true;
+        document.getElementById("buyBtn").disabled = true;
         return;
       }
 
@@ -173,10 +185,15 @@ Burn/reserve</li>
       countdown.textContent = `⏳ Presale ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
+    function toggleDarkMode() {
+      document.body.classList.toggle('light-mode');
+    }
+
     setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
 
+  <!-- Your App Logic -->
   <script src="app.js"></script>
 
   <!-- Footer -->
