@@ -160,9 +160,6 @@
     </div>
   </div>
 
-  <!-- Toggle Theme -->
-  <div class="dark-toggle" onclick="toggleDarkMode()">🌓</div>
-
   <!-- Countdown Timer -->
   <script>
     const endTime = new Date("2025-07-30T23:59:59Z").getTime();
@@ -183,11 +180,7 @@
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       countdown.textContent = `⏳ Presale ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    function toggleDarkMode() {
-      document.body.classList.toggle('light-mode');
-    }
+    } 
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
