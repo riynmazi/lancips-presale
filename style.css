@@ -5,19 +5,24 @@ body { font-family: 'Baloo 2', sans-serif; background-image: url('background-des
 *, *::before, *::after { box-sizing: inherit; }
 
 nav {
-  background-color: transparent;
-  padding: 6px 0;
-  margin-bottom: 16px;
-  border-radius: 10px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  background-color: #0f172a;
+  padding: 8px 0;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: auto;
 }
 
 nav ul {
+  list-style: none;
   display: flex;
   justify-content: center;
-  gap: 10px;
-  list-style: none;
-  padding: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0 10px;
   margin: 0;
 }
 
@@ -25,12 +30,15 @@ nav ul li a {
   color: #facc15;
   text-decoration: none;
   font-weight: bold;
-  font-size: 14px;
-  transition: color 0.3s;
+  font-size: 15px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
 }
 
 nav ul li a:hover {
-  color: #fff;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .container { max-width: 600px; margin: 50px auto; background-color: #1e293b; padding: 30px; border-radius: 16px; box-shadow: 0 0 25px rgba(0, 0, 0, 0.4); animation: fadeInUp 1s ease-out forwards; }
