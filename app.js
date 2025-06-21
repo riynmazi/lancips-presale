@@ -40,13 +40,6 @@ const PRICE_PER_TOKEN = 0.000005;
 const BACKEND_URL = "https://backendlancips-production.up.railway.app/buy";
 const RPC_URL = "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487ab1e2";
 
-// ⏳ On Load
-window.addEventListener("load", () => {
-  buyBtn.disabled = true;
-  statusMsg.textContent = "Connect your wallet to get started";
-  tokenAmountSpan.textContent = "0";
-});
-
 // 👀 Fetch total raised from backend
 async function fetchTotalRaised() {
   try {
@@ -62,10 +55,13 @@ async function fetchTotalRaised() {
   }
 }
 
+// ⏳ On Load
 window.addEventListener("load", () => {
+  buyBtn.disabled = true;
+  statusMsg.textContent = "Connect your wallet to get started";
+  tokenAmountSpan.textContent = "0";
   fetchTotalRaised();
 });
-
 
 // 💾 Load local total
 function loadPurchaseData() {
@@ -173,6 +169,7 @@ buyBtn.onclick = async () => {
     updatePurchaseRecord(tokens);
     solAmountInput.value = "";
     tokenAmountSpan.textContent = "0";
+    fetchTotalRaised(); // refresh after purchase
   } catch (e) {
     console.error(e);
     alert("❌ Error:\n" + e.message);
