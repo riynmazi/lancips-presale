@@ -45,12 +45,16 @@ async function fetchTotalRaised() {
   try {
     const res = await fetch("https://backendlancips-production.up.railway.app/total-raised");
     const data = await res.json();
-    const sol = data.totalRaised || 0;
+    const sol = parseFloat(data.totalRaised || "0");
+    console.log("Fetched:", sol); // Debug log
     document.getElementById("total-raised").textContent = sol.toFixed(6);
   } catch (e) {
+    console.error("Fetch error:", e);
     document.getElementById("total-raised").textContent = "N/A";
   }
 }
+
+window.addEventListener("load", fetchTotalRaised);
 
 // ⏳ On Load
 window.addEventListener("load", () => {
