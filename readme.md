@@ -20,7 +20,7 @@ This is the frontend interface for the LANCIPS presale — a meme token built on
 
 ## 📸 Screenshots
 
-![Preview](preview_1.png) <!-- Pastikan file ini ada di root repo -->
+![Preview](preview_2.png) <!-- Pastikan file ini ada di root repo -->
 
 ---
 
