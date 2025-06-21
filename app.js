@@ -115,7 +115,7 @@ buyBtn.onclick = async () => {
   statusMsg.textContent = "⏳ Sending transaction...";
 
   try {
-    // 🔁 Step 1: Catat di backend
+    // 🔁 Step 1: backend
     const res = await fetch(BACKEND_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -128,7 +128,7 @@ buyBtn.onclick = async () => {
     const result = await res.json();
     if (!res.ok) throw new Error(result.error || "Backend error");
 
-    // 🔁 Step 2: Transaksi SOL ke wallet presale
+    // 🔁 Step 2: wallet presale
     const toPubkey = new solanaWeb3.PublicKey(result.payTo);
     const fromPubkey = new solanaWeb3.PublicKey(wallet);
     const connection = new solanaWeb3.Connection(RPC_URL, "confirmed");
