@@ -45,10 +45,11 @@ async function fetchTotalRaised() {
   try {
     const res = await fetch("https://backendlancips-production.up.railway.app/total-raised");
     const data = await res.json();
-    const tokens = data.totalRaised || 0;
+    const tokens = parseFloat(data.totalRaised) || 0;
     const sol = tokens * PRICE_PER_TOKEN;
     document.getElementById("total-raised").textContent = sol.toFixed(6);
   } catch (e) {
+    console.error("❌ Error fetching total raised:", e);
     document.getElementById("total-raised").textContent = "N/A";
   }
 }
