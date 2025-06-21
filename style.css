@@ -26,6 +26,23 @@ body {
   box-sizing: inherit;
 }
 
+.emoji-fire {
+  display: inline-block;
+  animation: flameFlicker 1s infinite ease-in-out;
+}
+
+/* Animasi gerakan api */
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 5px orange, 0 0 10px red;
+  }
+  50% {
+    transform: translateY(-2px) scale(1.1);
+    text-shadow: 0 0 10px red, 0 0 20px orange;
+  }
+}
+
 nav {
   background-color: #0f172a;
   padding: 8px 0;
