@@ -45,7 +45,7 @@ window.addEventListener("load", () => {
   tokenAmountSpan.textContent = "0";
 });
 
-// Load pembelian
+// Load
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -83,14 +83,14 @@ connectBtn.onclick = async () => {
   }
 };
 
-// 💰 Kalkulator
+// 💰 calculate
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// ✅ Proses Beli
+// ✅ buy
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   const tokens = sol / PRICE_PER_TOKEN;
@@ -112,7 +112,7 @@ buyBtn.onclick = async () => {
   statusMsg.textContent = "⏳ Sending transaction...";
 
   try {
-    // ✅ Kirim ke backend untuk generate wallet tujuan dan validasi
+    // ✅ to backend
     const backendURL = "https://backendlancips-production.up.railway.app/buy";
     const backendRes = await fetch(backendURL, {
       method: "POST",
@@ -128,7 +128,7 @@ buyBtn.onclick = async () => {
       throw new Error(result.error || "Backend error");
     }
 
-    // ✅ Kirim transaksi dari user ke wallet backend
+    // ✅ sending transaction to wallet backend
     const toPubkey = new solanaWeb3.PublicKey(result.payTo);
     const fromPubkey = new solanaWeb3.PublicKey(wallet);
     const connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com", "confirmed");
