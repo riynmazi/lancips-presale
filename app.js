@@ -38,7 +38,7 @@ const totalBought = document.getElementById("total-bought");
 let wallet = null;
 const PRICE_PER_TOKEN = 0.000005;
 
-// Saat halaman dimuat
+// load
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
   statusMsg.textContent = "Connect your wallet to get started";
