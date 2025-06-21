@@ -66,3 +66,48 @@ button:hover { background-color: #0ea5e9; transform: translateY(-2px); }
 
 @keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0.2; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
 
+
+@media (max-width: 480px) {
+  .logo {
+    max-width: 70px;
+    margin-bottom: 10px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .form input[type="number"],
+  .form button {
+    width: 90%;
+  }
+
+  .form p {
+    font-size: 14px;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .bannersale {
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .pinksale-btn, .whitepaper-btn {
+    width: 90%;
+    margin: 0 auto 10px auto;
+    display: block;
+  }
+
+  .roadmap, .tokenomics {
+    padding: 15px;
+  }
+
+  .site-footer {
+    font-size: 12px;
+  }
+}
