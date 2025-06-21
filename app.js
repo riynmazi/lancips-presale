@@ -47,6 +47,26 @@ window.addEventListener("load", () => {
   tokenAmountSpan.textContent = "0";
 });
 
+// 👀 Fetch total raised from backend
+async function fetchTotalRaised() {
+  try {
+    const res = await fetch("https://backendlancips-production.up.railway.app/total-raised");
+    const data = await res.json();
+    const tokens = data.totalRaised || 0;
+    const sol = tokens * PRICE_PER_TOKEN;
+    document.getElementById("total-raised").textContent = sol.toLocaleString(undefined, {
+      maximumFractionDigits: 2,
+    });
+  } catch (e) {
+    document.getElementById("total-raised").textContent = "N/A";
+  }
+}
+
+window.addEventListener("load", () => {
+  fetchTotalRaised();
+});
+
+
 // 💾 Load local total
 function loadPurchaseData() {
   if (wallet) {
