@@ -47,9 +47,7 @@ async function fetchTotalRaised() {
     const data = await res.json();
     const tokens = data.totalRaised || 0;
     const sol = tokens * PRICE_PER_TOKEN;
-    document.getElementById("total-raised").textContent = sol.toLocaleString(undefined, {
-      maximumFractionDigits: 2,
-    });
+    document.getElementById("total-raised").textContent = sol.toFixed(6);
   } catch (e) {
     document.getElementById("total-raised").textContent = "N/A";
   }
