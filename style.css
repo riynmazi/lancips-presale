@@ -1,6 +1,9 @@
 /* Anti-scroll horizontal fix */ html, body { overflow-x: hidden; margin: 0; padding: 0; max-width: 100%; box-sizing: border-box; scroll-behavior: smooth; }
 
-body { font-family: 'Baloo 2', sans-serif; background-image: url(''); background-size: cover; background-position: center center; background-repeat: no-repeat; background-attachment: fixed; background-color: #058b9d; color: #fff; padding: 20px; text-align: center; transition: background 0.4s, color 0.4s; }
+body { font-family: 'Baloo 2', sans-serif; background-image: url(''); background-size: cover; background-position: center center; background-repeat: no-repeat; background-attachment: fixed; background-color: #058b9d; color: #fff; padding: 20px; text-align: center; transition: background 0.4s, color 0.4s;
+position: relative;
+  z-index: 1;
+  }
 
 *, *::before, *::after { box-sizing: inherit; }
 
