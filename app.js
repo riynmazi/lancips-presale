@@ -1,4 +1,4 @@
-// ✅ Buffer Polyfill (hex, base64, utf8)
+// ✅ Polyfill Buffer (hex, base64, utf8)
 if (typeof Buffer === "undefined") {
   window.Buffer = {
     from: function (input, encoding) {
@@ -40,13 +40,14 @@ const PRICE_PER_TOKEN = 0.000005;
 const BACKEND_URL = "https://backendlancips-production.up.railway.app/buy";
 const RPC_URL = "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487ab1e2";
 
-// on Load
+// ⏳ On Load
 window.addEventListener("load", () => {
   buyBtn.disabled = true;
   statusMsg.textContent = "Connect your wallet to get started";
   tokenAmountSpan.textContent = "0";
 });
 
+// 💾 Load local total
 function loadPurchaseData() {
   if (wallet) {
     const key = `lancips-${wallet}`;
@@ -55,6 +56,7 @@ function loadPurchaseData() {
   }
 }
 
+// 💾 Update local total
 function updatePurchaseRecord(amount) {
   const key = `lancips-${wallet}`;
   const current = parseFloat(localStorage.getItem(key)) || 0;
@@ -84,14 +86,14 @@ connectBtn.onclick = async () => {
   }
 };
 
-// 💰 calculate token amount
+// 💰 Token Calculator
 solAmountInput.oninput = () => {
   const sol = parseFloat(solAmountInput.value) || 0;
   const tokens = sol / PRICE_PER_TOKEN;
   tokenAmountSpan.textContent = tokens.toLocaleString();
 };
 
-// ✅ Buy button
+// ✅ Buy Tokens
 buyBtn.onclick = async () => {
   const sol = parseFloat(solAmountInput.value);
   const tokens = sol / PRICE_PER_TOKEN;
@@ -113,7 +115,7 @@ buyBtn.onclick = async () => {
   statusMsg.textContent = "⏳ Sending transaction...";
 
   try {
-    // Step 1: Request backend to record purchase
+    // 🔁 Step 1: Catat di backend
     const res = await fetch(BACKEND_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -124,23 +126,12 @@ buyBtn.onclick = async () => {
     });
 
     const result = await res.json();
-    if (!res.ok) {
-      throw new Error(result.error || "Backend error");
-    }
+    if (!res.ok) throw new Error(result.error || "Backend error");
 
-    // Step 2: Transfer SOL to presale address
+    // 🔁 Step 2: Transaksi SOL ke wallet presale
     const toPubkey = new solanaWeb3.PublicKey(result.payTo);
     const fromPubkey = new solanaWeb3.PublicKey(wallet);
     const connection = new solanaWeb3.Connection(RPC_URL, "confirmed");
-
-    // ❗ get blockhash with fallback
-    let blockhash;
-    try {
-      const latest = await connection.getLatestBlockhash();
-      blockhash = latest.blockhash;
-    } catch (e) {
-      throw new Error("❌ Failed to get latest blockhash. Try again.");
-    }
 
     const transaction = new solanaWeb3.Transaction().add(
       solanaWeb3.SystemProgram.transfer({
@@ -151,10 +142,10 @@ buyBtn.onclick = async () => {
     );
 
     transaction.feePayer = fromPubkey;
+    const { blockhash } = await connection.getLatestBlockhash();
     transaction.recentBlockhash = blockhash;
 
-    const signed = await window.solana.signTransaction(transaction);
-    const signature = await connection.sendRawTransaction(signed.serialize());
+    const { signature } = await window.solana.signAndSendTransaction(transaction);
     await connection.confirmTransaction(signature, "confirmed");
 
     alert("✅ Transaction successful!\nTX Hash:\n" + signature);
