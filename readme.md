@@ -1,4 +1,4 @@
-# 🐸 LANCIPS - Frontend
+#LANCIPS - Frontend
 
 This is the frontend interface for the LANCIPS presale — a meme token built on Solana, born out of frustration, irony, and just enough hope to click "Buy".
 
