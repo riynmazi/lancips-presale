@@ -58,6 +58,14 @@ nav ul li a:hover {
 
 .logo { max-width: 100px; margin-bottom: 20px; }
 
+
+.raised-amount {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #38bdf8;
+  font-weight: bold;
+}
+
 .countdown { font-size: 16px; color: #facc15; margin-bottom: 20px; }
 
 .description { background-color: #334155; padding: 20px; border-radius: 12px; margin-bottom: 20px; font-size: 14px; line-height: 1.6; color: #e2e8f0; text-align: left; animation: fadeInUp 2s ease-out forwards; }
