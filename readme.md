@@ -35,5 +35,4 @@ Whitepaper: [Read here](https://drive.google.com/file/d/1PwgTzk3bTD8z6f__kGux3yg
 ## ⚙️ Setup Locally
 
 ```bash
-git clone https://github.com/yourusername/lancips-frontend.git
-cd lancips-frontend
+git clone [[https://github.com/yourusername/lancips-frontend.git]
