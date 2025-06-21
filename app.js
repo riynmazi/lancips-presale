@@ -38,7 +38,7 @@ const totalBought = document.getElementById("total-bought");
 let wallet = null;
 const PRICE_PER_TOKEN = 0.000005;
 const BACKEND_URL = "https://backendlancips-production.up.railway.app/buy";
-const RPC_URL = "https://rpc.ankr.com/solana";
+const RPC_URL = "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487ab1e2";
 
 // on Load
 window.addEventListener("load", () => {
