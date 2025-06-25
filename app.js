@@ -122,8 +122,8 @@ buyBtn.onclick = async () => {
     return;
   }
 
-  if (newTotal > 15000000) {
-    alert("❌ Limit exceeded: Max purchase per wallet is 15,000,000 LANCIPS.");
+  if (newTotal > 35000000) {
+    alert("❌ Limit exceeded: Max purchase per wallet is 35,000,000 LANCIPS.");
     return;
   }
 
