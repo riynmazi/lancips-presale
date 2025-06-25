@@ -166,30 +166,47 @@
   </div>
 
   <!-- Countdown Timer -->
-  <script>
-    const endTime = new Date("2025-07-30T23:59:59Z").getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = endTime - now;
-      const countdown = document.getElementById("countdown");
+<script>
+  let endTime;
 
-      if (distance <= 0) {
-        countdown.textContent = "⛔ Presale has ended.";
-        document.getElementById("buyBtn").disabled = true;
-        return;
-      }
+  async function getEndTimeFromBackend() {
+    try {
+      const res = await fetch("https://backendlancips-production.up.railway.app/presale-end");
+      const data = await res.json();
+      endTime = new Date(data.endTime).getTime();
+    } catch (e) {
+      console.error("Failed to fetch end time, using fallback 3 days from now.");
+      endTime = Date.now() + 3 * 24 * 60 * 60 * 1000;
+    }
+  }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  function updateCountdown() {
+    if (!endTime) return;
 
-      countdown.textContent = `⏳ Presale ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-    } 
+    const now = new Date().getTime();
+    const distance = endTime - now;
+    const countdown = document.getElementById("countdown");
 
-    setInterval(updateCountdown, 1000);
+    if (distance <= 0) {
+      countdown.textContent = "⛔ Presale has ended.";
+      const buyBtn = document.getElementById("buy");
+      if (buyBtn) buyBtn.disabled = true;
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdown.textContent = `⏳ Presale ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  getEndTimeFromBackend().then(() => {
     updateCountdown();
-  </script>
+    setInterval(updateCountdown, 1000);
+  });
+</script>
 
   <!-- Your App Logic -->
   <script src="app.js"></script>
