@@ -12,7 +12,7 @@ This is the frontend interface for the **LANCIPS** presale — a meme token buil
 - Connect to Phantom Wallet (Solana)
 - Buy LANCIPS using SOL
 - Automatic token calculation
-- Presale cap per wallet: 15,000,000 LANCIPS
+- Presale cap per wallet: 35,000,000 LANCIPS
 - Countdown timer until presale ends
 - Uses `@solana/web3.js` for secure transactions
 
