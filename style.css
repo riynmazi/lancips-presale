@@ -337,3 +337,21 @@ button:hover {
     opacity: 0;
   }
 }
+
+.donation-links button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px 14px;
+  background-color: #111;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.donation-links button:hover {
+  background-color: #333;
+}
