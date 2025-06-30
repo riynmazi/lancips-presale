@@ -405,3 +405,24 @@ button:hover {
   max-width: 300px;
   text-align: center;
 }
+
+.donoplan {
+  display: flex;
+  justify-content: center;  /* Posisikan horizontal ke tengah */
+  margin-top: 30px;
+}
+
+.donoplan-btn {
+  padding: 10px 24px;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.donoplan-btn:hover {
+  background-color: #333;
+}
