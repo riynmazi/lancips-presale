@@ -204,8 +204,8 @@
 <script>
   function copyAddress(address) {
     navigator.clipboard.writeText(address)
-      .then(() => alert("✅ Address copied: " + address))
-      .catch(err => alert("❌ Failed to copy address."));
+      .then(() => alert("✅ Address copied:\n" + address))
+      .catch(() => alert("❌ Failed to copy address."));
   }
 </script>
 
