@@ -76,18 +76,43 @@
     <p><strong>Donation Wallets:</strong></p>
 
 <div class="donation-links">
-  <button onclick="window.open('https://solscan.io/account/7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8', '_blank')">
-    🔗 SOL
-  </button>
-  <button onclick="window.open('https://etherscan.io/address/0xYourEthereumAddressHere', '_blank')">
-    🔗 ETH / USDT
-  </button>
-  <button onclick="window.open('https://bscscan.com/address/0xYourBnbAddressHere', '_blank')">
-    🔗 BNB
-  </button>
-  <button onclick="window.open('https://www.blockchain.com/explorer/addresses/btc/bc1qYourBitcoinAddressHere', '_blank')">
-    🔗 BTC
-  </button>
+
+  <div class="donation-row">
+    <button onclick="window.open('https://solscan.io/account/7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8', '_blank')">
+      🔗 SOL
+    </button>
+    <button onclick="copyAddress('7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8')">
+      📋 Copy
+    </button>
+  </div>
+
+  <div class="donation-row">
+    <button onclick="window.open('https://etherscan.io/address/0xYourEthereumAddressHere', '_blank')">
+      🔗 ETH / USDT
+    </button>
+    <button onclick="copyAddress('0xYourEthereumAddressHere')">
+      📋 Copy
+    </button>
+  </div>
+
+  <div class="donation-row">
+    <button onclick="window.open('https://bscscan.com/address/0xYourBnbAddressHere', '_blank')">
+      🔗 BNB
+    </button>
+    <button onclick="copyAddress('0xYourBnbAddressHere')">
+      📋 Copy
+    </button>
+  </div>
+
+  <div class="donation-row">
+    <button onclick="window.open('https://www.blockchain.com/explorer/addresses/btc/bc1qYourBitcoinAddressHere', '_blank')">
+      🔗 BTC
+    </button>
+    <button onclick="copyAddress('bc1qYourBitcoinAddressHere')">
+      📋 Copy
+    </button>
+  </div>
+
 </div>
 
 <p><em>Scan or copy one of the addresses above to send manually, or connect wallet below to send directly.</em></p>
@@ -191,6 +216,14 @@
     Read Full DonoPlan
   </button>
 </div>
+
+<script>
+  function copyAddress(address) {
+    navigator.clipboard.writeText(address)
+      .then(() => alert("✅ Address copied: " + address))
+      .catch(err => alert("❌ Failed to copy address."));
+  }
+</script>
 
   <script src="app.js"></script>
 
