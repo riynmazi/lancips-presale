@@ -69,28 +69,94 @@
     <div class="description">
       <p><strong>LANCIPS</strong> started as a meme. But now it’s personal. We’re turning leftover presale energy into something that matters: donations to help humans.</p>
       <p>Don’t buy a dream. Fund real action. Onchain.</p>
+
     </div>
 
-    <p><strong>Donation Wallet:</strong><br>
-      <a href="https://solscan.io/account/YourDonationWalletAddressHere" target="_blank">
-        YourDonationWalletAddressHere
-      </a>
-    </p>
+<p><strong>Donation Wallets:</strong></p>
+<ul>
+  <li><strong>SOL:</strong> 7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8</li>
+  <li><strong>ETH / USDT:</strong> 0xYourEthereumAddressHere</li>
+  <li><strong>BNB:</strong> 0xYourBnbAddressHere</li>
+  <li><strong>BTC:</strong> bc1qYourBitcoinAddressHere</li>
+</ul>
 
-    <div class="wallet">
-      <button id="connect">Connect Phantom to Donate</button>
-      <p id="wallet-address">Wallet not connected</p>
-    </div>
+<p><em>Scan or copy one of the addresses above to send manually, or connect wallet below to send directly.</em></p>
 
-    <div class="form">
-      <input type="number" id="solAmount" placeholder="Enter donation amount in SOL" />
-      <p>Thank you. Your donation means something.</p>
-      <button id="buy" disabled>Donate with SOL</button>
-    </div>
+<div class="wallet">
+  <button id="donate-connect">Connect Wallet to Donate</button>
+  <p id="wallet-info">Wallet not connected</p>
+</div>
 
-    <div class="status">
-      <p id="status-message">We will log the donation hash soon for transparency.</p>
-    </div>
+<div class="form">
+  <input type="number" id="donationAmount" placeholder="Enter donation amount" />
+  <p>Thank you. Your donation means something.</p>
+  <button onclick="sendDonation()">Donate Now</button>
+</div>
+
+<div class="status">
+  <p id="status-message">We will log the donation hash soon for transparency.</p>
+</div>
+
+<!-- Web3Modal & Ethers.js -->
+<script src="https://unpkg.com/@walletconnect/web3modal@3.5.0/dist/browser.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+<script>
+  const projectId = "GANTI_DENGAN_PROJECT_ID_KAMU"; // dari WalletConnect cloud
+  let connectedAccount = null;
+  let provider;
+
+  const modal = new window.Web3Modal.default({
+    projectId,
+    themeMode: "dark",
+    walletConnectVersion: 2,
+    standaloneChains: ["eip155:1", "eip155:56", "solana:mainnet"]
+  });
+
+  document.getElementById("donate-connect").onclick = async () => {
+    try {
+      provider = await modal.connect();
+      const web3Provider = new ethers.providers.Web3Provider(provider);
+      const signer = web3Provider.getSigner();
+      const address = await signer.getAddress();
+      connectedAccount = address;
+      document.getElementById("wallet-info").innerText = "✅ Connected: " + address;
+    } catch (err) {
+      console.error(err);
+      alert("❌ Failed to connect wallet.");
+    }
+  };
+
+  async function sendDonation() {
+    if (!connectedAccount || !provider) {
+      alert("Please connect your wallet first.");
+      return;
+    }
+
+    const amount = parseFloat(document.getElementById("donationAmount").value);
+    if (!amount || amount <= 0) {
+      alert("Enter a valid donation amount.");
+      return;
+    }
+
+    try {
+      const web3Provider = new ethers.providers.Web3Provider(provider);
+      const signer = web3Provider.getSigner();
+      const tx = await signer.sendTransaction({
+        to: "0xYourEthereumAddressHere", // ganti sesuai chain
+        value: ethers.utils.parseEther(amount.toString())
+      });
+
+      document.getElementById("status-message").innerText = "⏳ Waiting for confirmation...";
+      await tx.wait();
+      alert("✅ Donation sent! TX Hash:\n" + tx.hash);
+      document.getElementById("status-message").innerText = "✅ Donation recorded. Thank you!";
+    } catch (err) {
+      console.error(err);
+      alert("❌ Transaction failed: " + err.message);
+    }
+  }
+</script>
 
     <div class="roadmap" id="roadmap">
       <h2>🌱 Purpose</h2>
