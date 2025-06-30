@@ -361,6 +361,7 @@ button:hover {
   margin: 4px;
   cursor: pointer;
   border-radius: 6px;
+  text-align :center;
   transition: background-color 0.2s ease;
   display: flex;
   align-items: center;
