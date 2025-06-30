@@ -37,7 +37,61 @@
         }  
       };  
     })();  
-  </script>    <!-- ✅ Solana Web3 -->    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>  </head>  <body>  
+  </script>    <!-- ✅ Solana Web3 -->    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
+
+
+<style>
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    background: #111;
+    padding: 10px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+  }
+
+  nav a:hover {
+    background-color: #333;
+  }
+
+  .menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  @media (max-width: 600px) {
+    nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav.active {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+  }
+</style>
+</head>
+
+
+<body>  
   <!-- Bubble background -->  
   <div class="bubbles">  
     <div class="bubble"></div>  
@@ -48,20 +102,21 @@
     <div class="bubble"></div>  
   </div>
 
-<!-- 🔝 Navigation Bar -->
+<!-- Toggle Button -->
+<button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">☰ Menu</button>
 
-<nav>  
-    <ul>  
-      <li><a href="#buy">Buy</a></li>  
-      <li><a href="#roadmap">Roadmap</a></li>  
-      <li><a href="#tokenomics">Tokenomics</a></li>  
-      
-<li><a href="#whitepaper">Whitepaper</a></li>     
-      <li><a href="https://forms.gle/65TbvRgtL7Si1Jsf9">Airdrop</a></li>
-      <li><a href="https://pump.fun/coin/3a4uLhyHUqMwXUagyTEiwXBLYHYeHppk6Du9Uu9jpump">LCIP2</a></li>
-      <li><a href="#donate">Donate</a></li>
-    </ul>  
-  </nav>
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="#buy">Buy</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#tokenomics">Tokenomics</a></li>
+    <li><a href="#whitepaper">Whitepaper</a></li>
+    <li><a href="https://forms.gle/65TbvRgtL7Si1Jsf9" target="_blank">Airdrop</a></li>
+    <li><a href="https://pump.fun/coin/3a4uLhyHUqMwXUagyTEiwXBLYHYeHppk6Du9Uu9jpump" target="_blank">LCIP2</a></li>
+    <li><a href="#donate">Donate</a></li>
+  </ul>
+</nav>
 
 
 <div class="container fade-in-up">  
