@@ -74,19 +74,23 @@ body {
     margin: 10px;
   }
 
-  /* ( mobile) */
-@media (max-width: 600px) {
-  nav.collapsed ul {
-    display: none;
-  }
+  /* bullet */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
+/* Responsive - Mobile */
+@media (max-width: 600px) {
   nav ul {
     flex-direction: column;
     align-items: center;
+    display: none; /* Default */
   }
 
   nav.active ul {
-    display: flex;
+    display: flex; /* active */
   }
 
   .menu-toggle {
