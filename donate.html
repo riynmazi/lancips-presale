@@ -51,15 +51,19 @@
     <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
   </div>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="#donate">Donate</a></li>
-      <li><a href="#roadmap">Purpose</a></li>
-      <li><a href="#tokenomics">Transparency</a></li>
-      <li><a href="#whitepaper">Dono plan</a></li>
-    </ul>
-  </nav>
+ <!-- Hamburger Toggle Button -->
+<button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <ul class="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="#donate">Donate</a></li>
+    <li><a href="#roadmap">Purpose</a></li>
+    <li><a href="#tokenomics">Transparency</a></li>
+    <li><a href="#whitepaper">Dono Plan</a></li>
+  </ul>
+</nav>
 
   <div class="container fade-in-up">
     <img src="logo.png" alt="Lancips Logo" class="logo" />
@@ -216,6 +220,13 @@
       .catch(() => alert("❌ Failed to copy address."));
   }
 </script>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('active');
+  }
+</script>
+
 
   <script src="app.js"></script>
 
