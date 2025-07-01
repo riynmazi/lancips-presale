@@ -46,71 +46,90 @@ body {
 /*navigation*/
 
   .navbar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: transparent;
-  padding: 10px;
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 22px;
-  background-color: #00bfff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-bottom: 10px;
-  box-shadow: 0 0 10px #00bfff88;
-}
-
-.nav-links {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  background-color: #111;
-  font-size: 18px;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  font-weight: 600;
-}
-
-.nav-links a:hover {
-  background-color: #333;
-  box-shadow: 0 0 10px #fff3;
-}
-
-/* Mobile Style */
-@media (max-width: 600px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-links {
+    display: flex;
     flex-direction: column;
-    display: none;
-    width: 100%;
-    text-align: center;
-    gap: 8px;
+    align-items: flex-start;
+    background-color: #111;
+    padding: 10px;
   }
 
+  /* Toggle button */
+  .menu-toggle {
+    background: none;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  /* Nav links */
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hidden by default on mobile */
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-links li {
+    margin: 5px 0;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    background-color: #222;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+
+  .nav-links a:hover {
+    background-color: #333;
+  }
+
+  /* Show menu when active */
   .nav-links.active {
     display: flex;
   }
-}
+
+  /* Desktop view (show always) */
+  @media (min-width: 768px) {
+    .navbar {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .nav-links {
+      display: flex !important;
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .nav-links li {
+      margin: 0;
+    }
+
+    .nav-links a {
+      background-color: transparent;
+      padding: 8px 12px;
+    }
+
+    .nav-links a:hover {
+      background-color: #333;
+    }
+  }
+
+
+
 
 .container {
   max-width: 600px;
