@@ -84,7 +84,7 @@ body {
   text-decoration: none;
   padding: 10px;
   display: block;
-  background-color: #222;
+  background-color: transparent;
   border-radius: 6px;
   transition: background 0.2s;
 }
