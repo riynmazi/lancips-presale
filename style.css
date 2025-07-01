@@ -46,87 +46,84 @@ body {
 /*navigation*/
 
   .navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: #111;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #111;
+  padding: 10px;
+}
+
+.menu-toggle {
+  background: none;
+  color: white;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none; /* Default hidden on mobile */
+  flex-direction: column;
+  width: 100%;
+}
+
+.nav-links.active {
+  display: flex;
+}
+
+.nav-links li {
+  margin: 5px 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  background-color: #222;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.nav-links a:hover {
+  background-color: #333;
+}
+
+/* Desktop Style */
+@media (min-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
-  /* Toggle button */
   .menu-toggle {
-    background: none;
-    color: white;
-    font-size: 24px;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 10px;
+    display: none;
   }
 
-  /* Nav links */
   .nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: none; /* Hidden by default on mobile */
-    flex-direction: column;
-    width: 100%;
+    display: flex !important;
+    flex-direction: row;
+    gap: 20px;
   }
 
   .nav-links li {
-    margin: 5px 0;
+    margin: 0;
   }
 
   .nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-    background-color: #222;
-    border-radius: 6px;
-    transition: background 0.2s;
+    background-color: transparent;
+    padding: 8px 12px;
   }
 
   .nav-links a:hover {
     background-color: #333;
   }
-
-  /* Show menu when active */
-  .nav-links.active {
-    display: flex;
-  }
-
-  /* Desktop view (show always) */
-  @media (min-width: 768px) {
-    .navbar {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .menu-toggle {
-      display: none;
-    }
-
-    .nav-links {
-      display: flex !important;
-      flex-direction: row;
-      gap: 20px;
-    }
-
-    .nav-links li {
-      margin: 0;
-    }
-
-    .nav-links a {
-      background-color: transparent;
-      padding: 8px 12px;
-    }
-
-    .nav-links a:hover {
-      background-color: #333;
-    }
-  }
+}
 
 
 
