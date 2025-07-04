@@ -17,7 +17,7 @@ html, body {
 /* === LAYOUT === */
 .container {
   max-width: 700px;
-  margin: 60px auto;
+  margin: 20px auto 40px;
   padding: 40px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.05);
@@ -165,7 +165,7 @@ input[type="number"] {
 .menu-toggle {
   background-color: rgba(255, 255, 255, 0.05);
   padding: 10px 16px;
-  margin: 10px 0 10px 16px; /* ⬅️ geser dari kiri */
+  margin: 10px 0 0 16px; /* ⬅️ geser dari kiri */
   border-radius: 8px;
   font-size: 22px;
   font-weight: bold;
