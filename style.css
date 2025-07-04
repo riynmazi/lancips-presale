@@ -29,8 +29,9 @@ html, body {
 }
 
 .logo {
-  width: 100px;
-  margin-bottom: 20px;
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 100px;
 }
 
 /* === TYPOGRAPHY === */
