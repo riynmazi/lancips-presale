@@ -10,12 +10,8 @@ html, body {
 
 body {
   font-family: 'Baloo 2', sans-serif;
-  background-image: url('');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
   background-attachment: fixed;
-  background-color: #1e293b;
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -31,7 +27,6 @@ body {
   animation: flameFlicker 1s infinite ease-in-out;
 }
 
-/* Animasi gerakan api */
 @keyframes flameFlicker {
   0%, 100% {
     transform: translateY(0) scale(1);
@@ -43,14 +38,14 @@ body {
   }
 }
 
-/*navigation*/
-
-  .navbar {
+.navbar {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-color: transparent;
   padding: 10px;
+  z-index: 2;
+  position: relative;
 }
 
 .menu-toggle {
@@ -66,9 +61,10 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: none; /* Default hidden on mobile */
+  display: none;
   flex-direction: column;
   width: 100%;
+  z-index: 3;
 }
 
 .nav-links.active {
@@ -84,16 +80,15 @@ body {
   text-decoration: none;
   padding: 10px;
   display: block;
-  background-color: transparent;
-  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
   transition: background 0.2s;
 }
 
 .nav-links a:hover {
-  background-color: #333;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Desktop Style */
 @media (min-width: 768px) {
   .navbar {
     flex-direction: row;
@@ -111,89 +106,69 @@ body {
     gap: 20px;
   }
 
-  .nav-links li {
-    margin: 0;
-  }
-
   .nav-links a {
-    background-color: transparent;
     font-size: 18px;
     padding: 8px 12px;
   }
-
-  .nav-links a:hover {
-    background-color: #333;
-  }
 }
 
-
-
-
 .container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 50px auto;
-  background-color: #34568e;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
   animation: fadeInUp 1s ease-out forwards;
+  position: relative;
+  z-index: 2;
 }
 
 .logo {
-  max-width: 100px;
-  margin-bottom: 20px;
-}
-
-.raised-amount {
-  font-size: 16px;
-  margin-bottom: 15px;
-  color: #38bdf8;
-  font-weight: bold;
-}
-
-.countdown {
-  font-size: 20px;
-  color: #facc15;
+  max-width: 120px;
   margin-bottom: 20px;
 }
 
 .description {
-  background-color: #334155;
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-bottom: 20px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
   color: #e2e8f0;
   text-align: left;
-  animation: fadeInUp 2s ease-out forwards;
+  animation: fadeInUp 1.5s ease-out forwards;
 }
 
 input[type="number"] {
   padding: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   width: 80%;
   margin-top: 10px;
   font-size: 16px;
+  text-align: center;
 }
 
 button {
-  background-color: #16b6fd;
+  background: linear-gradient(to right, #16b6fd, #38bdf8);
   color: #000;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: 10px;
+  padding: 12px 24px;
   font-weight: bold;
   margin-top: 15px;
   cursor: pointer;
-  font-size: 15px;
-  transition: background-color 0.3s, transform 0.2s;
+  font-size: 16px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
 button:hover {
-  background-color: #0ea5e9;
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
 }
 
 .status {
@@ -206,10 +181,11 @@ button:hover {
 .tokenomics {
   margin-top: 40px;
   text-align: left;
-  background-color: #1e293b;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   animation: fadeInUp 1s ease-out forwards;
 }
 
@@ -217,7 +193,8 @@ button:hover {
 .tokenomics h2 {
   color: #facc15;
   text-align: center;
-  font-size: 24px;
+  font-size: 26px;
+  margin-bottom: 20px;
 }
 
 .roadmap ul,
@@ -228,92 +205,54 @@ button:hover {
 
 .roadmap li,
 .tokenomics li {
-  margin-bottom: 10px;
-  font-size: 15px;
-  color: #e2e8f0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #f1f5f9;
 }
 
-.tokenomics-chart {
-  display: block;
-  max-width: 100%;
-  margin: 20px auto;
-  border-radius: 12px;
-  box-shadow: 0 0 10px #000;
-}
-
-/* Animation */
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+.whitepaper-btn,
 .pinksale-btn {
-  background-color: #fd2416;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.pinksale-btn:hover {
-  background-color: #ff85c2;
-}
-
-.whitepaper-btn {
   margin-top: 30px;
-  background-color: #16b6fd;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 10px;
   font-weight: bold;
-  transition: background-color 0.3s;
+  background-color: #facc15;
+  color: #000;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
 }
 
-.whitepaper-btn:hover {
-  background-color: #ff85c2;
+.whitepaper-btn:hover,
+.pinksale-btn:hover {
+  background-color: #fde047;
+  transform: scale(1.05);
 }
 
 .site-footer {
-  margin-top: 50px;
-  padding: 20px 10px;
+  margin-top: 60px;
+  padding: 25px 10px;
   font-size: 13px;
   color: #94a3b8;
-  background-color: #1e293b;
+  background-color: #0f172a;
   text-align: center;
   border-top: 1px solid #334155;
+  z-index: 2;
 }
 
 @media (max-width: 768px) {
-  body {
-    background-image: url('');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
+  .form input {
+    width: 100%;
   }
 }
 
-/* ✅ Bubble background fix */
+/* Bubble Background */
 .bubbles {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
 }
@@ -323,10 +262,10 @@ button:hover {
   bottom: -100px;
   width: 40px;
   height: 40px;
-  background: rgba(14, 165, 233, 0.4); /* blue */
+  background: rgba(14, 165, 233, 0.3);
   border-radius: 50%;
   animation: rise 20s infinite ease-in;
-  box-shadow: 0 0 15px rgba(14, 165, 233, 0.8); /* efek glow biru */
+  box-shadow: 0 0 15px rgba(14, 165, 233, 0.8);
 }
 
 .bubble:nth-child(2) {
@@ -336,6 +275,7 @@ button:hover {
   animation-delay: 2s;
   animation-duration: 25s;
 }
+
 .bubble:nth-child(3) {
   width: 20px;
   height: 20px;
@@ -343,6 +283,7 @@ button:hover {
   animation-delay: 4s;
   animation-duration: 18s;
 }
+
 .bubble:nth-child(4) {
   width: 50px;
   height: 50px;
@@ -350,6 +291,7 @@ button:hover {
   animation-delay: 1s;
   animation-duration: 22s;
 }
+
 .bubble:nth-child(5) {
   width: 30px;
   height: 30px;
@@ -357,6 +299,7 @@ button:hover {
   animation-delay: 3s;
   animation-duration: 26s;
 }
+
 .bubble:nth-child(6) {
   width: 25px;
   height: 25px;
@@ -368,108 +311,10 @@ button:hover {
 @keyframes rise {
   0% {
     transform: translateY(0) scale(1);
-    opacity: 0.2;
+    opacity: 0.3;
   }
   100% {
     transform: translateY(-100vh) scale(1.5);
     opacity: 0;
   }
-}
-
-
-
-/* block donate.html */
-
-
-  .donation-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .donation-row {
-    display: flex;
-    gap: 10px;
-  }
-
-  .donation-row button {
-  background-color: transparent;
-  border: none;
-  padding: 6px;
-  margin: 4px;
-  cursor: pointer;
-  border-radius: 6px;
-  text-align :center;
-  transition: background-color 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.donation-row button:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* efek hover ringan */
-}
-
-/* Icon size */
-.crypto-icon {
-  width: 24px;
-  height: 24px;
-  text-align: center;
-}
-
-.wallet,
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* center potition */
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.wallet button,
-.form button {
-  padding: 10px 20px;
-  background-color: #16b6fd;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.wallet button:hover,
-.form button:hover {
-  background-color: #333;
-}
-
-.form input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  width: 80%; /* mobile */
-  max-width: 300px;
-  text-align: center;
-}
-
-.donoplan {
-  display: flex;
-  justify-content: center;  /* center position*/
-  margin-top: 30px;
-}
-
-.donoplan-btn {
-  padding: 10px 24px;
-  background-color: #16b6fd;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.donoplan-btn:hover {
-  background-color: #333;
 }
