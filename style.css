@@ -161,13 +161,17 @@ input[type="number"] {
 }
 
 .menu-toggle {
-  background: none;
-  color: white;
-  font-size: 26px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 10px 16px;
+  margin: 10px 0 10px 16px; /* ⬅️ geser dari kiri */
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #f1f5f9;
   border: none;
   cursor: pointer;
-  margin-bottom: 10px;
-  z-index: 10;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  transition: all 0.3s ease;
 }
 
 .nav-links {
