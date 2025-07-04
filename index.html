@@ -1,9 +1,15 @@
-<!DOCTYPE html>  <html lang="en">  
+<!DOCTYPE html><html lang="en">  
 <head>  
   <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
-  <title>LANCIPS Presale</title>    <!-- CSS & Fonts -->    <link rel="stylesheet" href="style.css" />  
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">    <!-- Favicon -->    <link rel="icon" type="image/png" href="favicon.png">    <!-- ✅ Buffer Polyfill -->    <script>  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LANCIPS Presale</title>
+  <!-- CSS & Fonts -->
+  <link rel="stylesheet" href="style.css" />  
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <!-- ✅ Buffer Polyfill -->
+  <script>  
     (function () {  
       function base64ToBytes(str) {  
         const binary = atob(str);  
@@ -14,11 +20,9 @@
         }  
         return bytes;  
       }  
-  
       function utf8ToBytes(str) {  
         return new TextEncoder().encode(str);  
       }  
-  
       function hexToBytes(hex) {  
         if (hex.length % 2 !== 0) throw new Error("Invalid hex string");  
         const bytes = new Uint8Array(hex.length / 2);  
@@ -27,7 +31,6 @@
         }  
         return bytes;  
       }  
-  
       window.Buffer = {  
         from: function (input, encoding) {  
           if (encoding === "base64") return base64ToBytes(input);  
@@ -37,14 +40,11 @@
         }  
       };  
     })();  
-  </script>    <!-- ✅ Solana Web3 -->    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
-
-
-
+  </script>  
+  <!-- ✅ Solana Web3 -->  
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
 </head>
-
-
-<body>  
+<body>
   <!-- Bubble background -->  
   <div class="bubbles">  
     <div class="bubble"></div>  
@@ -53,34 +53,23 @@
     <div class="bubble"></div>  
     <div class="bubble"></div>  
     <div class="bubble"></div>  
-  </div>
+  </div>  <!-- Hamburger Menu --><button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
 
-<!-- Hamburger Menu -->
-<button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
-
-<!-- Navigation -->
-<nav class="navbar">
-  <ul class="nav-links">
-    <li><a href="#buy">Buy</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#tokenomics">Tokenomics</a></li>
-    <li><a href="#whitepaper">Whitepaper</a></li>
-    <li><a href="https://forms.gle/65TbvRgtL7Si1Jsf9" target="_blank">Airdrop</a></li>
-    <li><a href="https://pump.fun/coin/3a4uLhyHUqMwXUagyTEiwXBLYHYeHppk6Du9Uu9jpump" target="_blank">LCIP2</a></li>
-    <li><a href="#donate">Donate</a></li>
-  </ul>
-</nav>
-
-
-<div class="container fade-in-up">  
-    <img src="logo.png" alt="Lancips Logo" class="logo" />     <h1 class="presale-title">  
-  LANCIPS <span      class="emoji-fire">🔥</span><span class="emoji-fire">🔥</span><span class="emoji-fire">🔥</span>  
-</h1>
-
-<!--
-<p id="countdown" class="countdown">⏳ Calculating presale time...</p> -->
-
-<div class="description">  
+  <!-- Navigation -->  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a href="#buy">Buy</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#tokenomics">Tokenomics</a></li>
+      <li><a href="#whitepaper">Whitepaper</a></li>
+      <li><a href="https://forms.gle/65TbvRgtL7Si1Jsf9" target="_blank">Airdrop</a></li>
+      <li><a href="https://pump.fun/coin/3a4uLhyHUqMwXUagyTEiwXBLYHYeHppk6Du9Uu9jpump" target="_blank">LCIP2</a></li>
+      <li><a href="#donate">Donate</a></li>
+    </ul>
+  </nav>  <div class="container fade-in-up">  
+    <img src="logo.png" alt="Lancips Logo" class="logo" />
+    <h1 class="presale-title">
+      LANCIPS <span class="emoji-fire">🔥</span><span class="emoji-fire">🔥</span><span class="emoji-fire">🔥</span>
+    </h1><div class="description">  
   <p><strong>LANCIPS</strong> is a meme coin born out of pure disappointment — the kind you feel when your favorite token rugs, your bags go to zero, or your friend disappears after shilling a project.</p>  
   <p>It's not just a coin, it’s a coping mechanism. Fueled by irony, frustration, and just enough hope to click “Buy.”</p>  
 </div>  
@@ -89,20 +78,19 @@
 <p><strong>Total Token to presale:</strong> 35,000,000 LANCIPS</p>  
 <p><strong>Token Price:</strong> 0.00001 SOL</p>  
 <p><strong>Network:</strong> Solana</p>  
-<p><strong>Token Address:</strong>   
+<p><strong>Token Address:</strong>  
   <a href="https://solscan.io/token/8KigeQfhBc9Xw8mJ3pbuhUsyCh9N1AUbhAPwHfuBUrzm" target="_blank">  
     8KigeQfhBc9Xw...  
   </a>  
 </p>  
 
-
-
 <!-- Wallet connect -->
+<div class="wallet">  
+  <button id="connect">Connect with Phantom Wallet</button>  
+  <p id="wallet-address">Wallet not connected</p>  
+</div>
 
-   <div class="wallet">  
-      <button id="connect">Connect with Phantom Wallet</button>  
-      <p id="wallet-address">Wallet not connected</p>  
-    </div>  <div class="form">  
+<div class="form">  
   <input type="number" id="solAmount" placeholder="Enter amount in SOL" />  
   <p>You will receive: <span id="tokenAmount">0</span> LANCIPS</p>  
   <button id="buy">Buy LANCIPS</button>  
@@ -111,45 +99,36 @@
 <div class="status">  
   <p id="status-message">Connect your wallet to get started</p>  
   <p><strong>Total Purchased:</strong> <span id="total-bought">0</span> LANCIPS</p>  
-</div>  
+</div>
 
 <!-- Roadmap -->  
 <div class="roadmap" id="roadmap">  
-  <h2>🗺️ Roadmap</h2>  
+  <h2>🗘️ Roadmap</h2>  
   <ul>  
     <li><strong>Step 1:</strong> Launch Presale</li>  
-    <li><strong>Step 2:</strong>
-
-Meme Chaos</li>
-<li><strong>Step 3:</strong> List ,list and list</li>
-<li><strong>Step 4:</strong>
-Up to you</li>
-</ul>
+    <li><strong>Step 2:</strong> Meme Chaos</li>
+    <li><strong>Step 3:</strong> List ,list and list</li>
+    <li><strong>Step 4:</strong> Up to you</li>
+  </ul>
 </div>
 
 <!-- Tokenomics -->  
 <div class="tokenomics" id="tokenomics">  
   <h2>📊 Tokenomic</h2>  
   <ul>  
-    <li><strong>35%</strong> 🛒Presale web</li>  
-    <li><strong>55%</strong> 🧑‍🤝‍🧑Public</li>  
-    <li><strong>5%</strong> 👥
-
-Marketing</li>
-<li><strong>5%</strong> ✌️
-Dev team</li>
-
-</ul>  
-</div>  
+    <li><strong>35%</strong> 🛍Presale web</li>  
+    <li><strong>55%</strong> 🧑‍🧑Public</li>  
+    <li><strong>5%</strong> 👥Marketing</li>
+    <li><strong>5%</strong> ✌️Dev team</li>
+  </ul>  
+</div>
 
 <!-- Whitepaper -->  
 <div class="whitepaper" id="whitepaper">
-
   <button class="whitepaper-btn" onclick="window.open('https://drive.google.com/file/d/1TmQNxHcuTOkBehN8-k1iGohiasy48XJx/view?usp=drivesdk', '_blank')">  
     WHITEPAPER BRO !  
   </button>  
 </div>  
-
 
 <!-- Donate Button -->   
 <div class="donate" id="donate">  
@@ -158,64 +137,13 @@ Dev team</li>
   </button>  
 </div>
 
-
- <!-- Countdown Timer 
-
-<script>  
-  let endTime;  
-  
-  async function getEndTimeFromBackend() {  
-    try {  
-      const res = await fetch("https://backendlancips-production.up.railway.app/presale-end");  
-      const data = await res.json();  
-      endTime = new Date(data.endTime).getTime();  
-    } catch (e) {  
-      console.error("Failed to fetch end time, using fallback 3 days from now.");  
-      endTime = Date.now() + 3 * 24 * 60 * 60 * 1000;  
-    }  
-  }  
-  
-  function updateCountdown() {  
-    if (!endTime) return;  
-  
-    const now = new Date().getTime();  
-    const distance = endTime - now;  
-    const countdown = document.getElementById("countdown");  
-  
-    if (distance <= 0) {  
-      countdown.textContent = "⛔ Presale has ended.";  
-      const buyBtn = document.getElementById("buy");  
-      if (buyBtn) buyBtn.disabled = true;  
-      return;  
-    }  
-  
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));  
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));  
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));  
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);  
-  
-    countdown.textContent = `⏳ Presale ends in: ${days}d ${hours}h ${minutes}m ${seconds}s`;  
-  }  
-  
-  getEndTimeFromBackend().then(() => {  
-    updateCountdown();  
-    setInterval(updateCountdown, 1000);  
-  });  
-</script> -->
-
-
-<script>
-  function toggleMenu() {
-    const nav = document.querySelector('.nav-links');
-    nav.classList.toggle('active');
-  }
-</script>
-
-
-<!-- Your App Logic -->
-
-<script src="app.js"></script>    <!-- Footer -->    <footer class="site-footer">  
+  </div>  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('.nav-links');
+      nav.classList.toggle('active');
+    }
+  </script>  <!-- Your App Logic -->  <script src="app.js"></script>  <!-- Footer -->  <footer class="site-footer">  
     <p>© Lancips 2025. All rights reserved.</p>  
-  </footer>  
-</body>  
-</html>  
+  </footer>
+</body>
+</html>
