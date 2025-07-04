@@ -188,7 +188,7 @@ input[type="number"] {
   color: white;
   text-decoration: none;
   padding: 10px;
-  background-color: rgba(255,255,255,0.05);
+  background-color: none;
   border-radius: 8px;
   margin: 5px 0;
   transition: background 0.3s;
