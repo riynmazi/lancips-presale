@@ -55,13 +55,13 @@ h1.presale-title {
   font-size: 36px;
   font-weight: 700;
   color: #facc15;
+  text-align: center;
 }
 
 h2 {
   font-size: 24px;
   color: #38bdf8;
   margin-top: 30px;
-  text-align: center;
 }
 
 .description {
