@@ -163,6 +163,16 @@
   </script>
 
 
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const navbarWrapper = document.querySelector('.navbar-wrapper');
+    const logoContainer = document.querySelector('.logo-container');
+    const navbarHeight = navbarWrapper.offsetHeight;
+    logoContainer.style.marginTop = navbarHeight + 'px';
+  });
+</script>
+
+
 <!-- Your App Logic -->  <script src="app.js"></script>  <!-- Footer -->  <footer class="site-footer">  
     <p>© Lancips 2025. All rights reserved.</p>  
   </footer>
