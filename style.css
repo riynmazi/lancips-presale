@@ -186,15 +186,15 @@ input[type="number"] {
 
 .menu-toggle {
   background-color: rgba(255, 255, 255, 0.05);
-  padding: 10px 16px;
-  margin: 10px 0 0 16px; /* ⬅️ */
-  border-radius: 8px;
-  font-size: 22px;
+  padding: 6px 12px;
+  margin: 8px 0 0 12px; /* ⬅️ */
+  border-radius: 6px;
+  font-size: 16px;
   font-weight: bold;
   color: #f1f5f9;
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
   transition: all 0.3s ease;
 }
 
