@@ -253,3 +253,99 @@ input[type="number"] {
   0%, 100% { transform: translateY(0) scale(1); text-shadow: 0 0 5px orange, 0 0 10px red; }
   50% { transform: translateY(-2px) scale(1.1); text-shadow: 0 0 10px red, 0 0 20px orange; }
 }
+
+/* block donate.html */
+
+
+  .donation-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .donation-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .donation-row button {
+  background-color: transparent;
+  border: none;
+  padding: 6px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align :center;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donation-row button:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* efek hover ringan */
+}
+
+/* Icon size */
+.crypto-icon {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+}
+
+.wallet,
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center potition */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.wallet button,
+.form button {
+  padding: 10px 20px;
+  background-color: #16b6fd;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.wallet button:hover,
+.form button:hover {
+  background-color: #333;
+}
+
+.form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 80%; /* mobile */
+  max-width: 300px;
+  text-align: center;
+}
+
+.donoplan {
+  display: flex;
+  justify-content: center;  /* center position*/
+  margin-top: 30px;
+}
+
+.donoplan-btn {
+  padding: 10px 24px;
+  background-color: #16b6fd;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.donoplan-btn:hover {
+  background-color: #333;
+}
