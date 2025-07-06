@@ -28,11 +28,19 @@ html, body {
   animation: fadeInUp 1s ease-out;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 50px;
-  max-width: 100px;
+
+
+.logo-container {
+  text-align: center;
+  margin-top: 20px;
 }
+
+.logo {
+  max-width: 200px;
+  height: auto;
+}
+
+
 
 /* === TYPOGRAPHY === */
 h1, h2, p {
