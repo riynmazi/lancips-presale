@@ -220,6 +220,8 @@ input[type="number"] {
     flex-direction: row;
     justify-content: center;
   }
+
+/*
   .menu-toggle { display: none; }
   .nav-links {
     display: flex !important;
@@ -229,7 +231,7 @@ input[type="number"] {
   .nav-links a {
     padding: 10px 16px;
   }
-}
+}*/
 
 /* === FOOTER === */
 .site-footer {
