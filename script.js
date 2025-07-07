@@ -14,11 +14,9 @@ function toggleMenu() {
 // === SCROLL REVEAL ===
 function revealOnScroll() {
   const reveals = document.querySelectorAll('.fade-left, .fade-right');
-
   for (const el of reveals) {
     const rect = el.getBoundingClientRect();
     const isVisible = rect.top < window.innerHeight - 100;
-
     if (isVisible) {
       el.classList.add('show');
     }
@@ -91,32 +89,26 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 6. Efek loncat preset + suara saat klik logo
+    // 6. Efek loncat preset (pindah posisi) + suara boing
     const jumpPositions = [
-      { x: '0px', y: '0px' },       // Tengah
-      { x: '-80px', y: '-80px' },   // Kiri atas
-      { x: '80px', y: '-80px' },    // Kanan atas
-      { x: '-80px', y: '80px' },    // Kiri bawah
-      { x: '80px', y: '80px' },     // Kanan bawah
-      { x: '0px', y: '-100px' },    // Tengah atas
-      { x: '0px', y: '100px' },     // Tengah bawah
+      { x: '0%', y: '0%' },           // Tengah
+      { x: '-40%', y: '-40%' },       // Kiri atas
+      { x: '40%', y: '-40%' },        // Kanan atas
+      { x: '-40%', y: '40%' },        // Kiri bawah
+      { x: '40%', y: '40%' },         // Kanan bawah
+      { x: '0%', y: '-50%' },         // Tengah atas
+      { x: '0%', y: '50%' },          // Tengah bawah
     ];
 
     let jumpIndex = 0;
-
-    // Suara boing
     const boingSound = new Audio('audio/boing.mp3');
 
     logoWrapper.addEventListener('click', () => {
-      logoWrapper.classList.remove('jump');
-      void logoWrapper.offsetWidth;
-
       const pos = jumpPositions[jumpIndex];
-      logoWrapper.style.setProperty('--rand-x', pos.x);
-      logoWrapper.style.setProperty('--rand-y', pos.y);
-      logoWrapper.classList.add('jump');
+      logoWrapper.style.left = `calc(50% + ${pos.x})`;
+      logoWrapper.style.top = `calc(50% + ${pos.y})`;
+      logoWrapper.style.transform = 'translate(-50%, -50%)';
 
-      // Mainkan suara
       boingSound.currentTime = 0;
       boingSound.play();
 
