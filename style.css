@@ -97,7 +97,10 @@ html, body {
   border-radius: 8px;
   margin: 6px 0;
   transition: transform 0.2s ease, color 0.2s ease;
-  display: inline-block; /* important */
+  display: inline-block;
+  font-size: 18px;      /* ⬅️ big */
+  font-weight: 700;     /* ⬅️ bold  */
+  letter-spacing: 0.5px; /* ⬅️ optional space font */
 }
 
 .nav-links a:hover {
