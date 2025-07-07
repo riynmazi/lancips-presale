@@ -95,17 +95,18 @@ window.addEventListener('DOMContentLoaded', () => {
 const logoWrapper = document.querySelector('.logo-wrapper');
 if (logoWrapper) {
   logoWrapper.addEventListener('click', () => {
+    // Reset animasi (trik pakai reflow)
+    logoWrapper.classList.remove('jump');
+    void logoWrapper.offsetWidth; // ⬅️ ini paksa reflow, biar animasi bisa diputar ulang
+    // Acak arah loncatan
     const randX = (Math.random() - 0.5) * 100 + 'px';
     const randY = (Math.random() - 0.5) * 100 + 'px';
 
     logoWrapper.style.setProperty('--rand-x', randX);
     logoWrapper.style.setProperty('--rand-y', randY);
 
+    // Jalankan animasi
     logoWrapper.classList.add('jump');
-
-    setTimeout(() => {
-      logoWrapper.classList.remove('jump');
-    }, 600); // sama dengan durasi animasi
   });
 }
 
