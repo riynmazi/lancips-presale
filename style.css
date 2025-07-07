@@ -133,6 +133,20 @@ html, body {
 }
 
 
+.logo-wrapper.jump {
+  animation: logo-jump 0.4s ease;
+}
+
+@keyframes logo-jump {
+  0% { transform: translate(0, 0); }
+  50% {
+    transform: translate(var(--jX, 0px), var(--jY, 0px));
+  }
+  100% { transform: translate(0, 0); }
+}
+
+
+
 /* === NAVBAR & TOGGLE === */
 .navbar {
   display: flex;
