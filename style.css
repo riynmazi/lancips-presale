@@ -148,6 +148,8 @@ html, body {
 
 .logo-wrapper.jump {
   animation: randomJump 0.6s ease;
+  animation-fill-mode: forwards;
+  will-change: transform;
 }
 
 
