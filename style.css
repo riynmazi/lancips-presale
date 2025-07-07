@@ -319,6 +319,42 @@ h2 {
   margin: 20px 0;
 }
 
+/*Token info*/
+
+
+.token-info {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 600px;
+  font-size: 15px;
+  line-height: 1.6;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+
+.token-info p {
+  margin: 10px 0;
+  color: #f1f5f9;
+}
+
+.token-info strong {
+  color: #38bdf8;
+}
+
+.token-info a {
+  color: #facc15;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.token-info a:hover {
+  color: #fbbf24;
+}
+
+
+
+
 /* === BUBBLE BG === */
 .bubbles {
   position: fixed;
