@@ -91,18 +91,36 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 6. Efek loncat acak saat klik logo
+    // 6. Efek loncat preset + suara saat klik logo
+    const jumpPositions = [
+      { x: '0px', y: '0px' },       // Tengah
+      { x: '-80px', y: '-80px' },   // Kiri atas
+      { x: '80px', y: '-80px' },    // Kanan atas
+      { x: '-80px', y: '80px' },    // Kiri bawah
+      { x: '80px', y: '80px' },     // Kanan bawah
+      { x: '0px', y: '-100px' },    // Tengah atas
+      { x: '0px', y: '100px' },     // Tengah bawah
+    ];
+
+    let jumpIndex = 0;
+
+    // Suara boing
+    const boingSound = new Audio('audio/boing.mp3');
+
     logoWrapper.addEventListener('click', () => {
       logoWrapper.classList.remove('jump');
-      void logoWrapper.offsetWidth; // reset animasi
+      void logoWrapper.offsetWidth;
 
-      const randX = (Math.random() - 0.5) * 100 + 'px';
-      const randY = (Math.random() - 0.5) * 100 + 'px';
-
-      logoWrapper.style.setProperty('--rand-x', randX);
-      logoWrapper.style.setProperty('--rand-y', randY);
-
+      const pos = jumpPositions[jumpIndex];
+      logoWrapper.style.setProperty('--rand-x', pos.x);
+      logoWrapper.style.setProperty('--rand-y', pos.y);
       logoWrapper.classList.add('jump');
+
+      // Mainkan suara
+      boingSound.currentTime = 0;
+      boingSound.play();
+
+      jumpIndex = (jumpIndex + 1) % jumpPositions.length;
     });
   }
 });
