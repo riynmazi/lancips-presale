@@ -71,7 +71,7 @@ html, body {
 }
 
 .logo {
-  max-width: 200px;
+  max-width: 100px;
   width: 100%;
   height: auto;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
