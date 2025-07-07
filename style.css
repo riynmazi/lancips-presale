@@ -37,11 +37,11 @@ html, body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  position: relative;
+  position: fixed;
   height: 60px;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 1000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
