@@ -53,6 +53,13 @@ html, body {
   height: 100%;
 }
 
+.navbar-left {
+  display: flex;
+  align-items: center;
+  height: 100%; /* ⬅️ ini penting supaya tombol ditengah tinggi navbar */
+}
+
+
 /* === NAVBAR TOGGLE BUTTON === */
 .menu-toggle,
 .menu-close {
