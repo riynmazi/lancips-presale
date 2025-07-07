@@ -84,6 +84,7 @@ html, body {
   -webkit-touch-callout: none;              /* iOS long press menu */
   transition: transform 0.3s ease;
   cursor: pointer;
+  z-index: 3;
 }
 
 .logo-wrapper {
