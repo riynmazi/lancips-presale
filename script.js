@@ -1,7 +1,7 @@
 // === TOGGLE MENU ===
 function toggleMenu() {
   const nav = document.querySelector('.nav-links');
-  if (nav) nav.classList.toggle('active');
+  nav.classList.toggle('active');
 }
 
 // === AUTO CLOSE MENU ON LINK CLICK ===
@@ -11,13 +11,25 @@ window.addEventListener('DOMContentLoaded', () => {
 
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      // Tutup menu kalau sedang aktif (mobile mode)
       if (nav.classList.contains('active')) {
         nav.classList.remove('active');
       }
     });
   });
+
+  // === AUTO CLOSE MENU IF CLICK OUTSIDE ===
+  document.addEventListener('click', (e) => {
+    const toggleBtn = document.querySelector('.menu-toggle');
+    const isClickInsideNav = nav.contains(e.target);
+    const isClickOnToggle = toggleBtn.contains(e.target);
+
+    if (!isClickInsideNav && !isClickOnToggle) {
+      nav.classList.remove('active');
+    }
+  });
 });
+
+
 
 // === AUTO MARGIN-TOP BUAT LOGO (biar ga ketiban navbar) ===
 window.addEventListener('DOMContentLoaded', () => {
