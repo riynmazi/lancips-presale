@@ -41,9 +41,29 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// === COPY TO CLIPBOARD (khusus halaman donate) ===
+
+function revealOnScroll() {
+  const reveals = document.querySelectorAll('.fade-left, .fade-right');
+
+  for (const el of reveals) {
+    const rect = el.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight - 100;
+
+    if (isVisible) {
+      el.classList.add('show');
+    }
+  }
+}
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('DOMContentLoaded', revealOnScroll);
+
+
+
+// === COPY TO CLIPBOARD ( donate.html) ===
 function copyAddress(address) {
   navigator.clipboard.writeText(address)
     .then(() => alert("✅ Address copied:\n" + address))
     .catch(() => alert("❌ Failed to copy address."));
 }
+
