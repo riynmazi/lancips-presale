@@ -99,14 +99,24 @@ html, body {
 }
 
 .nav-links {
-  background-color: #0f172a;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  position: absolute;
+  top: 60px; /* Sama dengan tinggi navbar-wrapper */
+  left: 0;
+  right: 0;
+  width: 100%;
   display: none;
   flex-direction: column;
-  width: 100%;
-  z-index: 10;
+  align-items: flex-start;
+  padding: 10px 16px;
+  background-color: #0f172a;
+  z-index: 99;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-links.active {
+  display: flex;
 }
 
 .nav-links.active {
