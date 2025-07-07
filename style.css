@@ -95,50 +95,56 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px;
+  padding: 0; /* <= ubah jadi 0 biar gak nambahin spasi */
 }
 
+/* === NAV LINKS === */
 .nav-links {
   position: absolute;
-  top: 60px; /* Sama dengan tinggi navbar-wrapper */
+  top: 60px; /* Pastikan sama dengan .navbar-wrapper height */
   left: 0;
   right: 0;
   width: 100%;
   display: none;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 16px;
+  padding: 0 16px;       /* <= padding kiri-kanan aja */
+  margin: 0;
   background-color: #0f172a;
   z-index: 99;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   border-top: 1px solid rgba(255,255,255,0.1);
   border-bottom: 1px solid rgba(255,255,255,0.1);
+  list-style: none;     /* <= hapus bulletnya */
 }
 
 .nav-links.active {
   display: flex;
 }
 
-.nav-links.active {
-  display: flex;
+.nav-links li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
-  padding: 10px;
+  padding: 12px 0;
   border-radius: 8px;
-  margin: 6px 0;
+  margin: 0;
+  width: 100%;
   transition: transform 0.2s ease, color 0.2s ease;
-  display: inline-block;
-  font-size: 18px;      /* ⬅️ big */
-  font-weight: 700;     /* ⬅️ bold  */
-  letter-spacing: 0.5px; /* ⬅️ optional space font */
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .nav-links a:hover {
-  transform: scale(1.08); /* text tranform */
-  color: #38bdf8;          /* opsional */
+  transform: scale(1.08);
+  color: #38bdf8;
 }
 
 /* === RESPONSIVE NAV === */
