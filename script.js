@@ -72,6 +72,33 @@ window.addEventListener('DOMContentLoaded', revealOnScroll);
 
 
 
+document.querySelector('.logo-wrapper').addEventListener('mouseenter', () => {
+  const container = document.querySelector('.star-particles');
+
+  for (let i = 0; i < 12; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    // Random arah ledakan
+    const angle = Math.random() * 2 * Math.PI;
+    const radius = Math.random() * 40 + 20;
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+
+    star.style.setProperty('--x', `${x}px`);
+    star.style.setProperty('--y', `${y}px`);
+
+    container.appendChild(star);
+
+    // Hapus bintang setelah animasi selesai
+    setTimeout(() => {
+      star.remove();
+    }, 600);
+  }
+});
+
+
+
 // === COPY TO CLIPBOARD ( donate.html) ===
 function copyAddress(address) {
   navigator.clipboard.writeText(address)
