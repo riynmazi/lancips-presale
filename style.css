@@ -76,6 +76,7 @@ html, body {
 }
 
 .nav-links {
+  background-color: #0f172a;
   list-style: none;
   padding: 0;
   margin: 0;
