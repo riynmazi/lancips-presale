@@ -13,7 +13,7 @@ function toggleMenu() {
 
 // === SCROLL REVEAL ===
 function revealOnScroll() {
-  const reveals = document.querySelectorAll('.fade-left, .fade-right');
+  const reveals = document.querySelectorAll('.fade-left, .fade-right, .fade-in-up');
 
   for (const el of reveals) {
     const rect = el.getBoundingClientRect();
