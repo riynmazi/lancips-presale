@@ -232,12 +232,13 @@ input[type="number"] {
   border-radius: 16px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
   margin-top: 40px;
+  text-align: left;
 }
 
 .roadmap ul, .tokenomics ul {
   list-style: none;
   padding-left: 0;
-  text-align: left;
+  
 }
 
 .roadmap li, .tokenomics li {
