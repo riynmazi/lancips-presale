@@ -31,6 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-links a');
   const toggleBtn = document.getElementById('menuToggle');
   const closeBtn = document.getElementById('menuClose');
+  const logoWrapper = document.querySelector('.logo-wrapper');
 
   // 1. Margin top otomatis untuk logo biar ga ketiban navbar
   const navbarWrapper = document.querySelector('.navbar-wrapper');
@@ -64,56 +65,51 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // 4. Reveal saat load awal
   revealOnScroll();
+
+  // 5. Efek bintang saat hover logo
+  if (logoWrapper) {
+    logoWrapper.addEventListener('mouseenter', () => {
+      const container = document.querySelector('.star-particles');
+      if (!container) return;
+
+      for (let i = 0; i < 12; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+
+        const angle = Math.random() * 2 * Math.PI;
+        const radius = Math.random() * 40 + 20;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+
+        star.style.setProperty('--x', `${x}px`);
+        star.style.setProperty('--y', `${y}px`);
+        container.appendChild(star);
+
+        setTimeout(() => {
+          star.remove();
+        }, 600);
+      }
+    });
+
+    // 6. Efek loncat acak saat klik logo
+    logoWrapper.addEventListener('click', () => {
+      const randX = (Math.random() - 0.5) * 100 + 'px';
+      const randY = (Math.random() - 0.5) * 100 + 'px';
+
+      logoWrapper.style.setProperty('--rand-x', randX);
+      logoWrapper.style.setProperty('--rand-y', randY);
+
+      logoWrapper.classList.add('jump');
+
+      setTimeout(() => {
+        logoWrapper.classList.remove('jump');
+      }, 600);
+    });
+  }
 });
 
 // === SCROLL EVENT ===
 window.addEventListener('scroll', revealOnScroll);
-
-// === LOGO PARTICLE EFFECT ===
-const logoWrapper = document.querySelector('.logo-wrapper');
-if (logoWrapper) {
-  logoWrapper.addEventListener('mouseenter', () => {
-    const container = document.querySelector('.star-particles');
-    if (!container) return;
-
-    for (let i = 0; i < 12; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-
-      // Random arah ledakan
-      const angle = Math.random() * 2 * Math.PI;
-      const radius = Math.random() * 40 + 20;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
-
-      star.style.setProperty('--x', `${x}px`);
-      star.style.setProperty('--y', `${y}px`);
-
-      container.appendChild(star);
-
-      setTimeout(() => {
-        star.remove();
-      }, 600);
-    }
-  });
-}
-
-const logoWrapper = document.querySelector('.logo-wrapper');
-
-logoWrapper.addEventListener('click', () => {
-  const randX = (Math.random() - 0.5) * 100 + 'px';
-  const randY = (Math.random() - 0.5) * 100 + 'px';
-
-  logoWrapper.style.setProperty('--rand-x', randX);
-  logoWrapper.style.setProperty('--rand-y', randY);
-
-  logoWrapper.classList.add('jump');
-
-  setTimeout(() => {
-    logoWrapper.classList.remove('jump');
-  }, 600);
-});
-
 
 // === COPY TO CLIPBOARD (untuk donate.html) ===
 function copyAddress(address) {
