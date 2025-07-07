@@ -55,10 +55,15 @@
     <div class="bubble"></div>  
   </div>
 
+
 <!-- === Header Strip (Background Menu Bar) === -->
 <div class="navbar-wrapper">
-  <!-- Hamburger Menu -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <!-- Toggle Hamburger -->
+<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">☰</button>
+
+  <!-- Close Button (default hidden) -->
+<button class="menu-close" id="menuClose" onclick="toggleMenu()">✖</button>
 
   <!-- Navigation -->
   <nav class="navbar">
@@ -72,7 +77,10 @@
       <li><a href="#donate">Donate</a></li>
     </ul>
   </nav>
+
 </div>
+
+
 
 <!-- logo -->
 <div class="logo-container">
