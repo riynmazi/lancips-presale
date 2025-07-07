@@ -93,14 +93,16 @@ html, body {
 .nav-links a {
   color: white;
   text-decoration: none;
-  padding: 14px 16px;
+  padding: 10px;
   border-radius: 8px;
   margin: 6px 0;
-  transition: background 0.3s;
-  
+  transition: transform 0.2s ease, color 0.2s ease;
+  display: inline-block; /* important */
+}
 
 .nav-links a:hover {
-  transform: scaleY(1.1);
+  transform: scale(1.08); /* text tranform */
+  color: #38bdf8;          /* opsional */
 }
 
 /* === RESPONSIVE NAV === */
