@@ -107,7 +107,7 @@ html, body {
 
 /* === RESPONSIVE NAV === */
 @media (min-width: 768px) {
-*/
+/*
   .navbar {
     flex-direction: row;
     justify-content: center;
