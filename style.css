@@ -80,6 +80,12 @@ html, body {
   justify-content: center;
 }
 
+.menu-toggle:active,
+.menu-close:active {
+  transform: translateY(0); /* cegah gerak turun */
+  box-shadow: none;         /* kalau ada efek aktif */
+}
+
 .menu-image-right {
   height: 32px;
   cursor: pointer;
