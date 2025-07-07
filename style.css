@@ -232,13 +232,15 @@ input[type="number"] {
   padding: 20px;
   border-radius: 16px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  margin-top: 40px;
-  text-align: left;
+  margin: 40px auto;       /* Center horizontally */
+  text-align: center;     /* Center */
+  max-width: 600px;            
 }
 
 .roadmap ul, .tokenomics ul {
   list-style: none;
   padding-left: 0;
+  text-align : left;
   
 }
 
@@ -246,6 +248,11 @@ input[type="number"] {
   margin-bottom: 10px;
   font-size: 15px;
   color: #f1f5f9;
+}
+
+.whitepaper {
+  text-align: center;
+  margin-top: 40px;
 }
 
 /* === FOOTER === */
