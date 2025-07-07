@@ -45,6 +45,15 @@ html, body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
+.navbar-inner {
+  display: flex;
+  align-items: center;         /* 🔥 ini penting agar vertikal tengah */
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 16px;
+  height: 100%;
+}
+
 /* === NAVBAR TOGGLE BUTTON === */
 .menu-toggle,
 .menu-close {
