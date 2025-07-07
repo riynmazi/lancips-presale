@@ -1,3 +1,4 @@
+<script>
 // === TOGGLE MENU ===
 function toggleMenu() {
   const nav = document.querySelector('.nav-links');
@@ -91,17 +92,16 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 6. Efek loncat preset + suara saat klik logo
+    // 6. Efek gerak preset + suara saat klik logo
     const jumpPositions = [
-      { x: '50%', y: '50%' },   // Tengah
-      { x: '20%', y: '20%' },   // Kiri atas
-      { x: '80%', y: '20%' },   // Kanan atas
-      { x: '20%', y: '80%' },   // Kiri bawah
-      { x: '80%', y: '80%' },   // Kanan bawah
-      { x: '50%', y: '20%' },   // Tengah atas
-      { x: '50%', y: '80%' }    // Tengah bawah
+      { x: '50%', y: '50%' },      // Tengah
+      { x: '20%', y: '20%' },      // Kiri atas
+      { x: '80%', y: '20%' },      // Kanan atas
+      { x: '20%', y: '80%' },      // Kiri bawah
+      { x: '80%', y: '80%' },      // Kanan bawah
+      { x: '50%', y: '20%' },      // Tengah atas
+      { x: '50%', y: '80%' },      // Tengah bawah
     ];
-
     let jumpIndex = 0;
 
     const boingSound = new Audio('audio/boing.mp3');
@@ -109,6 +109,12 @@ window.addEventListener('DOMContentLoaded', () => {
     logoWrapper.addEventListener('click', () => {
       const pos = jumpPositions[jumpIndex];
 
+      logoWrapper.style.transition = 'none';
+      logoWrapper.style.left = pos.x;
+      logoWrapper.style.top = pos.y;
+      logoWrapper.offsetHeight; // force reflow
+
+      logoWrapper.style.transition = 'left 0.4s ease, top 0.4s ease, transform 0.3s ease';
       logoWrapper.style.left = pos.x;
       logoWrapper.style.top = pos.y;
       logoWrapper.style.transform = 'translate(-50%, -50%)';
@@ -130,3 +136,4 @@ function copyAddress(address) {
     .then(() => alert("✅ Address copied:\n" + address))
     .catch(() => alert("❌ Failed to copy address."));
 }
+</script>
