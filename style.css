@@ -95,7 +95,7 @@ html, body {
   cursor: pointer;
   z-index: 2;
   pointer-events: auto;
-  animation: pulse 1.2s ease-in-out infinite;
+  animation: heartbeat 1.2s ease-in-out infinite;
 }
 
 .logo-wrapper:hover {
