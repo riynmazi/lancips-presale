@@ -78,6 +78,10 @@ html, body {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+  -webkit-tap-highlight-color: transparent; /* Android Safari */
+  -webkit-touch-callout: none;              /* iOS long press menu */
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .logo-wrapper {
