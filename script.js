@@ -92,21 +92,22 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // 6. Efek loncat acak saat klik logo
-    logoWrapper.addEventListener('click', () => {
-      const randX = (Math.random() - 0.5) * 100 + 'px';
-      const randY = (Math.random() - 0.5) * 100 + 'px';
+const logoWrapper = document.querySelector('.logo-wrapper');
+if (logoWrapper) {
+  logoWrapper.addEventListener('click', () => {
+    const randX = (Math.random() - 0.5) * 100 + 'px';
+    const randY = (Math.random() - 0.5) * 100 + 'px';
 
-      logoWrapper.style.setProperty('--rand-x', randX);
-      logoWrapper.style.setProperty('--rand-y', randY);
+    logoWrapper.style.setProperty('--rand-x', randX);
+    logoWrapper.style.setProperty('--rand-y', randY);
 
-      logoWrapper.classList.add('jump');
+    logoWrapper.classList.add('jump');
 
-      setTimeout(() => {
-        logoWrapper.classList.remove('jump');
-      }, 600);
-    });
-  }
-});
+    setTimeout(() => {
+      logoWrapper.classList.remove('jump');
+    }, 600); // sama dengan durasi animasi
+  });
+}
 
 // === SCROLL EVENT ===
 window.addEventListener('scroll', revealOnScroll);
