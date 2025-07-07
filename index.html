@@ -59,14 +59,14 @@
 <!-- === Header Strip (Background Menu Bar) === -->
 <div class="navbar-wrapper">
 
-  <!-- Toggle Hamburger -->
-<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">☰</button>
+  <div class="navbar-inner">
+    <!-- Kiri: tombol menu -->
+    <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">☰</button>
+    <button class="menu-close" id="menuClose" onclick="toggleMenu()">✖</button>
 
-  <!-- Close Button (default hidden) -->
-<button class="menu-close" id="menuClose" onclick="toggleMenu()">✖</button>
-
- <!-- Gambar kanan atas -->
-  <img src="image/right.png" alt="Image right" class="menu-image-right" />
+    <!-- Kanan: gambar -->
+    <img src="image/right.png" alt="LCIP Logo" class="menu-image-right" />
+  </div>
 
   <!-- Navigation -->
   <nav class="navbar">
