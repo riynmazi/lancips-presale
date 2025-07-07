@@ -98,13 +98,15 @@ html, body {
 /* Star particles container */
 .star-particles {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
+  top: 0;
+  left: 0;
+  width: 100vw; /* penuh lebar viewport */
+  height: 100vh; /* penuh tinggi viewport */
   pointer-events: none;
+  overflow: visible;
   z-index: 5;
 }
+
 
 /* Individual stars */
 .star {
