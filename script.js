@@ -98,6 +98,25 @@ if (logoWrapper) {
   });
 }
 
+document.getElementById('logoWrapper').addEventListener('click', () => {
+  const logo = document.getElementById('logoWrapper');
+
+  // Gerakan acak ke kiri/kanan/atas/bawah max 20px
+  const randX = Math.floor(Math.random() * 40 - 20); // -20 to +20
+  const randY = Math.floor(Math.random() * 40 - 20);
+
+  logo.style.setProperty('--jX', `${randX}px`);
+  logo.style.setProperty('--jY`, `${randY}px`);
+
+  logo.classList.add('jump');
+
+  setTimeout(() => {
+    logo.classList.remove('jump');
+  }, 400); // waktu animasi = 0.4s
+});
+
+
+
 // === COPY TO CLIPBOARD (untuk donate.html) ===
 function copyAddress(address) {
   navigator.clipboard.writeText(address)
