@@ -1,33 +1,45 @@
 // === TOGGLE MENU ===
 function toggleMenu() {
   const nav = document.querySelector('.nav-links');
+  const toggleBtn = document.getElementById('menuToggle');
+  const closeBtn = document.getElementById('menuClose');
+
   nav.classList.toggle('active');
+
+  const isActive = nav.classList.contains('active');
+  toggleBtn.style.display = isActive ? 'none' : 'block';
+  closeBtn.style.display = isActive ? 'block' : 'none';
 }
 
-// === AUTO CLOSE MENU ON LINK CLICK ===
+// === AUTO CLOSE MENU ON LINK CLICK or Outside ===
 window.addEventListener('DOMContentLoaded', () => {
-  const navLinks = document.querySelectorAll('.nav-links a');
   const nav = document.querySelector('.nav-links');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const toggleBtn = document.getElementById('menuToggle');
+  const closeBtn = document.getElementById('menuClose');
 
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      if (nav.classList.contains('active')) {
-        nav.classList.remove('active');
-      }
+      nav.classList.remove('active');
+      toggleBtn.style.display = 'block';
+      closeBtn.style.display = 'none';
     });
   });
 
-  // === AUTO CLOSE MENU IF CLICK OUTSIDE ===
+  // Close if click outside nav & not on toggle
   document.addEventListener('click', (e) => {
-    const toggleBtn = document.querySelector('.menu-toggle');
     const isClickInsideNav = nav.contains(e.target);
     const isClickOnToggle = toggleBtn.contains(e.target);
+    const isClickOnClose = closeBtn.contains(e.target);
 
-    if (!isClickInsideNav && !isClickOnToggle) {
+    if (!isClickInsideNav && !isClickOnToggle && !isClickOnClose) {
       nav.classList.remove('active');
+      toggleBtn.style.display = 'block';
+      closeBtn.style.display = 'none';
     }
   });
 });
+
 
 
 
