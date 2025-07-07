@@ -63,7 +63,6 @@ html, body {
 /* === NAVBAR TOGGLE BUTTON === */
 .menu-toggle,
 .menu-close {
-  background-color: rgba(255, 255, 255, 0.05);
   padding: 0;
   margin: 0 4px;
   height : 32px;
