@@ -173,6 +173,20 @@ html, body {
   transition: all 0.3s ease;
 }
 
+.menu-image-right {
+  position: absolute;
+  top: 8px; /* Sama kayak .menu-toggle -> margin-top: 8px */
+  right: 12px; /* Biar sejajar dengan margin-left: 12px dari .menu-toggle */
+  height: 32px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.menu-image-right:hover {
+  transform: scale(1.1);
+}
+
 .menu-close {
   display: none;
   position: absolute;
