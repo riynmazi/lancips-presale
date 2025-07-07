@@ -75,6 +75,24 @@ html, body {
   transition: all 0.3s ease;
 }
 
+.menu-close {
+  display: none;
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #f1f5f9;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
 .nav-links {
   background-color: #0f172a;
   list-style: none;
