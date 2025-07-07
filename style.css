@@ -45,6 +45,113 @@ html, body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
+/* === NAVBAR TOGGLE BUTTON === */
+.menu-toggle,
+.menu-close {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #f1f5f9;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+  transition: all 0.3s ease;
+  margin-left: 12px;
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  z-index: 999;
+}
+
+.menu-close {
+  display: none;
+}
+
+/* === GAMBAR KANAN DI NAVBAR === */
+.menu-image-right {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  height: 32px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.menu-image-right:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* === NAVBAR & TOGGLE === */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.nav-links {
+  background-color: #0f172a;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  z-index: 10;
+}
+
+.nav-links.active {
+  display: flex;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 6px 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+  display: inline-block;
+  font-size: 18px;      /* ⬅️ big */
+  font-weight: 700;     /* ⬅️ bold  */
+  letter-spacing: 0.5px; /* ⬅️ optional space font */
+}
+
+.nav-links a:hover {
+  transform: scale(1.08); /* text tranform */
+  color: #38bdf8;          /* opsional */
+}
+
+/* === RESPONSIVE NAV === */
+@media (min-width: 768px) {
+/*
+  .navbar {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .nav-links a {
+    padding: 10px 16px;
+    margin: 0;
+  }
+
+  .menu-toggle {
+    display: none;
+  } */
+}
+
+
 /* LOGO */
 
 .logo-section {
@@ -154,103 +261,6 @@ html, body {
   }
 }
 
-/* === NAVBAR & TOGGLE === */
-.navbar {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 10px;
-}
-
-.menu-toggle,
-.menu-close {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #f1f5f9;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
-  transition: all 0.3s ease;
-  margin-left: 12px;
-}
-
-.menu-close {
-  display: none;
-}
-
-.menu-image-right {
-  position: absolute;
-  top: 8px; /* Sama kayak .menu-toggle -> margin-top: 8px */
-  right: 12px; /* Biar sejajar dengan margin-left: 12px dari .menu-toggle */
-  height: 32px;
-  z-index: 1000;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.menu-image-right:hover {
-  transform: scale(1.1);
-}
-
-.nav-links {
-  background-color: #0f172a;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: none;
-  flex-direction: column;
-  width: 100%;
-  z-index: 10;
-}
-
-.nav-links.active {
-  display: flex;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 8px;
-  margin: 6px 0;
-  transition: transform 0.2s ease, color 0.2s ease;
-  display: inline-block;
-  font-size: 18px;      /* ⬅️ big */
-  font-weight: 700;     /* ⬅️ bold  */
-  letter-spacing: 0.5px; /* ⬅️ optional space font */
-}
-
-.nav-links a:hover {
-  transform: scale(1.08); /* text tranform */
-  color: #38bdf8;          /* opsional */
-}
-
-/* === RESPONSIVE NAV === */
-@media (min-width: 768px) {
-/*
-  .navbar {
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .nav-links {
-    display: flex !important;
-    flex-direction: row;
-    gap: 16px;
-  }
-
-  .nav-links a {
-    padding: 10px 16px;
-    margin: 0;
-  }
-
-  .menu-toggle {
-    display: none;
-  } */
-}
 
 /* === TYPOGRAPHY === */
 h1, h2, p {
