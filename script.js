@@ -1,4 +1,3 @@
-<script>
 // === TOGGLE MENU ===
 function toggleMenu() {
   const nav = document.querySelector('.nav-links');
@@ -136,4 +135,3 @@ function copyAddress(address) {
     .then(() => alert("✅ Address copied:\n" + address))
     .catch(() => alert("❌ Failed to copy address."));
 }
-</script>
