@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('menuClose');
   const logoWrapper = document.querySelector('.logo-wrapper');
 
-  // 1. Margin top otomatis untuk logo biar ga ketiban navbar
+  // 1. Margin top otomatis untuk logo
   const navbarWrapper = document.querySelector('.navbar-wrapper');
   const logoContainer = document.querySelector('.logo-container');
   if (navbarWrapper && logoContainer) {
@@ -92,23 +92,20 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // 6. Efek loncat acak saat klik logo
-const logoWrapper = document.querySelector('.logo-wrapper');
-if (logoWrapper) {
-  logoWrapper.addEventListener('click', () => {
-    // Reset animasi (trik pakai reflow)
-    logoWrapper.classList.remove('jump');
-    void logoWrapper.offsetWidth; // ⬅️ ini paksa reflow, biar animasi bisa diputar ulang
-    // Acak arah loncatan
-    const randX = (Math.random() - 0.5) * 100 + 'px';
-    const randY = (Math.random() - 0.5) * 100 + 'px';
+    logoWrapper.addEventListener('click', () => {
+      logoWrapper.classList.remove('jump');
+      void logoWrapper.offsetWidth; // reset animasi
 
-    logoWrapper.style.setProperty('--rand-x', randX);
-    logoWrapper.style.setProperty('--rand-y', randY);
+      const randX = (Math.random() - 0.5) * 100 + 'px';
+      const randY = (Math.random() - 0.5) * 100 + 'px';
 
-    // Jalankan animasi
-    logoWrapper.classList.add('jump');
-  });
-}
+      logoWrapper.style.setProperty('--rand-x', randX);
+      logoWrapper.style.setProperty('--rand-y', randY);
+
+      logoWrapper.classList.add('jump');
+    });
+  }
+});
 
 // === SCROLL EVENT ===
 window.addEventListener('scroll', revealOnScroll);
