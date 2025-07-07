@@ -14,9 +14,11 @@ function toggleMenu() {
 // === SCROLL REVEAL ===
 function revealOnScroll() {
   const reveals = document.querySelectorAll('.fade-left, .fade-right');
+
   for (const el of reveals) {
     const rect = el.getBoundingClientRect();
     const isVisible = rect.top < window.innerHeight - 100;
+
     if (isVisible) {
       el.classList.add('show');
     }
@@ -89,24 +91,26 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 6. Efek loncat preset (pindah posisi) + suara boing
+    // 6. Efek loncat preset + suara saat klik logo
     const jumpPositions = [
-      { x: '0%', y: '0%' },           // Tengah
-      { x: '-40%', y: '-40%' },       // Kiri atas
-      { x: '40%', y: '-40%' },        // Kanan atas
-      { x: '-40%', y: '40%' },        // Kiri bawah
-      { x: '40%', y: '40%' },         // Kanan bawah
-      { x: '0%', y: '-50%' },         // Tengah atas
-      { x: '0%', y: '50%' },          // Tengah bawah
+      { x: '50%', y: '50%' },   // Tengah
+      { x: '20%', y: '20%' },   // Kiri atas
+      { x: '80%', y: '20%' },   // Kanan atas
+      { x: '20%', y: '80%' },   // Kiri bawah
+      { x: '80%', y: '80%' },   // Kanan bawah
+      { x: '50%', y: '20%' },   // Tengah atas
+      { x: '50%', y: '80%' }    // Tengah bawah
     ];
 
     let jumpIndex = 0;
+
     const boingSound = new Audio('audio/boing.mp3');
 
     logoWrapper.addEventListener('click', () => {
       const pos = jumpPositions[jumpIndex];
-      logoWrapper.style.left = `calc(50% + ${pos.x})`;
-      logoWrapper.style.top = `calc(50% + ${pos.y})`;
+
+      logoWrapper.style.left = pos.x;
+      logoWrapper.style.top = pos.y;
       logoWrapper.style.transform = 'translate(-50%, -50%)';
 
       boingSound.currentTime = 0;
