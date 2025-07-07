@@ -58,12 +58,16 @@ html, body {
   cursor: pointer;
   box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
   transition: all 0.3s ease;
-  margin-left: 12px;
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  z-index: 999;
+}
+
+.menu-image-right {
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.menu-image-right:hover {
+  transform: scale(1.1);
 }
 
 .menu-close {
@@ -149,6 +153,14 @@ html, body {
   .menu-toggle {
     display: none;
   } */
+}
+
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 12px;
 }
 
 
