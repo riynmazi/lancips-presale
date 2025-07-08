@@ -489,7 +489,7 @@ input[type="number"] {
 
 /* === SECTIONS === */
 
-.tokenomics .roadmap{
+.tokenomics,.roadmap{
   background: linear-gradient(135deg, #facc15, #1baea9);
   border: 4px dashed #fff;
   padding: 24px;
