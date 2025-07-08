@@ -331,6 +331,7 @@ html, body {
   font-size: 18px;
   text-shadow: 0 0 3px #000;
   font-style: italic;
+  paddinh-left: 100vw;
 }
 
 @keyframes scrollLeft {
