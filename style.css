@@ -320,7 +320,7 @@ html, body {
   width: 100%;
   margin-top: 80px;
   position: relative; /* supaya child pakai absolute */
-  height: 1.5em; /* tinggi disesuaikan agar tidak ketutup */
+  height: 1.8em; /* Sedikit lebih tinggi biar aman di semua font */
 }
 
 .meme-quote-marquee {
@@ -334,15 +334,17 @@ html, body {
   transform: translateX(100%);
   position: absolute;
   left: 0;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(100%);
+  /* animasi diatur lewat JS */
 }
 
 @keyframes scrollLeft {
   from {
-    transform: translateX(100%);
+    transform: translateY(-50%) translateX(100%);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateY(-50%) translateX(-100%);
   }
 }
 
