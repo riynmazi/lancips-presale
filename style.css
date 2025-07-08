@@ -81,6 +81,13 @@ html, body {
   justify-content: center;
 }
 
+
+.menu-toggle:active,
+.menu-close:active {
+  transform: none;
+  outline: none;
+}
+
 .menu-image-right {
   height: 32px;
   cursor: pointer;
