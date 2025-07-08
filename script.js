@@ -147,13 +147,18 @@ window.addEventListener('DOMContentLoaded', () => {
   let index = 0;
 
   function showNextQuote() {
-    quoteDisplay.innerHTML = quotes[index].innerHTML;
-    quoteDisplay.style.animation = 'none';
-    void quoteDisplay.offsetWidth;
-    quoteDisplay.style.animation = null;
+    const content = quotes[index].innerHTML;
+    quoteDisplay.innerHTML = content;
+
+    // Hitung durasi animasi berdasar panjang teks (semakin panjang, makin lama)
+    const duration = Math.max(8, content.length * 0.25); // durasi minimal 8 detik
+    quoteDisplay.style.animation = 'none';       // reset animasi
+    void quoteDisplay.offsetWidth;               // force reflow
+    quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
+
     index = (index + 1) % quotes.length;
   }
 
   showNextQuote();
-  setInterval(showNextQuote, 12000); // 12 detik ganti quote
+  setInterval(showNextQuote, 12000); // ganti quote setiap 12 detik
 });
