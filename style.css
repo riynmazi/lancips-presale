@@ -330,6 +330,7 @@ html, body {
   font-family: 'Poor Story', cursive;
   font-size: 18px;
   text-shadow: 0 0 3px #000;
+  font-style: italic;
 }
 
 @keyframes scrollLeft {
