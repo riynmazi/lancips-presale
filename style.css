@@ -76,6 +76,58 @@ html, body {
   }
 }
 
+
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poor+Story&display=swap'); /* Font lucu-lucu */
+
+.description {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.2);
+  font-family: 'Poor Story', cursive;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #f8fafc;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.description::before {
+  content: "💔";
+  font-size: 48px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  opacity: 0.1;
+}
+
+.description::after {
+  content: "😵‍💫";
+  font-size: 48px;
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  opacity: 0.1;
+}
+
+.description p {
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.description strong {
+  color: #facc15;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 20px;
+}
+
+
+
 /* === CONTAINER === */
 .container {
   max-width: 700px;
