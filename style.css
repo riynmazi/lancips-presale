@@ -530,26 +530,11 @@ input[type="number"] {
 /* ---STATUS--- */
 
 .status {
-  font-size: 15px;
-  color: #facc15;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 2px dashed #f97316;
-  padding: 16px;
-  margin-top: 30px;
-  border-radius: 16px;
+  font-size: 14px;
+  color: #0f172a; /* Warna gelap */
+  margin-top: 20px;
   text-align: center;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2), 0 0 20px rgba(250, 204, 21, 0.3);
-  font-family: 'Poor Story', cursive;
-  animation: pulseGlow 1.8s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(250, 204, 21, 0.2), 0 0 20px rgba(249, 115, 22, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 16px rgba(250, 204, 21, 0.5), 0 0 30px rgba(249, 115, 22, 0.6);
-  }
+  font-weight: 600;
 }
 
 
