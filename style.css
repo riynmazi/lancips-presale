@@ -14,6 +14,14 @@ html, body {
   box-sizing: inherit;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+h1, h2, .menu-toggle, .menu-close {
+  font-family: 'Comic Neue', cursive;
+}
+
+
+
 /* === CONTAINER === */
 .container {
   max-width: 700px;
