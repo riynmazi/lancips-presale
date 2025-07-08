@@ -51,10 +51,10 @@ html, body {
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
 }
 
-@media (max-width: 480px) {
-  .logo-banner img {
-    width: 95vw;
-    max-width: 95vw;
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 0 16px;
   }
 }
 
