@@ -137,34 +137,26 @@ function copyAddress(address) {
 }
 
 
-// === MEME QUOTE AUTO MARQUEE ===
+// === MEME QUOTE MARQUEE GABUNG SEMUA ===
 window.addEventListener('DOMContentLoaded', () => {
   const quoteContainer = document.querySelector('.meme-quotes');
   const quoteDisplay = document.getElementById('quote-display');
 
   if (!quoteContainer || !quoteDisplay) return;
 
-  const quotes = quoteContainer.querySelectorAll('div');
-  let index = 0;
+  // Ambil semua quote div, gabungkan jadi satu string panjang dengan bullet
+  const quotes = [...quoteContainer.querySelectorAll('div')].map(el => el.innerHTML.trim());
+  const fullQuote = quotes.join(' • '); // pisah antar quote
 
-  function showNextQuote() {
-    const content = quotes[index].innerHTML.trim(); // Trim buat hilangin spasi
-    quoteDisplay.innerHTML = content;
+  // Tampilkan ke quoteDisplay
+  quoteDisplay.innerHTML = fullQuote;
 
-    // Reset posisi ke kanan penuh
-    quoteDisplay.style.transform = 'translateX(100%)';
-    quoteDisplay.style.animation = 'none';
-    void quoteDisplay.offsetWidth; // Trigger reflow
+  // Reset animasi & posisi ke kanan penuh
+  quoteDisplay.style.transform = 'translateX(100%)';
+  quoteDisplay.style.animation = 'none';
+  void quoteDisplay.offsetWidth; // force reflow
 
-    // Hitung durasi berdasarkan panjang karakter (dengan batas minimal)
-    const duration = Math.max(8, content.length * 0.25);
-
-    // Terapkan ulang animasi dengan durasi dinamis
-    quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
-
-    index = (index + 1) % quotes.length;
-  }
-
-  showNextQuote();
-  setInterval(showNextQuote, 12000); // Ganti quote setiap 12 detik
+  // Durasi animasi berdasarkan panjang konten
+  const duration = Math.max(12, fullQuote.length * 0.15); // durasi minimal 12s
+  quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
 });
