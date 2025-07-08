@@ -136,6 +136,7 @@ function copyAddress(address) {
     .catch(() => alert("❌ Failed to copy address."));
 }
 
+
 // === MEME QUOTE AUTO MARQUEE ===
 window.addEventListener('DOMContentLoaded', () => {
   const quoteContainer = document.querySelector('.meme-quotes');
@@ -147,15 +148,15 @@ window.addEventListener('DOMContentLoaded', () => {
   let index = 0;
 
   function showNextQuote() {
-    const content = quotes[index].innerHTML;
+    const content = quotes[index].innerHTML.trim(); // Trim buat hilangin spasi
     quoteDisplay.innerHTML = content;
 
-    // Reset posisi ke kanan penuh (pastikan mulai dari pojok)
+    // Reset posisi ke kanan penuh
     quoteDisplay.style.transform = 'translateX(100%)';
-    quoteDisplay.style.animation = 'none'; // Reset animasi
-    void quoteDisplay.offsetWidth;        // Trigger reflow
+    quoteDisplay.style.animation = 'none';
+    void quoteDisplay.offsetWidth; // Trigger reflow
 
-    // Durasi berdasarkan panjang karakter (minimal 8 detik)
+    // Hitung durasi berdasarkan panjang karakter (dengan batas minimal)
     const duration = Math.max(8, content.length * 0.25);
 
     // Terapkan ulang animasi dengan durasi dinamis
@@ -165,5 +166,5 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   showNextQuote();
-  setInterval(showNextQuote, 12000); // Ganti setiap 12 detik
+  setInterval(showNextQuote, 12000); // Ganti quote setiap 12 detik
 });
