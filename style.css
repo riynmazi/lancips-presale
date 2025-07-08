@@ -324,14 +324,15 @@ html, body {
 
 .meme-quote-marquee {
   white-space: nowrap;
-  display: block; /* GANTI dari inline-block ke block */
+  display: inline-block;
   font-size: 16px;
   font-weight: bold;
-  color: #f87171;
   font-style: italic;
-  animation: scrollLeft linear infinite;
+  color: #f87171;
   will-change: transform;
+  transform: translateX(100%);
 }
+
 @keyframes scrollLeft {
   from {
     transform: translateX(100%);
