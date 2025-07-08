@@ -150,15 +150,20 @@ window.addEventListener('DOMContentLoaded', () => {
     const content = quotes[index].innerHTML;
     quoteDisplay.innerHTML = content;
 
-    // Hitung durasi animasi berdasar panjang teks (semakin panjang, makin lama)
-    const duration = Math.max(8, content.length * 0.25); // durasi minimal 8 detik
-    quoteDisplay.style.animation = 'none';       // reset animasi
-    void quoteDisplay.offsetWidth;               // force reflow
+    // Reset posisi ke kanan penuh (pastikan mulai dari pojok)
+    quoteDisplay.style.transform = 'translateX(100%)';
+    quoteDisplay.style.animation = 'none'; // Reset animasi
+    void quoteDisplay.offsetWidth;        // Trigger reflow
+
+    // Durasi berdasarkan panjang karakter (minimal 8 detik)
+    const duration = Math.max(8, content.length * 0.25);
+
+    // Terapkan ulang animasi dengan durasi dinamis
     quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
 
     index = (index + 1) % quotes.length;
   }
 
   showNextQuote();
-  setInterval(showNextQuote, 12000); // ganti quote setiap 12 detik
+  setInterval(showNextQuote, 12000); // Ganti setiap 12 detik
 });
