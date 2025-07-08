@@ -16,7 +16,7 @@ html, body {
 
 @import url('@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');');
 
-h1.presale-title {
+h1,h2 .presale-title {
   font-family: 'Luckiest Guy', cursive;
   font-size: 42px;
   color: #facc15;
