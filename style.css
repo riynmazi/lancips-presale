@@ -35,7 +35,7 @@ html, body {
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 .presale-title img {
-  height: 28px;      /* atur tinggi gambar */
+  height: 50px;      /* atur tinggi gambar */
   width: auto;       /* biar proporsional, jangan fix width */
   max-width: 100px;  /* batasi lebar maksimum */
   object-fit: contain;
