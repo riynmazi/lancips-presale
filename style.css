@@ -325,7 +325,7 @@ html, body {
 .meme-quote-marquee {
   display: inline-block;
   white-space: nowrap;
-  animation: scrollLeft 12s linear infinite;
+  animation: scrollLeft 120s linear infinite;
   color: red;
   font-family: 'Poor Story', cursive;
   font-size: 18px;
