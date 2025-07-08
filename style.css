@@ -311,6 +311,19 @@ html, body {
   /* optionally activate for desktop */
 }
 
+
+
+.meme-quote {
+  text-align: center;
+  font-size: 14px;
+  color: #94a3b8;
+  margin-top: 70px;
+  font-style: italic;
+}
+
+
+
+
 /* === LOGO === */
 .logo-section {
   position: relative;
