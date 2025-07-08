@@ -315,13 +315,23 @@ html, body {
 /*MEMEQUOTE*/
 
 
+.meme-quote-container {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 60px;
+}
+
 .meme-quote-marquee {
   white-space: nowrap;
   display: inline-block;
+  font-size: 16px;
+  color: #f87171; /* merah lucu */
+  font-style: italic;
   animation-name: scrollLeft;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  /* durasi diatur lewat JS */
+  will-change: transform;
+  /* Durasi disetel lewat JS */
 }
 
 @keyframes scrollLeft {
