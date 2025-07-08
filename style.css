@@ -318,31 +318,24 @@ html, body {
 .meme-quote-container {
   width: 100%;
   overflow: hidden;
-  margin-top: 60px;
-  padding: 10px 0;
+  position: relative;
+  margin-top: 80px;
+  height: 30px;
 }
 
 .meme-quote-marquee {
-  display: inline-block;
+  position: absolute;
   white-space: nowrap;
-  animation: scrollLeft 120s linear infinite;
-  color: red;
-  font-family: 'Poor Story', cursive;
-  font-size: 18px;
-  text-shadow: 0 0 3px #000;
-  font-style: italic;
-  paddinh-left: 100vw;
+  color: #f43f5e;
+  font-size: 16px;
+  font-family: 'Comic Neue', cursive;
+  animation: scrollLeft 10s linear infinite;
 }
 
 @keyframes scrollLeft {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(-100%);
-  }
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
-
 
 
 
