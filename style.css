@@ -488,19 +488,9 @@ input[type="number"] {
 
 
 /* === SECTIONS === */
-.roadmap {
-  background: #1cc2a6;
-box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255,255,255,0.1);
-  padding: 20px;
-  border-radius: 16px;
-  margin: 40px auto;       /* Center horizontally */
-  text-align: center;     /* Center */
-  max-width: 600px;            
-}
 
-
-.tokenomics {
-  background: linear-gradient(135deg, #facc15, #f97316);
+.tokenomics .roadmap{
+  background: linear-gradient(135deg, #facc15, #1baea9);
   border: 4px dashed #fff;
   padding: 24px;
   border-radius: 20px;
