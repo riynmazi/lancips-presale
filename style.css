@@ -315,26 +315,22 @@ html, body {
 /*MEMEQUOTE*/
 
 
-.meme-quote-container {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  margin-top: 80px;
-  height: 30px;
-}
-
 .meme-quote-marquee {
-  position: absolute;
   white-space: nowrap;
-  color: #f43f5e;
-  font-size: 16px;
-  font-family: 'Comic Neue', cursive;
-  animation: scrollLeft 10s linear infinite;
+  display: inline-block;
+  animation-name: scrollLeft;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* durasi diatur lewat JS */
 }
 
 @keyframes scrollLeft {
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 
