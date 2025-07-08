@@ -311,14 +311,49 @@ html, body {
   /* optionally activate for desktop */
 }
 
-
+/* ---MEME QUOTE ---*/
 
 .meme-quote {
-  text-align: center;
-  font-size: 14px;
-  color: #94a3b8;
-  margin-top: 70px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
   font-style: italic;
+  padding: 12px;
+  color: #94a3b8;
+  position: relative;
+}
+
+.meme-quote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, #00ffc3 20%, #00ffc3 80%, transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.meme-quote::after {
+  content: attr(data-text);
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scroll-left 12s linear infinite;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 
