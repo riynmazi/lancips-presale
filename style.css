@@ -6,8 +6,8 @@ html, body {
   overflow-x: hidden;
   scroll-behavior: smooth;
   font-family: 'Baloo 2', sans-serif;
-  background: linear-gradient(135deg, #2dd4bf, #fef08a);
-  color: #0f172a;
+  background-color: #1abc9c; /* Warna tosca solid */
+  color: #f1f5f9;
 }
 
 *, *::before, *::after {
