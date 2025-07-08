@@ -326,7 +326,7 @@ html, body {
   display: inline-block;
   white-space: nowrap;
   animation: scrollLeft 12s linear infinite;
-  color: #facc15;
+  color: red;
   font-family: 'Poor Story', cursive;
   font-size: 18px;
   text-shadow: 0 0 3px #000;
