@@ -325,6 +325,7 @@ html, body {
   white-space: nowrap;
   display: inline-block;
   font-size: 16px;
+  font-weight: bold;
   color: #f87171; /* merah lucu */
   font-style: italic;
   animation-name: scrollLeft;
