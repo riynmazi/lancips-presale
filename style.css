@@ -65,13 +65,11 @@ html, body {
 .menu-close {
   background-color: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
-  padding : 8px;
   margin: 4px;
-  width: 32px;
-  height : 32px;
+  width: 40px; /* lebih lega */
+  height: 40px;
   border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 0; /* karena pakai SVG, font nggak perlu */
   color: #f1f5f9;
   border: none;
   cursor: pointer;
@@ -79,14 +77,21 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0; /* 🚨 ini penting */
 }
 
+.menu-toggle svg,
+.menu-close svg {
+  width: 24px;
+  height: 24px;
+}
 
 .menu-toggle:active,
 .menu-close:active {
-  transform: none;
+  transform: scale(0.97); /* opsional, biar nggak jumpy */
   outline: none;
 }
+
 
 .menu-image-right {
   height: 32px;
