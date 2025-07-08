@@ -538,10 +538,10 @@ input[type="number"] {
 
 /* === SECTIONS === */
 .roadmap, .tokenomics {
-  background: rgba(255, 255, 255, 0.04);
+  background: #1cc2a6;
+box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255,255,255,0.1);
   padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
   margin: 40px auto;       /* Center horizontally */
   text-align: center;     /* Center */
   max-width: 600px;            
