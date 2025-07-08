@@ -180,6 +180,11 @@ h1.presale-title {
   transform: translateY(-50%) scale(1.1);
 }
 
+
+.menu-close {
+  display: none;
+}
+
 .navbar {
   display: flex;
   flex-direction: column;
