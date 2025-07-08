@@ -78,15 +78,12 @@ html, body {
 
 
 
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poor+Story&display=swap'); /* Font lucu-lucu */
-
 .description {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   padding: 24px;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 18px rgba(56, 189, 248, 0.2);
-  font-family: 'Poor Story', cursive;
   font-size: 17px;
   line-height: 1.8;
   color: #f8fafc;
@@ -122,7 +119,6 @@ html, body {
 
 .description strong {
   color: #facc15;
-  font-family: 'Permanent Marker', cursive;
   font-size: 20px;
 }
 
