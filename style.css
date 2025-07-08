@@ -377,6 +377,65 @@ h1.presale-title {
   100% { transform: translateY(-100vh); opacity: 0; }
 }
 
+/* === SECTIONS === */
+.roadmap, .tokenomics {
+  background: #1cc2a6;
+box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 16px;
+  margin: 40px auto;       /* Center horizontally */
+  text-align: center;     /* Center */
+  max-width: 600px;            
+}
+
+.roadmap ul, .tokenomics ul {
+  list-style: none;
+  padding-left: 0;
+  text-align : left;
+
+}
+
+.roadmap li, .tokenomics li {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #186059;
+}
+
+.whitepaper {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.donate{
+  text-align: center;
+}
+
+
+
+
+/*social-media*/
+
+.social-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-muted);
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  background-color: var(--color-bg);
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+  transition: all 0.3s ease;
+}
+
+.social-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
+}
+
+
 /* === FOOTER === */
 .site-footer {
   width: 100%;
