@@ -448,7 +448,7 @@ h2 {
 }
 
 .token-info a {
-  color: #facc15;
+  color: #186059;
   text-decoration: underline;
   word-break: break-all;
 }
@@ -557,7 +557,7 @@ box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255,255,255,0.1);
 .roadmap li, .tokenomics li {
   margin-bottom: 10px;
   font-size: 15px;
-  color: #f1f5f9;
+  color: #186059;
 }
 
 .whitepaper {
