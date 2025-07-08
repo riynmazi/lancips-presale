@@ -135,3 +135,25 @@ function copyAddress(address) {
     .then(() => alert("✅ Address copied:\n" + address))
     .catch(() => alert("❌ Failed to copy address."));
 }
+
+// === MEME QUOTE AUTO MARQUEE ===
+window.addEventListener('DOMContentLoaded', () => {
+  const quoteContainer = document.querySelector('.meme-quotes');
+  const quoteDisplay = document.getElementById('quote-display');
+
+  if (!quoteContainer || !quoteDisplay) return;
+
+  const quotes = quoteContainer.querySelectorAll('div');
+  let index = 0;
+
+  function showNextQuote() {
+    quoteDisplay.innerHTML = quotes[index].innerHTML;
+    quoteDisplay.style.animation = 'none';
+    void quoteDisplay.offsetWidth;
+    quoteDisplay.style.animation = null;
+    index = (index + 1) % quotes.length;
+  }
+
+  showNextQuote();
+  setInterval(showNextQuote, 12000); // 12 detik ganti quote
+});
