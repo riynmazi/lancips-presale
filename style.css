@@ -34,21 +34,21 @@ html, body {
 
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
-.presale-title img {
-  height: 50px;      /* atur tinggi gambar */
-  width: auto;       /* biar proporsional, jangan fix width */
-  max-width: 100px;  /* batasi lebar maksimum */
-  object-fit: contain;
-  vertical-align: middle;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
-}
-
-.presale-title img:hover {
-  transform: scale(1.1);
-}
-
-.presale-title {
+.logo-banner {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 20px auto;
   text-align: center;
+}
+
+.logo-banner img {
+  width: 100%;
+  max-width: 500px; /* biar di layar besar nggak terlalu gede */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
 }
 
 .emoji-fire {
