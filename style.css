@@ -51,6 +51,14 @@ html, body {
   filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
 }
 
+@media (max-width: 480px) {
+  .logo-banner img {
+    width: 95vw;
+    max-width: 95vw;
+  }
+}
+
+
 .emoji-fire {
   display: inline-block;
   animation: flameFlicker 1.1s infinite ease-in-out;
