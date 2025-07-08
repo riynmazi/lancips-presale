@@ -318,23 +318,20 @@ html, body {
 .meme-quote-container {
   overflow: hidden;
   width: 100%;
-  margin-top: 70px;
+  margin-top: 80px;
+  position: relative;
 }
 
 .meme-quote-marquee {
   white-space: nowrap;
-  display: inline-block;
+  display: block; /* GANTI dari inline-block ke block */
   font-size: 16px;
   font-weight: bold;
-  color: #f87171; /* merah lucu */
+  color: #f87171;
   font-style: italic;
-  animation-name: scrollLeft;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  animation: scrollLeft linear infinite;
   will-change: transform;
-  /* Durasi disetel lewat JS */
 }
-
 @keyframes scrollLeft {
   from {
     transform: translateX(100%);
