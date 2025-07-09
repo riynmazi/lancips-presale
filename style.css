@@ -596,9 +596,13 @@ input[type="number"] {
 }
 
 .tab-pane {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
+}
+
+.tab-pane.active {
+  display: flex;
 }
 
 .weird-tabs .tab-content {
