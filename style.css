@@ -796,6 +796,123 @@ input[type="number"] {
 }
 
 
+/* LCIP-AI */
+.lcip-ai-section {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Judul AI */
+.lcip-ai-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #a5f3fc;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Chatbox */
+.lcip-ai-chatbox {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+/* Message bubble */
+.lcip-ai-msg {
+  padding: 10px 16px;
+  border-radius: 12px;
+  line-height: 1.4;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+/* Bot message */
+.lcip-ai-msg.bot {
+  align-self: flex-start;
+  background: #1e293b;
+  color: #f1f5f9;
+  border-left: 4px solid #38bdf8;
+}
+
+/* User message */
+.lcip-ai-msg.user {
+  align-self: flex-end;
+  background: #0f172a;
+  color: #e0f2fe;
+  border-right: 4px solid #38bdf8;
+}
+
+/* Input & button */
+.lcip-ai-input-group {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.lcip-ai-input-group input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #1e293b;
+  color: #f8fafc;
+  border: 1px solid #0ea5e9;
+}
+
+.lcip-ai-input-group button {
+  background: linear-gradient(to right, #0ea5e9, #38bdf8);
+  color: white;
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.lcip-ai-input-group button:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 480px) {
+  .lcip-ai-title {
+    font-size: 1.4rem;
+  }
+
+  .lcip-ai-input-group {
+    flex-direction: column;
+  }
+
+  .lcip-ai-input-group button {
+    width: 100%;
+  }
+}
+
+
 
 
 /*SOCIAL MEDIA*/
