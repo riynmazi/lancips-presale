@@ -245,7 +245,7 @@
   <!-- Tombol Tab -->
   <div class="tab-buttons">
     <button class="tab-btn active" onclick="showTab('tab-weird')">🎲 Weird Stuff</button>
-    <button class="tab-btn" onclick="showTab('tab-fake')">📉 Fake Feature</button>
+    <button class="tab-btn" onclick="showTab('tab-lcip-ai')">🤖 LCIP-AI</button>
   </div>
 
   <!-- Isi Tab -->
@@ -269,9 +269,18 @@
       </div>
     </div>
 
-    <!-- TAB 2 (placeholder / kosong dulu) -->
-    <div id="tab-fake" class="tab-pane">
-      <p style="text-align:center; color:#888; margin-top: 30px;">Coming soon: something even more useless...</p>
+    <!-- TAB 2: LCIP-AI -->
+    <div id="tab-lcip-ai" class="tab-pane">
+      <div class="lcip-ai-section">
+        <h2 class="lcip-ai-title">🤖 Ask LCIP-AI</h2>
+        <div class="lcip-ai-chatbox" id="chat-box">
+          <div class="lcip-ai-msg bot">Hi there! Ask me anything. I know everything. Almost.</div>
+        </div>
+        <div class="lcip-ai-input-group">
+          <input type="text" id="user-question" placeholder="Type your question here..." />
+          <button onclick="askLcipAI()">Ask</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
