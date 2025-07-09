@@ -175,6 +175,10 @@ function showFunnyAlert(message, type) {
   setTimeout(() => {
     alertBox.style.display = 'none';
   }, 3000);
+
+function screamAlert() {
+  showFunnyAlert("Ahh! Don’t touch me! 😱💢", "useless");
+  }
 }
 
 function generateFortune() {
