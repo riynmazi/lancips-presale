@@ -718,6 +718,12 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 480px) {
+  .weird-feature-inner {
+    max-width: 90%;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
   .weird-title {
     font-size: 1.5rem;
   }
