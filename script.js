@@ -137,26 +137,26 @@ function copyAddress(address) {
 }
 
 
-// === MEME QUOTE MARQUEE GABUNG SEMUA ===
+// === MEME QUOTE MARQUEE AUTO SCROLL ===
 window.addEventListener('DOMContentLoaded', () => {
   const quoteContainer = document.querySelector('.meme-quotes');
   const quoteDisplay = document.getElementById('quote-display');
 
-  if (!quoteContainer || !quoteDisplay) return;
+  if (!quoteContainer || !quoteDisplay) {
+    console.warn("Meme quote elements not found");
+    return;
+  }
 
-  // Ambil semua quote div, gabungkan jadi satu string panjang dengan bullet
   const quotes = [...quoteContainer.querySelectorAll('div')].map(el => el.innerHTML.trim());
-  const fullQuote = quotes.join(' • '); // pisah antar quote
+  const fullQuote = quotes.join(' • ');
 
-  // Tampilkan ke quoteDisplay
   quoteDisplay.innerHTML = fullQuote;
-
-  // Reset animasi & posisi ke kanan penuh
   quoteDisplay.style.transform = 'translateX(100%)';
   quoteDisplay.style.animation = 'none';
-  void quoteDisplay.offsetWidth; // force reflow
+  void quoteDisplay.offsetWidth;
 
-  // Durasi animasi berdasarkan panjang konten
-  const duration = Math.max(12, fullQuote.length * 0.15); // durasi minimal 12s
-  quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
+  setTimeout(() => {
+    const duration = Math.max(12, fullQuote.length * 0.15);
+    quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
+  }, 50);
 });
