@@ -601,6 +601,11 @@ input[type="number"] {
   align-items: center;
 }
 
+.weird-tabs .tab-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Rata tengah horizontal */
+}
 
 .tab-buttons {
   display: flex;
@@ -633,15 +638,6 @@ input[type="number"] {
   color: white;
   box-shadow: 0 0 12px #38bdf8;
 }
-
-.tab-content .tab-pane {
-  display: none;
-}
-
-.tab-content .tab-pane.active {
-  display: block;
-}
-
 
 
 /*---WEIRD---*/
