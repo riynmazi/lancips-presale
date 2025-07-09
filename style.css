@@ -583,7 +583,7 @@ input[type="number"] {
   align-items: center;
   padding: 24px;
   border-radius: 16px;
-  background: rgba(255, 0, 0, 0.15); /* merah transparan */
+  background: rgba(255, 0, 0, 0.3); /* merah transparan */
   border: 1px solid rgba(255, 0, 0, 0.2);
   box-shadow: 0 0 18px rgba(255, 0, 0, 0.2);
   backdrop-filter: blur(6px);
