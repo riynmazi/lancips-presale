@@ -165,9 +165,8 @@ function generateFortune() {
     "You will find love… in the Telegram chat 💬❤️",
     "The chart says up. But your wallet says no. 📉💸",
   ];
-
-  const fortuneText = document.getElementById("fortune-text");
-  fortuneText.innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
+  document.getElementById("fortune-text").innerText =
+    fortunes[Math.floor(Math.random() * fortunes.length)];
 }
 
 function pressUselessButton() {
@@ -179,7 +178,6 @@ function pressUselessButton() {
     "You wasted 0.001 seconds. Worth it?",
     "You're now being watched. Just kidding. Or not.",
   ];
-
-  const result = document.getElementById("useless-result");
-  result.innerText = messages[Math.floor(Math.random() * messages.length)];
+  document.getElementById("useless-result").innerText =
+    messages[Math.floor(Math.random() * messages.length)];
 }
