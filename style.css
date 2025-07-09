@@ -671,13 +671,13 @@ input[type="number"] {
 
 .weird-title {
   font-size: 1.8rem;
-  color: #a5f3fc;
+  color: blue;
   margin-bottom: 10px;
 }
 
 .weird-text {
   font-size: 1.1rem;
-  color: #fefefe;
+  color: black;
   margin-bottom: 15px;
 }
 
@@ -709,7 +709,7 @@ input[type="number"] {
   max-width: 340px;
   line-height: 1.5;
   animation: shake 1s infinite alternate;
-  margin-top: 20px; /* Tambahan agar tidak terlalu nempel */
+  margin-top: 20px;
 }
 
 @keyframes shake {
