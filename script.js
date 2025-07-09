@@ -147,16 +147,19 @@ window.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // Ambil semua quote dan gabungkan jadi satu string panjang
   const quotes = [...quoteContainer.querySelectorAll('div')].map(el => el.innerHTML.trim());
   const fullQuote = quotes.join(' • ');
 
+  // Masukkan ke elemen display
   quoteDisplay.innerHTML = fullQuote;
   quoteDisplay.style.transform = 'translateX(100%)';
   quoteDisplay.style.animation = 'none';
   void quoteDisplay.offsetWidth;
 
+  // Hitung durasi scroll berdasarkan panjang teks
   setTimeout(() => {
-    const duration = Math.max(12, fullQuote.length * 0.15);
+    const duration = Math.max(12, fullQuote.length * 0.15); // Minimum 12s
     quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
-  }, 50);
+  }, 50); // Delay kecil biar browser ready
 });
