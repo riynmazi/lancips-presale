@@ -234,23 +234,43 @@
   </div>
 
 
-<section class="weird-feature-section">
-  <div class="weird-feature-inner">
-    <h2 class="weird-title">🔮 Crypto Fortune</h2>
-    <p class="weird-text" id="fortune-text">Click the button and know your (un)fortunate future.</p>
-    <button class="weird-button" onclick="generateFortune()">Reveal My Fate</button>
+
+<section class="weird-tabs">
+  <!-- Tombol Tab -->
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="showTab('tab-weird')">🎲 Weird Stuff</button>
+    <button class="tab-btn" onclick="showTab('tab-fake')">📉 Fake Feature</button>
   </div>
 
-  <div class="weird-feature-inner">
-    <h2 class="weird-title">🚨 Useless Button</h2>
-    <p class="weird-text" id="useless-result">Nothing will happen. Trust me.</p>
-    <button class="weird-button" onclick="pressUselessButton()">DO NOT PRESS</button>
-  </div>
+  <!-- Isi Tab -->
+  <div class="tab-content">
+    <!-- TAB 1 -->
+    <div id="tab-weird" class="tab-pane active">
+      <div class="weird-feature-inner">
+        <h2 class="weird-title">🔮 Crypto Fortune</h2>
+        <p class="weird-text" id="fortune-text">Click the button and know your (un)fortunate future.</p>
+        <button class="weird-button" onclick="generateFortune()">Reveal My Fate</button>
+      </div>
 
-  <div class="weird-banner">
-    ⚠️ This site has no purpose.<br>It’s art. ⚠️
+      <div class="weird-feature-inner">
+        <h2 class="weird-title">🚨 Useless Button</h2>
+        <p class="weird-text" id="useless-result">Nothing will happen. Trust me.</p>
+        <button class="weird-button" onclick="pressUselessButton()">DO NOT PRESS</button>
+      </div>
+
+      <div class="weird-banner">
+        ⚠️ This site has no purpose.<br>It’s art. ⚠️
+      </div>
+    </div>
+
+    <!-- TAB 2 (placeholder / kosong dulu) -->
+    <div id="tab-fake" class="tab-pane">
+      <p style="text-align:center; color:#888; margin-top: 30px;">Coming soon: something even more useless...</p>
+    </div>
   </div>
 </section>
+
+
 
 
 <div class="social-links fade-in-up">
