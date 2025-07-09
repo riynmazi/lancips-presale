@@ -609,6 +609,78 @@ input[type="number"] {
 }
 
 
+.weird-zone {
+  margin-top: 100px;
+  padding: 40px 20px;
+  background: #0f172a;
+  border-top: 2px dashed #1baea9;
+  border-bottom: 2px dashed #1baea9;
+}
+
+/* Fortune Box */
+.fortune-box {
+  margin: 30px auto;
+  max-width: 600px;
+  font-family: monospace;
+  background: #1e293b;
+  color: #facc15;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 18px;
+  border: 2px dashed #1baea9;
+  box-shadow: 0 0 10px #1baea9aa;
+}
+
+/* Useless Button */
+.useless-button-box {
+  text-align: center;
+  margin: 40px 0;
+}
+.useless-button-box button {
+  padding: 12px 24px;
+  background: #f87171;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #f8717190;
+  transition: transform 0.2s ease;
+}
+.useless-button-box button:hover {
+  transform: scale(1.05);
+}
+.useless-button-box p {
+  margin-top: 12px;
+  font-style: italic;
+  color: #94a3b8;
+}
+
+/* Pointless Banner */
+.error-banner {
+  background: #dc2626;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px;
+  animation: shake 2s infinite;
+  margin-top: 60px;
+  border-radius: 0.5rem;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+
+
+
+
 /* === FOOTER === */
 .site-footer {
   width: 100%;
