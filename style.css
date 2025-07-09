@@ -319,29 +319,33 @@ html, body {
   width: 100%;
   margin-top: 80px;
   position: relative;
-  height: 1.6em;
+  height: 1.8em;
 }
 
 .meme-quote-marquee {
+  display: flex;
+  width: max-content;
   white-space: nowrap;
-  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: marqueeScroll 40s linear infinite;
+}
+
+.meme-quote-marquee span {
   font-size: 16px;
   font-weight: bold;
   font-style: italic;
   color: #f87171;
-  will-change: transform;
-  transform: translateX(100%);
-  position: absolute;
-  left: 0;
-  top: 0;
+  padding-right: 2rem; /* jarak antar ulang teks */
 }
 
-@keyframes scrollLeft {
+@keyframes marqueeScroll {
   from {
     transform: translateX(0%);
   }
   to {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
