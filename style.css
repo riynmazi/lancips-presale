@@ -674,6 +674,7 @@ input[type="number"] {
   max-width: 400px;
   line-height: 1.5;
   animation: shake 1s infinite alternate;
+  margin-top: 40px;
 }
 
 @keyframes shake {
