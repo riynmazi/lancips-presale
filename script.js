@@ -151,3 +151,44 @@ window.addEventListener('DOMContentLoaded', () => {
   marqueeText.innerHTML = fullQuote;
   marqueeClone.innerHTML = fullQuote;
 });
+
+// === FUN SECTION SCRIPT ===
+
+// 1. Crypto Fortune Generator
+function showFortune() {
+  const fortunes = [
+    "Your wallet will moon... just not yours 🪙",
+    "You will buy the top and sell the bottom 📉",
+    "Today is a good day to ignore charts 📵",
+    "You will rug yourself accidentally 🧶",
+    "Airdrop is coming. Psych. 💨",
+    "The pump you sold early will haunt you forever 👻",
+    "You will explain LCIP to your mom. She will invest. 😅",
+    "Do nothing. That’s the alpha. 🧘‍♂️",
+    "Buy LANCIPS. Not financial advice. 😉"
+  ];
+  const text = document.getElementById('fortune-text');
+  if (text) {
+    text.textContent = fortunes[Math.floor(Math.random() * fortunes.length)];
+  }
+}
+
+// 2. Useless Button
+function showRandomMsg() {
+  const messages = [
+    "You just burned 1 neuron 🔥",
+    "Oops. Wallet drained. Just kidding 😅",
+    "You pressed it. Brave soul. 😳",
+    "The SEC is watching now 👀",
+    "You just unlocked nothing 🗝️",
+    "This button does absolutely nothing 😎",
+    "Congratulations, you're still broke! 💸"
+  ];
+  const result = document.getElementById('useless-result');
+  if (result) {
+    result.textContent = messages[Math.floor(Math.random() * messages.length)];
+  }
+}
+
+// 3. Jalankan saat DOM siap
+window.addEventListener('DOMContentLoaded', showFortune);
