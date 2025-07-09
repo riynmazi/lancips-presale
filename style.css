@@ -651,14 +651,15 @@ input[type="number"] {
   border: none;
   color: white;
   font-weight: bold;
-  padding: 12px 24px;
+  padding: 8px 16px; /* ↓ Dikecilin dari 12px 24px */
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
-  margin: 0 8px;
-  box-shadow: 0 0 10px #facc15;
+  font-size: 0.9rem; /* ↓ Dikecilin dari 1rem */
+  margin: 0 6px;
+  box-shadow: 0 0 8px #facc15;
   transition: transform 0.2s ease;
 }
+
 .weird-button:hover {
   transform: scale(1.05);
 }
@@ -683,9 +684,13 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 480px) {
-  .weird-title {
-    font-size: 1.5rem;
+  .weird-button {
+    font-size: 1rem;
+    padding: 12px 20px;
+    width: 100%;
+    margin-top: 10px;
   }
+}
 
   .weird-text {
     font-size: 1rem;
