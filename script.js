@@ -154,12 +154,12 @@ window.addEventListener('DOMContentLoaded', () => {
   // Masukkan ke elemen display
   quoteDisplay.innerHTML = fullQuote;
 
-  // Reset posisi dan animasi
+  // Reset posisi awal & animasi (tanpa delay)
   quoteDisplay.style.transform = 'translateX(100%)';
   quoteDisplay.style.animation = 'none';
-  void quoteDisplay.offsetWidth; // force reflow
+  void quoteDisplay.offsetWidth;
 
-  // Hitung durasi: pelan, panjang tergantung teks tapi tetap masuk akal
-  const duration = Math.min(60, Math.max(20, fullQuote.length * 0.1)); // 20–60s
+  // Durasi animasi berdasarkan panjang teks (pelan tapi langsung jalan)
+  const duration = Math.min(60, Math.max(20, fullQuote.length * 0.1));
   quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
 });
