@@ -636,13 +636,13 @@ input[type="number"] {
 
 .weird-title {
   font-size: 1.8rem;
-  color: #a5f3fc;
+  color: red;
   margin-bottom: 10px;
 }
 
 .weird-text {
   font-size: 1.1rem;
-  color: #fefefe;
+  color: black;
   margin-bottom: 15px;
 }
 
