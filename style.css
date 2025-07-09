@@ -632,6 +632,7 @@ input[type="number"] {
   max-width: 600px;
   text-align: center;
   width: 100%;
+  align-items: center;
 }
 
 .weird-title {
