@@ -203,26 +203,3 @@ function pressUselessButton() {
   showFunnyAlert(random, 'useless');
 }
 
-function showFunnyAlert(message, type) {
-  const alertBox = document.getElementById('fun-alert');
-  if (!alertBox) return;
-
-  // Reset class
-  alertBox.className = 'fun-alert';
-  if (type) alertBox.classList.add(type);
-
-  alertBox.innerText = message;
-  alertBox.style.display = 'block';
-
-  alertBox.style.animation = 'none';
-  void alertBox.offsetWidth;
-  alertBox.style.animation = 'pop-fade 3s ease-in-out';
-
-  setTimeout(() => {
-    alertBox.style.display = 'none';
-  }, 3000);
-}
-
-function screamAlert() {
-  showFunnyAlert("Ahh! Don’t touch me! 😱💢", "useless");
-}
