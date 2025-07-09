@@ -6,6 +6,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
 
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+
 
 /* === CSS VARIABLES === */
 :root {
@@ -24,8 +27,6 @@
   --color-overlay: #0f172a;
   --color-glow: rgba(56, 189, 248, 0.8);
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 
 
