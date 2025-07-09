@@ -675,6 +675,7 @@ input[type="number"] {
   font-size: 1.8rem;
   color: blue;
   margin-bottom: 10px;
+  font-family: 'Poor Story', cursive;
 }
 
 .weird-text {
@@ -821,6 +822,7 @@ input[type="number"] {
   text-align: center;
   font-size: 1.8rem;
   color: blue;
+  font-family: 'Poor Story', cursive;
 }
 
 .lcip-ai-chatbox {
