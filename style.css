@@ -654,6 +654,44 @@ input[type="number"] {
 }
 
 
+.fun-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ff3b3b;
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  z-index: 9999;
+  text-align: center;
+  box-shadow: 0 0 20px #ff9999;
+  animation: pop-fade 3s ease-in-out;
+}
+
+@keyframes pop-fade {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+}
+
+
+
 
 /*SOCIAL MEDIA*/
 
