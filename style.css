@@ -314,13 +314,12 @@ html, body {
 
 /*MEMEQUOTE*/
 
-
 .meme-quote-container {
   overflow: hidden;
   width: 100%;
   margin-top: 80px;
-  position: relative; /* supaya child pakai absolute */
-  height: 1.8em; /* Sedikit lebih tinggi biar aman di semua font */
+  position: relative;
+  height: 1.6em;
 }
 
 .meme-quote-marquee {
@@ -334,20 +333,17 @@ html, body {
   transform: translateX(100%);
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%) translateX(100%);
-  /* animasi diatur lewat JS */
+  top: 0;
 }
 
 @keyframes scrollLeft {
   from {
-    transform: translateY(-50%) translateX(100%);
+    transform: translateX(100%);
   }
   to {
-    transform: translateY(-50%) translateX(-100%);
+    transform: translateX(-100%);
   }
 }
-
 
 
 /* === LOGO === */
