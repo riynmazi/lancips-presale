@@ -580,71 +580,78 @@ input[type="number"] {
   background: #111827;
   color: #fef3c7;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
 .weird-feature-inner {
-  max-width: 800px;
-  width: 100%;
+  max-width: 600px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.weird-feature-container {
-  margin-bottom: 40px;
   width: 100%;
 }
 
 .weird-title {
   font-size: 1.8rem;
-  margin-bottom: 10px;
   color: #a5f3fc;
+  margin-bottom: 10px;
 }
 
 .weird-text {
   font-size: 1.1rem;
-  margin-bottom: 15px;
   color: #fefefe;
+  margin-bottom: 15px;
 }
 
 .weird-button {
-  background-color: #f472b6;
+  background: linear-gradient(to right, #f97316, #facc15);
   border: none;
   color: white;
+  font-weight: bold;
   padding: 12px 24px;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
   font-size: 1rem;
-  box-shadow: 0 0 12px #f472b6;
-  transition: background 0.2s ease;
+  margin: 0 8px;
+  box-shadow: 0 0 10px #facc15;
+  transition: transform 0.2s ease;
 }
 .weird-button:hover {
-  background-color: #fb7185;
+  transform: scale(1.05);
 }
 
 .weird-banner {
   background: #dc2626;
-  color: #fff;
-  padding: 12px 24px;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 12px;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 400px;
+  line-height: 1.5;
   animation: shake 1s infinite alternate;
-  margin-top: 40px;
-  border-radius: 8px;
 }
 
 @keyframes shake {
-  from {
-    transform: translateX(-2px);
-  }
-  to {
-    transform: translateX(2px);
-  }
+  from { transform: translateX(-2px); }
+  to   { transform: translateX(2px); }
 }
 
+@media screen and (max-width: 480px) {
+  .weird-title {
+    font-size: 1.5rem;
+  }
+
+  .weird-text {
+    font-size: 1rem;
+  }
+
+  .weird-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
 
 
 
