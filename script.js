@@ -156,28 +156,44 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // WEIRD
 
+function showFunnyAlert(message) {
+  const alertBox = document.getElementById('fun-alert');
+  if (!alertBox) return;
+
+  alertBox.innerText = message;
+  alertBox.style.display = 'block';
+
+  alertBox.style.animation = 'none';
+  void alertBox.offsetWidth;
+  alertBox.style.animation = 'pop-fade 3s ease-in-out';
+
+  setTimeout(() => {
+    alertBox.style.display = 'none';
+  }, 3000);
+}
+
 function generateFortune() {
   const fortunes = [
-    "Your token will moon. In your dreams. 🌕🛌",
-    "You’ll get rugged today. Spiritually. 🧘‍♂️",
-    "You’re early. For the next bear market. 🐻",
-    "Someone is about to buy your bag. Not today. 📦",
-    "You will find love… in the Telegram chat 💬❤️",
-    "The chart says up. But your wallet says no. 📉💸",
+    "🔮 Your token will moon. In your dreams. 🌕🛌",
+    "🧘 You’ll get rugged today. Spiritually.",
+    "🐻 You’re early. For the next bear market.",
+    "📦 Someone is about to buy your bag. Not today.",
+    "💬❤️ You will find love… in the Telegram chat.",
+    "📉💸 The chart says up. But your wallet says no.",
   ];
-  document.getElementById("fortune-text").innerText =
-    fortunes[Math.floor(Math.random() * fortunes.length)];
+  const random = fortunes[Math.floor(Math.random() * fortunes.length)];
+  showFunnyAlert(random);
 }
 
 function pressUselessButton() {
   const messages = [
-    "Why did you press that?",
-    "Congratulations, you're still broke!",
-    "Nice reflexes. Still no airdrop.",
-    "Well that was pointless. 🎉",
-    "You wasted 0.001 seconds. Worth it?",
-    "You're now being watched. Just kidding. Or not.",
+    "🤡 Why did you press that?",
+    "💸 Congratulations, you're still broke!",
+    "⚡️ Nice reflexes. Still no airdrop.",
+    "🎉 Well that was pointless.",
+    "⌛ You wasted 0.001 seconds. Worth it?",
+    "🕵️ You're now being watched. Just kidding. Or not.",
   ];
-  document.getElementById("useless-result").innerText =
-    messages[Math.floor(Math.random() * messages.length)];
+  const random = messages[Math.floor(Math.random() * messages.length)];
+  showFunnyAlert(random);
 }
