@@ -260,3 +260,29 @@ function askLcipAI() {
     chatBox.scrollTop = chatBox.scrollHeight;
   }, 1200); // Delay 1.2 detik untuk efek realistik
 }
+
+
+// === SWITCH TAB ===
+function showTab(tabId) {
+  // Sembunyikan semua tab-pane
+  const panes = document.querySelectorAll('.tab-pane');
+  panes.forEach(pane => pane.classList.remove('active'));
+
+  // Nonaktifkan semua tombol tab
+  const buttons = document.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+
+  // Tampilkan tab yang diklik
+  const targetPane = document.getElementById(tabId);
+  if (targetPane) {
+    targetPane.classList.add('active');
+  }
+
+  // Aktifkan tombol yang diklik
+  const btnToActivate = [...buttons].find(btn =>
+    btn.getAttribute('onclick')?.includes(tabId)
+  );
+  if (btnToActivate) {
+    btnToActivate.classList.add('active');
+  }
+}
