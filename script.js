@@ -151,15 +151,13 @@ window.addEventListener('DOMContentLoaded', () => {
   const quotes = [...quoteContainer.querySelectorAll('div')].map(el => el.innerHTML.trim());
   const fullQuote = quotes.join(' • ');
 
-  // Masukkan ke elemen display
+  // Masukkan ke elemen display dan reset posisi
   quoteDisplay.innerHTML = fullQuote;
   quoteDisplay.style.transform = 'translateX(100%)';
   quoteDisplay.style.animation = 'none';
-  void quoteDisplay.offsetWidth;
+  void quoteDisplay.offsetWidth; // Trigger reflow agar animasi bisa direset
 
-  // Hitung durasi scroll berdasarkan panjang teks
-  setTimeout(() => {
-    const duration = Math.max(12, fullQuote.length * 0.15); // Minimum 12s
-    quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
-  }, 50); // Delay kecil biar browser ready
+  // Hitung durasi animasi: minimal 12s, maksimal 30s
+  const duration = Math.min(30, Math.max(12, fullQuote.length * 0.05));
+  quoteDisplay.style.animation = `scrollLeft ${duration}s linear infinite`;
 });
