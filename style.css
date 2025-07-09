@@ -329,7 +329,7 @@ html, body {
   position: absolute;
   left: 0;
   top: 0;
-  animation: marqueeScroll 40s linear infinite;
+  animation: marqueeScroll 60s linear infinite;
 }
 
 .meme-quote-marquee span {
