@@ -155,7 +155,6 @@ window.addEventListener('DOMContentLoaded', () => {
   quoteDisplay.innerHTML = fullQuote;
 
   // Reset posisi awal & animasi (tanpa delay)
-  quoteDisplay.style.transform = 'translateX(100%)';
   quoteDisplay.style.animation = 'none';
   void quoteDisplay.offsetWidth;
 
