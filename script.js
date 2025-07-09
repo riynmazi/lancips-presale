@@ -152,43 +152,34 @@ window.addEventListener('DOMContentLoaded', () => {
   marqueeClone.innerHTML = fullQuote;
 });
 
-// === FUN SECTION SCRIPT ===
 
-// 1. Crypto Fortune Generator
-function showFortune() {
+
+// WEIRD
+
+function generateFortune() {
   const fortunes = [
-    "Your wallet will moon... just not yours 🪙",
-    "You will buy the top and sell the bottom 📉",
-    "Today is a good day to ignore charts 📵",
-    "You will rug yourself accidentally 🧶",
-    "Airdrop is coming. Psych. 💨",
-    "The pump you sold early will haunt you forever 👻",
-    "You will explain LCIP to your mom. She will invest. 😅",
-    "Do nothing. That’s the alpha. 🧘‍♂️",
-    "Buy LANCIPS. Not financial advice. 😉"
+    "Your token will moon. In your dreams. 🌕🛌",
+    "You’ll get rugged today. Spiritually. 🧘‍♂️",
+    "You’re early. For the next bear market. 🐻",
+    "Someone is about to buy your bag. Not today. 📦",
+    "You will find love… in the Telegram chat 💬❤️",
+    "The chart says up. But your wallet says no. 📉💸",
   ];
-  const text = document.getElementById('fortune-text');
-  if (text) {
-    text.textContent = fortunes[Math.floor(Math.random() * fortunes.length)];
-  }
+
+  const fortuneText = document.getElementById("fortune-text");
+  fortuneText.innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
 }
 
-// 2. Useless Button
-function showRandomMsg() {
+function pressUselessButton() {
   const messages = [
-    "You just burned 1 neuron 🔥",
-    "Oops. Wallet drained. Just kidding 😅",
-    "You pressed it. Brave soul. 😳",
-    "The SEC is watching now 👀",
-    "You just unlocked nothing 🗝️",
-    "This button does absolutely nothing 😎",
-    "Congratulations, you're still broke! 💸"
+    "Why did you press that?",
+    "Congratulations, you're still broke!",
+    "Nice reflexes. Still no airdrop.",
+    "Well that was pointless. 🎉",
+    "You wasted 0.001 seconds. Worth it?",
+    "You're now being watched. Just kidding. Or not.",
   ];
-  const result = document.getElementById('useless-result');
-  if (result) {
-    result.textContent = messages[Math.floor(Math.random() * messages.length)];
-  }
-}
 
-// 3. Jalankan saat DOM siap
-window.addEventListener('DOMContentLoaded', showFortune);
+  const result = document.getElementById("useless-result");
+  result.innerText = messages[Math.floor(Math.random() * messages.length)];
+}
