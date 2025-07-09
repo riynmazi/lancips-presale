@@ -630,20 +630,22 @@ input[type="number"] {
 
 .weird-feature-inner {
   max-width: 600px;
-  text-align: center;
   width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 .weird-title {
   font-size: 1.8rem;
-  color: red;
+  color: #a5f3fc;
   margin-bottom: 10px;
 }
 
 .weird-text {
   font-size: 1.1rem;
-  color: black;
+  color: #fefefe;
   margin-bottom: 15px;
 }
 
@@ -652,15 +654,14 @@ input[type="number"] {
   border: none;
   color: white;
   font-weight: bold;
-  padding: 8px 16px; /* ↓ Dikecilin dari 12px 24px */
-  border-radius: 8px;
+  padding: 8px 18px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem; /* ↓ Dikecilin dari 1rem */
+  font-size: 0.95rem;
   margin: 0 6px;
-  box-shadow: 0 0 8px #facc15;
+  box-shadow: 0 0 10px #facc15;
   transition: transform 0.2s ease;
 }
-
 .weird-button:hover {
   transform: scale(1.05);
 }
@@ -685,13 +686,9 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 480px) {
-  .weird-button {
-    font-size: 1rem;
-    padding: 12px 20px;
-    width: 100%;
-    margin-top: 10px;
+  .weird-title {
+    font-size: 1.5rem;
   }
-}
 
   .weird-text {
     font-size: 1rem;
@@ -699,7 +696,15 @@ input[type="number"] {
 
   .weird-button {
     width: 100%;
+    font-size: 0.95rem;
+    padding: 10px;
     margin-top: 10px;
+  }
+
+  .weird-banner {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    max-width: 90%;
   }
 }
 
