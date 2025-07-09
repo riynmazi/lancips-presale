@@ -210,3 +210,53 @@ function pressUselessButton() {
   showFunnyAlert(random, 'useless');
 }
 
+
+
+function askLcipAI() {
+  const input = document.getElementById("user-question");
+  const chatBox = document.getElementById("chat-box");
+  const userText = input.value.trim();
+
+  if (userText === "") return;
+
+  // Tambahkan pesan user ke chatbox
+  const userMsg = document.createElement("div");
+  userMsg.className = "lcip-ai-msg user";
+  userMsg.innerText = userText;
+  chatBox.appendChild(userMsg);
+
+  // Scroll ke bawah otomatis
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  input.value = "";
+
+  // Simulasikan loading bot
+  const loadingMsg = document.createElement("div");
+  loadingMsg.className = "lcip-ai-msg bot typing";
+  loadingMsg.innerText = "LCIP-AI is thinking...";
+  chatBox.appendChild(loadingMsg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // Setelah delay, tampilkan jawaban random
+  setTimeout(() => {
+    loadingMsg.remove();
+
+    const responses = [
+      "Sounds like a rugpull, go on.",
+      "Not financial advice, but... good luck!",
+      "Trust me, I'm coded to be wise.",
+      "You should’ve asked GPT, not me.",
+      "I can neither confirm nor deny.",
+      "Yes. Or no. Depends on the vibes.",
+      "Why are you like this? 😂",
+      "Ask again when gas fees are lower.",
+      "It’s a bull market. In your imagination.",
+    ];
+
+    const botMsg = document.createElement("div");
+    botMsg.className = "lcip-ai-msg bot";
+    botMsg.innerText = responses[Math.floor(Math.random() * responses.length)];
+    chatBox.appendChild(botMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 1200); // Delay 1.2 detik untuk efek realistik
+}
