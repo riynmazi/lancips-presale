@@ -156,9 +156,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // WEIRD
 
-function showFunnyAlert(message) {
+function showFunnyAlert(message, type) {
   const alertBox = document.getElementById('fun-alert');
   if (!alertBox) return;
+
+  // Reset class
+  alertBox.className = 'fun-alert';
+  if (type === 'fortune') alertBox.classList.add('fortune');
+  if (type === 'useless') alertBox.classList.add('useless');
 
   alertBox.innerText = message;
   alertBox.style.display = 'block';
@@ -182,7 +187,7 @@ function generateFortune() {
     "📉💸 The chart says up. But your wallet says no.",
   ];
   const random = fortunes[Math.floor(Math.random() * fortunes.length)];
-  showFunnyAlert(random);
+  showFunnyAlert(random, 'fortune');
 }
 
 function pressUselessButton() {
@@ -195,5 +200,5 @@ function pressUselessButton() {
     "🕵️ You're now being watched. Just kidding. Or not.",
   ];
   const random = messages[Math.floor(Math.random() * messages.length)];
-  showFunnyAlert(random);
+  showFunnyAlert(random, 'useless');
 }
