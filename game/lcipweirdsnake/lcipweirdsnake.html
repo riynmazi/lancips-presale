@@ -2,30 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LCIP-Weirdsnake 🐍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LCIP-Weirdsnake</title>
   <link rel="stylesheet" href="css/lcipweirdsnake.css" />
 </head>
 <body>
   <div class="snake-wrapper">
     <h1 class="snake-title">🐍 LCIP-Weirdsnake</h1>
+
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
     <div class="game-info">
       <p>Score: <span id="score">0</span></p>
-      <button id="startBtn" onclick="startGame()">▶️ Start</button>
-      <button id="restartBtn" onclick="restartGame()" style="display: none;">🔄 Restart</button>
+      <button onclick="startGame()">🔄 Restart</button>
     </div>
 
-    <!-- Optional Mobile Controls -->
-    <div class="mobile-controls">
-      <button onclick="changeDirection('UP')">⬆️</button>
-      <div>
-        <button onclick="changeDirection('LEFT')">⬅️</button>
-        <button onclick="changeDirection('RIGHT')">➡️</button>
-      </div>
-      <button onclick="changeDirection('DOWN')">⬇️</button>
-    </div>
+    <button id="startBtn" class="start-btn" onclick="startGame()">▶️ Start Game</button>
   </div>
 
   <script src="lcipweirdsnake.js"></script>
