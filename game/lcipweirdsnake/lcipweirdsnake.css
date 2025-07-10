@@ -10,11 +10,18 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 .snake-wrapper {
   text-align: center;
-  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 24px rgba(14, 165, 233, 0.2);
+  max-width: 460px;
+  width: 100%;
 }
 
 .snake-title {
@@ -27,59 +34,60 @@ body {
 #gameCanvas {
   border: 2px solid #facc15;
   background: #1e293b;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  display: block;
-  margin: 0 auto;
-}
-
-/* Overlay Start Button */
-.overlay-start {
-  position: absolute;
-  top: 64px; /* Adjust depending on canvas height */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
-.start-btn {
-  padding: 12px 24px;
-  background: #0ea5e9;
-  color: white;
-  border: none;
   border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 10px #0ea5e9;
-  transition: background 0.3s, transform 0.2s;
-}
-
-.start-btn:hover {
-  background: #38bdf8;
-  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
+  margin-bottom: 16px;
 }
 
 .game-info {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 1rem;
   color: #fefefe;
 }
 
 .game-info button {
   margin: 10px 5px;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   background: #0ea5e9;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
+  transition: all 0.3s;
 }
 
 .game-info button:hover {
   background: #38bdf8;
+  transform: scale(1.05);
+}
+
+/* Start Overlay */
+.overlay-start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.start-btn {
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  background: #22d3ee;
+  color: #0f172a;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
+  transition: all 0.3s;
+}
+
+.start-btn:hover {
+  background: #67e8f9;
+  transform: scale(1.05);
 }
 
 /* Mobile Controls */
@@ -100,6 +108,7 @@ body {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 .mobile-controls button:hover {
@@ -115,10 +124,6 @@ body {
   #gameCanvas {
     width: 300px;
     height: 300px;
-  }
-
-  .overlay-start {
-    top: 48px;
   }
 
   .game-info {
