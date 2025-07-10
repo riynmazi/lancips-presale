@@ -14,6 +14,7 @@ body {
 
 .snake-wrapper {
   text-align: center;
+  position: relative;
 }
 
 .snake-title {
@@ -27,6 +28,36 @@ body {
   border: 2px solid #facc15;
   background: #1e293b;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Overlay Start Button */
+.overlay-start {
+  position: absolute;
+  top: 64px; /* Adjust depending on canvas height */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.start-btn {
+  padding: 12px 24px;
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #0ea5e9;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.start-btn:hover {
+  background: #38bdf8;
+  transform: scale(1.05);
 }
 
 .game-info {
@@ -84,6 +115,10 @@ body {
   #gameCanvas {
     width: 300px;
     height: 300px;
+  }
+
+  .overlay-start {
+    top: 48px;
   }
 
   .game-info {
