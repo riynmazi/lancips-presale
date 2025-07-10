@@ -135,3 +135,15 @@ body {
     font-size: 1rem;
   }
 }
+
+
+@media screen and (max-width: 480px) {
+  #gameCanvas {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    max-width: 90vw;
+    display: block;
+    margin: 0 auto;
+  }
+}
