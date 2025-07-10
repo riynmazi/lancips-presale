@@ -983,7 +983,7 @@ input[type="number"] {
   border-top: 1px solid #334155;
 }
 
-/* === DONATE BLOCK === */
+/* === DONATE BLOCK === 
 .donation-links {
   display: flex;
   flex-direction: column;
@@ -1076,6 +1076,10 @@ input[type="number"] {
   background-color: var(--color-black);
 }
 
+*/
+
+
+
 /* === SCROLL ANIMATIONS === */
 .fade-left, .fade-right {
   opacity: 0;
@@ -1094,4 +1098,51 @@ input[type="number"] {
 .show {
   opacity: 1;
   transform: translateX(0);
+}
+
+
+.lcipweirdsnake-section {
+  display: flex;
+  justify-content: center;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.lcipweirdsnake-inner {
+  max-width: 600px;
+  width: 100%;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+.lcipweirdsnake-title {
+  font-size: 1.75rem;
+  margin-bottom: 12px;
+  color: #a5f3fc;
+}
+
+.lcipweirdsnake-text {
+  font-size: 1rem;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.lcipweirdsnake-button {
+  background: #0ea5e9;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.lcipweirdsnake-button:hover {
+  background: #38bdf8;
+  transform: scale(1.05);
 }
