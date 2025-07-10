@@ -1,75 +1,88 @@
-/* === LCIP Weirdsnake Final Style === */
-html, body {
+/* === LCIP Weirdsnake Style === */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
-  background: #0f172a;
-  font-family: 'Segoe UI', sans-serif;
-  color: #fefefe;
 }
 
-/* === Wrapper & Canvas === */
-.snake-wrapper {
+body {
+  background: #0f172a;
+  color: #fefefe;
+  font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  text-align: center;
-  padding: 0;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
 }
 
+/* Title */
+.snake-title {
+  color: #22d3ee;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  text-shadow: 0 0 8px #0ea5e9;
+  text-align: center;
+}
+
+/* Game Container */
+.snake-wrapper {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+/* Canvas */
 #gameCanvas {
-  width: 100vmin;
-  height: 100vmin;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
   background: #1e293b;
   border: 2px solid #facc15;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  margin-bottom: 20px;
 }
 
-/* === Game Title (optional) === */
-.snake-title {
-  color: #22d3ee;
-  font-size: 1.8rem;
-  text-shadow: 0 0 6px #0ea5e9;
-  margin-bottom: 12px;
-  display: none; /* Hide for fullscreen focus */
-}
-
-/* === Game Info & Buttons (optional) === */
+/* Score & Buttons */
 .game-info {
-  margin-top: 12px;
+  margin-bottom: 20px;
   font-size: 1rem;
-  display: none;
 }
 
-.game-info button {
-  margin: 8px;
-  padding: 8px 16px;
+button {
+  padding: 10px 16px;
+  margin: 6px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   background: #0ea5e9;
   color: white;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s;
+  box-shadow: 0 0 10px #0ea5e9;
+  transition: 0.2s ease;
 }
 
-.game-info button:hover {
+button:hover {
   background: #38bdf8;
+  transform: scale(1.05);
 }
 
-/* === Mobile Controls (Optional) === */
+/* Mobile Controls */
 .mobile-controls {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 10px;
+  align-items: center;
 }
 
 .control-row {
@@ -94,4 +107,26 @@ html, body {
 .control-btn:hover {
   background: #3b82f6;
   transform: scale(1.1);
+}
+
+/* Responsive */
+@media screen and (max-width: 480px) {
+  .snake-title {
+    font-size: 1.5rem;
+  }
+
+  #gameCanvas {
+    height: 300px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .control-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
 }
