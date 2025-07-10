@@ -234,9 +234,11 @@ html, body {
 }
 
 .menu-image-right {
+  max-width: 32px;
+  overflow: hidden;
   position: absolute;
   top: 50%;
-  right: 12px;
+  right: 8px;
   transform: translateY(-50%);
   height: 32px;
   z-index: 1000;
