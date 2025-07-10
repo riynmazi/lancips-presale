@@ -2,25 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LCIP-Weirdsnake</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LCIP-Weirdsnake 🐍</title>
   <link rel="stylesheet" href="css/lcipweirdsnake.css" />
 </head>
 <body>
   <div class="snake-wrapper">
     <h1 class="snake-title">🐍 LCIP-Weirdsnake</h1>
 
+    <!-- Tombol Start di tengah canvas -->
+    <div class="overlay-start" id="startOverlay">
+      <button class="start-btn" onclick="startGame()">▶️ Start Game</button>
+    </div>
+
     <canvas id="gameCanvas" width="400" height="400"></canvas>
 
     <div class="game-info">
       <p>Score: <span id="score">0</span></p>
-      <button onclick="startGame()">🔄 Restart</button>
+      <button onclick="restartGame()">🔁 Restart</button>
     </div>
 
-    <!-- Tombol Mulai -->
-    <button id="startBtn" class="start-btn" onclick="startGame()">▶️ Start Game</button>
-
-    <!-- Kontrol Mobile -->
+    <!-- Tombol kontrol untuk mobile -->
     <div class="mobile-controls">
       <div>
         <button onclick="setDirection('UP')">⬆️</button>
@@ -33,6 +35,6 @@
     </div>
   </div>
 
-  <script src="lcipweirdsnake.js"></script>
+  <script src="js/weirdsnake.js"></script>
 </body>
 </html>
