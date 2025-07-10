@@ -17,7 +17,20 @@
       <button onclick="startGame()">🔄 Restart</button>
     </div>
 
+    <!-- Tombol Mulai -->
     <button id="startBtn" class="start-btn" onclick="startGame()">▶️ Start Game</button>
+
+    <!-- Kontrol Mobile -->
+    <div class="mobile-controls">
+      <div>
+        <button onclick="setDirection('UP')">⬆️</button>
+      </div>
+      <div>
+        <button onclick="setDirection('LEFT')">⬅️</button>
+        <button onclick="setDirection('DOWN')">⬇️</button>
+        <button onclick="setDirection('RIGHT')">➡️</button>
+      </div>
+    </div>
   </div>
 
   <script src="lcipweirdsnake.js"></script>
