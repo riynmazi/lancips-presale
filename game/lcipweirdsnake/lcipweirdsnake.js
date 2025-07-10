@@ -6,30 +6,86 @@ const canvasSize = 400;
 let snake = [{ x: 160, y: 200 }];
 let direction = "RIGHT";
 let score = 0;
-let food = {
-  x: Math.floor(Math.random() * (canvasSize / box)) * box,
-  y: Math.floor(Math.random() * (canvasSize / box)) * box,
-};
+let food = {};
+let game;
+let started = false;
 
-let game = null;
-let isGameRunning = false;
+// Start Button
+const startBtn = document.getElementById("startBtn");
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  startGame();
+});
 
-// === DRAW FUNCTION ===
+function startGame() {
+  started = true;
+  snake = [{ x: 160, y: 200 }];
+  direction = "RIGHT";
+  score = 0;
+  document.getElementById("score").innerText = score;
+  spawnFood();
+  if (game) clearInterval(game);
+  game = setInterval(draw, 150);
+}
+
+function spawnFood() {
+  food = {
+    x: Math.floor(Math.random() * (canvasSize / box)) * box,
+    y: Math.floor(Math.random() * (canvasSize / box)) * box,
+  };
+}
+
+// Keyboard controls
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+  else if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+  else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+  else if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+});
+
+// Mobile swipe controls
+let touchStartX = 0;
+let touchStartY = 0;
+
+canvas.addEventListener("touchstart", (e) => {
+  const touch = e.touches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+});
+
+canvas.addEventListener("touchmove", (e) => {
+  if (!started) return;
+  const touch = e.touches[0];
+  const deltaX = touch.clientX - touchStartX;
+  const deltaY = touch.clientY - touchStartY;
+
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (deltaX > 20 && direction !== "LEFT") direction = "RIGHT";
+    else if (deltaX < -20 && direction !== "RIGHT") direction = "LEFT";
+  } else {
+    if (deltaY > 20 && direction !== "UP") direction = "DOWN";
+    else if (deltaY < -20 && direction !== "DOWN") direction = "UP";
+  }
+
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+});
+
 function draw() {
-  ctx.fillStyle = "#1e293b";
+  ctx.fillStyle = "#111";
   ctx.fillRect(0, 0, canvasSize, canvasSize);
 
-  // Snake
+  // Draw snake
   for (let i = 0; i < snake.length; i++) {
     ctx.fillStyle = i === 0 ? "#0ea5e9" : "#a5f3fc";
     ctx.fillRect(snake[i].x, snake[i].y, box, box);
   }
 
-  // Food
+  // Draw food
   ctx.fillStyle = "#22c55e";
   ctx.fillRect(food.x, food.y, box, box);
 
-  // Move
+  // Move snake
   let headX = snake[0].x;
   let headY = snake[0].y;
 
@@ -38,26 +94,25 @@ function draw() {
   if (direction === "UP") headY -= box;
   if (direction === "DOWN") headY += box;
 
+  // Check collision
   if (
     headX < 0 || headY < 0 ||
     headX >= canvasSize || headY >= canvasSize ||
     collision({ x: headX, y: headY }, snake)
   ) {
     clearInterval(game);
-    isGameRunning = false;
-    showStartButton("💀 Game Over! Score: " + score + "<br>🔁 Play Again");
+    alert("💀 Game Over! Your score: " + score);
+    startBtn.style.display = "block";
     return;
   }
 
   let newHead = { x: headX, y: headY };
 
+  // Check if food eaten
   if (headX === food.x && headY === food.y) {
     score++;
     document.getElementById("score").innerText = score;
-    food = {
-      x: Math.floor(Math.random() * (canvasSize / box)) * box,
-      y: Math.floor(Math.random() * (canvasSize / box)) * box,
-    };
+    spawnFood();
   } else {
     snake.pop();
   }
@@ -65,46 +120,15 @@ function draw() {
   snake.unshift(newHead);
 }
 
-// === COLLISION CHECK ===
 function collision(head, array) {
-  return array.some(segment => segment.x === head.x && segment.y === head.y);
+  for (let i = 0; i < array.length; i++) {
+    if (head.x === array[i].x && head.y === array[i].y) {
+      return true;
+    }
+  }
+  return false;
 }
 
-// === KEYBOARD CONTROL ===
-window.addEventListener("keydown", (e) => {
-  if (!isGameRunning) return;
-  if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-  else if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
-  else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
-  else if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
-});
-
-// === START / RESTART ===
-function startGame() {
-  snake = [{ x: 160, y: 200 }];
-  direction = "RIGHT";
-  score = 0;
-  document.getElementById("score").innerText = score;
-  food = {
-    x: Math.floor(Math.random() * (canvasSize / box)) * box,
-    y: Math.floor(Math.random() * (canvasSize / box)) * box,
-  };
-  if (game) clearInterval(game);
-  game = setInterval(draw, 150);
-  isGameRunning = true;
-  document.getElementById("startBtn").style.display = "none";
-}
-
-// === SHOW START BUTTON ON TOP ===
-function showStartButton(text = "▶️ Start Game") {
-  const btn = document.getElementById("startBtn");
-  btn.innerHTML = text;
-  btn.style.display = "block";
-}
-
-function setDirection(dir) {
-  if (dir === "LEFT" && direction !== "RIGHT") direction = "LEFT";
-  else if (dir === "UP" && direction !== "DOWN") direction = "UP";
-  else if (dir === "RIGHT" && direction !== "LEFT") direction = "RIGHT";
-  else if (dir === "DOWN" && direction !== "UP") direction = "DOWN";
+function restartGame() {
+  startGame();
 }
