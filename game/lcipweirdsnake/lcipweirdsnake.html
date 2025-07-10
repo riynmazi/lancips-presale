@@ -4,37 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LCIP-Weirdsnake 🐍</title>
-  
-  <!-- CSS terhubung dengan benar -->
-  <link rel="stylesheet" href="lcipweirdsnake.css" />
+  <link rel="stylesheet" href="css/lcipweirdsnake.css" />
 </head>
 <body>
   <div class="snake-wrapper">
     <h1 class="snake-title">🐍 LCIP-Weirdsnake</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
-<div class="mobile-controls">
-  <button onclick="changeDirection('up')">⬆️</button>
-  <div class="left-right">
-    <button onclick="changeDirection('left')">⬅️</button>
-    <button onclick="changeDirection('right')">➡️</button>
-  </div>
-  <button onclick="changeDirection('down')">⬇️</button>
-</div>
-
-<div class="game-info">
-  <p>Score: <span id="score">0</span></p>
-  <button id="startBtn" onclick="startGame()">▶️ Start</button>
-  <button id="restartBtn" onclick="restartGame()" style="display: none;">🔄 Restart</button>
-</div>
-
 
     <div class="game-info">
       <p>Score: <span id="score">0</span></p>
-      <button onclick="restartGame()">🔄 Restart</button>
+      <button id="startBtn" onclick="startGame()">▶️ Start</button>
+      <button id="restartBtn" onclick="restartGame()" style="display: none;">🔄 Restart</button>
+    </div>
+
+    <!-- Optional Mobile Controls -->
+    <div class="mobile-controls">
+      <button onclick="changeDirection('UP')">⬆️</button>
+      <div>
+        <button onclick="changeDirection('LEFT')">⬅️</button>
+        <button onclick="changeDirection('RIGHT')">➡️</button>
+      </div>
+      <button onclick="changeDirection('DOWN')">⬇️</button>
     </div>
   </div>
 
-  <!-- JS juga terhubung -->
   <script src="lcipweirdsnake.js"></script>
 </body>
 </html>
