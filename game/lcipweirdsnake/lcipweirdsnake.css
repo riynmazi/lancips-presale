@@ -1,99 +1,72 @@
-/* === LCIP Weirdsnake Style === */
-body {
+/* === LCIP Weirdsnake Final Style === */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
   background: #0f172a;
-  color: #fefefe;
   font-family: 'Segoe UI', sans-serif;
+  color: #fefefe;
+}
+
+/* === Wrapper & Canvas === */
+.snake-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  margin: 0;
-  padding: 20px;
-  overflow-x: hidden;
-}
-
-.snake-wrapper {
+  justify-content: center;
+  height: 100%;
   text-align: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 0 24px rgba(14, 165, 233, 0.2);
-  max-width: 460px;
-  width: 100%;
-}
-
-.snake-title {
-  margin: 10px 0 20px;
-  color: #22d3ee;
-  font-size: 2rem;
-  text-shadow: 0 0 6px #0ea5e9;
+  padding: 0;
 }
 
 #gameCanvas {
-  border: 2px solid #facc15;
+  width: 100vmin;
+  height: 100vmin;
+  max-width: 100%;
+  max-height: 100%;
   background: #1e293b;
+  border: 2px solid #facc15;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
-  margin-bottom: 16px;
 }
 
+/* === Game Title (optional) === */
+.snake-title {
+  color: #22d3ee;
+  font-size: 1.8rem;
+  text-shadow: 0 0 6px #0ea5e9;
+  margin-bottom: 12px;
+  display: none; /* Hide for fullscreen focus */
+}
+
+/* === Game Info & Buttons (optional) === */
 .game-info {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 1rem;
-  color: #fefefe;
+  display: none;
 }
 
 .game-info button {
-  margin: 10px 5px;
-  padding: 10px 20px;
+  margin: 8px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #0ea5e9;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
-  transition: all 0.3s;
+  transition: background 0.3s;
 }
 
 .game-info button:hover {
   background: #38bdf8;
-  transform: scale(1.05);
 }
 
-/* Start Overlay */
-.overlay-start {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-}
-
-.start-btn {
-  padding: 14px 28px;
-  font-size: 1.1rem;
-  background: #22d3ee;
-  color: #0f172a;
-  border: none;
-  border-radius: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
-  transition: all 0.3s;
-}
-
-.start-btn:hover {
-  background: #67e8f9;
-  transform: scale(1.05);
-}
-
-/* Mobile Controls */
+/* === Mobile Controls (Optional) === */
 .mobile-controls {
   margin-top: 20px;
-  display: flex;
+  display: none; /* Set to flex if used */
   flex-direction: column;
   gap: 8px;
   align-items: center;
@@ -108,42 +81,8 @@ body {
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
 .mobile-controls button:hover {
   background: #60a5fa;
-}
-
-/* Responsive */
-@media screen and (max-width: 480px) {
-  .snake-title {
-    font-size: 1.5rem;
-  }
-
-  #gameCanvas {
-    width: 300px;
-    height: 300px;
-  }
-
-  .game-info {
-    font-size: 0.9rem;
-  }
-
-  .mobile-controls button {
-    padding: 8px 12px;
-    font-size: 1rem;
-  }
-}
-
-
-@media screen and (max-width: 480px) {
-  #gameCanvas {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 1 / 1;
-    max-width: 90vw;
-    display: block;
-    margin: 0 auto;
-  }
 }
