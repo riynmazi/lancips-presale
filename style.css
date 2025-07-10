@@ -903,6 +903,13 @@ input[type="number"] {
 
 /* Responsive */
 @media screen and (max-width: 480px) {
+  
+  .lcip-ai-section {
+    max-width: 90%;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
   .lcip-ai-title {
     font-size: 1.4rem;
   }
