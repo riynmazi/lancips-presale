@@ -6,79 +6,30 @@ const canvasSize = 400;
 let snake = [{ x: 160, y: 200 }];
 let direction = "RIGHT";
 let score = 0;
-let game; // interval game
-let isPlaying = false;
-
 let food = {
   x: Math.floor(Math.random() * (canvasSize / box)) * box,
   y: Math.floor(Math.random() * (canvasSize / box)) * box,
 };
 
-// === Event keyboard ===
-document.addEventListener("keydown", (e) => {
-  if (!isPlaying) return;
+let game = null;
+let isGameRunning = false;
 
-  if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-  else if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
-  else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
-  else if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
-});
-
-// === Mobile Control ===
-function changeDirection(newDir) {
-  if (!isPlaying) return;
-
-  if (
-    (newDir === "UP" && direction !== "DOWN") ||
-    (newDir === "DOWN" && direction !== "UP") ||
-    (newDir === "LEFT" && direction !== "RIGHT") ||
-    (newDir === "RIGHT" && direction !== "LEFT")
-  ) {
-    direction = newDir;
-  }
-}
-
-// === Mulai Game Pertama Kali ===
-function startGame() {
-  if (isPlaying) return;
-
-  isPlaying = true;
-  document.getElementById("startBtn").style.display = "none";
-  document.getElementById("restartBtn").style.display = "inline-block";
-
-  game = setInterval(draw, 150);
-}
-
-// === Restart ===
-function restartGame() {
-  clearInterval(game);
-  snake = [{ x: 160, y: 200 }];
-  direction = "RIGHT";
-  score = 0;
-  document.getElementById("score").innerText = score;
-  food = {
-    x: Math.floor(Math.random() * (canvasSize / box)) * box,
-    y: Math.floor(Math.random() * (canvasSize / box)) * box,
-  };
-  game = setInterval(draw, 150);
-}
-
-// === Draw Loop ===
+// === DRAW FUNCTION ===
 function draw() {
-  ctx.fillStyle = "#111";
+  ctx.fillStyle = "#1e293b";
   ctx.fillRect(0, 0, canvasSize, canvasSize);
 
-  // Draw snake
+  // Snake
   for (let i = 0; i < snake.length; i++) {
     ctx.fillStyle = i === 0 ? "#0ea5e9" : "#a5f3fc";
     ctx.fillRect(snake[i].x, snake[i].y, box, box);
   }
 
-  // Draw food
+  // Food
   ctx.fillStyle = "#22c55e";
   ctx.fillRect(food.x, food.y, box, box);
 
-  // Next head position
+  // Move
   let headX = snake[0].x;
   let headY = snake[0].y;
 
@@ -87,17 +38,14 @@ function draw() {
   if (direction === "UP") headY -= box;
   if (direction === "DOWN") headY += box;
 
-  // Collision detection
   if (
     headX < 0 || headY < 0 ||
     headX >= canvasSize || headY >= canvasSize ||
     collision({ x: headX, y: headY }, snake)
   ) {
     clearInterval(game);
-    alert("💀 Game Over! Your score: " + score);
-    isPlaying = false;
-    document.getElementById("startBtn").style.display = "inline-block";
-    document.getElementById("restartBtn").style.display = "none";
+    isGameRunning = false;
+    showStartButton("💀 Game Over! Score: " + score + "<br>🔁 Play Again");
     return;
   }
 
@@ -117,10 +65,39 @@ function draw() {
   snake.unshift(newHead);
 }
 
-// === Collision Helper ===
+// === COLLISION CHECK ===
 function collision(head, array) {
-  for (let i = 0; i < array.length; i++) {
-    if (head.x === array[i].x && head.y === array[i].y) return true;
-  }
-  return false;
+  return array.some(segment => segment.x === head.x && segment.y === head.y);
+}
+
+// === KEYBOARD CONTROL ===
+window.addEventListener("keydown", (e) => {
+  if (!isGameRunning) return;
+  if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+  else if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+  else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+  else if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+});
+
+// === START / RESTART ===
+function startGame() {
+  snake = [{ x: 160, y: 200 }];
+  direction = "RIGHT";
+  score = 0;
+  document.getElementById("score").innerText = score;
+  food = {
+    x: Math.floor(Math.random() * (canvasSize / box)) * box,
+    y: Math.floor(Math.random() * (canvasSize / box)) * box,
+  };
+  if (game) clearInterval(game);
+  game = setInterval(draw, 150);
+  isGameRunning = true;
+  document.getElementById("startBtn").style.display = "none";
+}
+
+// === SHOW START BUTTON ON TOP ===
+function showStartButton(text = "▶️ Start Game") {
+  const btn = document.getElementById("startBtn");
+  btn.innerHTML = text;
+  btn.style.display = "block";
 }
