@@ -1,32 +1,126 @@
-// weirdsnake.js
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+const box = 20;
+const canvasSize = 400;
 
-const canvas = document.getElementById("gameCanvas"); const ctx = canvas.getContext("2d"); const box = 20; const canvasSize = 400;
+let snake = [{ x: 160, y: 200 }];
+let direction = "RIGHT";
+let score = 0;
+let game; // interval game
+let isPlaying = false;
 
-let snake = [{ x: 160, y: 200 }]; let direction = "RIGHT"; let score = 0; let food = { x: Math.floor(Math.random() * (canvasSize / box)) * box, y: Math.floor(Math.random() * (canvasSize / box)) * box, };
+let food = {
+  x: Math.floor(Math.random() * (canvasSize / box)) * box,
+  y: Math.floor(Math.random() * (canvasSize / box)) * box,
+};
 
-// Event untuk kontrol document.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT"; else if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP"; else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT"; else if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN"; });
+// === Event keyboard ===
+document.addEventListener("keydown", (e) => {
+  if (!isPlaying) return;
 
-function draw() { ctx.fillStyle = "#111"; ctx.fillRect(0, 0, canvasSize, canvasSize);
+  if (e.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+  else if (e.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+  else if (e.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+  else if (e.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+});
 
-for (let i = 0; i < snake.length; i++) { ctx.fillStyle = i === 0 ? "#0ea5e9" : "#a5f3fc"; ctx.fillRect(snake[i].x, snake[i].y, box, box); }
+// === Mobile Control ===
+function changeDirection(newDir) {
+  if (!isPlaying) return;
 
-ctx.fillStyle = "#22c55e"; ctx.fillRect(food.x, food.y, box, box);
+  if (
+    (newDir === "UP" && direction !== "DOWN") ||
+    (newDir === "DOWN" && direction !== "UP") ||
+    (newDir === "LEFT" && direction !== "RIGHT") ||
+    (newDir === "RIGHT" && direction !== "LEFT")
+  ) {
+    direction = newDir;
+  }
+}
 
-let headX = snake[0].x; let headY = snake[0].y;
+// === Mulai Game Pertama Kali ===
+function startGame() {
+  if (isPlaying) return;
 
-if (direction === "LEFT") headX -= box; if (direction === "RIGHT") headX += box; if (direction === "UP") headY -= box; if (direction === "DOWN") headY += box;
+  isPlaying = true;
+  document.getElementById("startBtn").style.display = "none";
+  document.getElementById("restartBtn").style.display = "inline-block";
 
-if ( headX < 0 || headY < 0 || headX >= canvasSize || headY >= canvasSize || collision({ x: headX, y: headY }, snake) ) { clearInterval(game); alert("💀 Game Over! Your score: " + score); return; }
+  game = setInterval(draw, 150);
+}
 
-let newHead = { x: headX, y: headY };
+// === Restart ===
+function restartGame() {
+  clearInterval(game);
+  snake = [{ x: 160, y: 200 }];
+  direction = "RIGHT";
+  score = 0;
+  document.getElementById("score").innerText = score;
+  food = {
+    x: Math.floor(Math.random() * (canvasSize / box)) * box,
+    y: Math.floor(Math.random() * (canvasSize / box)) * box,
+  };
+  game = setInterval(draw, 150);
+}
 
-if (headX === food.x && headY === food.y) { score++; document.getElementById("score").innerText = score; food = { x: Math.floor(Math.random() * (canvasSize / box)) * box, y: Math.floor(Math.random() * (canvasSize / box)) * box, }; } else { snake.pop(); }
+// === Draw Loop ===
+function draw() {
+  ctx.fillStyle = "#111";
+  ctx.fillRect(0, 0, canvasSize, canvasSize);
 
-snake.unshift(newHead); }
+  // Draw snake
+  for (let i = 0; i < snake.length; i++) {
+    ctx.fillStyle = i === 0 ? "#0ea5e9" : "#a5f3fc";
+    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+  }
 
-function collision(head, array) { for (let i = 0; i < array.length; i++) { if (head.x === array[i].x && head.y === array[i].y) { return true; } } return false; }
+  // Draw food
+  ctx.fillStyle = "#22c55e";
+  ctx.fillRect(food.x, food.y, box, box);
 
-function restartGame() { snake = [{ x: 160, y: 200 }]; direction = "RIGHT"; score = 0; document.getElementById("score").innerText = score; food = { x: Math.floor(Math.random() * (canvasSize / box)) * box, y: Math.floor(Math.random() * (canvasSize / box)) * box, }; clearInterval(game); game = setInterval(draw, 150); }
+  // Next head position
+  let headX = snake[0].x;
+  let headY = snake[0].y;
 
-let game = setInterval(draw, 150);
+  if (direction === "LEFT") headX -= box;
+  if (direction === "RIGHT") headX += box;
+  if (direction === "UP") headY -= box;
+  if (direction === "DOWN") headY += box;
 
+  // Collision detection
+  if (
+    headX < 0 || headY < 0 ||
+    headX >= canvasSize || headY >= canvasSize ||
+    collision({ x: headX, y: headY }, snake)
+  ) {
+    clearInterval(game);
+    alert("💀 Game Over! Your score: " + score);
+    isPlaying = false;
+    document.getElementById("startBtn").style.display = "inline-block";
+    document.getElementById("restartBtn").style.display = "none";
+    return;
+  }
+
+  let newHead = { x: headX, y: headY };
+
+  if (headX === food.x && headY === food.y) {
+    score++;
+    document.getElementById("score").innerText = score;
+    food = {
+      x: Math.floor(Math.random() * (canvasSize / box)) * box,
+      y: Math.floor(Math.random() * (canvasSize / box)) * box,
+    };
+  } else {
+    snake.pop();
+  }
+
+  snake.unshift(newHead);
+}
+
+// === Collision Helper ===
+function collision(head, array) {
+  for (let i = 0; i < array.length; i++) {
+    if (head.x === array[i].x && head.y === array[i].y) return true;
+  }
+  return false;
+}
