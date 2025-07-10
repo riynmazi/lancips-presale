@@ -12,6 +12,16 @@
   <div class="snake-wrapper">
     <h1 class="snake-title">🐍 LCIP-Weirdsnake</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+<div class="mobile-controls">
+  <button onclick="changeDirection('up')">⬆️</button>
+  <div class="left-right">
+    <button onclick="changeDirection('left')">⬅️</button>
+    <button onclick="changeDirection('right')">➡️</button>
+  </div>
+  <button onclick="changeDirection('down')">⬇️</button>
+</div>
+
+
     <div class="game-info">
       <p>Score: <span id="score">0</span></p>
       <button onclick="restartGame()">🔄 Restart</button>
