@@ -101,3 +101,10 @@ function showStartButton(text = "▶️ Start Game") {
   btn.innerHTML = text;
   btn.style.display = "block";
 }
+
+function setDirection(dir) {
+  if (dir === "LEFT" && direction !== "RIGHT") direction = "LEFT";
+  else if (dir === "UP" && direction !== "DOWN") direction = "UP";
+  else if (dir === "RIGHT" && direction !== "LEFT") direction = "RIGHT";
+  else if (dir === "DOWN" && direction !== "UP") direction = "DOWN";
+}
