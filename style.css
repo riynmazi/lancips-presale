@@ -512,6 +512,11 @@ button:hover, .whitepaper-btn:hover, .pinksale-btn:hover {
   box-shadow: 0 0 24px rgba(255, 203, 77, 1);
 }
 
+.token-info, .form {
+ text-align: center;
+}
+
+
 input[type="number"] {
   width: 100%;
   padding: 10px;
