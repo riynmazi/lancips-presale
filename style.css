@@ -238,7 +238,7 @@ html, body {
   overflow: hidden;
   position: absolute;
   top: 50%;
-  right: 24px;
+  right: 20px;
   transform: translateY(-50%);
   height: 32px;
   z-index: 1000;
