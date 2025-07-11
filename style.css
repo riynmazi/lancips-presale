@@ -504,6 +504,7 @@ button, .whitepaper-btn, .pinksale-btn {
   transition: all 0.3s ease;
   box-shadow: 0 0 16px rgba(255, 203, 77, 0.8);
   text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+  text-align: center;
 }
 
 button:hover, .whitepaper-btn:hover, .pinksale-btn:hover {
