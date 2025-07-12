@@ -119,6 +119,13 @@ body.dark-mode .token-info {
   color: #7dd3fc;
 }
 
+body.dark-mode .buy-card{
+  background: linear-gradient(135deg, #1e40af, #0f766e); 
+  border: 4px dashed #7dd3fc; 
+  color: #f1f5f9; 
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2),
+}
+
 body.dark-mode .tokenomics,
 body.dark-mode .roadmap,
 body.dark-mode .weird-feature-inner,
