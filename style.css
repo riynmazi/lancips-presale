@@ -346,6 +346,33 @@ html, body {
 }
 
 
+/*shrink effect*/
+
+.navbar-wrapper {
+  transition: all 0.3s ease;
+}
+
+.navbar-wrapper.shrink {
+  height: 50px;
+  padding: 4px 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+.navbar-wrapper.shrink .menu-toggle,
+.navbar-wrapper.shrink .menu-close,
+.navbar-wrapper.shrink .menu-image-right,
+.navbar-wrapper.shrink .navbar-icon img {
+  transform: scale(0.85);
+  transition: transform 0.3s ease;
+}
+
+.navbar-wrapper.shrink .navbar-center img {
+  transform: scale(0.85);
+}
+
+
+
+
 /*MEMEQUOTE*/
 
 .meme-quote-container {
