@@ -629,8 +629,99 @@ body.dark-mode * {
   100% { transform: translateY(-100vh); opacity: 0; }
 }
 
+
+/*BUY CARX*/
+
+.buy-card {
+  background: rgba(0, 255, 170, 0.1);
+  border: 1px solid rgba(0, 255, 170, 0.3);
+  border-radius: 20px;
+  box-shadow:
+    0 0 8px rgba(0, 255, 170, 0.3),
+    0 0 20px rgba(0, 255, 170, 0.15);
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  transform: perspective(800px);
+  transition: transform 0.4s ease;
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.buy-card:hover {
+  transform: perspective(800px) rotateY(4deg) rotateX(2deg);
+  box-shadow:
+    0 0 12px rgba(0, 255, 170, 0.4),
+    0 0 30px rgba(0, 255, 170, 0.2);
+}
+
+.buy-card input,
+.buy-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.buy-card input {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.buy-card button {
+  background: linear-gradient(90deg, #00ffaa, #00c2ff);
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.buy-card button:hover {
+  background: linear-gradient(90deg, #00c2ff, #00ffaa);
+}
+
+.buy-card p {
+  color: #ccc;
+  text-align: center;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 480px) {
+  .buy-card {
+    padding: 16px;
+    margin: 20px 16px;
+    transform: none;
+    box-shadow:
+      0 0 6px rgba(0, 255, 170, 0.2),
+      0 0 12px rgba(0, 255, 170, 0.1);
+  }
+
+  .buy-card:hover {
+    transform: none;
+  }
+
+  .buy-card input,
+  .buy-card button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .buy-card p {
+    font-size: 0.85rem;
+  }
+}
+
+
+
 /* === BUTTONS === */
-button, .whitepaper-btn, .pinksale-btn {
+button, .whitepaper-btn {
   padding: 12px 24px;
   font-size: 16px;
   font-weight: bold;
@@ -645,11 +736,13 @@ button, .whitepaper-btn, .pinksale-btn {
   text-align: center;
 }
 
-button:hover, .whitepaper-btn:hover, .pinksale-btn:hover {
+button:hover, .whitepaper-btn:hover, {
   transform: scale(1.07);
   box-shadow: 0 0 24px rgba(255, 203, 77, 1);
 }
 
+
+/*
 .wallet {
   display: flex;
   flex-direction: column;
@@ -661,6 +754,7 @@ button:hover, .whitepaper-btn:hover, .pinksale-btn:hover {
 }
 
 
+
 input[type="number"] {
   width: 100%;
   padding: 10px;
@@ -669,7 +763,7 @@ input[type="number"] {
   font-size: 16px;
   margin-top: 10px;
   text-align: center;
-}
+} */
 
 
 /*CTA*/
