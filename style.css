@@ -141,8 +141,8 @@ body.dark-mode .tokenomics li {
   font-weight: bold;
 }
 
-body.dark-mode .tab-buttons{
- background-color: var(--color-bg);
+body.dark-mode .tab-btn{
+ background-color: #0f172a;
 }
 
 /* Transisi global */
