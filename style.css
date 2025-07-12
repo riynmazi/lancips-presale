@@ -263,29 +263,6 @@ html, body {
 }
 
 
-.menu-right {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  position: absolute;
-  left: 70%;
-  transform: translateX(-50%);
-  height: 100%;
-  z-index: 999;
-}
-
-.menu-right {
-  height: 32px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.menu-right:hover {
-  transform: scale(1.1);
-}
-
-
-
 .menu-close {
   display: none;
 }
