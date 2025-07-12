@@ -263,22 +263,27 @@ html, body {
 }
 
 
-.menu-image-right {
-  
-  overflow: hidden;
+.menu-right {
+  display: flex;
+  gap: 16px;
+  align-items: center;
   position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+  left: 70%;
+  transform: translateX(-50%);
+  height: 100%;
+  z-index: 999;
+}
+
+.menu-right {
   height: 32px;
-  z-index: 1000;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
-.menu-image-right:hover {
-  transform: translateY(-50%) scale(1.1);
+.menu-right:hover {
+  transform: scale(1.1);
 }
+
 
 
 .menu-close {
