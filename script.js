@@ -302,19 +302,17 @@ function showTab(tabId) {
 
 
   const body = document.body;
-  const darkIcon = document.getElementById("darkModeIcon");
-  const lightIcon = document.getElementById("lightModeIcon");
+  const darkIcon = document.getElementById("darkModeIcon");   // Klik untuk AKTIFKAN mode gelap
+  const lightIcon = document.getElementById("lightModeIcon"); // Klik untuk AKTIFKAN mode terang
 
-  // Saat ikon mode gelap diklik
   darkIcon.addEventListener("click", () => {
-    body.classList.add("dark-mode");
-    darkIcon.style.display = "none";
-    lightIcon.style.display = "inline";
+    body.classList.add("dark-mode");           // Aktifkan dark mode
+    darkIcon.style.display = "none";           // Sembunyikan ikon dark
+    lightIcon.style.display = "inline";        // Tampilkan ikon light
   });
 
-  // Saat ikon mode terang diklik
   lightIcon.addEventListener("click", () => {
-    body.classList.remove("dark-mode");
+    body.classList.remove("dark-mode");        // Kembali ke terang
     darkIcon.style.display = "inline";
     lightIcon.style.display = "none";
   });
