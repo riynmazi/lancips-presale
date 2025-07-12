@@ -672,6 +672,27 @@ input[type="number"] {
 }
 
 
+/*CTA*/
+
+.cheap-alert-animated {
+  color: #00ffaa;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 12px;
+  text-shadow: 0 0 8px #00ffaa, 0 0 12px #00ffaa;
+  animation: wiggle 0.3s infinite ease-in-out;
+  transition: transform 0.2s ease;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+
+
+
 /* ---STATUS--- */
 
 .status {
