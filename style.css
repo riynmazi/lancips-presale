@@ -65,7 +65,7 @@ body.dark-mode .navbar {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
-/* Semua link */
+/* link */
 body.dark-mode a {
   color: #38bdf8;
   transition: color 0.4s ease;
@@ -74,7 +74,7 @@ body.dark-mode a:hover {
   color: #7dd3fc;
 }
 
-/* Tombol umum */
+/* Tombol central */
 body.dark-mode button,
 body.dark-mode .button {
   background-color: #1e293b;
@@ -83,7 +83,7 @@ body.dark-mode .button {
   transition: background-color 0.4s ease, color 0.4s ease, border 0.4s ease;
 }
 
-/* Placeholder input (jika ada form) */
+/* Placeholder input (form) */
 body.dark-mode input::placeholder {
   color: #94a3b8;
 }
@@ -102,28 +102,37 @@ body.dark-mode .container {
   box-shadow: 0 0 8px rgba(56, 189, 248, 0.1);
   padding: 20px;
   border-radius: 12px;
-  transition: all 0.4s ease;
-}
+  }
 
-/* Tambahan: card, token-info, section, footer */
+/* card, section, footer */
 body.dark-mode .card,
-body.dark-mode .token-info,
 body.dark-mode .section,
 body.dark-mode .footer {
   background-color: #1e293b;
   color: #f1f5f9;
   border: 1px solid #334155;
   box-shadow: 0 0 8px rgba(56, 189, 248, 0.05);
-  transition: all 0.4s ease;
+  
+}
+
+body.dark-mode .token-info{
+  background-color: #1e293b;
+  color: #f1f5f9;
 }
 
 body.dark-mode .tokenomics,
 body.dark-mode .roadmap {
-  background: linear-gradient(135deg, #1e40af, #0f766e); /* biru tua ke hijau gelap */
-  border: 4px dashed #7dd3fc; /* biru muda */
-  color: #f1f5f9; /* teks putih terang */
+  background: linear-gradient(135deg, #1e40af, #0f766e); 
+  border: 4px dashed #7dd3fc; 
+  color: #f1f5f9; 
   box-shadow: 0 0 25px rgba(56, 189, 248, 0.2),
               inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .roadmap li,
+body.dark-mode .tokenomics li {
+  color: #7dd3fc;
+  font-weight: bold;
 }
 
 
