@@ -126,6 +126,18 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
+  window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar-wrapper");
+    if (window.scrollY > 30) {
+      navbar.classList.add("shrink");
+    } else {
+      navbar.classList.remove("shrink");
+    }
+  });
+
+
+
 // === SCROLL EVENT ===
 window.addEventListener('scroll', revealOnScroll);
 
