@@ -117,10 +117,24 @@ body.dark-mode .footer {
   transition: all 0.4s ease;
 }
 
+body.dark-mode .tokenomics,
+body.dark-mode .roadmap {
+  background: linear-gradient(135deg, #1e40af, #0f766e); /* biru tua ke hijau gelap */
+  border: 4px dashed #7dd3fc; /* biru muda */
+  color: #f1f5f9; /* teks putih terang */
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2),
+              inset 0 0 10px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s ease;
+}
+
+
+
 /* Transisi global */
 body.dark-mode * {
   transition: all 0.4s ease;
 }
+
+
 
 
 
