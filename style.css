@@ -675,24 +675,23 @@ input[type="number"] {
 /*CTA*/
 
 .cheap-alert {
-  font-size: 1.1rem;
-  color: #003300; /* teks gelap untuk kontras */
+  font-size: 1.05rem;
+  color: #000;
   font-weight: bold;
   text-align: center;
   margin-top: 12px;
   padding: 12px 16px;
-  background: linear-gradient(135deg, #39ff14, #00cc66); /* hijau neon */
-  border: 2px solid #00ff55;
   border-radius: 12px;
-  animation:
-    shakeGlowGreen 1.8s infinite ease-in-out,
-    blinkGlow 2.5s infinite ease-in-out;
+  background: linear-gradient(135deg, #ffd800, #ff9c00); /* gold-ish */
   box-shadow:
-    0 0 4px #39ff14,
-    0 0 8px #00cc66;
+    0 0 4px #ffd800,
+    0 0 8px #ffb300;
+  animation:
+    shakeGlowGold 1.8s infinite ease-in-out,
+    blinkGlow 2.5s infinite ease-in-out;
 }
 
-@keyframes shakeGlowGreen {
+@keyframes shakeGlowGold {
   0% { transform: translateX(0); }
   25% { transform: translateX(-2px); }
   50% { transform: translateX(2px); }
@@ -702,7 +701,7 @@ input[type="number"] {
 
 @keyframes blinkGlow {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  50% { opacity: 0.75; }
 }
 
 
