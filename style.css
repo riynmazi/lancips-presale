@@ -122,7 +122,9 @@ body.dark-mode .status{
 }
 
 body.dark-mode .tokenomics,
-body.dark-mode .roadmap {
+body.dark-mode .roadmap,
+body.dark-mode .weird-feature-inner,
+body.dark-mode .lcip-ai-section   {
   background: linear-gradient(135deg, #1e40af, #0f766e); 
   border: 4px dashed #7dd3fc; 
   color: #f1f5f9; 
@@ -135,8 +137,6 @@ body.dark-mode .tokenomics li {
   color: #7dd3fc;
   font-weight: bold;
 }
-
-
 
 /* Transisi global */
 body.dark-mode * {
