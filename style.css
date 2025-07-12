@@ -77,7 +77,7 @@ body.dark-mode a:hover {
 /* Tombol central */
 body.dark-mode button,
 body.dark-mode .button {
-  background-color: #1e293b;
+  background: linear-gradient(135deg, #f5af19, #f12711); /* gold → orange */
   color: #f1f5f9;
   border: 1px solid #334155;
   transition: background-color 0.4s ease, color 0.4s ease, border 0.4s ease;
