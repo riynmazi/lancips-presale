@@ -240,7 +240,7 @@ html, body {
   gap: 16px;
   align-items: center;
   position: absolute;
-  left: 80%;
+  left: 70%;
   transform: translateX(-50%);
   height: 100%;
   z-index: 999;
