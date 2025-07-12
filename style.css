@@ -148,7 +148,7 @@ body.dark-mode .tab-btn:not(.active){
 body.dark-mode .weird-tittle,
 body.dark-mode .lcip-ai-tittle {
  color: white;
-
+}
 
 /* Transisi global */
 body.dark-mode * {
