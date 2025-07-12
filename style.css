@@ -115,7 +115,8 @@ body.dark-mode .footer {
   
 }
 
-body.dark-mode .token-info,.status{
+body.dark-mode .token-info,
+body.dark-mode .status{
   background-color: #1e293b;
   color: #7dd3fc;
 }
