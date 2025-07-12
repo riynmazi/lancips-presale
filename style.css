@@ -1011,22 +1011,43 @@ input[type="number"] {
   margin-bottom: 15px;
 }
 
+
+
 .weird-button {
-  background: linear-gradient(to right, #f97316, #facc15);
-  border: none;
-  color: white;
+  background: linear-gradient(145deg, #00f5d4, #00cfc0);
+  color: #001f1f;
+  border: 2px dashed #00ffe0;
+  border-radius: 20px;
+  padding: 14px 28px;
+  font-size: 1rem;
   font-weight: bold;
-  padding: 8px 18px;
-  border-radius: 6px;
+  font-family: 'Comic Neue', sans-serif;
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.6), 0 0 20px rgba(0, 255, 200, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  font-size: 0.95rem;
-  margin: 0 6px;
-  box-shadow: 0 0 10px #facc15;
-  transition: transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+.weird-button::after {
+  content: "✨";
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 1.2rem;
+  animation: sparkle 1.5s infinite ease-in-out;
+}
+
 .weird-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.08) rotate(-1deg);
+  box-shadow: 0 0 16px rgba(0, 255, 200, 0.8);
 }
+
+@keyframes sparkle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(20deg) scale(1.4); }
+}
+
 
 .weird-banner {
   background: #dc2626;
