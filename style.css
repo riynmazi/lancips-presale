@@ -9,7 +9,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 
-
 /* === CSS VARIABLES === */
 :root {
   --color-bg: #00ffc3;
@@ -29,6 +28,11 @@
 }
 
 
+/* Mode malam */
+body.dark-mode {
+  background-color: #0f172a; /* gelap */
+  color: #f1f5f9;            /* terang */
+}
 
 /* === RESET & BASE === */
 html, body {
@@ -46,7 +50,7 @@ html, body {
   box-sizing: inherit;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
 
 .logo-banner {
   width: 100%;
