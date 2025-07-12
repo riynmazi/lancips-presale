@@ -44,32 +44,37 @@ html, body {
   box-sizing: inherit;
 }
 
-/* Aktif saat <body class="dark-mode"> */
+
+/* === DARK MODE ACTIVE === */
 body.dark-mode {
   background-color: #0f172a;
   color: #f1f5f9;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Navbar gelap */
+/* Navbar wrapper */
 body.dark-mode .navbar-wrapper {
-  background-color: rgba(15, 23, 42, 0.95); /* sama kayak navbar biar seragam */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);    /* bayangan halus */
+  background-color: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Link */
+/* Navbar (jaga-jaga kalau beda dari wrapper) */
+body.dark-mode .navbar {
+  background-color: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Semua link */
 body.dark-mode a {
   color: #38bdf8;
   transition: color 0.4s ease;
 }
-
-/* Hover link */
 body.dark-mode a:hover {
   color: #7dd3fc;
 }
 
-/* Semua tombol */
+/* Tombol umum */
 body.dark-mode button,
 body.dark-mode .button {
   background-color: #1e293b;
@@ -83,25 +88,37 @@ body.dark-mode input::placeholder {
   color: #94a3b8;
 }
 
-/* Ikon di navbar */
+/* Gambar ikon navbar */
 body.dark-mode .navbar-icon img,
 body.dark-mode .menu-right {
   filter: brightness(0.8);
   transition: filter 0.4s ease;
 }
 
-/* Animasi halus untuk semua */
-body.dark-mode * {
+/* Container umum */
+body.dark-mode .container {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.1);
+  padding: 20px;
+  border-radius: 12px;
   transition: all 0.4s ease;
 }
 
+/* Tambahan: card, token-info, section, footer */
+body.dark-mode .card,
+body.dark-mode .token-info,
+body.dark-mode .section,
+body.dark-mode .footer {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border: 1px solid #334155;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.05);
+  transition: all 0.4s ease;
+}
 
-body.dark-mode .container {
-  background-color: #1e293b; /* abu gelap elegan */
-  border: 1px solid #334155; /* garis batas */
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.1); /* glow lembut */
-  padding: 20px;
-  border-radius: 12px;
+/* Transisi global */
+body.dark-mode * {
   transition: all 0.4s ease;
 }
 
