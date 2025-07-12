@@ -237,7 +237,7 @@ html, body {
 
 .navbar-icon {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   align-items: center;
   position: absolute;
   left: 60%;
