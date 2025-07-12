@@ -52,9 +52,10 @@ body.dark-mode {
 }
 
 /* Navbar gelap */
-body.dark-mode .navbar {
-  background-color: rgba(15, 23, 42, 0.95);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+body.dark-mode .navbar-wrapper {
+  background-color: rgba(15, 23, 42, 0.95); /* sama kayak navbar biar seragam */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);    /* bayangan halus */
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Link */
@@ -91,6 +92,16 @@ body.dark-mode .menu-right {
 
 /* Animasi halus untuk semua */
 body.dark-mode * {
+  transition: all 0.4s ease;
+}
+
+
+body.dark-mode .container {
+  background-color: #1e293b; /* abu gelap elegan */
+  border: 1px solid #334155; /* garis batas */
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.1); /* glow lembut */
+  padding: 20px;
+  border-radius: 12px;
   transition: all 0.4s ease;
 }
 
