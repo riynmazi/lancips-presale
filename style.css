@@ -246,10 +246,16 @@ html, body {
   z-index: 999;
 }
 
+
 .nav-icon {
   height: 32px;
   cursor: pointer;
   transition: transform 0.2s ease;
+}
+
+.navbar-icon a {
+  display: flex;
+  align-items: center;
 }
 
 .nav-icon:hover {
