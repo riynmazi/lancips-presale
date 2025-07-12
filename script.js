@@ -298,3 +298,23 @@ function showTab(tabId) {
     btnToActivate.classList.add('active');
   }
 }
+
+
+
+  const body = document.body;
+  const darkIcon = document.getElementById("darkModeIcon");
+  const lightIcon = document.getElementById("lightModeIcon");
+
+  // Saat ikon mode gelap diklik
+  darkIcon.addEventListener("click", () => {
+    body.classList.add("dark-mode");
+    darkIcon.style.display = "none";
+    lightIcon.style.display = "inline";
+  });
+
+  // Saat ikon mode terang diklik
+  lightIcon.addEventListener("click", () => {
+    body.classList.remove("dark-mode");
+    darkIcon.style.display = "inline";
+    lightIcon.style.display = "none";
+  });
