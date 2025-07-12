@@ -145,12 +145,15 @@ body.dark-mode .tab-btn:not(.active){
  background-color: #0f172a;
 }
 
+body.dark-mode .weird-tittle,
+body.dark-mode .lcip-ai-tittle {
+ color: white;
+
+
 /* Transisi global */
 body.dark-mode * {
   transition: all 0.4s ease;
 }
-
-
 
 
 
