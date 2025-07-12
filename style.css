@@ -48,7 +48,7 @@ html, body {
 /* === DARK MODE ACTIVE === */
 body.dark-mode {
   background-color: #0f172a;
-  color: #f1f5f9;
+  color: #7dd3fc;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
@@ -109,7 +109,7 @@ body.dark-mode .card,
 body.dark-mode .section,
 body.dark-mode .footer {
   background-color: #1e293b;
-  color: #f1f5f9;
+  color: #7dd3fc;
   border: 1px solid #334155;
   box-shadow: 0 0 8px rgba(56, 189, 248, 0.05);
   
@@ -117,7 +117,7 @@ body.dark-mode .footer {
 
 body.dark-mode .token-info{
   background-color: #1e293b;
-  color: #f1f5f9;
+  color: #7dd3fc;
 }
 
 body.dark-mode .tokenomics,
