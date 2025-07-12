@@ -676,20 +676,23 @@ input[type="number"] {
 
 .cheap-alert {
   font-size: 1.1rem;
-  color: #ff4b4b;
+  color: #003300; /* teks gelap untuk kontras */
   font-weight: bold;
   text-align: center;
   margin-top: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #39ff14, #00cc66); /* hijau neon */
+  border: 2px solid #00ff55;
+  border-radius: 12px;
   animation:
-    shakeGlowRed 1.8s infinite ease-in-out,
+    shakeGlowGreen 1.8s infinite ease-in-out,
     blinkGlow 2.5s infinite ease-in-out;
-  text-shadow:
-    0 0 2px #ff4b4b,
-    0 0 4px #ff6b6b,
-    0 0 6px #ff6b6b;
+  box-shadow:
+    0 0 4px #39ff14,
+    0 0 8px #00cc66;
 }
 
-@keyframes shakeGlowRed {
+@keyframes shakeGlowGreen {
   0% { transform: translateX(0); }
   25% { transform: translateX(-2px); }
   50% { transform: translateX(2px); }
