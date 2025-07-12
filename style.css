@@ -235,11 +235,15 @@ html, body {
 
 .navbar-center {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;                /* vertikal center */
+  left: 50%;               /* horizontal center */
+  transform: translate(-50%, -50%);
   height: 32px;
   z-index: 1000;
   list-style: none;
+  display: flex;           /* >1 item */
+  align-items: center;
+  justify-content: center;
 }
 
 
