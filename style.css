@@ -141,6 +141,10 @@ body.dark-mode .tokenomics li {
   font-weight: bold;
 }
 
+body.dark-mode .tab-btn{
+ background-color: var(--color-bg);
+}
+
 /* Transisi global */
 body.dark-mode * {
   transition: all 0.4s ease;
