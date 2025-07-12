@@ -247,7 +247,7 @@ html, body {
 }
 
 
-.nav-icon {
+.nav-icon,.menu-right{
   height: 32px;
   cursor: pointer;
   transition: transform 0.2s ease;
