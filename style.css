@@ -1434,14 +1434,14 @@ input[type="number"] {
 
 @media screen and (min-width: 768px) {
   .social-item {
-    font-size: 14px;
-    padding: 8px 16px;
-    gap: 8px;
+    font-size: 13px !important;
+    padding: 6px 12px !important;
+    gap: 6px !important;
   }
 
   .social-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px !important;
+    height: 18px !important;
   }
 }
 
