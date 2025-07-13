@@ -197,19 +197,64 @@ function screamAlert() {
 
 
 //FORTUNE
-  function activateLightning(ball) {
-    const overlay = ball.querySelector('.lightning-overlay');
-    
-    // Tampilkan kilatan
-    overlay.style.opacity = '1';
-    ball.classList.add('shock');
 
-    // Hilangkan efek setelah 500ms
-    setTimeout(() => {
-      overlay.style.opacity = '0';
-      ball.classList.remove('shock');
-    }, 500);
-  }
+function activateCrystalBall(wrapper) {
+  const ball = wrapper.querySelector('.magic-ball');
+  const overlay = wrapper.querySelector('.lightning-overlay');
+  const alertBox = document.getElementById('fun-alert');
+  const fortuneText = document.getElementById('fortuneText');
+
+  // Reset semua efek
+  wrapper.classList.remove('shock');
+  ball.style.animation = 'none';
+  void ball.offsetWidth; // trigger reflow
+  ball.style.animation = 'shake 0.5s';
+
+  // Tampilkan petir
+  overlay.style.opacity = '1';
+
+  // Hilangkan petir dan getar setelah 500ms
+  setTimeout(() => {
+    overlay.style.opacity = '0';
+    wrapper.classList.remove('shock');
+    ball.style.animation = 'slowRotate 12s linear infinite';
+  }, 500);
+
+  // Ganti teks ramalan (bisa di-random kalau mau)
+  const fortunes = [
+    "You're about to buy the top 😹",
+    "Soon... you'll be rich or rugged. Who knows?",
+    "The spirits say: GM.",
+    "Airdrop coming? Keep dreaming.",
+    "Your wallet is... empty 😭"
+  ];
+  const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+  fortuneText.innerText = randomFortune;
+
+  // Tampilkan alert
+  showFunnyAlert(randomFortune, "fortune");
+}
+
+function showFunnyAlert(message, type) {
+  const alertBox = document.getElementById('fun-alert');
+  if (!alertBox) return;
+
+  alertBox.className = 'fun-alert'; // reset class
+  if (type === 'fortune') alertBox.classList.add('fortune');
+
+  alertBox.innerText = message;
+  alertBox.style.display = 'block';
+
+  // Trigger animasi ulang
+  alertBox.style.animation = 'none';
+  void alertBox.offsetWidth;
+  alertBox.style.animation = 'pop-fade 3s ease-in-out';
+
+  // Sembunyikan setelah 3 detik
+  setTimeout(() => {
+    alertBox.style.display = 'none';
+  }, 3000);
+}
 
 
 
