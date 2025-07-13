@@ -1393,23 +1393,34 @@ input[type="number"] {
 
 /*SOCIAL MEDIA*/
 
-.social-wrapper {
+/* Container Umum */
+.container {
   width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Social Wrapper */
+.social-wrapper {
   display: flex;
   justify-content: center;
+  width: 100%;
   padding: 20px 0;
 }
 
+/* Social Links */
 .social-links {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  max-width: 500px;
   width: 100%;
 }
 
+/* Social Item */
 .social-item {
   display: flex;
   align-items: center;
@@ -1433,13 +1444,6 @@ input[type="number"] {
   width: 20px;
   height: 20px;
   filter: drop-shadow(0 0 4px #38bdf8);
-}
-
-
-.social-wrapper {
-  outline: 2px solid lime;
-  margin: 0;
-  padding: 0;
 }
 
 
