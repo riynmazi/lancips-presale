@@ -196,18 +196,25 @@ function screamAlert() {
 
 
 
-function generateFortune() {
-  const fortunes = [
-    "🔮 Your token will moon. In your dreams. 🌕🛌",
-    "🧘 You’ll get rugged today. Spiritually.",
-    "🐻 You’re early. For the next bear market.",
-    "📦 Someone is about to buy your bag. Not today.",
-    "💬❤️ You will find love… in the Telegram chat.",
-    "📉💸 The chart says up. But your wallet says no.",
-  ];
-  const random = fortunes[Math.floor(Math.random() * fortunes.length)];
-  showFunnyAlert(random, 'fortune');
-}
+//FORTUNE
+const ball = document.getElementById("magicBall");
+const text = document.getElementById("fortuneText");
+
+ball.addEventListener("click", () => {
+  ball.style.animation = "shakeZap 0.5s ease 3";
+  
+  setTimeout(() => {
+    ball.style.animation = "fadeOutBoom 1.5s forwards";
+  }, 1500);
+
+  setTimeout(() => {
+    text.style.opacity = 1;
+    text.textContent = "🔮 You will FOMO into LCIP anyway.";
+  }, 3000);
+});
+
+
+
 
 function pressUselessButton() {
   const messages = [
