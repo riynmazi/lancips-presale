@@ -202,25 +202,24 @@ function activateCrystalBall(wrapper) {
   const ball = wrapper.querySelector('.magic-ball');
   const overlay = wrapper.querySelector('.lightning-overlay');
   const alertBox = document.getElementById('fun-alert');
-  const fortuneText = document.getElementById('fortuneText');
 
-  // Reset semua efek
+  // Reset animasi bola
   wrapper.classList.remove('shock');
   ball.style.animation = 'none';
   void ball.offsetWidth; // trigger reflow
   ball.style.animation = 'shake 0.5s';
 
-  // Tampilkan petir
+  // Efek petir menyala
   overlay.style.opacity = '1';
 
-  // Hilangkan petir dan getar setelah 500ms
+  // Setelah 500ms: petir mati, bola kembali muter
   setTimeout(() => {
     overlay.style.opacity = '0';
     wrapper.classList.remove('shock');
     ball.style.animation = 'slowRotate 12s linear infinite';
   }, 500);
 
-  // Ganti teks ramalan (bisa di-random kalau mau)
+  // Random fortune
   const fortunes = [
     "You're about to buy the top 😹",
     "Soon... you'll be rich or rugged. Who knows?",
@@ -229,31 +228,9 @@ function activateCrystalBall(wrapper) {
     "Your wallet is... empty 😭"
   ];
   const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-  fortuneText.innerText = randomFortune;
 
-  // Tampilkan alert
+  // Tampilkan alert lucu
   showFunnyAlert(randomFortune, "fortune");
-}
-
-function showFunnyAlert(message, type) {
-  const alertBox = document.getElementById('fun-alert');
-  if (!alertBox) return;
-
-  alertBox.className = 'fun-alert'; // reset class
-  if (type === 'fortune') alertBox.classList.add('fortune');
-
-  alertBox.innerText = message;
-  alertBox.style.display = 'block';
-
-  // Trigger animasi ulang
-  alertBox.style.animation = 'none';
-  void alertBox.offsetWidth;
-  alertBox.style.animation = 'pop-fade 3s ease-in-out';
-
-  // Sembunyikan setelah 3 detik
-  setTimeout(() => {
-    alertBox.style.display = 'none';
-  }, 3000);
 }
 
 
