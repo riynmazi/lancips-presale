@@ -1034,6 +1034,10 @@ input[type="number"] {
   z-index: 1;
 }
 
+#fortuneText {
+  display: none;
+}
+
 /* Efek guncangan */
 .shock .magic-ball {
   animation: shake 0.5s;
