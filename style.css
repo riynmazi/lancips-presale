@@ -1077,9 +1077,15 @@ input[type="number"] {
 }
 
 .mystic-hand {
-  margin-bottom: 50px;
-  pointer-events: none;
-
+  width: 100px; 
+  height: auto;
+  display: block;
+  margin-top: -30px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+  position: relative;
+}
 
 
 
