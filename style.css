@@ -1393,22 +1393,29 @@ input[type="number"] {
 
 /*SOCIAL MEDIA*/
 
+/* === SOCIAL MEDIA WRAPPER === */
 .social-wrapper {
   width: 100%;
-  text-align: center;
-  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
 }
 
+/* === SOCIAL INNER (CONTAINER UTAMA) === */
 .social-inner {
-  display: inline-block;
-  max-width: 600px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
+/* === SOCIAL ITEM (TIAP TOMBOL) === */
 .social-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
-  margin: 8px;
   font-size: 14px;
   text-decoration: none;
   padding: 8px 16px;
@@ -1424,6 +1431,7 @@ input[type="number"] {
   box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
 }
 
+/* === ICON UKURAN === */
 .social-icon {
   width: 20px;
   height: 20px;
