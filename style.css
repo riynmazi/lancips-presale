@@ -1432,6 +1432,20 @@ input[type="number"] {
   filter: drop-shadow(0 0 4px #38bdf8);
 }
 
+@media screen and (min-width: 768px) {
+  .social-item {
+    font-size: 14px;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+
+  .social-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
 
 
 /* === FOOTER === */
