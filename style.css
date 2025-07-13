@@ -992,8 +992,8 @@ input[type="number"] {
 
 .crystal-ball {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 80px;
+  height: 80px;
   margin: auto;
   animation: slowRotate 10s linear infinite;
   cursor: pointer;
