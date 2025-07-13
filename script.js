@@ -197,22 +197,19 @@ function screamAlert() {
 
 
 //FORTUNE
-const ball = document.getElementById("magicBall");
-const text = document.getElementById("fortuneText");
+  function activateLightning(ball) {
+    const overlay = ball.querySelector('.lightning-overlay');
+    
+    // Tampilkan kilatan
+    overlay.style.opacity = '1';
+    ball.classList.add('shock');
 
-ball.addEventListener("click", () => {
-  ball.style.animation = "shakeZap 0.5s ease 3";
-  
-  setTimeout(() => {
-    ball.style.animation = "fadeOutBoom 1.5s forwards";
-  }, 1500);
-
-  setTimeout(() => {
-    text.style.opacity = 1;
-    text.textContent = "🔮 You will FOMO into LCIP anyway.";
-  }, 3000);
-});
-
+    // Hilangkan efek setelah 500ms
+    setTimeout(() => {
+      overlay.style.opacity = '0';
+      ball.classList.remove('shock');
+    }, 500);
+  }
 
 
 
