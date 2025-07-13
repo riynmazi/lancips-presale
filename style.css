@@ -990,52 +990,102 @@ input[type="number"] {
 /*FORTUNE*/
 
 
-.crystal-ball {
+.magic-ball-wrapper {
   position: relative;
-  width: 80px;
-  height: 80px;
-  margin: auto;
-  animation: slowRotate 10s linear infinite;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
   cursor: pointer;
 }
 
-.crystal-ball img {
+.magic-ball {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   border-radius: 50%;
-  display: block;
+  animation: slowRotate 12s linear infinite;
+  box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
 }
 
 .lightning-overlay {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(white, rgba(255, 255, 255, 0));
+  background: radial-gradient(white, transparent);
   opacity: 0;
-  transition: opacity 0.1s ease-in-out;
   pointer-events: none;
+  transition: opacity 0.2s ease;
+  border-radius: 50%;
   z-index: 2;
 }
 
-.crystal-ball.shock {
-  animation: shake 0.3s ease-in-out;
+.fortune-text {
+  position: absolute;
+  bottom: -40px;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  opacity: 0.8;
+  z-index: 1;
 }
 
+/* Efek guncangan */
+.shock .magic-ball {
+  animation: shake 0.5s;
+}
+
+/* Animasi pelan muter */
 @keyframes slowRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
+/* Guncangan cepat */
 @keyframes shake {
-  0% { transform: rotate(0deg) translate(0, 0); }
-  25% { transform: rotate(1deg) translate(-2px, 2px); }
-  50% { transform: rotate(-1deg) translate(2px, -1px); }
-  75% { transform: rotate(1deg) translate(-1px, 1px); }
-  100% { transform: rotate(0deg) translate(0, 0); }
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(2deg); }
+  40% { transform: rotate(-2deg); }
+  60% { transform: rotate(2deg); }
+  80% { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
 }
 
+/* Alert styling opsional */
+.fun-alert {
+  margin-top: 16px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #fff;
+  background: #6a0dad;
+  padding: 10px 16px;
+  border-radius: 10px;
+  display: none;
+  animation: pop-fade 3s ease-in-out;
+}
+
+.fun-alert.fortune {
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+@keyframes pop-fade {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
 
 
 
