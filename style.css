@@ -1076,15 +1076,14 @@ input[type="number"] {
   }
 }
 
-
-
 .mystic-hand {
-  position: absolute;
   margin-top: 10px;
-  transform: translateX(-50%);
   width: 100px;
   height: auto;
   pointer-events: none;
+
+
+
 
 /*---WEIRD---*/
 
