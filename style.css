@@ -1448,7 +1448,6 @@ input[type="number"] {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  margin-top: 60px;
   font-size: 13px;
   padding: 20px;
   color: var(--color-muted);
