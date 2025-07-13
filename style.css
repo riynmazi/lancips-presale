@@ -1441,21 +1441,20 @@ input[type="number"] {
 
 
 /* === FOOTER === */
-.site-footer {
+
+.footer-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  font-size: 13px;
-  padding: 20px;
-  color: var(--color-muted);
-  border-top: 1px solid #334155;
-  max-width: 960px;
-  margin: 60px auto 0 auto;
 }
 
+.site-footer {
+  max-width: 960px;
+  width: 100%;
+  padding: 20px;
+  border-top: 1px solid #334155;
+  text-align: center;
+}
 
 
 
