@@ -1005,7 +1005,7 @@ input[type="number"] {
   object-fit: cover;
   border-radius: 50%;
   animation: slowRotate 12s linear infinite;
-  box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+  /*box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);*/
 }
 
 .lightning-overlay {
