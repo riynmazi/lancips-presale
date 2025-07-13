@@ -28,6 +28,12 @@
 }
 
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* === RESET & BASE === */
 html, body {
   margin: 0;
@@ -996,6 +1002,7 @@ input[type="number"] {
   width: 200px;
   height: 200px;
   cursor: pointer;
+  margin: 0 auto;
 }
 
 .magic-ball {
@@ -1396,7 +1403,7 @@ input[type="number"] {
   margin: 40px auto;
   animation: fadeInUp 1s ease-out;
   max-width: 600px;
-  flex-warp: wrap;
+  flex-wrap: wrap;
 }
 
 .social-item {
@@ -1431,7 +1438,6 @@ input[type="number"] {
 .site-footer {
   width: 100%;
   display: flex;
-  margin: 0 auto;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -1441,7 +1447,10 @@ input[type="number"] {
   padding: 20px;
   color: var(--color-muted);
   border-top: 1px solid #334155;
+  max-width: 960px;
+  margin: 60px auto 0 auto;
 }
+
 
 
 
