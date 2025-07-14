@@ -1450,6 +1450,7 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  outline: 2px solid red;
 }
 
 .site-footer {
@@ -1458,7 +1459,9 @@ input[type="number"] {
   padding: 20px;
   border-top: 1px solid #334155;
   text-align: center;
+  outline: 2px solid lime;
 }
+
 
 
 
