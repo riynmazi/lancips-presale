@@ -1449,6 +1449,8 @@ input[type="number"] {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 50px;
+  align-item: center;
 }
 
 .site-footer {
@@ -1456,7 +1458,6 @@ input[type="number"] {
   width: 100%;
   padding: 20px;
   border-top: 1px solid #334155;
-  text-align: center;
 }
 
 
