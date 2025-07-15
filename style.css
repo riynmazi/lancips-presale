@@ -777,7 +777,7 @@ input[type="number"] {
 } */
 
 
-/*CTA*/
+/*CTA
 
 .cheap-alert {
   position: relative;
@@ -792,7 +792,7 @@ input[type="number"] {
   animation: slideChaos 18s ease-in-out infinite;
 }
 
-/* Animasi total 18s (masuk, diam+getar, keluar, delay) */
+
 @keyframes slideChaos {
   0% {
     transform: translateX(120%);
@@ -831,7 +831,7 @@ input[type="number"] {
   }
 }
 
-/* Efek getar menggigil */
+
 @keyframes shake {
   0%, 100% { transform: translate(0, 0); }
   5%  { transform: translate(1px, -2px); }
@@ -854,6 +854,8 @@ input[type="number"] {
   90% { transform: translate(-2px, 1px); }
   95% { transform: translate(1px, -2px); }
 }
+
+*/
 
 
 /* ---STATUS--- */
