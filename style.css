@@ -777,7 +777,7 @@ input[type="number"] {
 } */
 
 
-/*CTA
+/*CTA*/
 
 .cheap-alert {
   position: relative;
@@ -855,7 +855,7 @@ input[type="number"] {
   95% { transform: translate(1px, -2px); }
 }
 
-*/
+
 
 
 /* ---STATUS--- */
@@ -876,7 +876,7 @@ input[type="number"] {
 
 
 
-/* === SECTIONS === */
+/* === SECTIONS === 
 
 .tokenomics,.roadmap{
   background: linear-gradient(135deg, #facc15, #1baea9);
@@ -915,6 +915,8 @@ input[type="number"] {
 .donate{
   text-align: center;
 }
+
+*/
 
 
 /* === TAB UI === */
