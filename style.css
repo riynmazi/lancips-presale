@@ -160,7 +160,7 @@ body.dark-mode * {
 .chart-container {
   position: relative;
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto; /* Center secara horizontal */
   aspect-ratio: 5 / 4;
   display: flex;
