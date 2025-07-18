@@ -51,7 +51,7 @@ LANCIPS is a standard SPL token created via **Solana CLI** — without custom sm
 spl-token create-token
 
 # 2. Create a token account
-spl-token create-account 8KigeQfhBc9Xw8mJ3pbuhUsyCh9N1AUbhAPwHfuBUrzm
+spl-token create-account 6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK
 
 # 3. Mint total supply to our wallet
 spl-token mint 8KigeQfhBc9Xw8mJ3pbuhUsyCh9N1AUbhAPwHfuBUrzm 100000000 HPbJkontUYCiriMxTuCZxcxCAmod7dzBVTpXzzXkHbq7
