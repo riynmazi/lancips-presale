@@ -681,7 +681,6 @@ body.dark-mode * {
   display: flex;
   justify-content: center;
   margin-top: 50px;
-  outline: 2px solid red;
 }
 
 .site-footer {
@@ -690,7 +689,6 @@ body.dark-mode * {
   padding: 20px;
   border-top: 1px solid #334155;
   text-align: center;
-  outline: 2px solid lime;
 }
 
 .site-footer p {
