@@ -372,7 +372,7 @@ body.dark-mode * {
   gap: 16px;
   align-items: center;
   position: absolute;
-  right: 30;
+  left: 50%;
   transform: translateX(-50%);
   height: 100%;
   z-index: 999;
