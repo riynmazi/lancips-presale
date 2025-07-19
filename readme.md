@@ -1,9 +1,9 @@
-# 🐸 LANCIPS - Frontend
+# About LANCIPS 
 
-This is the frontend interface for the **LANCIPS** presale — a meme token built on Solana, born out of frustration, irony, and just enough hope to click "Buy".
+**LANCIPS**— a meme token built on Solana, born out of frustration, irony, and just enough hope to click "Buy".
 
 🌐 Website: [https://lancips.xyz](https://lancips.xyz)  
-📄 Whitepaper: [Read here](https://drive.google.com/file/d/1TmQNxHcuTOkBehN8-k1iGohiasy48XJx/view?usp=drivesdk)
+📄 Whitepaper: [Read here](https://github.com/riynmazi/lancips-presale/blob/main/data/whitepaper.pdf)
 
 ---
 
