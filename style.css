@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Puimek&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
-
-
 @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
 
 
@@ -178,8 +175,6 @@ body.dark-mode * {
 
 
 
-
-
 .logo-banner {
   width: 100%;
   max-width: 100%;
@@ -190,7 +185,7 @@ body.dark-mode * {
 
 .logo-banner img {
   width: 100%;
-  max-width: 500px; /* biar di layar besar nggak terlalu gede */
+  max-width: 500px;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -1340,6 +1335,31 @@ input[type="number"] {
 
 
 
+/* === FOOTER === */
+
+.footer-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  outline: 2px solid red;
+}
+
+.site-footer {
+  max-width: 960px;
+  width: 100%;
+  padding: 20px;
+  border-top: 1px solid #334155;
+  text-align: center;
+  outline: 2px solid lime;
+}
+
+.site-footer p {
+  text-align: center;
+  margin: 0 auto;
+}
+
+
 
 
 /* LCIP-AI */
@@ -1523,29 +1543,7 @@ input[type="number"] {
 
 
 
-/* === FOOTER === */
 
-.footer-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-  outline: 2px solid red;
-}
-
-.site-footer {
-  max-width: 960px;
-  width: 100%;
-  padding: 20px;
-  border-top: 1px solid #334155;
-  text-align: center;
-  outline: 2px solid lime;
-}
-
-.site-footer p {
-  text-align: center;
-  margin: 0 auto;
-}
 
 
 /* === SCROLL ANIMATIONS === */
