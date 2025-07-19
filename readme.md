@@ -42,7 +42,7 @@ LANCIPS is a standard SPL token created via **Solana CLI** — without custom sm
 - ✅ Fixed total supply: 100,000,000 LANCIPS
 - ✅ No taxes, no hidden logic, no backdoors
 - ✅ Token uses Solana’s official SPL Token Program:  
-  `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA`
+  `ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL`
 
 ### 🔍 Token Creation Proof (CLI)
 
@@ -54,7 +54,7 @@ spl-token create-token
 spl-token create-account 6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK
 
 # 3. Mint total supply to our wallet
-spl-token mint 8KigeQfhBc9Xw8mJ3pbuhUsyCh9N1AUbhAPwHfuBUrzm 100000000 HPbJkontUYCiriMxTuCZxcxCAmod7dzBVTpXzzXkHbq7
+spl-token mint 6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK 100000000 HPbJkontUYCiriMxTuCZxcxCAmod7dzBVTpXzzXkHbq7
 
 # 4. Disable minting forever
-spl-token authorize 8KigeQfhBc9Xw8mJ3pbuhUsyCh9N1AUbhAPwHfuBUrzm mint --disable
+spl-token authorize 6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK mint --disable
