@@ -1294,6 +1294,7 @@ input[type="number"] {
 }
 
 /*DEV*/
+
 .team-container {
   display: flex;
   justify-content: center;
@@ -1312,8 +1313,8 @@ input[type="number"] {
 }
 
 .member-img {
-  width: 24px;
-  height: 24px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 10px;
