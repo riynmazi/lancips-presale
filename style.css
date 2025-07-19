@@ -1374,7 +1374,7 @@ input[type="number"] {
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px;
+  padding: 60px 20px;
   border-radius: 18px;
   background: #111827;
   border: 1px solid rgba(255, 0, 0, 0.2);
