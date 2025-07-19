@@ -1540,8 +1540,10 @@ input[type="number"] {
   outline: 2px solid lime;
 }
 
-
-
+.site-footer p {
+  text-align: center;
+  margin: 0 auto;
+}
 
 
 /* === SCROLL ANIMATIONS === */
