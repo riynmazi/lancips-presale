@@ -56,7 +56,7 @@ body.dark-mode .navbar-wrapper {
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Navbar (jaga-jaga kalau beda dari wrapper) */
+/* Navbar */
 body.dark-mode .navbar {
   background-color: rgba(15, 23, 42, 0.95);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
@@ -71,7 +71,7 @@ body.dark-mode a:hover {
   color: #7dd3fc;
 }
 
-/* Tombol central */
+/* central */
 body.dark-mode button,
 body.dark-mode .button {
   background: linear-gradient(135deg, #f5af19, #f12711); /* gold → orange */
@@ -85,14 +85,14 @@ body.dark-mode input::placeholder {
   color: #94a3b8;
 }
 
-/* Gambar ikon navbar */
+/* icon navbar */
 body.dark-mode .navbar-icon img,
 body.dark-mode .menu-right {
   filter: brightness(0.8);
   transition: filter 0.4s ease;
 }
 
-/* Container umum */
+/* Container central*/
 body.dark-mode .container {
   background-color: #1e293b;
   border: 1px solid #334155;
@@ -147,7 +147,7 @@ body.dark-mode .lcip-ai-title {
  color: white;
 }
 
-/* Transisi global */
+/* global transition*/
 body.dark-mode * {
   transition: all 0.4s ease;
 }
@@ -956,7 +956,7 @@ input[type="number"] {
 
 .status {
   font-size: 14px;
-  color: #0f172a; /* Warna gelap */
+  color: #0f172a; /* dark color */
   margin-top: 20px;
   text-align: center;
   font-weight: 600;
@@ -1010,7 +1010,7 @@ input[type="number"] {
 
 
 
-/* === TAB UI === */
+/* === UI TAB=== */
 
 .weird-feature-inner {
   max-width: 600px;
@@ -1021,7 +1021,7 @@ input[type="number"] {
   align-items: center;
   padding: 24px;
   border-radius: 16px;
-  background: rgba(255, 0, 0, 0.3); /* merah transparan */
+  background: rgba(255, 0, 0, 0.3); /* red transparent */
   border: 1px solid rgba(255, 0, 0, 0.2);
   box-shadow: 0 0 18px rgba(255, 0, 0, 0.2);
   backdrop-filter: blur(6px);
@@ -1125,18 +1125,18 @@ input[type="number"] {
 }
 
 
-/* Efek guncangan */
+/* Effect */
 .shock .magic-ball {
   animation: shake 0.5s;
 }
 
-/* Animasi pelan muter */
+/* Animation */
 @keyframes slowRotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-/* Guncangan cepat */
+/* Shake */
 @keyframes shake {
   0% { transform: rotate(0deg); }
   20% { transform: rotate(2deg); }
@@ -1146,7 +1146,7 @@ input[type="number"] {
   100% { transform: rotate(0deg); }
 }
 
-/* Alert styling opsional */
+/* Alert styling optional */
 .fun-alert {
   margin-top: 16px;
   text-align: center;
@@ -1332,7 +1332,7 @@ input[type="number"] {
   line-height: 1.6;
 }
 
-/* Khusus warna alert */
+/* alert color */
 .fun-alert.fortune {
   background: linear-gradient(135deg, #8b5cf6, #ec4899); /* ungu-pink */
   box-shadow: 0 0 30px #c084fc;
@@ -1508,7 +1508,7 @@ input[type="number"] {
   padding: 20px 0;
 }
 
-/* === SOCIAL INNER (CONTAINER UTAMA) === */
+/* === SOCIAL INNER (CONTAINER) === */
 .social-inner {
   max-width: 400px;
   width: 100%;
@@ -1518,7 +1518,7 @@ input[type="number"] {
   gap: 16px;
 }
 
-/* === SOCIAL ITEM (TIAP TOMBOL) === */
+/* === SOCIAL ITEM (BUTTON) === */
 .social-item {
   display: flex;
   align-items: center;
@@ -1538,7 +1538,7 @@ input[type="number"] {
   box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
 }
 
-/* === ICON UKURAN === */
+/* === ICON UNIT === */
 .social-icon {
   width: 20px;
   height: 20px;
