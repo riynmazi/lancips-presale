@@ -825,7 +825,7 @@ body.dark-mode * {
 
 
 /* === BUTTONS === */
-button, .whitepaper-btn {
+button {
   padding: 12px 24px;
   font-size: 16px;
   font-weight: bold;
@@ -840,7 +840,7 @@ button, .whitepaper-btn {
   text-align: center;
 }
 
-button:hover, .whitepaper-btn:hover, {
+button:hover {
   transform: scale(1.07);
   box-shadow: 0 0 24px rgba(255, 203, 77, 1);
 }
