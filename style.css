@@ -664,6 +664,7 @@ body.dark-mode * {
   color: Blue;
   font-size: 35px;
   margin-bottom: 8px;
+  font-family: 'Poor Story', cursive;
 }
 
 .member-bio a {
@@ -1007,9 +1008,6 @@ input[type="number"] {
   margin-top: 40px;
 }
 
-.donate{
-  text-align: center;
-}
 
 
 
