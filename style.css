@@ -1312,8 +1312,8 @@ input[type="number"] {
 }
 
 .member-img {
-  width: 80px;
-  height: 80px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 10px;
@@ -1322,12 +1322,13 @@ input[type="number"] {
 
 .member-name {
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 25 px;
+  color: red;
 }
 
 .member-role {
   color: #00ffe7;
-  font-size: 0.9em;
+  font-size: 50;
   margin-bottom: 8px;
 }
 
