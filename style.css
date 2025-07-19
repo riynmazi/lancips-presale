@@ -623,6 +623,84 @@ body.dark-mode * {
   }
 }
 
+
+
+
+/*DEV*/
+
+.team-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.member-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 20px;
+  width: 220px;
+  text-align: center;
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.member-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 2px solid #00ffe7;
+}
+
+.member-name {
+  font-weight: bold;
+  font-size: 25px;
+  color: red;
+}
+
+.member-role {
+  color: Blue;
+  font-size: 35px;
+  margin-bottom: 8px;
+}
+
+.member-bio a {
+  font-size: 25px;
+  color: black;
+}
+
+
+
+/* === FOOTER === */
+
+.footer-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  outline: 2px solid red;
+}
+
+.site-footer {
+  max-width: 960px;
+  width: 100%;
+  padding: 20px;
+  border-top: 1px solid #334155;
+  text-align: center;
+  outline: 2px solid lime;
+}
+
+.site-footer p {
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+
+
+
 /* === BUBBLES === */
 .bubbles {
   position: fixed;
@@ -1288,76 +1366,7 @@ input[type="number"] {
   }
 }
 
-/*DEV*/
 
-.team-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-.member-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 15px;
-  padding: 20px;
-  width: 220px;
-  text-align: center;
-  color: #fff;
-  backdrop-filter: blur(10px);
-}
-
-.member-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-  border: 2px solid #00ffe7;
-}
-
-.member-name {
-  font-weight: bold;
-  font-size: 25px;
-  color: red;
-}
-
-.member-role {
-  color: Blue;
-  font-size: 35px;
-  margin-bottom: 8px;
-}
-
-.member-bio a {
-  font-size: 25px;
-  color: black;
-}
-
-
-
-/* === FOOTER === */
-
-.footer-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-  outline: 2px solid red;
-}
-
-.site-footer {
-  max-width: 960px;
-  width: 100%;
-  padding: 20px;
-  border-top: 1px solid #334155;
-  text-align: center;
-  outline: 2px solid lime;
-}
-
-.site-footer p {
-  text-align: center;
-  margin: 0 auto;
-}
 
 
 
