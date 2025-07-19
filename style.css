@@ -1323,18 +1323,19 @@ input[type="number"] {
 
 .member-name {
   font-weight: bold;
-  font-size: 25 px;
+  font-size: 25px;
   color: red;
 }
 
 .member-role {
-  color: #00ffe7;
-  font-size: 50;
+  color: Blue;
+  font-size: 35px;
   margin-bottom: 8px;
 }
 
 .member-bio a {
-  font-size: 0.9em;
+  font-size: 25px;
+  color: black;
 }
 
 
