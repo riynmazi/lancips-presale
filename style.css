@@ -1494,66 +1494,6 @@ input[type="number"] {
 
 
 
-
-
-
-
-
-
-
-/*SOCIAL MEDIA*/
-
-/* === SOCIAL MEDIA WRAPPER === */
-.social-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-/* === SOCIAL INNER (CONTAINER) === */
-.social-inner {
-  max-width: 400px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-/* === SOCIAL ITEM (BUTTON) === */
-.social-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #38bdf8;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-  transition: all 0.3s ease;
-}
-
-.social-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
-}
-
-/* === ICON UNIT === */
-.social-icon {
-  width: 20px;
-  height: 20px;
-  filter: drop-shadow(0 0 4px #38bdf8);
-}
-
-
-
-
-
-
-
 /* === SCROLL ANIMATIONS === */
 .fade-left, .fade-right {
   opacity: 0;
