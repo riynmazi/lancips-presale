@@ -1,6 +1,6 @@
 # About LANCIPS 
 
-**LANCIPS**— a meme token built on Solana, born out of frustration, irony, and just enough hope to click "Buy".
+**LANCIPS** a meme token built on Solana, born out of frustration, irony, and just enough hope to click "Buy".
 
 🌐 Website: [https://lancips.xyz](https://lancips.xyz)  
 📄 Whitepaper: [Read here](https://github.com/riynmazi/lancips-presale/blob/main/data/whitepaper.pdf)
