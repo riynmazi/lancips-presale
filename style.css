@@ -1293,6 +1293,51 @@ input[type="number"] {
   }
 }
 
+/*DEV*/
+.team-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.member-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 20px;
+  width: 220px;
+  text-align: center;
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.member-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 2px solid #00ffe7;
+}
+
+.member-name {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.member-role {
+  color: #00ffe7;
+  font-size: 0.9em;
+  margin-bottom: 8px;
+}
+
+.member-bio a {
+  font-size: 0.9em;
+}
+
+
+
+
 
 /* LCIP-AI */
 /* === LCIP-AI STYLES === */
