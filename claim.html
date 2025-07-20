@@ -9,7 +9,7 @@
     body {
       font-family: 'Orbitron', sans-serif;
       background: radial-gradient(circle, #111 0%, #000 100%);
-      color: #00ffcc;
+      color: #00ffd5;
       text-align: center;
       padding: 2rem;
     }
@@ -18,14 +18,14 @@
       max-width: 500px;
       margin: auto;
       background: rgba(0,0,0,0.4);
-      border: 1px solid #00ffcc;
+      border: 1px solid #00ffd5;
       border-radius: 12px;
       padding: 2rem;
-      box-shadow: 0 0 10px #00ffcc88;
+      box-shadow: 0 0 10px #00ffd588;
     }
 
     button {
-      background: #00ffcc;
+      background: #00ffd5;
       color: black;
       border: none;
       padding: 12px 24px;
@@ -36,7 +36,7 @@
     }
 
     button:hover {
-      background: #00ffaa;
+      background: #00ffbb;
     }
 
     .status {
@@ -51,23 +51,23 @@
     .footer {
       margin-top: 2rem;
       font-size: 0.8rem;
-      color: #aaa;
+      color: #888;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🎁 Klaim Token LANCIPS</h1>
-    <p>Connect wallet kamu dan klaim token micin ini. Satu wallet satu kali!</p>
-    
+    <h1>🧠 Claim Your LANCIPS</h1>
+    <p>This is it. The moment you've been ignoring. Connect your wallet to claim this very suspicious token. One wallet, one cosmic chance.</p>
+
     <button id="connectBtn">🔌 Connect Wallet</button>
-    <button id="claimBtn" class="hidden">🚀 Klaim Token</button>
-    
-    <div class="status" id="statusText">Wallet belum terhubung</div>
+    <button id="claimBtn" class="hidden">🎉 Claim LANCIPS</button>
+
+    <div class="status" id="statusText">Wallet not connected. Reality still stable.</div>
   </div>
 
   <div class="footer">
-    &copy; 2025 LANCIPS | Dunia micin makin absurd.
+    &copy; 2025 LANCIPS | Probably not a rug. But who knows?
   </div>
 
   <!-- Solana Wallet Adapter -->
@@ -90,24 +90,24 @@
         try {
           const res = await window.solana.connect();
           walletAddress = res.publicKey.toString();
-          statusText.textContent = "Wallet terhubung: " + walletAddress;
+          statusText.textContent = "Wallet connected: " + walletAddress;
           connectBtn.classList.add("hidden");
           claimBtn.classList.remove("hidden");
         } catch (err) {
-          statusText.textContent = "Gagal menghubungkan wallet.";
+          statusText.textContent = "Wallet connection failed. Probably cursed.";
         }
       } else {
-        statusText.textContent = "Phantom Wallet tidak ditemukan.";
+        statusText.textContent = "Phantom Wallet not found. You might be too early.";
       }
     };
 
     claimBtn.onclick = async () => {
       if (!walletAddress) return;
 
-      statusText.textContent = "⏳ Mengecek whitelist & klaim...";
+      statusText.textContent = "⏳ Scanning the blockchain void...";
 
       try {
-        // GANTI URL BACKEND DENGAN PUNYAMU
+        // CHANGE THIS TO YOUR REAL BACKEND
         const response = await fetch("https://your-backend-url.com/claim", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -117,14 +117,14 @@
         const data = await response.json();
 
         if (data.success) {
-          statusText.textContent = "✅ Token berhasil dikirim ke wallet kamu!";
+          statusText.textContent = "✅ LANCIPS have been mysteriously deposited into your wallet!";
           claimBtn.disabled = true;
         } else {
           statusText.textContent = "❌ " + data.message;
         }
       } catch (error) {
         console.error(error);
-        statusText.textContent = "❌ Terjadi error saat klaim.";
+        statusText.textContent = "❌ Unexpected cosmic error during claim.";
       }
     };
   </script>
