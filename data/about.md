@@ -1,6 +1,6 @@
 # About LANCIPS (LCIP)
 
-**LANCIPS** is a memecoin built on the **Solana blockchain**, designed as a satirical take on the absurdity of the crypto space — a world overflowing with fake promises, rugpulls, absurd devs, and "next 100x" nonsense.
+**LANCIPS** is a memecoin built on the **Solana blockchain**, designed as a satirical take on the absurdity of the crypto space , a world overflowing with fake promises, rugpulls, absurd devs, and "next 100x" nonsense.
 
 This isn't your usual token with a 30-page whitepaper, AI partnership lies, or a "game" that never ships.
 
@@ -37,7 +37,7 @@ We're here to:
 
 The devs? ✌️Riyn mazi: [dev_core](https://x.com/aurinawan?t=vrxXV70TkhjOhV7Ss6gFcw&s=09)  
 The vibes? Unmatched.  
-Think of them as shadowy super coders with a sense of humor — and no VCs breathing down their necks.
+Think of them as shadowy super coders with a sense of humor , and no VCs breathing down their necks.
 
 ---
 
