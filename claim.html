@@ -75,10 +75,7 @@
     <p>This ain't your grandma's airdrop. Connect your wallet. One shot. One claim. No rug (hopefully).</p>
 
     <button id="connectBtn">🧩 Connect Wallet</button>
-    <button id="claimBtn" class="hidden">🎉 Claim LANCIPS</button>
-
-<button id="claimBtn" style="display:none;">🎁 Claim Token</button>
-<p id="claimStatus" style="color: #00ffc3;"></p>
+    <button id="claimBtn" class="hidden">🎁 Claim Token</button>
 
     <div class="status" id="statusText">No wallet? No party.</div>
   </div>
@@ -87,44 +84,35 @@
     &copy; 2025 LANCIPS | Powered by memes, held by legends.
   </div>
 
-  <!-- Solana Wallet Adapter -->
-  <script type="module">
-    import {
-      Connection,
-      PublicKey,
-      clusterApiUrl,
-      Transaction
-    } from "https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js";
-
-    let walletAddress = null;
-
+  <script>
     const connectBtn = document.getElementById('connectBtn');
     const claimBtn = document.getElementById('claimBtn');
     const statusText = document.getElementById('statusText');
+
+    let walletAddress = null;
 
     connectBtn.onclick = async () => {
       if (window.solana && window.solana.isPhantom) {
         try {
           const res = await window.solana.connect();
           walletAddress = res.publicKey.toString();
-          statusText.textContent = "Wallet connected: " + walletAddress;
+          statusText.textContent = "🦾 Connected: " + walletAddress;
           connectBtn.classList.add("hidden");
           claimBtn.classList.remove("hidden");
         } catch (err) {
-          statusText.textContent = "Connection failed. Is your Phantom shy?";
+          statusText.textContent = "😵 Phantom is having stage fright.";
         }
       } else {
-        statusText.textContent = "No Phantom Wallet detected. Please try again in the Matrix.";
+        statusText.textContent = "🚫 No Phantom Wallet detected. Install it or summon it via ritual.";
       }
     };
 
     claimBtn.onclick = async () => {
       if (!walletAddress) return;
 
-      statusText.textContent = "🧠 Checking your brain... I mean, wallet...";
+      statusText.textContent = "🧠 Scanning your wallet neurons...";
 
       try {
-        // GANTI URL BACKEND DENGAN URL PUNYAMU
         const response = await fetch("https://your-backend-url.com/claim", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -134,16 +122,19 @@
         const data = await response.json();
 
         if (data.success) {
-          statusText.textContent = "🚀 Claimed! Now refresh wallet and do a little dance.";
+          statusText.textContent = "🚀 Claimed successfully! Now vibe and refresh wallet.";
           claimBtn.disabled = true;
         } else {
           statusText.textContent = "❌ " + data.message;
         }
       } catch (error) {
         console.error(error);
-        statusText.textContent = "💥 Something exploded. Probably not your fault.";
+        statusText.textContent = "💥 Something exploded. It's not your fault (probably).";
       }
     };
   </script>
+
+  <!-- Solana Web3 Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
 </body>
 </html>
