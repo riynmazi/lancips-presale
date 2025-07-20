@@ -4,7 +4,7 @@ LANCIPS is a memecoin built on the Solana blockchain, created as a satirical ref
 
 This isn't your average token with a 30-page whitepaper, vague AI buzzwords, or a metaverse that never arrives.
 
-Instead, LANCIPS embraces the absurd: no utility, no roadmap, no hollow marketing — just memetic energy, chaotic vibes, and a community that gets the joke.
+Instead, LANCIPS embraces the absurd: no utility, no roadmap, no hollow marketing, just memetic energy, chaotic vibes, and a community that gets the joke.
 
 ---
 
