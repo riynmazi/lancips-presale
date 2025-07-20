@@ -25,6 +25,17 @@
       box-shadow: 0 0 15px #00ffd088;
     }
 
+    .logo {
+      width: 80px;
+      margin-bottom: 1rem;
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     button {
       background: #00ffd0;
       color: black;
@@ -59,7 +70,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>🌐 Welcome to the LANCIPS Claim Zone</h1>
+    <img src="logo.png" alt="LANCIPS Logo" class="logo">
+    <h1>Welcome to the LANCIPS Claim Zone</h1>
     <p>This ain't your grandma's airdrop. Connect your wallet. One shot. One claim. No rug (hopefully).</p>
 
     <button id="connectBtn">🧩 Connect Wallet</button>
