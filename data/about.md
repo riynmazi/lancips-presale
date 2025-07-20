@@ -1,11 +1,10 @@
 # About LANCIPS (LCIP)
 
-**LANCIPS** is a memecoin built on the **Solana blockchain**, designed as a satirical take on the absurdity of the crypto space , a world overflowing with fake promises, rugpulls, absurd devs, and "next 100x" nonsense.
+LANCIPS is a memecoin built on the Solana blockchain, created as a satirical reflection of the chaos and comedy in the crypto space, a world full of wild promises, endless hype, and mysterious devs.
 
-This isn't your usual token with a 30-page whitepaper, AI partnership lies, or a "game" that never ships.
+This isn't your average token with a 30-page whitepaper, vague AI buzzwords, or a metaverse that never arrives.
 
-Instead, LANCIPS is brutally honest:  
-No utility, no roadmap, no empty hype. Just pure memetic energy, chaotic vibes, and a community that’s in on the joke.
+Instead, LANCIPS embraces the absurd: no utility, no roadmap, no hollow marketing — just memetic energy, chaotic vibes, and a community that gets the joke.
 
 ---
 
@@ -22,14 +21,16 @@ No utility, no roadmap, no empty hype. Just pure memetic energy, chaotic vibes, 
 
 ## 🧠 Why LANCIPS?
 
-While others shout "utility" and deliver nothing, **LANCIPS says nothing... and delivers memes**.  
-It’s a reminder that not every token needs to fake a future to be fun in the present.
+While others scream about “utility” and roadmap dreams, LANCIPS stays silent... and delivers memes.
+It’s a reminder that not every token needs to sell a fantasy to be fun right now.
 
 We're here to:
 
-- Expose the satire of the crypto world  
-- Build a cult of degens who love honesty  
-- Surf the chaos without pretending to be serious
+Celebrate the satire of crypto culture
+
+Build a cult of honest degens
+
+Surf the chaos with zero expectations and maximum memes
 
 ---
 
