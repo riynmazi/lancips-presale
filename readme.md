@@ -1,4 +1,4 @@
-# About LANCIPS 
+# LANCIPS presale
 
 **LANCIPS** a meme token built on Solana, born out of frustration, irony, and just enough hope to click "Buy".
 
