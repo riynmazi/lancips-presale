@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LANCIPS Token Claim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle, #111 0%, #000 100%);
+      color: #00ffcc;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid #00ffcc;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 0 10px #00ffcc88;
+    }
+
+    button {
+      background: #00ffcc;
+      color: black;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background: #00ffaa;
+    }
+
+    .status {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎁 Klaim Token LANCIPS</h1>
+    <p>Connect wallet kamu dan klaim token micin ini. Satu wallet satu kali!</p>
+    
+    <button id="connectBtn">🔌 Connect Wallet</button>
+    <button id="claimBtn" class="hidden">🚀 Klaim Token</button>
+    
+    <div class="status" id="statusText">Wallet belum terhubung</div>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 LANCIPS | Dunia micin makin absurd.
+  </div>
+
+  <!-- Solana Wallet Adapter -->
+  <script type="module">
+    import {
+      Connection,
+      PublicKey,
+      clusterApiUrl,
+      Transaction
+    } from "https://cdn.jsdelivr.net/npm/@solana/web3.js@1.92.2/+esm";
+
+    let walletAddress = null;
+
+    const connectBtn = document.getElementById('connectBtn');
+    const claimBtn = document.getElementById('claimBtn');
+    const statusText = document.getElementById('statusText');
+
+    connectBtn.onclick = async () => {
+      if (window.solana && window.solana.isPhantom) {
+        try {
+          const res = await window.solana.connect();
+          walletAddress = res.publicKey.toString();
+          statusText.textContent = "Wallet terhubung: " + walletAddress;
+          connectBtn.classList.add("hidden");
+          claimBtn.classList.remove("hidden");
+        } catch (err) {
+          statusText.textContent = "Gagal menghubungkan wallet.";
+        }
+      } else {
+        statusText.textContent = "Phantom Wallet tidak ditemukan.";
+      }
+    };
+
+    claimBtn.onclick = async () => {
+      if (!walletAddress) return;
+
+      statusText.textContent = "⏳ Mengecek whitelist & klaim...";
+
+      try {
+        // GANTI URL BACKEND DENGAN PUNYAMU
+        const response = await fetch("https://your-backend-url.com/claim", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ address: walletAddress })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          statusText.textContent = "✅ Token berhasil dikirim ke wallet kamu!";
+          claimBtn.disabled = true;
+        } else {
+          statusText.textContent = "❌ " + data.message;
+        }
+      } catch (error) {
+        console.error(error);
+        statusText.textContent = "❌ Terjadi error saat klaim.";
+      }
+    };
+  </script>
+</body>
+</html>
