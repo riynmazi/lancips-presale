@@ -37,13 +37,13 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.0000008;
-const BACKEND_URL = "https://script.google.com/macros/library/d/1XCFZSS8yn9rdvxzUoTTTaZrYmxEahSda_nsaCXRwlOPZDvNUIQ69xVs8/2";
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbzSx_UtYab6m6yKdvk8T8I6QWZ4EY04e9rVdGPtiQNGgUo-ffEx0czEVfEems0Jj-xc/exec";
 const RPC_URL = "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487ab1e2";
 
 // 👀 Fetch total raised from backend
 async function fetchTotalRaised() {
   try {
-    const res = await fetch("https://script.google.com/macros/library/d/1XCFZSS8yn9rdvxzUoTTTaZrYmxEahSda_nsaCXRwlOPZDvNUIQ69xVs8/2");
+    const res = await fetch("https://script.google.com/macros/s/AKfycbzSx_UtYab6m6yKdvk8T8I6QWZ4EY04e9rVdGPtiQNGgUo-ffEx0czEVfEems0Jj-xc/exec");
     const data = await res.json();
     const sol = parseFloat(data.totalRaised || "0");
     console.log("Fetched:", sol); // Debug log
