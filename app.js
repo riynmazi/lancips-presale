@@ -43,7 +43,7 @@ const RPC_URL = "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487
 // 👀 Fetch total raised from backend
 async function fetchTotalRaised() {
   try {
-    const res = await fetch("https://script.google.com/macros/library/d/1XCFZSS8yn9rdvxzUoTTTaZrYmxEahSda_nsaCXRwlOPZDvNUIQ69xVs8/2");
+    const res = await fetch("https://backendlancips-production.up.railway.app/total-raised");
     const data = await res.json();
     const sol = parseFloat(data.totalRaised || "0");
     console.log("Fetched:", sol); // Debug log
