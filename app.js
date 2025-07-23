@@ -42,15 +42,23 @@ const RPC_URL = "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487
 
 // 👀 Fetch total raised from backend
 async function fetchTotalRaised() {
+  const display = document.getElementById("total-raised");
+  if (!display) return console.warn("Element #total-raised not found");
+
+  display.textContent = "Loading...";
+
   try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbzSx_UtYab6m6yKdvk8T8I6QWZ4EY04e9rVdGPtiQNGgUo-ffEx0czEVfEems0Jj-xc/exec");
+    const res = await fetch(BACKEND_URL, { cache: "no-cache" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    
     const data = await res.json();
     const sol = parseFloat(data.totalRaised || "0");
-    console.log("Fetched:", sol); // Debug log
-    document.getElementById("total-raised").textContent = sol.toFixed(6);
+    
+    console.log("✅ Total Raised Fetched:", sol);
+    display.textContent = sol.toFixed(6) + " SOL";
   } catch (e) {
-    console.error("Fetch error:", e);
-    document.getElementById("total-raised").textContent = "N/A";
+    console.error("❌ Error fetching total raised:", e);
+    display.textContent = "N/A";
   }
 }
 
