@@ -37,7 +37,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.0000008;
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbzSx_UtYab6m6yKdvk8T8I6QWZ4EY04e9rVdGPtiQNGgUo-ffEx0czEVfEems0Jj-xc/exec";
+const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx2u6gJRl8PMj_d9-yuXvA2EW8NCeLAHICv36L9c0ZihLhMR338-U-acz6N7Ma8aQI6wQ/exec";
 const RPC_URL = "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487ab1e2";
 
 // 👀 Fetch total raised from backend
