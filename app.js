@@ -37,7 +37,7 @@ const totalBought = document.getElementById("total-bought");
 
 let wallet = null;
 const PRICE_PER_TOKEN = 0.0000008;
-const BACKEND_URL = "https://script.google.com/macros/s/AKfycbx2u6gJRl8PMj_d9-yuXvA2EW8NCeLAHICv36L9c0ZihLhMR338-U-acz6N7Ma8aQI6wQ/exec";
+const BACKEND_URL = "https://zucchini-benevolence-production.up.railway.app";
 const RPC_URL = "https://rpc.helius.xyz/?api-key=6a1332cb-869d-4794-8c3d-737a487ab1e2";
 
 // 👀 Fetch total raised from backend
