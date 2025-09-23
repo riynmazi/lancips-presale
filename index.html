@@ -262,25 +262,33 @@
 
 <!-- Buy card -->
 
-<div class="buy-card">
-
- <div class="wallet">  
-  <button id="connect">Connect with Phantom Wallet</button>  
-  <p id="wallet-address">Wallet not connected</p>  
- </div>
-
- <div class="form">  
-  <input type="number" id="solAmount" placeholder="Enter amount in SOL" />  
-  <p>You will receive: <span id="tokenAmount">0</span> LANCIPS</p>  
-  <button id="buy">Buy LANCIPS</button>  
-</div>  
-
-<div class="status">  
-  <p id="status-message">Connect your wallet to get started</p>  
-  <p><strong>Total Purchased:</strong> <span id="total-bought">0</span> LANCIPS</p>  
- </div>
+<div class="wallet-card">
+  <p id="wallet-address">Wallet not connected</p>
+  <button id="copy-address">Copy Address</button>
 </div>
 
+<script>
+  const walletAddressEl = document.getElementById("wallet-address");
+  const copyBtn = document.getElementById("copy-address");
+
+ 
+  let walletAddress = "7dfn2m3kLQp9x4YtVbzA8D1nWcXeRrQmPpTsUvXyZ";
+
+  
+  function shortenAddress(addr) {
+    return addr.slice(0, 4) + "..." + addr.slice(-4);
+  }
+
+  // address
+  walletAddressEl.textContent = shortenAddress(walletAddress);
+
+  // copy full address
+  copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(walletAddress).then(() => {
+      alert("Wallet address copied!\n" + walletAddress);
+    });
+  });
+</script>
 
 
 
