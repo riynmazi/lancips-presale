@@ -478,7 +478,27 @@ body.dark-mode * {
   transform: scale(0.85);
 }
 
+.buy-on-orca {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1E1E1E;
+  border-radius: 10px;
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: all 0.25s ease-in-out;
+}
 
+.buy-on-orca img {
+  width: 120px;  /* atau 100px biar lebih kecil */
+  height: 40px;
+  object-fit: contain;
+}
+
+.buy-on-orca:hover {
+  background: #2c2c2c;
+  transform: scale(1.05);
+}
 
 
 /*MEMEQUOTE*/
