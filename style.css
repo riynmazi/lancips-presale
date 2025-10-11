@@ -478,6 +478,15 @@ body.dark-mode * {
   transform: scale(0.85);
 }
 
+/* Pusatkan tombol di tengah halaman */
+.buy-on-orca-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Tombol utama */
 .buy-on-orca {
   display: inline-flex;
   align-items: center;
@@ -487,14 +496,19 @@ body.dark-mode * {
   padding: 10px 18px;
   text-decoration: none;
   transition: all 0.25s ease-in-out;
+  border: none;         /* hilangkan border */
+  outline: none;        /* hilangkan outline fokus */
 }
 
+/* Gambar di dalam tombol */
 .buy-on-orca img {
-  width: 120px;  /* atau 100px biar lebih kecil */
+  width: 120px;
   height: 40px;
   object-fit: contain;
+  display: block;       /* hilangkan jarak bawah default gambar */
 }
 
+/* Efek hover */
 .buy-on-orca:hover {
   background: #2c2c2c;
   transform: scale(1.05);
