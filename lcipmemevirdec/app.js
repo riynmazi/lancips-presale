@@ -27,8 +27,8 @@ tokens.forEach(token => {
   const row = createRow(token, [
     {label: "Token Name", value: token.name},
     {label: "Symbol", value: token.symbol},
-    {label: "Total Supply", value: token.supply},
-    {label: "Holder Count", value: token.holders},
+    {label: "Total Supply", value: token.supply.toLocaleString()},
+    {label: "Holder Count", value: token.holders.toLocaleString()},
     {label: "Listing Date", value: token.listingDate}
   ]);
   newTokensTable.appendChild(row);
