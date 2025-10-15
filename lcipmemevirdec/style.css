@@ -1,1 +1,64 @@
 
+/* General */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f1f;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, #ff4aff, #4affee);
+  text-align: center;
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+header p {
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Sections */
+section {
+  padding: 1.5rem;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+thead {
+  background-color: #1f1f3f;
+}
+th, td {
+  padding: 0.75rem;
+  border: 1px solid #4affee;
+  text-align: center;
+}
+tbody tr:hover {
+  background-color: #3333aa;
+}
+
+/* Badge */
+.badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #1f1f3f;
+  margin-top: 2rem;
+}
