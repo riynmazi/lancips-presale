@@ -5,12 +5,12 @@ const tokens = [
   {name: "MoonCheese", symbol: "CHEESE", supply: 200000, holders: 300, volume24h: 15000, absurdity: false, listingDate: "2025-10-15"}
 ];
 
-// Threshold scoring sederhana
+// Fungsi scoring sederhana untuk viral
 function getViralScore(token){
   let score = 0;
   if(token.holders > 100) score += 1;
-  if(token.volume24h > 10000) score +=1;
-  if(token.absurdity) score +=1;
+  if(token.volume24h > 10000) score += 1;
+  if(token.absurdity) score += 1;
   return score;
 }
 
@@ -21,8 +21,8 @@ tokens.forEach(token => {
   row.innerHTML = `
     <td>${token.name}</td>
     <td>${token.symbol}</td>
-    <td>${token.supply}</td>
-    <td>${token.holders}</td>
+    <td>${token.supply.toLocaleString()}</td>
+    <td>${token.holders.toLocaleString()}</td>
     <td>${token.listingDate}</td>
   `;
   newTokensTable.appendChild(row);
