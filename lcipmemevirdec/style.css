@@ -28,7 +28,7 @@ section {
   padding: 1.5rem;
 }
 
-/* Tables */
+/* Tables - desktop & mobile friendly */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -85,8 +85,8 @@ footer {
 /* Responsive Tables */
 @media (max-width: 768px) {
   table {
-    display: block;
-    overflow-x: auto; /* scroll horizontal jika tabel lebar */
+    display: block; /* tetap tabel tapi scrollable */
+    overflow-x: auto;
   }
   th, td {
     padding: 0.5rem;
@@ -94,30 +94,11 @@ footer {
   }
 }
 
-/* Mobile Card-Style Option */
+/* Very small mobile adjustments */
 @media (max-width: 480px) {
-  thead {
-    display: none; /* hide header */
-  }
-  tbody tr {
-    display: block;
-    margin-bottom: 1rem;
-    border: 1px solid #4affee;
-    border-radius: 10px;
-    padding: 0.5rem;
-  }
-  tbody td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-    border: none;
-    border-bottom: 1px solid #4affee;
-  }
-  tbody td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    color: #ff4aff;
-    margin-right: 0.5rem;
+  th, td {
+    font-size: 0.85rem;
+    padding: 0.4rem;
   }
   header h1 {
     font-size: 1.5rem;
