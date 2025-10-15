@@ -33,50 +33,20 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
-  display: block; /* agar scrollable di mobile */
-  overflow-x: auto;
+  table-layout: auto;
 }
 
 thead {
   background-color: #1f1f3f;
 }
-
 th, td {
   padding: 0.75rem;
   border: 1px solid #4affee;
   text-align: center;
   white-space: nowrap;
 }
-
 tbody tr:hover {
   background-color: #3333aa;
-}
-
-/* Responsive Tables */
-@media (max-width: 768px) {
-  thead {
-    display: none; /* sembunyikan header di mobile */
-  }
-  tr {
-    display: block;
-    margin-bottom: 1rem;
-    border: 1px solid #4affee;
-    border-radius: 10px;
-    padding: 0.5rem;
-  }
-  td {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-    border: none;
-    border-bottom: 1px solid #4affee;
-  }
-  td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    color: #ff4aff;
-    margin-right: 0.5rem;
-  }
 }
 
 /* Badge */
@@ -107,14 +77,48 @@ footer {
   border-radius: 10px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .btn-meme:hover {
   transform: scale(1.05);
   box-shadow: 0 0 15px #ff4aff, 0 0 15px #4affee;
 }
 
-/* Small font for mobile */
+/* Responsive Tables */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto; /* scroll horizontal jika tabel lebar */
+  }
+  th, td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile Card-Style Option */
 @media (max-width: 480px) {
+  thead {
+    display: none; /* hide header */
+  }
+  tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #4affee;
+    border-radius: 10px;
+    padding: 0.5rem;
+  }
+  tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1px solid #4affee;
+  }
+  tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #ff4aff;
+    margin-right: 0.5rem;
+  }
   header h1 {
     font-size: 1.5rem;
   }
@@ -124,7 +128,16 @@ footer {
   section {
     padding: 1rem;
   }
-  td {
-    font-size: 0.9rem;
-  }
+}
+
+/* Scrollbar styling (optional) */
+table::-webkit-scrollbar {
+  height: 6px;
+}
+table::-webkit-scrollbar-thumb {
+  background: #4affee;
+  border-radius: 3px;
+}
+table::-webkit-scrollbar-track {
+  background: #1f1f3f;
 }
