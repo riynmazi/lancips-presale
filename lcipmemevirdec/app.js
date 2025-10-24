@@ -1,52 +1,51 @@
-// === FETCH MEME TOKENS DARI BACKEND ===
-fetch("https://backend-memevirdec.vercel.app/api/get-tokens")
-  .then(res => res.json())
-  .then(data => {
+const API_URL = "https://backend-memevirdec.vercel.app/api/fetch-meme-tokens";
+
+async function fetchTokens() {
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error("Failed to fetch tokens");
+
+    const data = await res.json();
     const tokens = data.tokens || [];
 
-    console.log("Fetched tokens:", tokens);
+    console.log("✅ Tokens fetched:", tokens.length);
+    renderTokens(tokens);
 
-    // === Fungsi scoring viral sederhana ===
-    function getViralScore(token) {
-      let score = 0;
-      if (token.volumeUsd > 10000) score += 1;
-      if (token.liquidityUsd > 5000) score += 1;
-      if (token.priceChange24h > 10) score += 1;
-      return score;
-    }
+  } catch (err) {
+    console.error("❌ Fetch error:", err);
+  }
+}
 
-    // === Render Token Baru ===
-    const newTokensTable = document.querySelector("#new-tokens tbody");
-    newTokensTable.innerHTML = '';
-    tokens.forEach(token => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td><a href="${token.pairUrl}" target="_blank">${token.name}</a></td>
-        <td>${token.symbol}</td>
-        <td>$${Number(token.priceUsd).toFixed(6)}</td>
-        <td>$${Number(token.liquidityUsd || 0).toLocaleString()}</td>
-        <td>${new Date(token.createdAt).toLocaleString()}</td>
-      `;
-      newTokensTable.appendChild(row);
+function renderTokens(tokens) {
+  const tbody = document.querySelector("#new-tokens tbody");
+  tbody.innerHTML = "";
+
+  tokens.forEach(token => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${token.name || "-"}</td>
+      <td>${token.symbol || "-"}</td>
+      <td>${formatNumber(token.priceUsd)} USD</td>
+      <td>${formatNumber(token.liquidityUsd)}</td>
+      <td>${new Date(token.createdAt).toLocaleString()}</td>
+    `;
+
+    // Klik baris → buka pair di dexscreener
+    row.addEventListener("click", () => {
+      if (token.pairUrl) window.open(token.pairUrl, "_blank");
     });
 
-    // === Render Potensial Viral ===
-    const viralTokensTable = document.querySelector("#viral-tokens tbody");
-    viralTokensTable.innerHTML = '';
-    tokens.forEach(token => {
-      const score = getViralScore(token);
-      if (score >= 2) {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td><a href="${token.pairUrl}" target="_blank">${token.name}</a></td>
-          <td>${token.symbol}</td>
-          <td>${score}</td>
-          <td><img src="images/${token.symbol.toLowerCase()}.png" class="badge" alt="badge"></td>
-        `;
-        viralTokensTable.appendChild(row);
-      }
-    });
-  })
-  .catch(err => {
-    console.error("Failed to fetch meme tokens:", err);
+    tbody.appendChild(row);
   });
+}
+
+function formatNumber(num) {
+  if (!num || isNaN(num)) return "0";
+  const n = parseFloat(num);
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(2) + "M";
+  if (n >= 1_000) return (n / 1_000).toFixed(2) + "K";
+  return n.toFixed(4);
+}
+
+fetchTokens();
