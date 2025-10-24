@@ -3,6 +3,7 @@ const API_URL = "https://backend-memevirdec.vercel.app/api/fetch-meme-tokens";
 
 // 🧠 Simpan token yang sudah pernah ditampilkan (biar gak duplikat)
 const renderedTokens = new Map();
+const MAX_TOKENS = 50; // maksimal token yang disimpan
 
 async function fetchTokens() {
   try {
@@ -13,18 +14,24 @@ async function fetchTokens() {
     console.log(`✅ Fetched ${tokens.length} tokens`);
 
     // 🧹 Filter duplikat berdasarkan mint
-    const uniqueTokens = [];
+    const newUniqueTokens = [];
     tokens.forEach(token => {
       if (!renderedTokens.has(token.mint)) {
         renderedTokens.set(token.mint, token);
-        uniqueTokens.push(token);
+        newUniqueTokens.push(token);
       }
     });
 
-    console.log(`✨ ${uniqueTokens.length} new unique tokens found`);
+    console.log(`✨ ${newUniqueTokens.length} new unique tokens found`);
 
-    // Render hanya yang baru
-    renderTokens(uniqueTokens);
+    // 🔁 Batasi agar hanya menyimpan 50 token terakhir
+    while (renderedTokens.size > MAX_TOKENS) {
+      const oldestKey = renderedTokens.keys().next().value;
+      renderedTokens.delete(oldestKey);
+    }
+
+    // Render hanya token baru
+    renderTokens(newUniqueTokens);
   } catch (err) {
     console.error("❌ Failed to fetch meme tokens:", err);
     document.querySelector("#new-tokens tbody").innerHTML =
@@ -74,6 +81,11 @@ function renderTokens(tokens) {
   if (renderedTokens.size === 0) {
     newTokensTable.innerHTML = `<tr><td colspan="5">No tokens found</td></tr>`;
     viralTokensTable.innerHTML = `<tr><td colspan="4">No viral tokens yet</td></tr>`;
+  }
+
+  // 🧹 Bersihkan tabel kalau barisnya lebih dari 50
+  while (newTokensTable.rows.length > MAX_TOKENS) {
+    newTokensTable.deleteRow(newTokensTable.rows.length - 1);
   }
 }
 
