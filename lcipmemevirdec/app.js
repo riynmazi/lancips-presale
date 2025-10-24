@@ -1,5 +1,5 @@
 // === FETCH MEME TOKENS DARI BACKEND ===
-fetch("https://backend-memevirdec-kaxhq7br0-riynmazis-projects.vercel.app/api/fetch-meme-tokens")
+fetch("https://backend-memevirdec.vercel.app/api/fetch-meme-tokens")
   .then(res => res.json())
   .then(data => {
     const tokens = data.saved; // anggap backend return array token
