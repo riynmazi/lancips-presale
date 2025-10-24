@@ -124,19 +124,28 @@ window.addEventListener('DOMContentLoaded', () => {
       jumpIndex = (jumpIndex + 1) % jumpPositions.length;
     });
   }
+
+  // === FETCH TOP 3 MEME TOKENS ===
+  const memeContainer = document.getElementById('meme-tokens');
+  if (memeContainer) {
+    fetch("https://backend-memevirdec-kaxhq7br0-riynmazis-projects.vercel.app/api/fetch-meme-tokens")
+      .then(res => res.json())
+      .then(data => {
+        memeContainer.innerHTML = '';
+        data.saved.slice(0, 3).forEach(token => {
+          const div = document.createElement('div');
+          div.className = 'meme-token';
+          div.innerText = `${token.name} (${token.symbol}) - ${token.price || 'N/A'}`;
+          memeContainer.appendChild(div);
+        });
+      })
+      .catch(err => {
+        console.error('Error fetching meme tokens:', err);
+        memeContainer.innerText = 'Failed to load meme tokens';
+      });
+  }
+
 });
-
-
-  window.addEventListener("scroll", function () {
-    const navbar = document.querySelector(".navbar-wrapper");
-    if (window.scrollY > 30) {
-      navbar.classList.add("shrink");
-    } else {
-      navbar.classList.remove("shrink");
-    }
-  });
-
-
 
 // === SCROLL EVENT ===
 window.addEventListener('scroll', revealOnScroll);
@@ -147,7 +156,6 @@ function copyAddress(address) {
     .then(() => alert("✅ Address copied:\n" + address))
     .catch(() => alert("❌ Failed to copy address."));
 }
-
 
 // === MEME QUOTE MARQUEE SCROLL (Seamless) ===
 window.addEventListener('DOMContentLoaded', () => {
@@ -164,22 +172,17 @@ window.addEventListener('DOMContentLoaded', () => {
   marqueeClone.innerHTML = fullQuote;
 });
 
-
-
-// WEIRD
-
+// WEIRD FUNCTIONS
 function showFunnyAlert(message, type) {
   const alertBox = document.getElementById('fun-alert');
   if (!alertBox) return;
 
-  // Reset class
   alertBox.className = 'fun-alert';
   if (type === 'fortune') alertBox.classList.add('fortune');
   if (type === 'useless') alertBox.classList.add('useless');
 
   alertBox.innerText = message;
   alertBox.style.display = 'block';
-
   alertBox.style.animation = 'none';
   void alertBox.offsetWidth;
   alertBox.style.animation = 'pop-fade 3s ease-in-out';
@@ -189,37 +192,25 @@ function showFunnyAlert(message, type) {
   }, 3000);
 }
 
-// Fungsi tambahan di luar
-function screamAlert() {
-  showFunnyAlert("Ahh! Don’t touch me! 😱💢", "useless");
-}
-
-
-
-//FORTUNE
+function screamAlert() { showFunnyAlert("Ahh! Don’t touch me! 😱💢", "useless"); }
 
 function activateCrystalBall(wrapper) {
   const ball = wrapper.querySelector('.magic-ball');
   const overlay = wrapper.querySelector('.lightning-overlay');
   const alertBox = document.getElementById('fun-alert');
 
-  // Reset animasi bola
   wrapper.classList.remove('shock');
   ball.style.animation = 'none';
-  void ball.offsetWidth; // trigger reflow
+  void ball.offsetWidth;
   ball.style.animation = 'shake 0.5s';
-
-  // Efek petir menyala
   overlay.style.opacity = '1';
 
-  // Setelah 500ms: petir mati, bola kembali muter
   setTimeout(() => {
     overlay.style.opacity = '0';
     wrapper.classList.remove('shock');
     ball.style.animation = 'slowRotate 12s linear infinite';
   }, 500);
 
-  // Random fortune
   const fortunes = [
     "You're about to buy the top 😹",
     "Soon... you'll be rich or rugged. Who knows?",
@@ -228,12 +219,8 @@ function activateCrystalBall(wrapper) {
     "Your wallet is... empty 😭"
   ];
   const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-
-  // Tampilkan alert lucu
   showFunnyAlert(randomFortune, "fortune");
 }
-
-
 
 function pressUselessButton() {
   const messages = [
@@ -248,37 +235,27 @@ function pressUselessButton() {
   showFunnyAlert(random, 'useless');
 }
 
-
-
 function askLcipAI() {
   const input = document.getElementById("user-question");
   const chatBox = document.getElementById("chat-box");
   const userText = input.value.trim();
-
   if (userText === "") return;
 
-  // Tambahkan pesan user ke chatbox
   const userMsg = document.createElement("div");
   userMsg.className = "lcip-ai-msg user";
   userMsg.innerText = userText;
   chatBox.appendChild(userMsg);
-
-  // Scroll ke bawah otomatis
   chatBox.scrollTop = chatBox.scrollHeight;
-
   input.value = "";
 
-  // Simulasikan loading bot
   const loadingMsg = document.createElement("div");
   loadingMsg.className = "lcip-ai-msg bot typing";
   loadingMsg.innerText = "LCIP-AI is thinking...";
   chatBox.appendChild(loadingMsg);
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  // Setelah delay, tampilkan jawaban random
   setTimeout(() => {
     loadingMsg.remove();
-
     const responses = [
       "Sounds like a rugpull, go on.",
       "Not financial advice, but... good luck!",
@@ -290,55 +267,41 @@ function askLcipAI() {
       "Ask again when gas fees are lower.",
       "It’s a bull market. In your imagination.",
     ];
-
     const botMsg = document.createElement("div");
     botMsg.className = "lcip-ai-msg bot";
     botMsg.innerText = responses[Math.floor(Math.random() * responses.length)];
     chatBox.appendChild(botMsg);
     chatBox.scrollTop = chatBox.scrollHeight;
-  }, 1200); // Delay 1.2 detik untuk efek realistik
+  }, 1200);
 }
-
 
 // === SWITCH TAB ===
 function showTab(tabId) {
-  // Sembunyikan semua tab-pane
   const panes = document.querySelectorAll('.tab-pane');
   panes.forEach(pane => pane.classList.remove('active'));
-
-  // Nonaktifkan semua tombol tab
   const buttons = document.querySelectorAll('.tab-btn');
   buttons.forEach(btn => btn.classList.remove('active'));
-
-  // Tampilkan tab yang diklik
   const targetPane = document.getElementById(tabId);
-  if (targetPane) {
-    targetPane.classList.add('active');
-  }
-
-  // Aktifkan tombol yang diklik
+  if (targetPane) targetPane.classList.add('active');
   const btnToActivate = [...buttons].find(btn =>
     btn.getAttribute('onclick')?.includes(tabId)
   );
-  if (btnToActivate) {
-    btnToActivate.classList.add('active');
-  }
+  if (btnToActivate) btnToActivate.classList.add('active');
 }
 
+// === DARK/LIGHT MODE ===
+const body = document.body;
+const darkIcon = document.getElementById("darkModeIcon");
+const lightIcon = document.getElementById("lightModeIcon");
 
+darkIcon.addEventListener("click", () => {
+  body.classList.add("dark-mode");
+  darkIcon.style.display = "none";
+  lightIcon.style.display = "inline";
+});
 
-  const body = document.body;
-  const darkIcon = document.getElementById("darkModeIcon");   // Klik untuk AKTIFKAN mode gelap
-  const lightIcon = document.getElementById("lightModeIcon"); // Klik untuk AKTIFKAN mode terang
-
-  darkIcon.addEventListener("click", () => {
-    body.classList.add("dark-mode");           // Aktifkan dark mode
-    darkIcon.style.display = "none";           // Sembunyikan ikon dark
-    lightIcon.style.display = "inline";        // Tampilkan ikon light
-  });
-
-  lightIcon.addEventListener("click", () => {
-    body.classList.remove("dark-mode");        // Kembali ke terang
-    darkIcon.style.display = "inline";
-    lightIcon.style.display = "none";
-  });
+lightIcon.addEventListener("click", () => {
+  body.classList.remove("dark-mode");
+  darkIcon.style.display = "inline";
+  lightIcon.style.display = "none";
+});
