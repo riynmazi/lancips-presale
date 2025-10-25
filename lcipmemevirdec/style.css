@@ -41,56 +41,160 @@ body {
 
 
 /* ========================================
-   BACK TO LANCIPS.XYZ BUTTON — V2
-   Lebih ke kiri, lebih gede, warna PUTIH
+   NAVBAR — LANCIPS OFFICIAL STYLE
+   Fixed, responsive, neon, mewah
    ======================================== */
-.back-btn {
+.navbar {
   position: fixed;
-  top: 1.8rem;
-  right: 2.2rem;           /* LEBIH KE KIRI (bukan mentok) */
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
-  width: 56px;             /* LEBIH GEDE */
-  height: 56px;            /* LEBIH GEDE */
-  background: rgba(0, 255, 136, 0.12);
-  border: 2px solid var(--neon);
-  color: #ffffff !important; /* WARNA PUTIH */
-  border-radius: 50%;
+  background: rgba(10, 10, 26, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+  padding: 0.8rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(10, 10, 26, 0.95);
+  padding: 0.6rem 0;
+  box-shadow: 0 5px 20px rgba(0, 255, 136, 0.1);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  text-decoration: none;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;       /* ICON LEBIH GEDE */
+  gap: 0.5rem;
+}
+
+.brand-text {
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--neon), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+}
+
+/* Desktop Menu */
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text);
   text-decoration: none;
-  transition: all 0.35s ease;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.back-btn:hover {
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
   background: var(--neon);
-  color: #000000 !important;
-  transform: translateX(-4px) scale(1.08);
-  box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+  transition: width 0.3s ease;
 }
 
-/* Mobile: tetap proporsional */
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--neon);
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+}
+
+/* Mobile Toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--neon);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  z-index: 9998;
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-link {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.mobile-link:hover,
+.mobile-link.active {
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--neon);
+  border: 1px solid var(--neon);
+}
+
+/* ========================================
+   RESPONSIVE NAVBAR
+   ======================================== */
 @media (max-width: 768px) {
-  .back-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 1.4rem;
-    top: 1.2rem;
-    right: 1.8rem;         /* Masih ada jarak */
+  .nav-toggle {
+    display: block;
+  }
+  .nav-menu {
+    display: none;
+  }
+  .hero {
+    padding-top: 6rem; /* Space for navbar */
   }
 }
 
 @media (max-width: 480px) {
-  .back-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 1.3rem;
-    right: 1.5rem;
+  .brand-text {
+    font-size: 1.4rem;
   }
 }
+
 
 
 /* ========================================
