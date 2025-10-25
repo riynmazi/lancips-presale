@@ -1,170 +1,408 @@
+/* ========================================
+   LANCIPS OFFICIAL THEME — www.lancips.xyz
+   SYNC: Background, Neon, Gold, Font, Glow
+   ======================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
 
+/* WARNA RESMI LANGSIPS.XYZ */
 :root {
-  --void: #0f0f23;
-  --abyss: #1a1a2e;
-  --neon: #39ff14;
-  --gold: #ffd700;
-  --cyan: #4affee;
+  --bg-main: #0a0a1a;           /* Background utama (hitam pekat) */
+  --bg-card: #1a1a2e;           /* Card / box */
+  --text: #ffffff;              /* Teks utama */
+  --neon: #00ff88;              /* Hijau neon glowing (RESMI) */
+  --gold: #ffcc00;              /* Emas highlight (RESMI) */
+  --border-glow: rgba(0, 255, 136, 0.3);
   --gray: #94a3b8;
+  --gray-light: #b0b0b0;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Space Grotesk', monospace; background: var(--void); color: white; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-.container { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
+body {
+  font-family: 'Space Grotesk', monospace;
+  background: var(--bg-main);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-/* HERO */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ========================================
+   HERO HEADER — SAMA KAYAK LANGSIPS.XYZ
+   ======================================== */
 .hero {
   text-align: center;
-  padding: 3rem 1rem;
-  background: linear-gradient(135deg, rgba(57,255,20,0.1), rgba(255,215,0,0.05));
+  padding: 3.5rem 1rem 3rem;
+  background: linear-gradient(135deg, rgba(0,255,136,0.08), rgba(255,204,0,0.03));
+  position: relative;
+  overflow: hidden;
 }
-.hero h1 { font-size: 3.5rem; font-weight: 700; }
-.hero h1 .gold { 
-  background: linear-gradient(90deg, var(--gold), #fff); 
-  -webkit-background-clip: text; 
-  color: transparent; 
-}
-.subtitle { font-size: 1.3rem; color: var(--gray); margin: 0.5rem 0; }
-.neon { color: var(--neon); }
 
-.live-status { margin: 1rem 0; font-size: 0.9rem; color: var(--gray); }
-.pulse { display: inline-block; width: 8px; height: 8px; background: var(--neon); border-radius: 50%; animation: pulse 1.5s infinite; margin-right: 0.5rem; }
-.pills { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
-.pill { padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: bold; }
-.scanning { background: rgba(255,215,0,0.2); border: 1px solid var(--gold); color: var(--gold); }
-.live { background: rgba(57,255,20,0.2); border: 1px solid var(--neon); color: var(--neon); animation: pulse 2s infinite; }
-
-/* DESKTOP LAYOUT */
-.desktop-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin: 3rem auto;
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0,255,136,0.05), transparent 70%);
+  pointer-events: none;
 }
-.column h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+
+.hero h1 {
+  font-size: 3.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  background: linear-gradient(90deg, var(--neon), var(--gold), var(--neon));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(0,255,136,0.3);
+  animation: title-glow 3s ease-in-out infinite alternate;
+}
+
+.hero h1 .gold {
+  background: linear-gradient(90deg, var(--gold), #ffffff, var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 1.35rem;
+  color: var(--gray-light);
+  margin: 0.8rem 0 0.5rem;
+  font-weight: 500;
+}
+
+.neon { color: var(--neon); font-weight: bold; }
+
+.live-status {
+  margin: 1.2rem 0;
+  font-size: 0.95rem;
+  color: var(--gray);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
-.column h2::before { font-size: 1.5rem; }
 
-/* CARDS */
+.pulse {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: var(--neon);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 15px var(--neon);
+}
+
+.pills {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 0.6rem 1.3rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  border: 1px solid;
+  transition: all 0.3s ease;
+}
+
+.scanning {
+  background: rgba(255,204,0,0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.live {
+  background: rgba(0,255,136,0.15);
+  border-color: var(--neon);
+  color: var(--neon);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   DESKTOP: 2 KOLOM
+   ======================================== */
+.desktop-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.column h2 {
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--text);
+}
+
+.column h2::before {
+  font-size: 1.6rem;
+}
+
+/* ========================================
+   CARD SYSTEM — SAMA KAYAK LANGSIPS.XYZ
+   ======================================== */
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  max-height: 70vh;
+  gap: 1rem;
+  max-height: 72vh;
   overflow-y: auto;
   padding-right: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon) transparent;
 }
+
 .card {
-  background: var(--abyss);
-  border: 1px solid rgba(57,255,20,0.2);
-  border-radius: 1rem;
-  padding: 1rem;
-  transition: all 0.3s ease;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 1.2rem;
+  padding: 1.1rem;
+  transition: all 0.35s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(0,255,136,0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(57,255,20,0.2);
+  transform: translateY(-5px);
   border-color: var(--neon);
+  box-shadow: 
+    0 15px 30px rgba(0,255,136,0.15),
+    0 0 25px rgba(0,255,136,0.1);
 }
+
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
-}
-.token-name { font-weight: bold; color: white; }
-.liquidity { font-size: 0.9rem; color: var(--gold); }
-.symbol { color: var(--neon); font-weight: bold; }
-.badge {
-  padding: 0.2rem 0.6rem;
-  border-radius: 1rem;
-  font-size: 0.7rem;
-  font-weight: bold;
-  animation: glow 2s infinite alternate;
+  margin-bottom: 0.6rem;
 }
 
-/* MOBILE TABS */
-.mobile-layout { display: none; }
+.token-name {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+
+.symbol {
+  color: var(--neon);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.liquidity {
+  font-size: 0.92rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.badge {
+  padding: 0.25rem 0.7rem;
+  border-radius: 1.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(0,255,136,0.2) !important;
+  color: var(--neon) !important;
+  border: 1px solid var(--neon) !important;
+  animation: glow 2s ease-in-out infinite alternate;
+  box-shadow: 0 0 10px rgba(0,255,136,0.3);
+}
+
+/* ========================================
+   MOBILE: TAB SYSTEM
+   ======================================== */
+.mobile-layout {
+  display: none;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
 .tabs {
   display: flex;
-  background: var(--abyss);
-  border-radius: 1rem;
+  background: var(--bg-card);
+  border-radius: 1.2rem;
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--border-glow);
 }
+
 .tab {
   flex: 1;
-  padding: 0.8rem;
+  padding: 0.9rem;
   background: transparent;
   border: none;
   color: var(--gray);
-  font-weight: bold;
-  transition: all 0.3s;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
+
 .tab.active {
   background: var(--neon);
-  color: black;
+  color: #000;
+  font-weight: 800;
 }
+
 .tab-content {
   display: none;
   max-height: 70vh;
   overflow-y: auto;
+  padding-right: 0.5rem;
 }
-.tab-content.active { display: block; }
 
-/* TOAST */
+.tab-content.active {
+  display: block;
+}
+
+/* ========================================
+   TOAST NOTIFICATION
+   ======================================== */
 .toast {
   position: fixed;
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
   background: var(--neon);
-  color: black;
-  padding: 0.8rem 1.5rem;
+  color: #000;
+  padding: 0.9rem 1.8rem;
   border-radius: 2rem;
-  font-weight: bold;
+  font-weight: 800;
+  font-size: 0.95rem;
   display: none;
-  animation: toast 3s forwards;
+  animation: toast 3.5s ease-in-out forwards;
   z-index: 1000;
+  box-shadow: 0 10px 25px rgba(0,255,136,0.3);
+  border: 1px solid var(--neon);
 }
 
-/* FOOTER */
+/* ========================================
+   FOOTER
+   ======================================== */
 .footer {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 2.5rem 1rem;
   color: var(--gray);
-  font-size: 0.9rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  margin-top: 3rem;
+  font-size: 0.92rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 4rem;
+  background: rgba(10,10,26,0.6);
+  backdrop-filter: blur(6px);
 }
 
-/* ANIMATIONS */
-@keyframes pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
-@keyframes glow { from { box-shadow: 0 0 5px var(--neon); } to { box-shadow: 0 0 15px var(--neon); } }
-@keyframes toast { 0% { transform: translateX(-50%) translateY(100px); opacity: 0; } 10% { transform: translateX(-50%) translateY(0); opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(-50%) translateY(100px); opacity: 0; } }
-
-/* SCROLLBAR */
-.cards::-webkit-scrollbar, .tab-content::-webkit-scrollbar {
-  width: 6px;
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
-.cards::-webkit-scrollbar-thumb, .tab-content::-webkit-scrollbar-thumb {
+
+@keyframes glow {
+  from { box-shadow: 0 0 8px var(--neon), 0 0 15px rgba(0,255,136,0.3); }
+  to { box-shadow: 0 0 20px var(--neon), 0 0 30px rgba(0,255,136,0.5); }
+}
+
+@keyframes title-glow {
+  from { text-shadow: 0 0 15px rgba(0,255,136,0.2); }
+  to { text-shadow: 0 0 30px rgba(0,255,136,0.4); }
+}
+
+@keyframes toast {
+  0% { transform: translateX(-50%) translateY(100px); opacity: 0; }
+  10% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(-50%) translateY(100px); opacity: 0; }
+}
+
+/* ========================================
+   SCROLLBAR CUSTOM — SAMA KAYAK LANGSIPS.XYZ
+   ======================================== */
+.cards::-webkit-scrollbar,
+.tab-content::-webkit-scrollbar {
+  width: 7px;
+}
+
+.cards::-webkit-scrollbar-track,
+.tab-content::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.cards::-webkit-scrollbar-thumb,
+.tab-content::-webkit-scrollbar-thumb {
   background: var(--neon);
-  border-radius: 3px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--neon);
 }
 
-/* RESPONSIVE */
+.cards::-webkit-scrollbar-thumb:hover,
+.tab-content::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ========================================
+   RESPONSIVE — DESKTOP vs MOBILE
+   ======================================== */
 @media (max-width: 768px) {
   .desktop-layout { display: none; }
   .mobile-layout { display: block; }
-  .hero h1 { font-size: 2.5rem; }
+  .hero h1 { font-size: 2.6rem; }
+  .subtitle { font-size: 1.15rem; }
+  .live-status { font-size: 0.88rem; }
+  .cards, .tab-content { max-height: 65vh; }
+  .card { padding: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2.3rem; }
+  .pills { flex-direction: column; align-items: center; }
+  .pill { width: fit-content; }
 }
