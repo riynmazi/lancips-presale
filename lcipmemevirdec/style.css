@@ -1,193 +1,343 @@
-/* 🌌 GENERAL LAYOUT */
-body {
-  font-family: 'Segoe UI', 'Inter', sans-serif;
-  background: radial-gradient(circle at top, #0e0e20 0%, #050510 100%);
-  color: #f3f3f3;
+/* ========================================
+   🌌 LANCIPS MEME RADAR — LUXURY CYBER STYLE
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+
+/* 🌐 ROOT & GENERAL */
+:root {
+  --void: #0f0f23;
+  --abyss: #1a1a2e;
+  --neon: #39ff14;
+  --lux: #ffd700;
+  --gold: #ffea80;
+  --cyan: #4affee;
+  --pink: #ff4aff;
+  --gray: #94a3b8;
+  --light: #f3f3f3;
+}
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', monospace;
+  background: var(--void);
+  color: var(--light);
   line-height: 1.6;
   overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(57, 255, 20, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+  min-height: 100vh;
 }
 
-/* 🌈 HEADER */
-header {
-  background: linear-gradient(90deg, #ff4aff, #4affee);
-  text-align: center;
-  padding: 2.5rem 1rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+/* ========================================
+   ✨ HERO HEADER
+   ======================================== */
+.hero-header {
   position: relative;
-  z-index: 10;
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-header h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  margin: 0;
-  color: #0f0f1f;
-  text-shadow: 0 2px 5px rgba(255,255,255,0.3);
+.hero-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.15), rgba(255, 215, 0, 0.1));
+  z-index: -1;
+  animation: pulse-bg 8s ease-in-out infinite;
 }
 
-header p {
-  margin-top: 0.6rem;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--neon), var(--lux), var(--neon));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.title-gold {
+  background: linear-gradient(90deg, var(--lux), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: var(--gray);
+  margin-bottom: 0.5rem;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.4em;
+  background: var(--neon);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+.text-neon { color: var(--neon); }
+.text-gold { color: var(--lux); }
+
+.hero-warning {
+  font-size: 0.95rem;
+  color: #fbbf24;
   font-style: italic;
-  color: #1b1b1b;
-  font-weight: 500;
+  margin-top: 0.8rem;
 }
 
-/* 🚀 SECTION TITLES */
-section {
-  padding: 2rem 1.5rem;
-  margin: 0 auto;
-  max-width: 1200px;
+/* Status Pills */
+.status-pills {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
-section h2 {
+.pill {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #4affee;
-  font-size: 1.6rem;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  border: 1px solid;
+}
+
+.pill.scanning {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: var(--lux);
+  color: var(--lux);
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+.pill.live {
+  background: rgba(57, 255, 20, 0.15);
+  border-color: var(--neon);
+  color: var(--neon);
+}
+
+/* ========================================
+   🚀 SECTIONS
+   ======================================== */
+.section-container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 1rem;
 }
 
-section h2::before {
-  content: "💠";
-  font-size: 1.5rem;
+.emoji {
+  font-size: 1.8rem;
 }
 
-/* 📊 TABLE STYLE */
-table {
+.gradient-text {
+  background: linear-gradient(90deg, var(--lux), #fff, var(--lux));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ========================================
+   📊 TABLES
+   ======================================== */
+.table-wrapper {
+  background: var(--abyss);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 
+    0 0 30px rgba(57, 255, 20, 0.15),
+    0 0 50px rgba(57, 255, 20, 0.08);
+  border: 1px solid rgba(57, 255, 20, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.viral-table {
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.new-table {
+  border-color: rgba(74, 255, 238, 0.2);
+}
+
+.data-table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(25, 25, 45, 0.9);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.05);
-  animation: fadeIn 0.8s ease-out;
+  font-size: 0.95rem;
 }
 
-thead {
-  background: linear-gradient(90deg, #1f1f3f, #252555);
+.data-table thead {
+  background: linear-gradient(90deg, rgba(30, 30, 60, 0.9), rgba(40, 40, 80, 0.9));
 }
 
-th, td {
-  padding: 0.9rem;
-  border: 1px solid rgba(74, 255, 238, 0.3);
+.data-table th {
+  padding: 1.2rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: var(--cyan);
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.data-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(57, 255, 20, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+}
+
+.data-table th.text-center,
+.data-table td.text-center {
   text-align: center;
-  white-space: nowrap;
 }
 
-th {
-  color: #4affee;
+/* Badge Styling */
+.badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: rgba(57, 255, 20, 0.2);
+  color: var(--neon);
+  border: 1px solid var(--neon);
+  border-radius: 2rem;
+  font-size: 0.75rem;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 0.9rem;
+  animation: pulse 2s infinite;
 }
 
-tbody tr {
-  transition: background 0.2s, transform 0.1s;
-}
-
-tbody tr:hover {
-  background: rgba(100, 100, 255, 0.2);
-  transform: scale(1.01);
-}
-
-/* 🧿 BADGE IMAGE */
-.badge {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2px solid #4affee;
-  object-fit: cover;
-  box-shadow: 0 0 10px rgba(74,255,238,0.4);
-}
-
-/* 💎 TOKEN LINK FIX */
-a.token-link {
-  color: #f3f3f3;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s, text-shadow 0.2s;
-}
-
-a.token-link:hover {
-  color: #4affee;
-  text-shadow: 0 0 6px #4affee;
-}
-
-/* 🌀 FOOTER */
-footer {
+/* ========================================
+   🌀 FOOTER
+   ======================================== */
+.site-footer {
   text-align: center;
-  padding: 1.5rem;
-  background: #14142a;
-  color: #aaa;
-  font-size: 0.9rem;
-  border-top: 1px solid rgba(74,255,238,0.2);
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 4rem;
+  background: rgba(15, 15, 35, 0.6);
+  backdrop-filter: blur(10px);
 }
 
-/* 💫 BUTTON / LINK STYLE */
-.btn-meme {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  background: linear-gradient(90deg, #ff4aff, #4affee);
-  color: #0e0e1f;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: all 0.2s ease;
+.footer-text {
+  color: var(--gray);
+  font-size: 0.95rem;
 }
 
-.btn-meme:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 0 15px #ff4aff, 0 0 15px #4affee;
+.footer-text strong {
+  color: var(--lux);
 }
 
-/* 📱 RESPONSIVE TABLES */
+.footer-disclaimer {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+/* ========================================
+   🎨 ANIMATIONS
+   ======================================== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 5px var(--neon); }
+  50% { box-shadow: 0 0 20px var(--neon), 0 0 30px var(--neon); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pulse-bg {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* ========================================
+   📱 RESPONSIVE
+   ======================================== */
 @media (max-width: 768px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    border-radius: 0;
-  }
-  th, td {
-    font-size: 0.85rem;
-    padding: 0.6rem;
-  }
-  section {
-    padding: 1.5rem 1rem;
-  }
+  .hero-title { font-size: 2.5rem; }
+  .section-title { font-size: 1.6rem; flex-direction: column; }
+  .data-table { font-size: 0.85rem; }
+  .data-table th, .data-table td { padding: 0.8rem 0.5rem; }
+  .table-wrapper { overflow-x: auto; display: block; }
+  .data-table { min-width: 600px; }
 }
 
 @media (max-width: 480px) {
-  header h1 {
-    font-size: 1.6rem;
-  }
-  header p {
-    font-size: 0.85rem;
-  }
-  section h2 {
-    font-size: 1.3rem;
-  }
+  .hero-title { font-size: 2rem; }
+  .hero-subtitle { font-size: 1.1rem; }
+  .status-pills { flex-direction: column; align-items: center; }
+  .pill { width: fit-content; }
 }
 
-/* 🎢 SCROLLBAR */
-table::-webkit-scrollbar {
-  height: 6px;
+/* ========================================
+   SCROLLBAR CUSTOM
+   ======================================== */
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
 }
-table::-webkit-scrollbar-thumb {
-  background: #4affee;
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: var(--abyss);
   border-radius: 4px;
 }
-table::-webkit-scrollbar-track {
-  background: #1f1f3f;
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--neon);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--neon);
 }
 
-/* ✨ ANIMATION */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--lux);
 }
