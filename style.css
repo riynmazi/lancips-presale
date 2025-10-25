@@ -1547,3 +1547,26 @@ input[type="number"] {
   opacity: 1;
   transform: translateX(0);
 }
+
+
+
+
+.quick-links-text {
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 0.95rem;
+  color: #94a3b8;
+  background: rgba(10, 10, 20, 0.6);
+  border-top: 1px solid rgba(0, 255, 231, 0.15);
+}
+
+.quick-links-text a {
+  color: #00ffe7;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.quick-links-text a:hover {
+  text-decoration: underline;
+}
