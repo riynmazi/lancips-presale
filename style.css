@@ -1577,12 +1577,19 @@ a {
     text-decoration: underline;
 }
 
+/* Timpa gaya dark mode untuk quick-links-text */
+body.dark-mode .quick-links-text a {
+    color: black;
+    text-decoration: none;
+}
+
 /* Pastikan gaya konsisten di desktop */
 @media (min-width: 768px) {
     .quick-links-text {
         text-align: center;
     }
-    .quick-links-text a {
+    .quick-links-text a,
+    body.dark-mode .quick-links-text a {
         color: black;
         text-decoration: none;
     }
