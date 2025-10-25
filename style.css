@@ -1557,12 +1557,11 @@ input[type="number"] {
   font-family: 'Baloo 2', sans-serif;
   font-size: 0.95rem;
   color: #94a3b8;
-  background: rgba(10, 10, 20, 0.6);
   border-top: 1px solid rgba(0, 255, 231, 0.15);
 }
 
 .quick-links-text a {
-  color: #00ffe7;
+  color: black;
   text-decoration: none;
   font-weight: 500;
 }
