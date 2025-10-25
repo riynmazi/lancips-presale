@@ -1,7 +1,7 @@
 // 🌐 API endpoint
 const API_URL = "https://backend-memevirdec.vercel.app/api/fetch-meme-tokens";
 
-// 🧠 Simpan token yang sudah pernah ditampilkan (biar gak duplikat)
+// 🧠 Simpan token yang sudah pernah ditampilkan (New Tokens)
 const renderedTokens = new Map();
 const MAX_TOKENS = 50; // maksimal token yang disimpan
 
@@ -13,7 +13,7 @@ async function fetchTokens() {
 
     console.log(`✅ Fetched ${tokens.length} tokens`);
 
-    // 🧹 Filter duplikat berdasarkan mint
+    // 🧹 Filter token baru untuk New Tokens
     const newUniqueTokens = [];
     tokens.forEach(token => {
       if (!renderedTokens.has(token.mint)) {
@@ -30,29 +30,24 @@ async function fetchTokens() {
       renderedTokens.delete(oldestKey);
     }
 
-    // Render hanya token baru
-    renderTokens(newUniqueTokens);
+    // Render New Tokens & Viral Tokens
+    renderTokens(newUniqueTokens, tokens);
   } catch (err) {
     console.error("❌ Failed to fetch meme tokens:", err);
     document.querySelector("#new-tokens tbody").innerHTML =
       `<tr><td colspan="5">Error loading data</td></tr>`;
+    document.querySelector("#viral-tokens tbody").innerHTML =
+      `<tr><td colspan="4">Error loading data</td></tr>`;
   }
 }
 
-function renderTokens(tokens) {
+function renderTokens(newTokens, allTokens) {
   const newTokensTable = document.querySelector("#new-tokens tbody");
   const viralTokensTable = document.querySelector("#viral-tokens tbody");
 
-  tokens.forEach(token => {
-    const {
-      pairUrl = "#",
-      name = "-",
-      symbol = "-",
-      priceUsd,
-      liquidityUsd,
-      createdAt
-    } = token;
-
+  // === Render New Tokens (hanya token baru) ===
+  newTokens.forEach(token => {
+    const { pairUrl = "#", name = "-", symbol = "-", priceUsd, liquidityUsd, createdAt } = token;
     const row = document.createElement("tr");
     row.innerHTML = `
       <td><a href="${pairUrl}" target="_blank" class="token-link">${name}</a></td>
@@ -61,35 +56,58 @@ function renderTokens(tokens) {
       <td>${liquidityUsd ? "$" + parseFloat(liquidityUsd).toLocaleString() : "-"}</td>
       <td>${createdAt ? new Date(createdAt).toLocaleString() : "-"}</td>
     `;
-    newTokensTable.prepend(row); // 🔁 tambahkan di atas biar token baru tampil duluan
+    newTokensTable.prepend(row);
+  });
 
-    // 🚀 Deteksi yang berpotensi viral (likuiditas > 10k)
+  // === Render Viral Tokens (bisa token baru atau lama) ===
+  // Kriteria viral: liquidity > 10k || volume > 5k
+  const VIRAL_LIQUIDITY = 10000;
+  const VIRAL_VOLUME = 5000;
+
+  allTokens.forEach(token => {
+    const { pairUrl = "#", name = "-", symbol = "-", liquidityUsd, volumeUsd } = token;
     const liquidityValue = parseFloat(liquidityUsd);
-    if (!isNaN(liquidityValue) && liquidityValue > 10000) {
+    const volumeValue = parseFloat(volumeUsd);
+
+    if (
+      (!isNaN(liquidityValue) && liquidityValue > VIRAL_LIQUIDITY) ||
+      (!isNaN(volumeValue) && volumeValue > VIRAL_VOLUME)
+    ) {
+      // Cek kalau row sudah ada, supaya nggak duplikat
+      const existingRow = viralTokensTable.querySelector(`tr[data-mint="${token.mint}"]`);
+      if (existingRow) return;
+
       const viralRow = document.createElement("tr");
+      viralRow.setAttribute("data-mint", token.mint); // id unik
       viralRow.innerHTML = `
         <td><a href="${pairUrl}" target="_blank" class="token-link">${name}</a></td>
         <td>${symbol}</td>
-        <td>$${liquidityValue.toLocaleString()}</td>
+        <td>$${liquidityValue ? liquidityValue.toLocaleString() : "-"}</td>
+        <td>$${volumeValue ? volumeValue.toLocaleString() : "-"}</td>
         <td><span class="badge">🚀</span></td>
       `;
       viralTokensTable.prepend(viralRow);
     }
   });
 
-  // Kalau belum ada token sama sekali
-  if (renderedTokens.size === 0) {
-    newTokensTable.innerHTML = `<tr><td colspan="5">No tokens found</td></tr>`;
-    viralTokensTable.innerHTML = `<tr><td colspan="4">No viral tokens yet</td></tr>`;
-  }
-
-  // 🧹 Bersihkan tabel kalau barisnya lebih dari 50
+  // === Bersihkan tabel jika lebih dari 50 row ===
   while (newTokensTable.rows.length > MAX_TOKENS) {
     newTokensTable.deleteRow(newTokensTable.rows.length - 1);
   }
+  while (viralTokensTable.rows.length > MAX_TOKENS) {
+    viralTokensTable.deleteRow(viralTokensTable.rows.length - 1);
+  }
+
+  // === Default message kalau kosong ===
+  if (renderedTokens.size === 0) {
+    newTokensTable.innerHTML = `<tr><td colspan="5">No tokens found</td></tr>`;
+  }
+  if (viralTokensTable.rows.length === 0) {
+    viralTokensTable.innerHTML = `<tr><td colspan="5">No viral tokens yet</td></tr>`;
+  }
 }
 
-// 🕒 Auto-refresh setiap 60 detik
+// 🕒 Auto-refresh tiap 60 detik
 setInterval(fetchTokens, 60000);
 
 // 🚀 Jalankan pertama kali saat halaman dimuat
