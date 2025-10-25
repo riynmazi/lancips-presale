@@ -1,72 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lancips Meme Token Detector</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lancips Meme Radar</title>
+  <meta name="description" content="Real-time Meme Token Detector – powered by Lancips. Discover new and potentially viral meme tokens early on Solana." />
+  <meta name="theme-color" content="#0f0f23" />
+  <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/coin_1fa99.png" />
 
-  <!-- 🌐 Meta -->
-  <meta name="description" content="Real-time Meme Token Detector – powered by Lancips. Discover new and potentially viral meme tokens early on Solana.">
-  <meta name="theme-color" content="#0e0e20">
-  <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/coin_1fa99.png">
+  <!-- Font & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- 🎨 Styles -->
+  <!-- CSS terpisah -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <!-- 🌈 HEADER -->
-  <header>
-    <h1>Lancips Meme Token Detector <br><small>(under construction)</small></h1>
-    <p>Early clue for the newest meme tokens. DYOR is still required!</p>
+
+<body class="bg-void text-white min-h-screen font-mono overflow-x-hidden">
+
+  <!-- HERO HEADER -->
+  <header class="hero-header">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        LANCIPS <span class="title-gold">MEME RADAR</span>
+      </h1>
+      <p class="hero-subtitle">
+        <span class="cursor">_</span> Early clue for the <span class="text-neon">next 1000x meme coin</span>
+      </p>
+      <p class="hero-warning">Warning: DYOR or get rekt. We just point. You jump.</p>
+    </div>
+
+    <div class="status-pills">
+      <div class="pill scanning">
+        <i class="fas fa-satellite-dish"></i> Scanning Solana...
+      </div>
+      <div class="pill live">
+        <i class="fas fa-bolt"></i> Live Detection
+      </div>
+    </div>
   </header>
 
-
-<!-- 🚀 POTENTIALLY VIRAL -->
-  <section>
-    <h2>🚀 Potentially Viral</h2>
-    <table id="viral-tokens">
-      <thead>
-        <tr>
-          <th>Token Name</th>
-          <th>Symbol</th>
-          <th>Liquidity</th>
-          <th>Badge</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Tokens will be rendered via JS -->
-      </tbody>
-    </table>
+  <!-- POTENTIALLY VIRAL -->
+  <section class="section-container" id="viral-section">
+    <h2 class="section-title">
+      <span class="emoji">Rocket</span> <span class="gradient-text">POTENTIALLY VIRAL</span>
+    </h2>
+    
+    <div class="table-wrapper viral-table">
+      <table id="viral-tokens" class="data-table">
+        <thead>
+          <tr>
+            <th>Token Name</th>
+            <th>Symbol</th>
+            <th>Liquidity</th>
+            <th class="text-center">Badge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS will populate -->
+        </tbody>
+      </table>
+    </div>
   </section>
 
-
-  <!-- 🪙 NEW TOKENS -->
-  <section>
-    <h2>🪙 New Tokens</h2>
-    <table id="new-tokens">
-      <thead>
-        <tr>
-          <th>Token Name</th>
-          <th>Symbol</th>
-          <th>Price (USD)</th>
-          <th>Liquidity</th>
-          <th>Created At</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Tokens will be rendered via JS -->
-      </tbody>
-    </table>
+  <!-- NEW TOKENS -->
+  <section class="section-container" id="new-section">
+    <h2 class="section-title">
+      <span class="emoji">Coin</span> <span class="text-gray">Freshly Minted</span> <span class="text-neon">NEW TOKENS</span>
+    </h                 </h2>
+    
+    <div class="table-wrapper new-table">
+      <table id="new-tokens" class="data-table">
+        <thead>
+          <tr>
+            <th>Token Name</th>
+            <th>Symbol</th>
+            <th>Price (USD)</th>
+            <th>Liquidity</th>
+            <th>Born</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS will populate -->
+        </tbody>
+      </table>
+    </div>
   </section>
 
-  
-
-  <!-- 🌀 FOOTER -->
-  <footer>
-    <p>&copy; 2025 <strong>Lancips</strong> — Fun, absurd, and early clue for meme tokens!</p>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="footer-text">
+      &copy; 2025 <strong class="text-gold">Lancips</strong> — 
+      <span class="text-neon">Fun, absurd, and dangerously early.</span>
+    </p>
+    <p class="footer-disclaimer">
+      Not financial advice. We just vibe and detect. <span class="text-red">Death</span>
+    </p>
   </footer>
 
-  <!-- ⚡ SCRIPT -->
+  <!-- JS -->
   <script src="app.js"></script>
 </body>
 </html>
