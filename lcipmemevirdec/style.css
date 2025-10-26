@@ -601,3 +601,12 @@ body {
     font-size: 1.1rem;
   }
 }
+
+
+.card.expanded .detail-section {
+  max-height: 500px !important; /* Force expand lebih besar */
+  padding: 1rem 1.1rem 1.1rem !important;
+}
+.toggle-btn {
+  z-index: 10; /* Pasti di atas */
+}
