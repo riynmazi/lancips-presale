@@ -17,7 +17,30 @@ function showToast() {
 function createCard(token, isViral = false) {
   const badge = BADGES[Math.floor(Math.random() * BADGES.length)];
   const color = ['#39ff14', '#ffd700', '#ff4aff'][Math.floor(Math.random() * 3)];
-  
+
+  // Tambahan: Section X Data (proporsional, kalau ada data)
+  const xSection = token.xMentions !== undefined ? `
+    <div class="x-section">
+      <div class="x-metric">
+        <span class="x-label">Mentions:</span>
+        <span class="x-value">${token.xMentions || 0}</span>
+      </div>
+      <div class="x-metric">
+        <span class="x-label">Likes:</span>
+        <span class="x-value">${token.xLikes?.toLocaleString() || 0}</span>
+      </div>
+      <div class="x-metric">
+        <span class="x-label">Retweets:</span>
+        <span class="x-value">${token.xRetweets?.toLocaleString() || 0}</span>
+      </div>
+      <div class="x-metric">
+        <span class="x-label">Engagement:</span>
+        <span class="x-value x-engagement">${token.xEngagement?.toLocaleString() || 0}</span>
+      </div>
+      <div class="x-timestamp">Fetched: ${new Date(token.xFetchedAt || Date.now()).toLocaleString()}</div>
+    </div>
+  ` : '';
+
   return `
     <div class="card" onclick="window.open('${token.pairUrl}', '_blank')">
       <div class="card-header">
@@ -29,6 +52,7 @@ function createCard(token, isViral = false) {
         ? `<div class="liquidity">$${parseFloat(token.liquidityUsd).toLocaleString()} liquidity</div>`
         : `<div>$${parseFloat(token.priceUsd).toFixed(8)} • ${new Date(token.createdAt).toLocaleTimeString()}</div>`
       }
+      ${xSection} <!-- Tambahan X Section di sini -->
     </div>
   `;
 }
