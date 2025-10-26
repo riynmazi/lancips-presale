@@ -130,19 +130,23 @@ function createCard(token, isViral = false) {
       </div>
       <div>FDV: $${(token.fdv || 0).toLocaleString()}</div>
       ${isViral ? `<div class="viral-score"><div class="score-bar" style="width: ${score}%"></div></div><div class="score-text">Viral Score: ${score}%</div>` : ''}
-      <button class="toggle-btn" onclick="event.stopPropagation();"><i class="fas fa-chevron-down"></i></button>
+      <button class="toggle-btn" onclick="event.stopPropagation(); event.preventDefault();"><i class="fas fa-chevron-down"></i></button>
       ${detailSection}
     </div>
   `;
 }
 
-// Toggle Function (Event Delegation)
-document.addEventListener('click', (e) => {
-  if (e.target.closest('.toggle-btn')) {
-    const card = e.target.closest('.card');
-    card.classList.toggle('expanded');
-  }
-});
+// Toggle Function (Attach ke containers setelah render)
+function attachToggleListeners(container) {
+  container.addEventListener('click', (e) => {
+    if (e.target.closest('.toggle-btn')) {
+      console.log('Toggle clicked!'); // Debug log
+      const card = e.target.closest('.card');
+      card.classList.toggle('expanded');
+      console.log('Card expanded:', card.classList.contains('expanded')); // Debug
+    }
+  });
+}
 
 async function load() {
   if (loadingEl) loadingEl.style.display = 'flex';
@@ -163,13 +167,19 @@ async function load() {
     if (currentTopVol > prevViralVolume && currentTopVol > 10000) showToast();
     prevViralVolume = currentTopVol;
 
-    // Desktop
+    // Render Desktop
     viralCards.innerHTML = viral.map(t => createCard(t, true)).join('');
     newCards.innerHTML = newest.map(t => createCard(t)).join('');
 
-    // Mobile
+    // Render Mobile
     mobileViral.innerHTML = viralCards.innerHTML;
     mobileNew.innerHTML = newCards.innerHTML;
+
+    // Attach listeners setelah render (fix timing issue)
+    attachToggleListeners(viralCards);
+    attachToggleListeners(newCards);
+    attachToggleListeners(mobileViral);
+    attachToggleListeners(mobileNew);
 
     if (viral.length > 0) showToast();
   } catch (e) {
