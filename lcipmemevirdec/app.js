@@ -130,22 +130,30 @@ function createCard(token, isViral = false) {
       </div>
       <div>FDV: $${(token.fdv || 0).toLocaleString()}</div>
       ${isViral ? `<div class="viral-score"><div class="score-bar" style="width: ${score}%"></div></div><div class="score-text">Viral Score: ${score}%</div>` : ''}
-      <button class="toggle-btn" onclick="event.stopPropagation(); event.preventDefault();"><i class="fas fa-chevron-down"></i></button>
+      <button class="toggle-btn" data-toggle="true"><i class="fas fa-chevron-down"></i></button>
       ${detailSection}
     </div>
   `;
 }
 
-// Toggle Function (Attach ke containers setelah render)
-function attachToggleListeners(container) {
-  container.addEventListener('click', (e) => {
-    if (e.target.closest('.toggle-btn')) {
-      console.log('Toggle clicked!'); // Debug log
-      const card = e.target.closest('.card');
-      card.classList.toggle('expanded');
-      console.log('Card expanded:', card.classList.contains('expanded')); // Debug
-    }
-  });
+// Global Toggle Listener (Robust, re-attach pas load)
+function initToggle() {
+  document.removeEventListener('click', handleToggle); // Prevent duplicate
+  document.addEventListener('click', handleToggle);
+}
+
+function handleToggle(e) {
+  const btn = e.target.closest('.toggle-btn[data-toggle="true"]');
+  if (btn) {
+    e.stopPropagation();
+    e.preventDefault();
+    const card = btn.closest('.card');
+    card.classList.toggle('expanded');
+    console.log('Toggle triggered! Expanded:', card.classList.contains('expanded')); // Debug
+    // Rotate icon
+    const icon = btn.querySelector('i');
+    if (icon) icon.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
 }
 
 async function load() {
@@ -175,11 +183,8 @@ async function load() {
     mobileViral.innerHTML = viralCards.innerHTML;
     mobileNew.innerHTML = newCards.innerHTML;
 
-    // Attach listeners setelah render (fix timing issue)
-    attachToggleListeners(viralCards);
-    attachToggleListeners(newCards);
-    attachToggleListeners(mobileViral);
-    attachToggleListeners(mobileNew);
+    // Re-init toggle setelah render
+    initToggle();
 
     if (viral.length > 0) showToast();
   } catch (e) {
@@ -188,6 +193,7 @@ async function load() {
     newCards.innerHTML = viralCards.innerHTML;
     mobileViral.innerHTML = viralCards.innerHTML;
     mobileNew.innerHTML = newCards.innerHTML;
+    initToggle(); // Re-init fallback
   } finally {
     if (loadingEl) loadingEl.style.display = 'none';
   }
@@ -200,8 +206,13 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('mobile-' + tab.dataset.tab).classList.add('active');
+    // Re-init toggle setelah tab switch
+    setTimeout(initToggle, 100);
   });
 });
+
+// Init on load
+initToggle();
 
 // Load + refresh
 load();
