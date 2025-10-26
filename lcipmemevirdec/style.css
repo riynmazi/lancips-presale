@@ -15,6 +15,8 @@
   --border-glow: rgba(0, 255, 136, 0.3);
   --gray: #94a3b8;
   --gray-light: #b0b0b0;
+  --success: #00ff88;
+  --danger: #ff6b6b;
 }
 
 * {
@@ -38,28 +40,22 @@ body {
   padding: 0 1rem;
 }
 
-
-/* ========================================
-   BACK TO LANCIPS.XYZ BUTTON — V4
-   POSISI: KIRI ATAS
-   PANAH: KE KIRI (back)
-   UKURAN: GEDE, WARNA PUTIH
-   ======================================== */
+/* BACK BTN (Unchanged) */
 .back-btn {
   position: fixed;
   top: 1.8rem;
-  left: 2.2rem;            /* POSISI DI KIRI */
+  left: 2.2rem;
   z-index: 9999;
-  width: 56px;             /* GEDE */
-  height: 56px;            /* GEDE */
+  width: 56px;
+  height: 56px;
   background: rgba(0, 255, 136, 0.12);
   border: 2px solid var(--neon);
-  color: #ffffff !important; /* PUTIH */
+  color: #ffffff !important;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;       /* ICON GEDE */
+  font-size: 1.6rem;
   text-decoration: none;
   transition: all 0.35s ease;
   backdrop-filter: blur(10px);
@@ -69,35 +65,18 @@ body {
 .back-btn:hover {
   background: var(--neon);
   color: #000000 !important;
-  transform: translateX(-4px) scale(1.08); /* Geser ke KIRI (back effect) */
+  transform: translateX(-4px) scale(1.08);
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  .back-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 1.4rem;
-    top: 1.2rem;
-    left: 1.8rem;
-  }
+  .back-btn { width: 50px; height: 50px; font-size: 1.4rem; top: 1.2rem; left: 1.8rem; }
 }
-
 @media (max-width: 480px) {
-  .back-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 1.3rem;
-    left: 1.5rem;
-  }
+  .back-btn { width: 48px; height: 48px; font-size: 1.3rem; left: 1.5rem; }
 }
 
-
-
-/* ========================================
-   HERO HEADER — SAMA KAYAK LANGSIPS.XYZ
-   ======================================== */
+/* HERO (Unchanged) */
 .hero {
   text-align: center;
   padding: 3.5rem 1rem 3rem;
@@ -194,9 +173,17 @@ body {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* ========================================
-   DESKTOP: 2 KOLOM
-   ======================================== */
+/* LOADING */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: var(--neon);
+}
+
+/* DESKTOP LAYOUT (Unchanged + icons) */
 .desktop-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -217,13 +204,7 @@ body {
   color: var(--text);
 }
 
-.column h2::before {
-  font-size: 1.6rem;
-}
-
-/* ========================================
-   CARD SYSTEM — SAMA KAYAK LANGSIPS.XYZ
-   ======================================== */
+/* CARDS ENHANCED */
 .cards {
   display: flex;
   flex-direction: column;
@@ -244,6 +225,8 @@ body {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .card::before {
@@ -257,23 +240,31 @@ body {
   pointer-events: none;
 }
 
-.card:hover::before {
-  opacity: 1;
-}
+.card:hover::before { opacity: 1; }
 
 .card:hover {
   transform: translateY(-5px);
   border-color: var(--neon);
-  box-shadow: 
-    0 15px 30px rgba(0,255,136,0.15),
-    0 0 25px rgba(0,255,136,0.1);
+  box-shadow: 0 15px 30px rgba(0,255,136,0.15), 0 0 25px rgba(0,255,136,0.1);
 }
 
 .card-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.8rem;
   margin-bottom: 0.6rem;
+}
+
+.token-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--neon);
+}
+
+.token-info {
+  flex: 1;
 }
 
 .token-name {
@@ -283,20 +274,33 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 70%;
 }
 
-.symbol {
-  color: var(--neon);
-  font-weight: 700;
-  font-size: 0.95rem;
+.symbol { color: var(--neon); font-weight: 700; font-size: 0.95rem; }
+
+.chain-label {
+  font-size: 0.8rem;
+  color: var(--gray);
+  padding: 0.2rem 0.5rem;
+  background: rgba(0,255,136,0.1);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-glow);
 }
 
-.liquidity {
+.liquidity, .price {
   font-size: 0.92rem;
   color: var(--gold);
   font-weight: 600;
 }
+
+.price-change {
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.positive { color: var(--success); }
+.negative { color: var(--danger); }
 
 .badge {
   padding: 0.25rem 0.7rem;
@@ -310,11 +314,62 @@ body {
   border: 1px solid var(--neon) !important;
   animation: glow 2s ease-in-out infinite alternate;
   box-shadow: 0 0 10px rgba(0,255,136,0.3);
+  align-self: flex-end;
 }
 
-/* ========================================
-   MOBILE: TAB SYSTEM
-   ======================================== */
+.viral-score {
+  background: linear-gradient(to right, var(--neon), var(--gold));
+  height: 4px;
+  border-radius: 2px;
+  margin: 0.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  background: var(--neon);
+  transition: width 0.5s ease;
+}
+
+.score-text {
+  font-size: 0.8rem;
+  color: var(--gray-light);
+  text-align: center;
+  margin-top: 0.2rem;
+}
+
+/* X SECTION (Unchanged) */
+.x-section {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-glow);
+  font-size: 0.8rem;
+}
+
+.x-metric {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0;
+}
+
+.x-label { color: var(--gray); }
+
+.x-value {
+  font-weight: 600;
+  color: var(--neon);
+}
+
+.x-engagement { color: var(--gold) !important; }
+
+.x-timestamp {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  color: var(--gray-light);
+  text-align: right;
+}
+
+/* MOBILE TABS (Unchanged + icons) */
 .mobile-layout {
   display: none;
   margin: 2rem auto;
@@ -340,6 +395,10 @@ body {
   font-size: 0.95rem;
   transition: all 0.3s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .tab.active {
@@ -355,13 +414,9 @@ body {
   padding-right: 0.5rem;
 }
 
-.tab-content.active {
-  display: block;
-}
+.tab-content.active { display: block; }
 
-/* ========================================
-   TOAST NOTIFICATION
-   ======================================== */
+/* TOAST (Unchanged) */
 .toast {
   position: fixed;
   bottom: 2rem;
@@ -380,9 +435,7 @@ body {
   border: 1px solid var(--neon);
 }
 
-/* ========================================
-   FOOTER
-   ======================================== */
+/* FOOTER (Unchanged) */
 .footer {
   text-align: center;
   padding: 2.5rem 1rem;
@@ -394,9 +447,7 @@ body {
   backdrop-filter: blur(6px);
 }
 
-/* ========================================
-   ANIMATIONS
-   ======================================== */
+/* ANIMATIONS (Unchanged) */
 @keyframes pulse {
   0%, 100% { opacity: 0.7; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.1); }
@@ -419,71 +470,13 @@ body {
   100% { transform: translateX(-50%) translateY(100px); opacity: 0; }
 }
 
-/* ========================================
-   SCROLLBAR CUSTOM — SAMA KAYAK LANGSIPS.XYZ
-   ======================================== */
-.cards::-webkit-scrollbar,
-.tab-content::-webkit-scrollbar {
-  width: 7px;
-}
+/* SCROLLBAR (Unchanged) */
+.cards::-webkit-scrollbar, .tab-content::-webkit-scrollbar { width: 7px; }
+.cards::-webkit-scrollbar-track, .tab-content::-webkit-scrollbar-track { background: transparent; border-radius: 4px; }
+.cards::-webkit-scrollbar-thumb, .tab-content::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 4px; box-shadow: 0 0 10px var(--neon); }
+.cards::-webkit-scrollbar-thumb:hover, .tab-content::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-.cards::-webkit-scrollbar-track,
-.tab-content::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 4px;
-}
-
-.cards::-webkit-scrollbar-thumb,
-.tab-content::-webkit-scrollbar-thumb {
-  background: var(--neon);
-  border-radius: 4px;
-  box-shadow: 0 0 10px var(--neon);
-}
-
-.cards::-webkit-scrollbar-thumb:hover,
-.tab-content::-webkit-scrollbar-thumb:hover {
-  background: var(--gold);
-}
-
-/* ========================================
-   TAMBAHAN: X (TWITTER) SECTION — PROPORSIONAL
-   ======================================== */
-.x-section {
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-glow);
-  font-size: 0.8rem; /* Kecil biar proporsional */
-}
-
-.x-metric {
-  display: flex;
-  justify-content: space-between;
-  margin: 2px 0; /* Gap kecil */
-}
-
-.x-label {
-  color: var(--gray);
-}
-
-.x-value {
-  font-weight: 600;
-  color: var(--neon); /* Match theme */
-}
-
-.x-engagement {
-  color: var(--gold) !important; /* Highlight engagement emas */
-}
-
-.x-timestamp {
-  margin-top: 4px;
-  font-size: 0.7rem;
-  color: var(--gray-light);
-  text-align: right;
-}
-
-/* ========================================
-   RESPONSIVE — DESKTOP vs MOBILE
-   ======================================== */
+/* RESPONSIVE (Unchanged + mobile tweaks) */
 @media (max-width: 768px) {
   .desktop-layout { display: none; }
   .mobile-layout { display: block; }
@@ -491,12 +484,14 @@ body {
   .subtitle { font-size: 1.15rem; }
   .live-status { font-size: 0.88rem; }
   .cards, .tab-content { max-height: 65vh; }
-  .card { padding: 1rem; }
-  .x-section { font-size: 0.75rem; } /* Lebih kecil di mobile */
+  .card { padding: 1rem; grid-template-rows: auto auto 1fr auto; }
+  .token-image { width: 35px; height: 35px; }
+  .x-section { font-size: 0.75rem; }
 }
 
 @media (max-width: 480px) {
   .hero h1 { font-size: 2.3rem; }
   .pills { flex-direction: column; align-items: center; }
   .pill { width: fit-content; }
+  .card-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
