@@ -95,7 +95,7 @@ function createCard(token, isViral = false) {
         <span class="detail-value">$${liqUsd.toLocaleString()}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Alamat Kontrak:</span>
+        <span class="detail-label">contract:</span>
         <a href="${explorerUrl}" target="_blank" rel="noopener" class="detail-value detail-link">${(token.baseAddress || token.address || '').slice(0, 8)}...${(token.baseAddress || token.address || '').slice(-4)}</a>
       </div>
       <div class="detail-row">
