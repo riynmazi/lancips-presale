@@ -13,59 +13,55 @@
 </head>
 <body>
 
-
-
 <a href="https://www.lancips.xyz" class="back-btn" target="_blank" rel="noopener">
   <i class="fas fa-arrow-left"></i>
 </a>
 
-
-
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container">
-      <h1>MEME <span class="gold">VIRAL DETECTOR</span></h1>
-      <p class="subtitle">Early clue for the <span class="neon">next 1000x meme coin</span></p>
-      <div class="live-status">
-        <span class="pulse"></span>
-        <span id="scan-count">0</span> tokens scanned today
-      </div>
-      <div class="pills">
-        <span class="pill scanning">Scanning...</span>
-        <span class="pill live">DYOR</span>
-      </div>
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <h1>MEME <span class="gold">VIRAL DETECTOR</span></h1>
+    <p class="subtitle">Early clue for the <span class="neon">next 1000x meme coin</span></p>
+    <div class="live-status">
+      <span class="pulse"></span>
+      <span id="scan-count">0</span> tokens scanned today
     </div>
-  </header>
-
-  <!-- DESKTOP: 2 COLUMNS -->
-  <section class="desktop-layout container">
-    <div class="column viral-column">
-      <h2>POTENTIALLY VIRAL</h2>
-      <div id="viral-cards" class="cards"></div>
+    <div class="pills">
+      <span class="pill scanning">Scanning...</span>
+      <span class="pill live">DYOR</span>
     </div>
-    <div class="column new-column">
-      <h2>FRESHLY MINTED</h2>
-      <div id="new-cards" class="cards"></div>
-    </div>
-  </section>
+  </div>
+</header>
 
-  <!-- MOBILE: TABS -->
-  <section class="mobile-layout container">
-    <div class="tabs">
-      <button class="tab active" data-tab="viral">VIRAL</button>
-      <button class="tab" data-tab="new">NEW</button>
-    </div>
-    <div id="mobile-viral" class="tab-content active"></div>
-    <div id="mobile-new" class="tab-content"></div>
-  </section>
+<!-- DESKTOP: 2 COLUMNS -->
+<section class="desktop-layout container">
+  <div class="column viral-column">
+    <h2>POTENTIALLY VIRAL</h2>
+    <div id="viral-cards" class="cards"></div>
+  </div>
+  <div class="column new-column">
+    <h2>FRESHLY MINTED</h2>
+    <div id="new-cards" class="cards"></div>
+  </div>
+</section>
 
-  <!-- NOTIF TOAST -->
-  <div id="toast" class="toast">NEW VIRAL DETECTED!</div>
+<!-- MOBILE: TABS -->
+<section class="mobile-layout container">
+  <div class="tabs">
+    <button class="tab active" data-tab="viral">VIRAL</button>
+    <button class="tab" data-tab="new">NEW</button>
+  </div>
+  <div id="mobile-viral" class="tab-content active"></div>
+  <div id="mobile-new" class="tab-content"></div>
+</section>
 
-  <footer class="footer">
-    <p>&copy; 2025 <strong>Lancips</strong> — Fun, absurd, and dangerously early.</p>
-  </footer>
+<!-- NOTIF TOAST -->
+<div id="toast" class="toast">NEW VIRAL DETECTED!</div>
 
-  <script src="app.js"></script>
+<footer class="footer">
+  <p>&copy; 2025 <strong>Lancips</strong> — Fun, absurd, and dangerously early.</p>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
