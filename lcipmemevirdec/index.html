@@ -12,56 +12,60 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a href="https://www.lancips.xyz" class="back-btn" target="_blank" rel="noopener">
+    <i class="fas fa-arrow-left"></i>
+  </a>
 
-<a href="https://www.lancips.xyz" class="back-btn" target="_blank" rel="noopener">
-  <i class="fas fa-arrow-left"></i>
-</a>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="container">
-    <h1>MEME <span class="gold">VIRAL DETECTOR</span></h1>
-    <p class="subtitle">Early clue for the <span class="neon">next 1000x meme coin</span></p>
-    <div class="live-status">
-      <span class="pulse"></span>
-      <span id="scan-count">0</span> tokens scanned today
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <h1>MEME <span class="gold">VIRAL DETECTOR</span></h1>
+      <p class="subtitle">Early clue for the <span class="neon">next 1000x meme coin</span></p>
+      <div class="live-status">
+        <span class="pulse"></span>
+        <span id="scan-count">0</span> tokens scanned today
+      </div>
+      <div class="pills">
+        <span class="pill scanning">Scanning...</span>
+        <span class="pill live">DYOR</span>
+      </div>
     </div>
-    <div class="pills">
-      <span class="pill scanning">Scanning...</span>
-      <span class="pill live">DYOR</span>
+  </header>
+
+  <!-- LOADING -->
+  <div id="loading" class="loading-container">
+    <i class="fas fa-spinner fa-spin"></i> Loading fresh memes...
+  </div>
+
+  <!-- DESKTOP: 2 COLUMNS -->
+  <section class="desktop-layout container">
+    <div class="column viral-column">
+      <h2><i class="fas fa-fire"></i> POTENTIALLY VIRAL</h2>
+      <div id="viral-cards" class="cards"></div>
     </div>
-  </div>
-</header>
+    <div class="column new-column">
+      <h2><i class="fas fa-clock"></i> FRESHLY MINTED</h2>
+      <div id="new-cards" class="cards"></div>
+    </div>
+  </section>
 
-<!-- DESKTOP: 2 COLUMNS -->
-<section class="desktop-layout container">
-  <div class="column viral-column">
-    <h2>POTENTIALLY VIRAL</h2>
-    <div id="viral-cards" class="cards"></div>
-  </div>
-  <div class="column new-column">
-    <h2>FRESHLY MINTED</h2>
-    <div id="new-cards" class="cards"></div>
-  </div>
-</section>
+  <!-- MOBILE: TABS -->
+  <section class="mobile-layout container">
+    <div class="tabs">
+      <button class="tab active" data-tab="viral"><i class="fas fa-fire"></i> VIRAL</button>
+      <button class="tab" data-tab="new"><i class="fas fa-clock"></i> NEW</button>
+    </div>
+    <div id="mobile-viral" class="tab-content active"></div>
+    <div id="mobile-new" class="tab-content"></div>
+  </section>
 
-<!-- MOBILE: TABS -->
-<section class="mobile-layout container">
-  <div class="tabs">
-    <button class="tab active" data-tab="viral">VIRAL</button>
-    <button class="tab" data-tab="new">NEW</button>
-  </div>
-  <div id="mobile-viral" class="tab-content active"></div>
-  <div id="mobile-new" class="tab-content"></div>
-</section>
+  <!-- NOTIF TOAST -->
+  <div id="toast" class="toast">NEW VIRAL DETECTED! 🚨</div>
 
-<!-- NOTIF TOAST -->
-<div id="toast" class="toast">NEW VIRAL DETECTED!</div>
+  <footer class="footer">
+    <p>&copy; 2025 <strong>Lancips</strong> — Fun, absurd, and dangerously early. DYOR | Data: DexScreener</p>
+  </footer>
 
-<footer class="footer">
-  <p>&copy; 2025 <strong>Lancips</strong> — Fun, absurd, and dangerously early.</p>
-</footer>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
