@@ -446,6 +446,42 @@ body {
 }
 
 /* ========================================
+   TAMBAHAN: X (TWITTER) SECTION — PROPORSIONAL
+   ======================================== */
+.x-section {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-glow);
+  font-size: 0.8rem; /* Kecil biar proporsional */
+}
+
+.x-metric {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0; /* Gap kecil */
+}
+
+.x-label {
+  color: var(--gray);
+}
+
+.x-value {
+  font-weight: 600;
+  color: var(--neon); /* Match theme */
+}
+
+.x-engagement {
+  color: var(--gold) !important; /* Highlight engagement emas */
+}
+
+.x-timestamp {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  color: var(--gray-light);
+  text-align: right;
+}
+
+/* ========================================
    RESPONSIVE — DESKTOP vs MOBILE
    ======================================== */
 @media (max-width: 768px) {
@@ -456,6 +492,7 @@ body {
   .live-status { font-size: 0.88rem; }
   .cards, .tab-content { max-height: 65vh; }
   .card { padding: 1rem; }
+  .x-section { font-size: 0.75rem; } /* Lebih kecil di mobile */
 }
 
 @media (max-width: 480px) {
