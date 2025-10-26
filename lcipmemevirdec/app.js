@@ -2,7 +2,7 @@ const API = "https://backend-memevirdec.vercel.app/api/fetch-meme-tokens";
 const BADGES = ["WEN MOON?", "RUG?", "LFG", "CTO", "GEM", "HARAMBE", "MOON", "1000X", "HIGH VOL", "FRESH"];
 let scanCount = 0;
 let prevViralVolume = 0;
-const iconCache = new Map(); // Cache imageUrl biar gak fetch ulang
+const iconCache = new Map(); // Cache imageUrl
 
 const viralCards = document.getElementById('viral-cards');
 const newCards = document.getElementById('new-cards');
@@ -58,10 +58,17 @@ function getWebsiteHtml(websites) {
   return websites.map(w => `<a href="${w.url}" target="_blank" rel="noopener" class="detail-link">${w.label || w.url}</a>`).join(', ');
 }
 
+// Update formula viral score: Liquidity + Volume + Engagement
 function calculateViralScore(token) {
+  const liq = parseFloat(token.liquidityUsd || token.liquidity?.usd || 0);
   const vol = token.volumeH24 || token.volume?.h24 || 0;
-  const buys = token.txnsH24Buys || token.txns?.h24?.buys || 0;
-  return Math.min(100, Math.log10(vol + 1) * 20 + buys * 2); // Masuk akal: Log vol + buys weight
+  const engagement = getXMetrics(token).xEngagement; // Dari X metrics
+
+  const liqScore = Math.min(30, liq / 1000); // $100K liq = 30 poin
+  const volScore = Math.min(40, Math.log10(vol + 1) * 10); // $10K vol = ~40 poin
+  const engScore = Math.min(30, engagement / 100); // 3K engagement = 30 poin
+
+  return Math.min(100, liqScore + volScore + engScore); // Total cap 100%
 }
 
 function getChainIcon(chainId) {
@@ -114,7 +121,7 @@ function createCard(token, isViral = false) {
       </div>
       <div class="detail-row">
         <span class="detail-label">Contract Address:</span>
-        <a href="${explorerUrl}" target="_blank" rel="noopener" class="detail-value detail-link">${address.slice(0, 8)}...${address.slice(-4)}</a>
+        <a href="${explorerUrl}" target="_blank" rel="noopener" class="detail-value detail-link">${address ? address.slice(0, 8) + '...' + address.slice(-4) : 'N/A'}</a>
       </div>
       <div class="detail-row">
         <span class="detail-label">Volume 24h:</span>
@@ -136,23 +143,21 @@ function createCard(token, isViral = false) {
     <div class="viral-score">
       <div class="score-bar" style="width: ${score}%"></div>
     </div>
-    <div class="score-text">Viral Score: ${score}%</div>
+    <div class="score-text">Viral Score: ${score.toFixed(0)}%</div>
   ` : '';
 
-  // Fetch icon async, render placeholder dulu, update pas ready
-  const placeholderImg = 'https://via.placeholder.com/40?text=MEME';
-  let imgSrc = placeholderImg;
+  // Fetch icon async
+  let imgSrc = 'https://via.placeholder.com/40?text=MEME';
   if (address) {
     fetchTokenIcon(address, token.chainId).then(icon => {
       imgSrc = icon;
-      // Update img di DOM setelah render (via querySelector)
-      const card = document.querySelector(`[data-address="${address}"] img.token-image`);
-      if (card) card.src = imgSrc;
+      const img = document.querySelector(`[data-address="${address}"] .token-image`);
+      if (img) img.src = imgSrc;
     });
   }
 
   return `
-    <div class="card" data-address="${address}" style="position: relative;">
+    <div class="card" data-address="${address || ''}" style="position: relative;">
       <div class="card-header">
         <div class="token-info">
           <div class="token-name" onclick="window.open('${pairUrl}', '_blank')" style="cursor: pointer;">${name}</div>
@@ -198,15 +203,15 @@ async function load() {
     const data = await res.json();
     tokens = data.tokens || [];
   } catch (e) {
-    console.error('API error, using fallback data:', e);
-    tokens = []; // Atau load fallback dari local if needed
+    console.error('API error:', e);
+    tokens = []; // No fallback, or add if needed
   }
 
   scanCount += tokens.length;
   countEl.textContent = scanCount.toLocaleString();
 
   const viral = tokens.filter(t => parseFloat(t.liquidityUsd || 0) > 10000)
-    .sort((a, b) => (parseFloat(b.volumeH24 || b.volume?.h24 || 0) - parseFloat(a.volumeH24 || a.volume?.h24 || 0)))
+    .sort((a, b) => calculateViralScore(b) - calculateViralScore(a)) // Sort by score now!
     .slice(0, 10);
   const newest = tokens.slice(0, 20)
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
