@@ -586,10 +586,27 @@ body {
   .card-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
 
-/* CARD HEADER ALIGNMENT FIX */
+/* CARD & HEADER FIX FOR DESKTOP */
+.card {
+  max-width: 400px; /* Limit card width biar gak stretch */
+  margin: 0 auto 1.5rem; /* Center card, spacing bawah */
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: 1rem;
+  padding: 1.2rem;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.2);
+}
+
 .card-header {
   display: flex;
-  align-items: flex-start; /* Atas align */
+  align-items: flex-start;
   justify-content: space-between; /* Nama left, logo + badge right */
   gap: 0.8rem;
   margin-bottom: 0.6rem;
@@ -598,7 +615,8 @@ body {
 
 .token-info {
   flex: 1;
-  min-width: 0; /* Biar ellipsis work */
+  min-width: 0;
+  max-width: 65%; /* Batasi width nama biar gak overlap logo */
 }
 
 .token-name {
@@ -610,7 +628,6 @@ body {
   text-overflow: ellipsis;
   cursor: pointer;
   transition: color 0.2s;
-  max-width: 60%; /* Limit width biar gak push logo */
 }
 
 .token-name:hover {
@@ -621,7 +638,7 @@ body {
   color: var(--neon); 
   font-weight: 700; 
   font-size: 0.95rem; 
-  margin-top: 0.2rem; /* Space dari nama */
+  margin-top: 0.2rem;
 }
 
 .token-image {
@@ -630,8 +647,8 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--neon);
-  flex-shrink: 0; /* Gak shrink */
-  margin-left: auto; /* Push ke kanan */
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .badge {
@@ -646,11 +663,31 @@ body {
   border: 1px solid var(--neon) !important;
   animation: glow 2s ease-in-out infinite alternate;
   box-shadow: 0 0 10px rgba(0,255,136,0.3);
-  flex-shrink: 0; /* Gak shrink */
-  margin-left: 0.5rem; /* Space dari logo */
+  flex-shrink: 0;
+  margin-left: 0.5rem;
 }
 
-/* DROPDOWN FIX (Force animation & z-index) */
+/* DESKTOP SPECIFIC FIX (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .card {
+    max-width: 450px; /* Sedikit lebih lebar di desktop */
+    margin: 0 1rem 1.5rem; /* Spacing antar card */
+  }
+
+  .card-header {
+    gap: 1rem; /* Lebih longgar di desktop */
+  }
+
+  .token-info {
+    max-width: 70%; /* Biar nama gak terlalu sempit */
+  }
+
+  .desktop-layout .column {
+    padding: 0 1rem; /* Space antar kolom */
+  }
+}
+
+/* DROPDOWN FIX (Sama kayak sebelumnya, pastiin work) */
 .toggle-btn {
   position: absolute;
   bottom: 0.5rem;
@@ -665,20 +702,20 @@ body {
 }
 
 .card.expanded .toggle-btn i {
-  transform: rotate(180deg) !important; /* Force rotate */
+  transform: rotate(180deg) !important;
 }
 
 .detail-section {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease-out, padding 0.3s ease !important; /* Smooth slide */
+  transition: max-height 0.4s ease-out, padding 0.3s ease !important;
   background: rgba(0, 255, 136, 0.05);
   border-top: 1px solid var(--border-glow);
   padding: 0 1.1rem 0;
 }
 
 .card.expanded .detail-section {
-  max-height: 400px !important; /* Adjust kalau detail panjang */
+  max-height: 400px !important;
   padding: 1rem 1.1rem !important;
 }
 
@@ -704,7 +741,7 @@ body {
   flex: 2;
 }
 
-/* Mobile adjust */
+/* Mobile adjust (sama kayak sebelumnya) */
 @media (max-width: 768px) {
   .card-header {
     flex-direction: column;
