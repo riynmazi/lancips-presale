@@ -585,3 +585,149 @@ body {
   .pill { width: fit-content; }
   .card-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
+
+/* CARD HEADER ALIGNMENT FIX */
+.card-header {
+  display: flex;
+  align-items: flex-start; /* Atas align */
+  justify-content: space-between; /* Nama left, logo + badge right */
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+  position: relative;
+}
+
+.token-info {
+  flex: 1;
+  min-width: 0; /* Biar ellipsis work */
+}
+
+.token-name {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: color 0.2s;
+  max-width: 60%; /* Limit width biar gak push logo */
+}
+
+.token-name:hover {
+  color: var(--neon);
+}
+
+.symbol { 
+  color: var(--neon); 
+  font-weight: 700; 
+  font-size: 0.95rem; 
+  margin-top: 0.2rem; /* Space dari nama */
+}
+
+.token-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--neon);
+  flex-shrink: 0; /* Gak shrink */
+  margin-left: auto; /* Push ke kanan */
+}
+
+.badge {
+  padding: 0.25rem 0.7rem;
+  border-radius: 1.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(0,255,136,0.2) !important;
+  color: var(--neon) !important;
+  border: 1px solid var(--neon) !important;
+  animation: glow 2s ease-in-out infinite alternate;
+  box-shadow: 0 0 10px rgba(0,255,136,0.3);
+  flex-shrink: 0; /* Gak shrink */
+  margin-left: 0.5rem; /* Space dari logo */
+}
+
+/* DROPDOWN FIX (Force animation & z-index) */
+.toggle-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--neon);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: 10;
+}
+
+.card.expanded .toggle-btn i {
+  transform: rotate(180deg) !important; /* Force rotate */
+}
+
+.detail-section {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.3s ease !important; /* Smooth slide */
+  background: rgba(0, 255, 136, 0.05);
+  border-top: 1px solid var(--border-glow);
+  padding: 0 1.1rem 0;
+}
+
+.card.expanded .detail-section {
+  max-height: 400px !important; /* Adjust kalau detail panjang */
+  padding: 1rem 1.1rem !important;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.detail-label {
+  color: var(--gray);
+  font-weight: 500;
+  flex: 1;
+}
+
+.detail-value {
+  color: var(--neon);
+  font-weight: 600;
+  text-align: right;
+  word-break: break-all;
+  flex: 2;
+}
+
+/* Mobile adjust */
+@media (max-width: 768px) {
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .token-name {
+    max-width: 100%;
+  }
+  .token-image {
+    align-self: flex-end;
+    margin-top: 0.5rem;
+  }
+  .badge {
+    align-self: flex-end;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+  .detail-value {
+    text-align: left;
+  }
+}
