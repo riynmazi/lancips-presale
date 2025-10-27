@@ -17,6 +17,9 @@
   --gray-light: #b0b0b0;
   --success: #00ff88;
   --danger: #ff6b6b;
+  --spacing-sm: 0.5rem;         /* 8px */
+  --spacing-md: 1rem;           /* 16px */
+  --spacing-lg: 1.5rem;         /* 24px */
 }
 
 * {
@@ -37,14 +40,14 @@ body {
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 var(--spacing-md);
 }
 
 /* BACK BTN */
 .back-btn {
   position: fixed;
-  top: 1.8rem;
-  left: 2.2rem;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
   z-index: 9999;
   width: 56px;
   height: 56px;
@@ -70,16 +73,16 @@ body {
 }
 
 @media (max-width: 768px) {
-  .back-btn { width: 50px; height: 50px; font-size: 1.4rem; top: 1.2rem; left: 1.8rem; }
+  .back-btn { width: 50px; height: 50px; font-size: 1.4rem; }
 }
 @media (max-width: 480px) {
-  .back-btn { width: 48px; height: 48px; font-size: 1.3rem; left: 1.5rem; }
+  .back-btn { width: 48px; height: 48px; font-size: 1.3rem; }
 }
 
 /* HERO */
 .hero {
   text-align: center;
-  padding: 3.5rem 1rem 3rem;
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
   background: linear-gradient(135deg, rgba(0,255,136,0.08), rgba(255,204,0,0.03));
   position: relative;
   overflow: hidden;
@@ -116,20 +119,20 @@ body {
 .subtitle {
   font-size: 1.35rem;
   color: var(--gray-light);
-  margin: 0.8rem 0 0.5rem;
+  margin: var(--spacing-sm) 0;
   font-weight: 500;
 }
 
 .neon { color: var(--neon); font-weight: bold; }
 
 .live-status {
-  margin: 1.2rem 0;
+  margin: var(--spacing-md) 0;
   font-size: 0.95rem;
   color: var(--gray);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 }
 
 .pulse {
@@ -145,13 +148,13 @@ body {
 .pills {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
   flex-wrap: wrap;
 }
 
 .pill {
-  padding: 0.6rem 1.3rem;
+  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: 2rem;
   font-size: 0.85rem;
   font-weight: 700;
@@ -178,29 +181,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: var(--spacing-lg);
   font-size: 1.1rem;
   color: var(--neon);
 }
 
-/* DESKTOP LAYOUT (Tanpa Card) */
+/* DESKTOP LAYOUT (List Tanpa Card) */
 .desktop-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  margin: 3rem auto;
-  padding: 0 1rem;
+  gap: var(--spacing-lg);
+  margin: var(--spacing-lg) auto;
+  padding: 0 var(--spacing-md);
 }
 
 .column h2 {
   text-align: center;
   font-size: 1.9rem;
   font-weight: 700;
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--spacing-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: var(--spacing-sm);
   color: var(--text);
 }
 
@@ -213,7 +216,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: var(--spacing-md) 0;
   border-bottom: 1px solid var(--border-glow);
   transition: all 0.3s ease;
 }
@@ -247,7 +250,7 @@ body {
   color: var(--neon);
   font-weight: 700;
   font-size: 0.95rem;
-  margin-top: 0.2rem;
+  margin-top: var(--spacing-sm);
 }
 
 .token-badges {
@@ -263,11 +266,11 @@ body {
   object-fit: cover;
   border: 2px solid var(--neon);
   flex-shrink: 0;
-  margin-left: 1rem;
+  margin-left: var(--spacing-md);
 }
 
 .badge {
-  padding: 0.25rem 0.7rem;
+  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: 1.5rem;
   font-size: 0.72rem;
   font-weight: 800;
@@ -279,7 +282,7 @@ body {
   animation: glow 2s ease-in-out infinite alternate;
   box-shadow: 0 0 10px rgba(0,255,136,0.3);
   flex-shrink: 0;
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-sm);
 }
 
 .price {
@@ -287,31 +290,54 @@ body {
   color: var(--gold);
   font-weight: 600;
   text-align: right;
+  margin-left: var(--spacing-md);
 }
 
 .price-change {
   font-size: 0.85rem;
   font-weight: bold;
-  margin-left: 0.5rem;
+  margin-left: var(--spacing-sm);
 }
 
 .positive { color: var(--success); }
 .negative { color: var(--danger); }
 
+.viral-score {
+  background: linear-gradient(to right, var(--neon), var(--gold));
+  height: 4px;
+  border-radius: 2px;
+  margin: var(--spacing-sm) 0 var(--spacing-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  background: var(--neon);
+  transition: width 0.5s ease;
+}
+
+.score-text {
+  font-size: 0.8rem;
+  color: var(--gray-light);
+  text-align: center;
+  margin-top: var(--spacing-sm);
+}
+
 /* MOBILE LAYOUT (Dengan Card) */
 .mobile-layout {
   display: none;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  margin: var(--spacing-lg) auto;
+  padding: 0 var(--spacing-md);
 }
 
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--spacing-md);
   max-height: 65vh;
   overflow-y: auto;
-  padding-right: 0.5rem;
+  padding-right: var(--spacing-sm);
   scrollbar-width: thin;
   scrollbar-color: var(--neon) transparent;
 }
@@ -320,7 +346,7 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border-glow);
   border-radius: 1.2rem;
-  padding: 1rem;
+  padding: var(--spacing-md);
   transition: all 0.35s ease;
   cursor: pointer;
   position: relative;
@@ -352,8 +378,8 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.8rem;
-  margin-bottom: 0.6rem;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
   position: relative;
 }
 
@@ -363,18 +389,18 @@ body {
   transition: max-height 0.5s ease-out, padding 0.3s ease 0.2s;
   background: rgba(0, 255, 136, 0.05);
   border-top: 1px solid var(--border-glow);
-  padding: 0 1rem;
+  padding: 0 var(--spacing-md);
 }
 
 .card.expanded .detail-section {
   max-height: 500px;
-  padding: 1rem 1rem 1rem;
+  padding: var(--spacing-md);
 }
 
 .toggle-btn {
   position: absolute;
-  bottom: 0.5rem;
-  right: 1rem;
+  bottom: var(--spacing-sm);
+  right: var(--spacing-md);
   background: none;
   border: none;
   color: var(--neon);
@@ -392,7 +418,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--spacing-sm);
   font-size: 0.85rem;
 }
 
@@ -422,8 +448,8 @@ body {
 
 .socials {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
 }
 
 .social-icon {
@@ -438,8 +464,8 @@ body {
 }
 
 .x-section {
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
   border-top: 1px solid var(--border-glow);
   font-size: 0.8rem;
 }
@@ -447,7 +473,7 @@ body {
 .x-metric {
   display: flex;
   justify-content: space-between;
-  margin: 2px 0;
+  margin: var(--spacing-sm) 0;
 }
 
 .x-label { color: var(--gray); }
@@ -460,7 +486,7 @@ body {
 .x-engagement { color: var(--gold); }
 
 .x-timestamp {
-  margin-top: 4px;
+  margin-top: var(--spacing-sm);
   font-size: 0.7rem;
   color: var(--gray-light);
   text-align: right;
@@ -472,13 +498,13 @@ body {
   background: var(--bg-card);
   border-radius: 1.2rem;
   overflow: hidden;
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--spacing-md);
   border: 1px solid var(--border-glow);
 }
 
 .tab {
   flex: 1;
-  padding: 0.9rem;
+  padding: var(--spacing-md);
   background: transparent;
   border: none;
   color: var(--gray);
@@ -489,7 +515,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 }
 
 .tab.active {
@@ -502,7 +528,7 @@ body {
   display: none;
   max-height: 65vh;
   overflow-y: auto;
-  padding-right: 0.5rem;
+  padding-right: var(--spacing-sm);
 }
 
 .tab-content.active { display: block; }
@@ -510,12 +536,12 @@ body {
 /* TOAST */
 .toast {
   position: fixed;
-  bottom: 2rem;
+  bottom: var(--spacing-lg);
   left: 50%;
   transform: translateX(-50%);
   background: var(--neon);
   color: #000;
-  padding: 0.9rem 1.8rem;
+  padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: 2rem;
   font-weight: 800;
   font-size: 0.95rem;
@@ -529,11 +555,11 @@ body {
 /* FOOTER */
 .footer {
   text-align: center;
-  padding: 2.5rem 1rem;
+  padding: var(--spacing-lg) var(--spacing-md);
   color: var(--gray);
   font-size: 0.92rem;
   border-top: 1px solid rgba(255,255,255,0.08);
-  margin-top: 4rem;
+  margin-top: var(--spacing-lg);
   background: rgba(10,10,26,0.6);
   backdrop-filter: blur(6px);
 }
@@ -573,31 +599,32 @@ body {
   .mobile-layout { display: block; }
   .hero h1 { font-size: 3rem; }
   .subtitle { font-size: 1.2rem; }
-  .token-item { padding: 0.8rem 0; }
+  .token-item { padding: var(--spacing-sm) 0; }
   .token-image { width: 35px; height: 35px; }
-  .badge { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
+  .badge { font-size: 0.7rem; padding: var(--spacing-sm) var(--spacing-sm); }
+  .cards, .tab-content { max-height: 60vh; } /* Adjust buat mobile */
 }
 
 @media (max-width: 768px) {
   .card-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
   }
   .token-info { max-width: 100%; }
-  .token-image { align-self: flex-end; margin-top: 0.5rem; }
-  .badge { align-self: flex-end; margin-top: 0.3rem; margin-left: 0; }
-  .detail-row { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .token-image { align-self: flex-end; margin-top: var(--spacing-sm); }
+  .badge { align-self: flex-end; margin-top: var(--spacing-sm); margin-left: 0; }
+  .detail-row { flex-direction: column; align-items: flex-start; gap: var(--spacing-sm); }
   .detail-value { text-align: left; }
   .x-section { font-size: 0.75rem; }
-  .detail-section { padding: 0 1rem; }
-  .card.expanded .detail-section { padding: 0.8rem 1rem 1rem; }
+  .detail-section { padding: 0 var(--spacing-sm); }
+  .card.expanded .detail-section { padding: var(--spacing-sm); }
 }
 
 @media (max-width: 480px) {
   .hero h1 { font-size: 2.3rem; }
   .pills { flex-direction: column; align-items: center; }
-  .pill { width: fit-content; padding: 0.5rem 1rem; font-size: 0.8rem; }
+  .pill { width: fit-content; padding: var(--spacing-sm) var(--spacing-md); font-size: 0.8rem; }
   .live-status { font-size: 0.85rem; }
   .column h2 { font-size: 1.6rem; }
 }
