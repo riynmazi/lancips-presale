@@ -183,7 +183,7 @@ body {
   color: var(--neon);
 }
 
-/* DESKTOP LAYOUT */
+/* DESKTOP LAYOUT (Tanpa Card) */
 .desktop-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -204,61 +204,22 @@ body {
   color: var(--text);
 }
 
-/* CARDS */
-.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-height: 72vh;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--neon) transparent;
+.token-list {
+  list-style: none;
+  padding: 0;
 }
 
-.card {
-  max-width: 450px;
-  margin: 0 auto 1.5rem;
-  width: 100%;
-  background: var(--bg-card);
-  border: 1px solid var(--border-glow);
-  border-radius: 1.2rem;
-  padding: 1.2rem;
-  transition: all 0.35s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(0,255,136,0.05), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-.card:hover::before { opacity: 1; }
-
-.card:hover {
-  transform: translateY(-5px);
-  border-color: var(--neon);
-  box-shadow: 0 15px 30px rgba(0,255,136,0.15), 0 0 25px rgba(0,255,136,0.1);
-}
-
-/* CARD HEADER (Logo di kanan atas) */
-.card-header {
+.token-item {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.8rem;
-  margin-bottom: 0.6rem;
-  position: relative;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-glow);
+  transition: all 0.3s ease;
+}
+
+.token-item:hover {
+  background: rgba(0, 255, 136, 0.05);
 }
 
 .token-info {
@@ -289,6 +250,12 @@ body {
   margin-top: 0.2rem;
 }
 
+.token-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .token-image {
   width: 40px;
   height: 40px;
@@ -296,13 +263,7 @@ body {
   object-fit: cover;
   border: 2px solid var(--neon);
   flex-shrink: 0;
-  order: 2;
-}
-
-.token-badges {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  margin-left: 1rem;
 }
 
 .badge {
@@ -321,33 +282,11 @@ body {
   margin-top: 0.5rem;
 }
 
-/* VIRAL SCORE & PRICE */
-.viral-score {
-  background: linear-gradient(to right, var(--neon), var(--gold));
-  height: 4px;
-  border-radius: 2px;
-  margin: 0.5rem 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.score-bar {
-  height: 100%;
-  background: var(--neon);
-  transition: width 0.5s ease;
-}
-
-.score-text {
-  font-size: 0.8rem;
-  color: var(--gray-light);
-  text-align: center;
-  margin-top: 0.2rem;
-}
-
-.liquidity, .price {
+.price {
   font-size: 0.92rem;
   color: var(--gold);
   font-weight: 600;
+  text-align: right;
 }
 
 .price-change {
@@ -359,73 +298,94 @@ body {
 .positive { color: var(--success); }
 .negative { color: var(--danger); }
 
-/* X SECTION & DETAIL (Hanya buat mobile) */
-.detail-section, .x-section {
-  display: none; /* Default hide di desktop */
+/* MOBILE LAYOUT (Dengan Card) */
+.mobile-layout {
+  display: none;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
-@media (max-width: 1024px) {
-  .detail-section {
-    display: block; /* Show di mobile */
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-out, padding 0.3s ease 0.2s;
-    background: rgba(0, 255, 136, 0.05);
-    border-top: 1px solid var(--border-glow);
-    padding: 0 1.1rem;
-  }
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon) transparent;
+}
 
-  .card.expanded .detail-section {
-    max-height: 500px;
-    padding: 1rem 1.1rem;
-  }
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 1.2rem;
+  padding: 1rem;
+  transition: all 0.35s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
 
-  .x-section {
-    display: block;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid var(--border-glow);
-    font-size: 0.8rem;
-  }
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(0,255,136,0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
 
-  .x-metric {
-    display: flex;
-    justify-content: space-between;
-    margin: 2px 0;
-  }
+.card:hover::before { opacity: 1; }
 
-  .x-label { color: var(--gray); }
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--neon);
+  box-shadow: 0 15px 30px rgba(0,255,136,0.15), 0 0 25px rgba(0,255,136,0.1);
+}
 
-  .x-value {
-    font-weight: 600;
-    color: var(--neon);
-  }
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+  position: relative;
+}
 
-  .x-engagement { color: var(--gold); }
+.detail-section {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, padding 0.3s ease 0.2s;
+  background: rgba(0, 255, 136, 0.05);
+  border-top: 1px solid var(--border-glow);
+  padding: 0 1rem;
+}
 
-  .x-timestamp {
-    margin-top: 4px;
-    font-size: 0.7rem;
-    color: var(--gray-light);
-    text-align: right;
-  }
+.card.expanded .detail-section {
+  max-height: 500px;
+  padding: 1rem 1rem 1rem;
+}
 
-  .toggle-btn {
-    position: absolute;
-    bottom: 0.5rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: var(--neon);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    z-index: 20;
-  }
+.toggle-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--neon);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: 20;
+}
 
-  .card.expanded .toggle-btn i {
-    transform: rotate(180deg);
-  }
+.card.expanded .toggle-btn i {
+  transform: rotate(180deg);
 }
 
 .detail-row {
@@ -477,13 +437,36 @@ body {
   color: var(--neon);
 }
 
-/* MOBILE TABS */
-.mobile-layout {
-  display: none;
-  margin: 2rem auto;
-  padding: 0 1rem;
+.x-section {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-glow);
+  font-size: 0.8rem;
 }
 
+.x-metric {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0;
+}
+
+.x-label { color: var(--gray); }
+
+.x-value {
+  font-weight: 600;
+  color: var(--neon);
+}
+
+.x-engagement { color: var(--gold); }
+
+.x-timestamp {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  color: var(--gray-light);
+  text-align: right;
+}
+
+/* TABS */
 .tabs {
   display: flex;
   background: var(--bg-card);
@@ -517,7 +500,7 @@ body {
 
 .tab-content {
   display: none;
-  max-height: 70vh;
+  max-height: 65vh;
   overflow-y: auto;
   padding-right: 0.5rem;
 }
@@ -579,10 +562,10 @@ body {
 }
 
 /* SCROLLBAR */
-.cards::-webkit-scrollbar, .tab-content::-webkit-scrollbar { width: 7px; }
-.cards::-webkit-scrollbar-track, .tab-content::-webkit-scrollbar-track { background: transparent; border-radius: 4px; }
-.cards::-webkit-scrollbar-thumb, .tab-content::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 4px; box-shadow: 0 0 10px var(--neon); }
-.cards::-webkit-scrollbar-thumb:hover, .tab-content::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+.token-list::-webkit-scrollbar, .cards::-webkit-scrollbar, .tab-content::-webkit-scrollbar { width: 7px; }
+.token-list::-webkit-scrollbar-track, .cards::-webkit-scrollbar-track, .tab-content::-webkit-scrollbar-track { background: transparent; border-radius: 4px; }
+.token-list::-webkit-scrollbar-thumb, .cards::-webkit-scrollbar-thumb, .tab-content::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 4px; box-shadow: 0 0 10px var(--neon); }
+.token-list::-webkit-scrollbar-thumb:hover, .cards::-webkit-scrollbar-thumb:hover, .tab-content::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
 /* RESPONSIVE BREAKPOINTS */
 @media (max-width: 1024px) {
@@ -590,8 +573,7 @@ body {
   .mobile-layout { display: block; }
   .hero h1 { font-size: 3rem; }
   .subtitle { font-size: 1.2rem; }
-  .cards, .tab-content { max-height: 65vh; }
-  .card { padding: 1rem; max-width: 100%; }
+  .token-item { padding: 0.8rem 0; }
   .token-image { width: 35px; height: 35px; }
   .badge { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
 }
