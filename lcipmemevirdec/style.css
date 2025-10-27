@@ -367,6 +367,7 @@ img {
     grid-template-columns: 1fr;
     gap: 8px;
     margin-top: 20px;
+    width: 50%;
   }
 
   .search-input {
