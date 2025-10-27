@@ -253,6 +253,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap; /* NEW: Biar badge nggak tembus */
 }
 
 .mvd-pair {
@@ -276,6 +277,14 @@ a:hover {
   animation: wiggle 0.5s ease-in-out infinite alternate;
 }
 
+.mvd-badge--meme { /* NEW */
+  background: #facc15;
+  color: #1f2937;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
 @keyframes wiggle {
   0% { transform: rotate(-3deg); }
   100% { transform: rotate(3deg); }
@@ -293,7 +302,39 @@ a:hover {
   overflow: hidden;
 }
 
+.mvd-info { /* NEW */
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.mvd-info-label { /* NEW */
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.mvd-info-value { /* NEW */
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.mvd-info-address { /* NEW */
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
 .mvd-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.mvd-social { /* NEW */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
@@ -421,8 +462,13 @@ a:hover {
     grid-template-columns: 1fr;
   }
 
-  .mvd-metrics {
+  .mvd-metrics,
+  .mvd-social { /* NEW */
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mvd-info { /* NEW */
+    grid-template-columns: 1fr;
   }
 
   .feature-title {
@@ -445,6 +491,11 @@ a:hover {
 
   .mvd-metric-value,
   .mvd-metric-label {
+    font-size: 0.75rem;
+  }
+
+  .mvd-info-value,
+  .mvd-info-address { /* NEW */
     font-size: 0.75rem;
   }
 
