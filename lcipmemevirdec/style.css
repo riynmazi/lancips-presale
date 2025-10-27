@@ -112,6 +112,7 @@ a:hover {
 .feature-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 2rem;
+  color: black;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
