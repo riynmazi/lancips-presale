@@ -1,3 +1,4 @@
+<script>
 (function () {
   if (window.__MVD_V2_ENABLED__) return;
   window.__MVD_V2_ENABLED__ = true;
@@ -18,7 +19,7 @@
 
   let allTokens = [];
 
-  /** Utils **/
+  /** ==================== UTILITIES ==================== **/
   function formatUSD(n) {
     const num = Number(n || 0);
     if (num >= 1e9) return `$${(num / 1e9).toFixed(2)}B`;
@@ -54,7 +55,7 @@
     return c && Date.now() - c < FRESH_WINDOW_MS;
   }
 
-  /** Render **/
+  /** ==================== RENDER ==================== **/
   function makeCard(p) {
     const chain = p.chain || 'unknown';
     const symbol = p.symbol || '—';
@@ -90,22 +91,10 @@
       </div>
 
       <div class="mvd-metrics">
-        <div class="mvd-metric">
-          <span class="mvd-metric-label">Price</span>
-          <span class="mvd-metric-value">${price !== '—' ? `$${price}` : '—'}</span>
-        </div>
-        <div class="mvd-metric">
-          <span class="mvd-metric-label">Liquidity</span>
-          <span class="mvd-metric-value">${formatUSD(liquidity)}</span>
-        </div>
-        <div class="mvd-metric">
-          <span class="mvd-metric-label">Volume 24h</span>
-          <span class="mvd-metric-value">${formatUSD(volume)}</span>
-        </div>
-        <div class="mvd-metric">
-          <span class="mvd-metric-label">Viral Score</span>
-          <span class="mvd-metric-value ${viralScore > 15 ? 'mvd-metric-up' : ''}">${viralScore}</span>
-        </div>
+        <div class="mvd-metric"><span class="mvd-metric-label">Price</span><span class="mvd-metric-value">${price !== '—' ? `$${price}` : '—'}</span></div>
+        <div class="mvd-metric"><span class="mvd-metric-label">Liquidity</span><span class="mvd-metric-value">${formatUSD(liquidity)}</span></div>
+        <div class="mvd-metric"><span class="mvd-metric-label">Volume 24h</span><span class="mvd-metric-value">${formatUSD(volume)}</span></div>
+        <div class="mvd-metric"><span class="mvd-metric-label">Viral Score</span><span class="mvd-metric-value ${viralScore > 15 ? 'mvd-metric-up' : ''}">${viralScore}</span></div>
       </div>
 
       <div class="mvd-social">
@@ -128,66 +117,67 @@
   }
 
   function renderTokens(tokens) {
+    if (!els.tokenGrid) return;
     els.tokenGrid.innerHTML = '';
 
-    if (tokens.length === 0) {
+    if (!tokens.length) {
       els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens match your filters</div>`;
+      els.scanCount.textContent = 0;
       return;
     }
 
-    tokens.forEach(t => els.tokenGrid.appendChild(makeCard(t)));
-
+    const fragment = document.createDocumentFragment();
+    tokens.forEach(t => fragment.appendChild(makeCard(t)));
+    els.tokenGrid.appendChild(fragment);
     els.scanCount.textContent = tokens.length;
   }
 
-  /** Filtering Logic **/
+  /** ==================== FILTER ==================== **/
   function applyFilters() {
-    const chain = els.chainFilter.value;
-    const category = els.categoryFilter.value;
-    const q = (els.searchInput.value || '').toLowerCase();
+    if (!allTokens.length) return;
+
+    const chain = els.chainFilter?.value || 'all';
+    const category = els.categoryFilter?.value || 'all';
+    const q = (els.searchInput?.value || '').toLowerCase();
 
     let filtered = [...allTokens];
 
-    if (chain !== 'all') {
-      filtered = filtered.filter(t => (t.chain || '').toLowerCase() === chain);
-    }
+    if (chain !== 'all') filtered = filtered.filter(t => (t.chain || '').toLowerCase() === chain);
 
-    if (category === 'viral') {
-      filtered = filtered.filter(isViral);
-    } else if (category === 'new') {
-      filtered = filtered.filter(isFresh);
-    } else if (category === 'top24h') {
-      filtered = filtered.sort((a, b) => Number(b.volumeUsd) - Number(a.volumeUsd));
-    }
+    if (category === 'viral') filtered = filtered.filter(isViral);
+    else if (category === 'new') filtered = filtered.filter(isFresh);
+    else if (category === 'top24h') filtered = filtered.sort((a, b) => Number(b.volumeUsd) - Number(a.volumeUsd));
 
     if (q) {
-      filtered = filtered.filter(
-        t =>
-          (t.symbol || '').toLowerCase().includes(q) ||
-          (t.name || '').toLowerCase().includes(q)
+      filtered = filtered.filter(t =>
+        (t.symbol || '').toLowerCase().includes(q) ||
+        (t.name || '').toLowerCase().includes(q)
       );
     }
 
     renderTokens(filtered);
   }
 
-  /** Fetch **/
+  /** ==================== FETCH ==================== **/
   async function fetchTokens() {
     try {
       const res = await fetch(API_URL);
       const data = await res.json();
       return Array.isArray(data) ? data : data.tokens || [];
-    } catch (e) {
-      console.error('[MVD] Fetch error:', e);
-      els.tokenGrid.innerHTML = `<div class="mvd-empty">⚠️ Failed to fetch tokens</div>`;
+    } catch (err) {
+      console.error('[MVD] Fetch error:', err);
+      if (els.tokenGrid) els.tokenGrid.innerHTML = `<div class="mvd-empty">⚠️ Failed to fetch tokens</div>`;
       return [];
     }
   }
 
   async function scan() {
+    if (!els.loading) return;
     els.loading.classList.remove('hidden');
+
     allTokens = await fetchTokens();
     applyFilters();
+
     els.loading.classList.add('hidden');
 
     if (allTokens.length && els.toast) {
@@ -196,13 +186,14 @@
     }
   }
 
-  /** Listeners **/
-  els.chainFilter.addEventListener('change', applyFilters);
-  els.categoryFilter.addEventListener('change', applyFilters);
-  els.searchInput.addEventListener('input', applyFilters);
+  /** ==================== INIT ==================== **/
+  if (els.chainFilter) els.chainFilter.addEventListener('change', applyFilters);
+  if (els.categoryFilter) els.categoryFilter.addEventListener('change', applyFilters);
+  if (els.searchInput) els.searchInput.addEventListener('input', applyFilters);
 
   document.addEventListener('DOMContentLoaded', () => {
     scan();
     setInterval(scan, POLL_MS);
   });
 })();
+</script>
