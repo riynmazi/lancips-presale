@@ -2,7 +2,7 @@ const API = "https://backend-memevirdec.vercel.app/api/fetch-meme-tokens";
 const BADGES = ["WEN MOON?", "RUG?", "LFG", "CTO", "GEM", "HARAMBE", "MOON", "1000X", "HIGH VOL", "FRESH"];
 let scanCount = 0;
 let prevViralVolume = 0;
-const iconCache = new Map(); // Cache imageUrl
+const iconCache = new Map();
 
 const viralCards = document.getElementById('viral-cards');
 const newCards = document.getElementById('new-cards');
@@ -12,7 +12,8 @@ const toast = document.getElementById('toast');
 const countEl = document.getElementById('scan-count');
 const loadingEl = document.getElementById('loading');
 
-function showToast() {
+function showToast(message = 'NEW VIRAL DETECTED! 🚨') {
+  toast.textContent = message;
   toast.style.display = 'block';
   setTimeout(() => toast.style.display = 'none', 3000);
 }
@@ -58,17 +59,16 @@ function getWebsiteHtml(websites) {
   return websites.map(w => `<a href="${w.url}" target="_blank" rel="noopener" class="detail-link">${w.label || w.url}</a>`).join(', ');
 }
 
-// Update formula viral score: Liquidity + Volume + Engagement
 function calculateViralScore(token) {
-  const liq = parseFloat(token.liquidityUsd || token.liquidity?.usd || 0);
-  const vol = token.volumeH24 || token.volume?.h24 || 0;
-  const engagement = getXMetrics(token).xEngagement; // Dari X metrics
+  const liq = parseFloat(token.liquidityUsd || 0);
+  const vol = token.volumeH24 || 0;
+  const engagement = (token.xLikes || 0) + (token.xRetweets || 0);
 
-  const liqScore = Math.min(30, liq / 1000); // $100K liq = 30 poin
-  const volScore = Math.min(40, Math.log10(vol + 1) * 10); // $10K vol = ~40 poin
-  const engScore = Math.min(30, engagement / 100); // 3K engagement = 30 poin
+  const liqScore = Math.min(30, liq / 1000);
+  const volScore = Math.min(40, Math.log10(vol + 1) * 10);
+  const engScore = Math.min(30, engagement / 100);
 
-  return Math.min(100, liqScore + volScore + engScore); // Total cap 100%
+  return Math.min(100, liqScore + volScore + engScore);
 }
 
 function getChainIcon(chainId) {
@@ -92,16 +92,16 @@ function createCard(token, isViral = false) {
   const badge = BADGES[Math.floor(Math.random() * BADGES.length)];
   const color = ['#39ff14', '#ffd700', '#ff4aff'][Math.floor(Math.random() * 3)];
   const score = calculateViralScore(token);
-  const change24 = token.priceChangeH24 || token.priceChange?.h24 || 0;
+  const change24 = token.priceChangeH24 || 0;
   const changeClass = change24 >= 0 ? 'positive' : 'negative';
   const changeSign = change24 >= 0 ? '+' : '';
   const xData = getXMetrics(token);
   const createdTime = new Date(token.createdAt || Date.now()).toLocaleTimeString();
-  const explorerUrl = getExplorerUrl(token.chainId, token.address || token.baseToken?.address);
-  const vol24 = token.volumeH24 || token.volume?.h24 || 0;
-  const liqUsd = parseFloat(token.liquidityUsd || token.liquidity?.usd || 0);
-  const pairUrl = token.pairUrl || token.url;
-  const address = token.address || token.baseToken?.address;
+  const explorerUrl = getExplorerUrl(token.chainId, token.address);
+  const vol24 = token.volumeH24 || 0;
+  const liqUsd = parseFloat(token.liquidityUsd || 0);
+  const pairUrl = token.pairUrl;
+  const address = token.address;
 
   const xSection = `
     <div class="x-section">
@@ -129,11 +129,11 @@ function createCard(token, isViral = false) {
       </div>
       <div class="detail-row">
         <span class="detail-label">Website:</span>
-        <span class="detail-value">${getWebsiteHtml(token.websites || token.info?.websites)}</span>
+        <span class="detail-value">${getWebsiteHtml(token.websites)}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Social Media:</span>
-        <div class="socials">${getSocialHtml(token.socials || token.info?.socials)}</div>
+        <div class="socials">${getSocialHtml(token.socials)}</div>
       </div>
       ${xSection}
     </div>
@@ -146,7 +146,6 @@ function createCard(token, isViral = false) {
     <div class="score-text">Viral Score: ${score.toFixed(0)}%</div>
   ` : '';
 
-  // Fetch icon async
   let imgSrc = 'https://via.placeholder.com/40?text=MEME';
   if (address) {
     fetchTokenIcon(address, token.chainId).then(icon => {
@@ -177,7 +176,7 @@ function createCard(token, isViral = false) {
   `;
 }
 
-// Global Toggle Listener
+// Global Toggle Listener (Tambah debug log)
 function initToggle() {
   document.removeEventListener('click', handleToggle);
   document.addEventListener('click', handleToggle);
@@ -189,9 +188,11 @@ function handleToggle(e) {
     e.stopPropagation();
     e.preventDefault();
     const card = btn.closest('.card');
+    const isExpanded = card.classList.contains('expanded');
     card.classList.toggle('expanded');
     const icon = btn.querySelector('i');
     if (icon) icon.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0deg)';
+    console.log('Toggle OK! Expanded now:', !isExpanded); // Debug log – cek F12 Console
   }
 }
 
@@ -204,19 +205,20 @@ async function load() {
     tokens = data.tokens || [];
   } catch (e) {
     console.error('API error:', e);
-    tokens = []; // No fallback, or add if needed
+    showToast('API error – using fallback');
+    tokens = []; // Atau load fallback kalau ada
   }
 
   scanCount += tokens.length;
   countEl.textContent = scanCount.toLocaleString();
 
   const viral = tokens.filter(t => parseFloat(t.liquidityUsd || 0) > 10000)
-    .sort((a, b) => calculateViralScore(b) - calculateViralScore(a)) // Sort by score now!
+    .sort((a, b) => calculateViralScore(b) - calculateViralScore(a))
     .slice(0, 10);
   const newest = tokens.slice(0, 20)
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  const currentTopVol = parseFloat(viral[0]?.volumeH24 || viral[0]?.volume?.h24 || 0);
+  const currentTopVol = parseFloat(viral[0]?.volumeH24 || 0);
   if (currentTopVol > prevViralVolume && currentTopVol > 10000) showToast();
   prevViralVolume = currentTopVol;
 
@@ -226,7 +228,7 @@ async function load() {
   mobileViral.innerHTML = viralCards.innerHTML;
   mobileNew.innerHTML = newCards.innerHTML;
 
-  initToggle();
+  initToggle(); // Re-attach listener
 
   if (viral.length > 0) showToast();
   if (loadingEl) loadingEl.style.display = 'none';
@@ -239,7 +241,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('mobile-' + tab.dataset.tab).classList.add('active');
-    setTimeout(initToggle, 100);
+    setTimeout(initToggle, 100); // Re-attach pas switch tab
   });
 });
 
