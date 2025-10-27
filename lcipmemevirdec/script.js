@@ -1,4 +1,3 @@
-<script>
 (function () {
   if (window.__MVD_V2_ENABLED__) return;
   window.__MVD_V2_ENABLED__ = true;
@@ -19,7 +18,7 @@
 
   let allTokens = [];
 
-  /** ==================== UTILITIES ==================== **/
+  /** Utils **/
   function formatUSD(n) {
     const num = Number(n || 0);
     if (num >= 1e9) return `$${(num / 1e9).toFixed(2)}B`;
@@ -37,25 +36,12 @@
     return `${m}m ago`;
   }
 
-  function isMemeLike(symbol, name) {
-    const kws = ['pepe', 'dog', 'doge', 'shib', 'inu', 'cat', 'elon', 'meme', 'moon', 'pump', 'wojak', 'floki', 'bonk'];
-    return kws.some(k => (symbol || '').toLowerCase().includes(k) || (name || '').toLowerCase().includes(k));
-  }
-
-  function isViral(p) {
-    const vol = Number(p.volumeUsd || 0);
-    const liq = Number(p.liquidityUsd || 0);
-    const viralScore = Number(p.viralScore || 0);
-    const xEng = Number(p.xEngagement || p.x?.engagement || 0);
-    return isMemeLike(p.symbol, p.name) && (liq > 30000 || vol > 100000) && (viralScore > 15 || xEng > 20);
-  }
-
   function isFresh(p) {
     const c = new Date(p.createdAt || 0).getTime();
     return c && Date.now() - c < FRESH_WINDOW_MS;
   }
 
-  /** ==================== RENDER ==================== **/
+  /** Render **/
   function makeCard(p) {
     const chain = p.chain || 'unknown';
     const symbol = p.symbol || '—';
@@ -64,11 +50,11 @@
     const liquidity = p.liquidityUsd || 0;
     const volume = p.volumeUsd || 0;
     const createdAgo = formatTimeAgo(p.createdAt);
-    const xLikes = p.xLikes || p.x?.likes || 0;
-    const xMentions = p.xMentions || p.x?.mentions || 0;
-    const xRetweets = p.xRetweets || p.x?.retweets || 0;
-    const xEng = p.xEngagement || p.x?.engagement || 0;
-    const viralScore = p.viralScore || 0;
+    const xLikes = p.xLikes || 0;
+    const xMentions = p.xMentions || 0;
+    const xRetweets = p.xRetweets || 0;
+    const xEng = p.xEngagement || 0;
+    const viralScore = p.memeScore || 0;
     const category = p.category || '—';
 
     const card = document.createElement('article');
@@ -77,8 +63,9 @@
       <div class="mvd-card-header">
         <div class="mvd-title-wrap">
           <span class="mvd-pair">${symbol}</span>
-          ${isViral(p) ? '<span class="mvd-badge mvd-badge--hot">🔥 HOT</span>' : ''}
-          ${category === 'meme' ? '<span class="mvd-badge mvd-badge--meme">😂 Meme</span>' : ''}
+          ${category === 'viral' ? '<span class="mvd-badge mvd-badge--hot">🔥 Viral</span>' : ''}
+          ${category === 'new' ? '<span class="mvd-badge mvd-badge--new">🆕 New</span>' : ''}
+          ${category === 'top24h' ? '<span class="mvd-badge mvd-badge--top">🚀 Top 24h</span>' : ''}
         </div>
         <span class="mvd-badge mvd-badge--chain">${chain.toUpperCase()}</span>
       </div>
@@ -91,10 +78,22 @@
       </div>
 
       <div class="mvd-metrics">
-        <div class="mvd-metric"><span class="mvd-metric-label">Price</span><span class="mvd-metric-value">${price !== '—' ? `$${price}` : '—'}</span></div>
-        <div class="mvd-metric"><span class="mvd-metric-label">Liquidity</span><span class="mvd-metric-value">${formatUSD(liquidity)}</span></div>
-        <div class="mvd-metric"><span class="mvd-metric-label">Volume 24h</span><span class="mvd-metric-value">${formatUSD(volume)}</span></div>
-        <div class="mvd-metric"><span class="mvd-metric-label">Viral Score</span><span class="mvd-metric-value ${viralScore > 15 ? 'mvd-metric-up' : ''}">${viralScore}</span></div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">Price</span>
+          <span class="mvd-metric-value">${price !== '—' ? `$${price}` : '—'}</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">Liquidity</span>
+          <span class="mvd-metric-value">${formatUSD(liquidity)}</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">Volume 24h</span>
+          <span class="mvd-metric-value">${formatUSD(volume)}</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">Meme Score</span>
+          <span class="mvd-metric-value ${viralScore > 15 ? 'mvd-metric-up' : ''}">${viralScore}</span>
+        </div>
       </div>
 
       <div class="mvd-social">
@@ -117,48 +116,45 @@
   }
 
   function renderTokens(tokens) {
-    if (!els.tokenGrid) return;
     els.tokenGrid.innerHTML = '';
 
     if (!tokens.length) {
-      els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens match your filters</div>`;
-      els.scanCount.textContent = 0;
+      els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens found</div>`;
       return;
     }
 
-    const fragment = document.createDocumentFragment();
-    tokens.forEach(t => fragment.appendChild(makeCard(t)));
-    els.tokenGrid.appendChild(fragment);
+    tokens.forEach(t => els.tokenGrid.appendChild(makeCard(t)));
     els.scanCount.textContent = tokens.length;
   }
 
-  /** ==================== FILTER ==================== **/
+  /** Filtering **/
   function applyFilters() {
-    if (!allTokens.length) return;
-
-    const chain = els.chainFilter?.value || 'all';
-    const category = els.categoryFilter?.value || 'all';
-    const q = (els.searchInput?.value || '').toLowerCase();
+    const chain = els.chainFilter.value;
+    const category = els.categoryFilter.value;
+    const q = (els.searchInput.value || '').toLowerCase();
 
     let filtered = [...allTokens];
 
-    if (chain !== 'all') filtered = filtered.filter(t => (t.chain || '').toLowerCase() === chain);
+    if (chain !== 'all') {
+      filtered = filtered.filter(t => (t.chain || '').toLowerCase() === chain);
+    }
 
-    if (category === 'viral') filtered = filtered.filter(isViral);
-    else if (category === 'new') filtered = filtered.filter(isFresh);
-    else if (category === 'top24h') filtered = filtered.sort((a, b) => Number(b.volumeUsd) - Number(a.volumeUsd));
+    if (category !== 'all') {
+      filtered = filtered.filter(t => (t.category || '').toLowerCase() === category);
+    }
 
     if (q) {
-      filtered = filtered.filter(t =>
-        (t.symbol || '').toLowerCase().includes(q) ||
-        (t.name || '').toLowerCase().includes(q)
+      filtered = filtered.filter(
+        t =>
+          (t.symbol || '').toLowerCase().includes(q) ||
+          (t.name || '').toLowerCase().includes(q)
       );
     }
 
     renderTokens(filtered);
   }
 
-  /** ==================== FETCH ==================== **/
+  /** Fetch **/
   async function fetchTokens() {
     try {
       const res = await fetch(API_URL);
@@ -166,18 +162,15 @@
       return Array.isArray(data) ? data : data.tokens || [];
     } catch (err) {
       console.error('[MVD] Fetch error:', err);
-      if (els.tokenGrid) els.tokenGrid.innerHTML = `<div class="mvd-empty">⚠️ Failed to fetch tokens</div>`;
+      els.tokenGrid.innerHTML = `<div class="mvd-empty">⚠️ Failed to fetch tokens</div>`;
       return [];
     }
   }
 
   async function scan() {
-    if (!els.loading) return;
     els.loading.classList.remove('hidden');
-
     allTokens = await fetchTokens();
     applyFilters();
-
     els.loading.classList.add('hidden');
 
     if (allTokens.length && els.toast) {
@@ -186,14 +179,13 @@
     }
   }
 
-  /** ==================== INIT ==================== **/
-  if (els.chainFilter) els.chainFilter.addEventListener('change', applyFilters);
-  if (els.categoryFilter) els.categoryFilter.addEventListener('change', applyFilters);
-  if (els.searchInput) els.searchInput.addEventListener('input', applyFilters);
+  /** Listeners **/
+  els.chainFilter.addEventListener('change', applyFilters);
+  els.categoryFilter.addEventListener('change', applyFilters);
+  els.searchInput.addEventListener('input', applyFilters);
 
   document.addEventListener('DOMContentLoaded', () => {
     scan();
     setInterval(scan, POLL_MS);
   });
 })();
-</script>
