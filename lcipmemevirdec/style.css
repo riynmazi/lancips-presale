@@ -46,14 +46,14 @@ img {
   left: 16px;
   background: none;
   border: none;
-  size: 24px;
   display: flex;
   align-items: center;
   transition: opacity 0.2s ease;
 }
 
-.back-btn:hover {
-  opacity: 0.8;
+.back-btn img {
+  width: 24px;
+  height: 24px;
 }
 
 .app-title {
