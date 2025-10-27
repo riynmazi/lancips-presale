@@ -33,46 +33,69 @@
     return `${ sign }${ n.toFixed(2) }%`;
   }
 
+  function formatTimeAgo(timestamp) {
+    if (!timestamp) return '—';
+    const diff = Date.now() - new Date(timestamp).getTime();
+    const minutes = Math.max(1, Math.floor(diff / (60 * 1000)));
+    if (minutes >= 1440) return `${ Math.floor(minutes / 1440) }d ago`;
+    if (minutes >= 60) return `${ Math.floor(minutes / 60) }h ago`;
+    return `${ minutes }m ago`;
+  }
+
   function isMemeLike(symbol, name) {
     const kws = ['pepe', 'dog', 'doge', 'shib', 'inu', 'cat', 'elon', 'meme', 'moon', 'pump', 'wojak', 'floki', 'bonk'];
     return kws.some(k => (symbol || '').toLowerCase().includes(k) || (name || '').toLowerCase().includes(k));
   }
 
   function isViral(p) {
-    const vol = Number(p.volume?.h24 || 0);
-    const liq = Number(p.liquidity?.usd || 0);
+    const vol = Number(p.volumeUsd || 0);
+    const liq = Number(p.liquidityUsd || 0);
     const ch1 = Number(p.priceChange?.h1 || 0);
     const ch6 = Number(p.priceChange?.h6 || 0);
-    const meme = isMemeLike(p.baseToken?.symbol, p.baseToken?.name);
-    const momentum = ch1 > 50 || ch6 > 100;
+    const meme = isMemeLike(p.symbol, p.name);
+    const momentum = ch1 > 50 || ch6 > 100 || p.viralScore > 15;
     const healthy = liq >= 30000 || vol >= 100000;
     return meme && healthy && momentum;
   }
 
   function isFresh(p) {
-    const created = Number(p.pairCreatedAt || 0);
+    const created = new Date(p.createdAt || 0).getTime();
     return created && (Date.now() - created) < FRESH_WINDOW_MS;
   }
 
   function makeCard(p) {
     const chain = p.chain || 'unknown';
-    const baseSymbol = p.baseToken?.symbol || '—';
-    const quoteSymbol = p.quoteToken?.symbol || '—';
+    const symbol = p.symbol || '—';
+    const name = p.name || '—';
     const price = p.priceUsd ? Number(p.priceUsd).toFixed(6) : '—';
-    const ch5m = p.priceChange?.m5;
-    const ch1h = p.priceChange?.h1;
-    const ch6h = p.priceChange?.h6;
-    const createdAgo = p.pairCreatedAt ? Math.max(1, Math.floor((Date.now() - Number(p.pairCreatedAt)) / (60 * 1000))) : null;
+    const liquidity = p.liquidityUsd || 0;
+    const volume = p.volumeUsd || 0;
+    const createdAgo = formatTimeAgo(p.createdAt);
+    const fetchedAgo = formatTimeAgo(p.xFetchedAt);
+    const xLikes = p.xLikes || p.x?.likes || 0;
+    const xMentions = p.xMentions || p.x?.mentions || 0;
+    const xRetweets = p.xRetweets || p.x?.retweets || 0;
+    const xEngagement = p.xEngagement || p.x?.engagement || 0;
+    const category = p.category || '—';
+    const viralScore = p.viralScore || '—';
+    const lunarScore = p.lunar?.galaxyScore || '—';
 
     const card = document.createElement('article');
     card.className = 'mvd-card';
     card.innerHTML = `
       <div class="mvd-card-header">
         <div class="mvd-title-wrap">
-          <span class="mvd-pair">${ baseSymbol }/${ quoteSymbol }</span>
+          <span class="mvd-pair">${ symbol }</span>
           ${ isViral(p) ? '<span class="mvd-badge mvd-badge--hot">🔥 HOT</span>' : '' }
+          ${ category === 'meme' ? '<span class="mvd-badge mvd-badge--meme">😂 Meme</span>' : '' }
         </div>
         <span class="mvd-badge mvd-badge--chain">${ chain.toUpperCase() }</span>
+      </div>
+      <div class="mvd-info">
+        <span class="mvd-info-label">Name</span>
+        <span class="mvd-info-value">${ name }</span>
+        <span class="mvd-info-label">Address</span>
+        <span class="mvd-info-value mvd-info-address">${ p.address || '—' }</span>
       </div>
       <div class="mvd-metrics">
         <div class="mvd-metric">
@@ -80,25 +103,56 @@
           <span class="mvd-metric-value">${ price !== '—' ? `$${ price }` : '—' }</span>
         </div>
         <div class="mvd-metric">
-          <span class="mvd-metric-label">5m</span>
-          <span class="mvd-metric-value ${ ch5m >= 0 ? 'mvd-metric-up' : 'mvd-metric-down' }">${ formatPct(ch5m) }</span>
+          <span class="mvd-metric-label">Liquidity</span>
+          <span class="mvd-metric-value">${ formatUSD(liquidity) }</span>
         </div>
         <div class="mvd-metric">
-          <span class="mvd-metric-label">1h</span>
-          <span class="mvd-metric-value ${ ch1h >= 0 ? 'mvd-metric-up' : 'mvd-metric-down' }">${ formatPct(ch1h) }</span>
+          <span class="mvd-metric-label">Volume (24h)</span>
+          <span class="mvd-metric-value">${ formatUSD(volume) }</span>
         </div>
         <div class="mvd-metric">
-          <span class="mvd-metric-label">6h</span>
-          <span class="mvd-metric-value ${ ch6h >= 0 ? 'mvd-metric-up' : 'mvd-metric-down' }">${ formatPct(ch6h) }</span>
+          <span class="mvd-metric-label">Viral Score</span>
+          <span class="mvd-metric-value ${ viralScore > 15 ? 'mvd-metric-up' : '' }">${ viralScore }</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">Lunar Score</span>
+          <span class="mvd-metric-value">${ lunarScore }</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">Created</span>
+          <span class="mvd-metric-value">${ createdAgo }</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">Fetched</span>
+          <span class="mvd-metric-value">${ fetchedAgo }</span>
+        </div>
+      </div>
+      <div class="mvd-social">
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">❤️ Likes</span>
+          <span class="mvd-metric-value">${ xLikes }</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">💬 Mentions</span>
+          <span class="mvd-metric-value">${ xMentions }</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">🔄 Retweets</span>
+          <span class="mvd-metric-value">${ xRetweets }</span>
+        </div>
+        <div class="mvd-metric">
+          <span class="mvd-metric-label">📈 Engagement</span>
+          <span class="mvd-metric-value">${ xEngagement }</span>
         </div>
       </div>
       <div class="mvd-footer">
         <div class="mvd-chips">
-          <span class="mvd-chip">💰 ${ formatUSD(p.volume?.h24 || 0) }</span>
-          <span class="mvd-chip">💧 ${ formatUSD(p.liquidity?.usd || 0) }</span>
-          ${ createdAgo ? `<span class="mvd-chip mvd-age">🕒 ${ createdAgo }m ago</span>` : '' }
+          ${ category !== '—' ? `<span class="mvd-chip">🏷️ ${ category }</span>` : '' }
+          <span class="mvd-chip">💰 ${ formatUSD(volume) }</span>
+          <span class="mvd-chip">💧 ${ formatUSD(liquidity) }</span>
+          <span class="mvd-chip mvd-age">🕒 ${ createdAgo }</span>
         </div>
-        <a class="mvd-view" href="${ p.url || '#' }" target="_blank" rel="noopener">🔗 View</a>
+        <a class="mvd-view" href="${ p.pairUrl || '#' }" target="_blank" rel="noopener">🔗 View</a>
       </div>
     `;
     return card;
@@ -138,7 +192,7 @@
       els.mobileNew.appendChild(makeCard(p));
     });
 
-    els.scanCount.textContent = pairs.filter(p => p.pairCreatedAt && Number(p.pairCreatedAt) >= Date.now() - 24 * 60 * 60 * 1000).length;
+    els.scanCount.textContent = pairs.filter(p => p.createdAt && (Date.now() - new Date(p.createdAt).getTime()) < 24 * 60 * 60 * 1000).length;
   }
 
   els.tabs.forEach(tab => {
