@@ -167,11 +167,13 @@ function createCard(token, isViral = false) {
           <img src="${imgSrc}" alt="${symbol}" class="token-image" loading="lazy">
           <div class="badge" style="background:${color}20; color:${color}; border:1px solid ${color};">${badge}</div>
         </div>
-        <div class="price">
-          ${isViral ? `$${liqUsd.toLocaleString()} liquidity` : `$${parseFloat(token.priceUsd || 0).toFixed(8)} • ${createdTime}`}
-          <span class="price-change ${changeClass}">${changeSign}${change24.toFixed(2)}%</span>
+        <div class="price-info">
+          <div class="price">
+            ${isViral ? `$${liqUsd.toLocaleString()} liquidity` : `$${parseFloat(token.priceUsd || 0).toFixed(8)} • ${createdTime}`}
+            <span class="price-change ${changeClass}">${changeSign}${change24.toFixed(2)}%</span>
+          </div>
+          ${viralScoreHtml}
         </div>
-        ${viralScoreHtml}
         ${detailSection}
       </li>
     `;
@@ -189,11 +191,13 @@ function createCard(token, isViral = false) {
             <div class="badge" style="background:${color}20; color:${color}; border:1px solid ${color};">${badge}</div>
           </div>
         </div>
-        <div class="price ${isViral ? 'liquidity' : ''}">
-          ${isViral ? `$${liqUsd.toLocaleString()} liquidity` : `$${parseFloat(token.priceUsd || 0).toFixed(8)} • ${createdTime}`}
-          <span class="price-change ${changeClass}">${changeSign}${change24.toFixed(2)}%</span>
+        <div class="price-info">
+          <div class="price ${isViral ? 'liquidity' : ''}">
+            ${isViral ? `$${liqUsd.toLocaleString()} liquidity` : `$${parseFloat(token.priceUsd || 0).toFixed(8)} • ${createdTime}`}
+            <span class="price-change ${changeClass}">${changeSign}${change24.toFixed(2)}%</span>
+          </div>
+          ${viralScoreHtml}
         </div>
-        ${viralScoreHtml}
         ${toggleBtn}
         ${detailSection}
       </div>
