@@ -1,386 +1,145 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
-  <head>
-    <title id="ik8v5">MEME VIRAL DETECTOR</title>
-    <meta charset="UTF-8" id="i7roa" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" id="iyqtr" />
-    <meta name="robots" content="index,follow">
-    <meta name="generator" content="GrapesJS Studio">
-    <meta name="description" content="Real-time Meme Token Detector – powered by Lancips." id="i0rao" />
-    <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/coin_1fa99.png" id="id5uka" />
-    <meta name="theme-color" content="#0f0f23" id="igyot" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet" id="iix6qp" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" id="ix3jvp" />
-    <link rel="stylesheet" href="style.css" id="i10911" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Real-time Meme Token Detector – powered by Lancips." />
+  <meta name="theme-color" content="#0f0f23" />
+  <title>MEME VIRAL DETECTOR</title>
+  <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/coin_1fa99.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ====== FIX GLOBAL LAYOUT LEAK ====== */
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
 
-  <body class="gjs-t-body" id="ibpf"><!-- HERO -->
-    <header class="hero" id="isubgo">
-      <a href="https://www.lancips.xyz" target="_blank" rel="noopener" class="back-btn" id="iqvsue"></a>
-      <div class="container" id="irmh2v">
-        <p class="subtitle" id="ioxrhq">Early clue for the <span class="neon" id="i6ua9w">next 1000x meme coin</span>
-        </p>
-        <div class="live-status" id="isp69h">
-          <span class="pulse" id="iaawcs"></span>
-          <span id="scan-count">0</span> tokens scanned today
-        </div>
-        <div class="pills" id="itqiuf"></div>
-        <span class="pill live" id="itk23l">DYOR</span>
+    img,
+    iframe {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    /* ====== FIX: Tombol View di mobile ====== */
+    @media (max-width: 480px) {
+      .cards {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        overflow-x: hidden;
+      }
+
+      .card {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .footer-row {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+
+      .footer-row .action-link {
+        flex-shrink: 0;
+        padding: 6px 10px;
+        font-size: 14px;
+        border-radius: 6px;
+      }
+
+      .volume-liq {
+        flex: 1 1 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 6px;
+      }
+
+      html,
+      body {
+        overflow-x: hidden !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="gjs-t-body">
+  <header class="hero">
+    <a href="https://www.lancips.xyz" target="_blank" rel="noopener" class="back-btn"></a>
+
+    <div class="container">
+      <p class="subtitle">
+        Early clue for the <span class="neon">next 1000x meme coin</span>
+      </p>
+
+      <div class="live-status">
+        <span class="pulse"></span>
+        <span id="scan-count">0</span> tokens scanned today
       </div>
-      <section id="meme-viral-feature" aria-label="Meme Viral Detector Feature" class="mvd-section">
-        <div id="idukr" class="mvd-back-label gjs-t-h2">MEME VIRAL DETECTOR</div>
-        <div id="loading-2" class="loading-container">
-          <img src="https://api.iconify.design/svg-spinners:180-ring-with-bg.svg?color=%233B82F6&amp;width=22&amp;height=22" alt="Loading spinner" id="iu82ur" class="spinner" />
-          Loading fresh memes...
+
+      <div class="pills">
+        <span class="pill live">DYOR</span>
+      </div>
+    </div>
+
+    <section id="meme-viral-feature" class="mvd-section">
+      <div class="mvd-back-label gjs-t-h2">MEME VIRAL DETECTOR</div>
+
+      <div id="loading-2" class="loading-container">
+        <img src="https://api.iconify.design/svg-spinners:180-ring-with-bg.svg?color=%233B82F6&width=22&height=22"
+          alt="Loading spinner" class="spinner" />
+        Loading fresh memes...
+      </div>
+
+      <!-- MOBILE -->
+      <section class="mobile-layout container">
+        <div class="tabs" role="tablist">
+          <button type="button" data-tab="viral" aria-selected="true" role="tab" class="tab active">
+            <img src="https://api.iconify.design/mdi:fire.svg?color=currentColor&width=18&height=18" alt="Viral" /> VIRAL
+          </button>
+          <button type="button" data-tab="new" aria-selected="false" role="tab" class="tab">
+            <img src="https://api.iconify.design/mdi:clock-outline.svg?color=currentColor&width=18&height=18" alt="New" /> NEW
+          </button>
         </div>
-        <section id="i4s5yj" class="mobile-layout container">
-          <div role="tablist" aria-label="Token tabs" id="izq10f" class="tabs">
-            <button type="button" data-tab="viral" aria-selected="true" aria-controls="mobile-viral-2" role="tab" id="izh61j" class="tab active">
-              <img src="https://api.iconify.design/mdi:fire.svg?color=currentColor&amp;width=18&amp;height=18" alt="Viral icon" id="i3z4wl" /> VIRAL
-            </button>
-            <button type="button" data-tab="new" aria-selected="false" aria-controls="mobile-new-2" role="tab" id="idshy5" class="tab">
-              <img src="https://api.iconify.design/mdi:clock-outline.svg?color=currentColor&amp;width=18&amp;height=18" alt="New icon" id="iic9gu" /> NEW
-            </button>
-          </div>
-          <div id="mobile-viral-2" role="tabpanel" aria-labelledby="viral" class="tab-content active"></div>
-          <div id="mobile-new-2" role="tabpanel" aria-labelledby="new" class="tab-content"></div>
-        </section>
-        <section id="iypbz3" class="desktop-layout container">
-          <div id="iubnl7" class="column viral-column">
-            <h2 id="ismdxn">
-              <img src="https://api.iconify.design/mdi:fire.svg?color=currentColor&amp;width=24&amp;height=24" alt="Fire icon" id="ic4dh3" class="icon" />
-              POTENTIALLY VIRAL
-            </h2>
-            <div id="viral-cards-2" aria-live="polite" class="cards"></div>
-          </div>
-          <div id="i3qdbn" class="column new-column">
-            <h2 id="imbxuc">
-              <img src="https://api.iconify.design/mdi:clock-outline.svg?color=currentColor&amp;width=24&amp;height=24" alt="Clock icon" id="iyrboy" class="icon" />
-              FRESHLY MINTED
-            </h2>
-            <div id="new-cards-2" aria-live="polite" class="cards"></div>
-          </div>
-        </section>
-        <div id="toast-2" role="status" aria-live="assertive" class="toast">NEW VIRAL DETECTED! 🚨</div>
-        <script id="i1myql">
-          (function() {
-            const root = document.getElementById('meme-viral-feature');
-            const els = {
-              scanCount: root.querySelector('#scan-count-2'),
-              loading: root.querySelector('#loading-2'),
-              viralCards: root.querySelector('#viral-cards-2'),
-              newCards: root.querySelector('#new-cards-2'),
-              mobileViral: root.querySelector('#mobile-viral-2'),
-              mobileNew: root.querySelector('#mobile-new-2'),
-              toast: root.querySelector('#toast-2'),
-              tabs: root.querySelectorAll('.tab')
-            };
 
-            const SEARCH_QUERIES = ['pepe', 'dog', 'doge', 'shib', 'inu', 'cat', 'elon', 'meme', 'moon', 'pump'];
-            const VIRAL_LIMIT = 12;
-            const NEW_LIMIT = 12;
-            const FRESH_WINDOW_MS = 6 * 60 * 60 * 1000; // 6 hours
-            const POLL_MS = 60000; // 60s refresh
-
-            const shownViral = new Set();
-
-            els.tabs.forEach(tab => {
-              tab.addEventListener('click', () => {
-                els.tabs.forEach(t => {
-                  t.classList.remove('active');
-                  t.setAttribute('aria-selected', 'false');
-                });
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
-                const active = tab.getAttribute('data-tab');
-                if (active === 'viral') {
-                  els.mobileViral.classList.add('active');
-                  els.mobileNew.classList.remove('active');
-                } else {
-                  els.mobileViral.classList.remove('active');
-                  els.mobileNew.classList.add('active');
-                }
-              });
-            });
-
-            function formatUSD(n) {
-              const num = Number(n || 0);
-              if (num >= 1e9) return '$' + (num / 1e9).toFixed(2) + 'B';
-              if (num >= 1e6) return '$' + (num / 1e6).toFixed(2) + 'M';
-              if (num >= 1e3) return '$' + (num / 1e3).toFixed(2) + 'K';
-              return '$' + num.toFixed(2);
-            }
-
-            function formatPct(n) {
-              if (n === undefined || n === null || isNaN(n)) return '—';
-              const v = Number(n);
-              const sign = v > 0 ? '+' : '';
-              return sign + v.toFixed(2) + '%';
-            }
-
-            function chainFromURL(url = '') {
-              try {
-                const u = new URL(url);
-                const parts = u.pathname.split('/').filter(Boolean);
-                return parts[0] || 'unknown';
-              } catch {
-                return 'unknown';
-              }
-            }
-
-            function chainIcon(chain) {
-              const map = {
-                ethereum: 'simple-icons:ethereum',
-                eth: 'simple-icons:ethereum',
-                bsc: 'simple-icons:binance',
-                binance: 'simple-icons:binance',
-                solana: 'simple-icons:solana',
-                base: 'simple-icons:base',
-                arbitrum: 'simple-icons:arbitrum',
-                optimism: 'simple-icons:optimism',
-                polygon: 'simple-icons:polygon',
-                matic: 'simple-icons:polygon',
-                avalanche: 'simple-icons:avalanche',
-                unknown: 'mdi:link-variant'
-              };
-              const icon = map[chain] || 'mdi:link-variant';
-              return `https://api.iconify.design/${icon}.svg?color=currentColor&width=16&height=16`;
-            }
-
-            function isMemeLike(symbol, name) {
-              const s = (symbol || '').toLowerCase();
-              const n = (name || '').toLowerCase();
-              const kws = ['pepe', 'dog', 'doge', 'shib', 'inu', 'cat', 'elon', 'meme', 'moon', 'pump', 'wojak', 'floki', 'bonk', 'slerf', 'pudgy', 'corgi', 'kitty'];
-              return kws.some(k => s.includes(k) || n.includes(k));
-            }
-
-            function scorePair(p) {
-              const vol = (p.volume && p.volume.h24) ? Number(p.volume.h24) : 0;
-              const liq = (p.liquidity && p.liquidity.usd) ? Number(p.liquidity.usd) : 0;
-              const ch1 = (p.priceChange && p.priceChange.h1) ? Number(p.priceChange.h1) : 0;
-              const ch6 = (p.priceChange && p.priceChange.h6) ? Number(p.priceChange.h6) : 0;
-              const buys = (p.txns && p.txns.h1 && p.txns.h1.buys) ? Number(p.txns.h1.buys) : 0;
-              const sells = (p.txns && p.txns.h1 && p.txns.h1.sells) ? Number(p.txns.h1.sells) : 0;
-              const momentum = ch1 * 1.2 + ch6 * 0.6 + (buys - sells) * 0.8;
-              return Math.log10(vol + 1) * 1.5 + Math.log10(liq + 1) + momentum;
-            }
-
-            function isFresh(p) {
-              const created = p.pairCreatedAt ? Number(p.pairCreatedAt) : null;
-              if (!created) return false;
-              return (Date.now() - created) < FRESH_WINDOW_MS;
-            }
-
-            function isViral(p) {
-              const vol = (p.volume && p.volume.h24) ? Number(p.volume.h24) : 0;
-              const liq = (p.liquidity && p.liquidity.usd) ? Number(p.liquidity.usd) : 0;
-              const ch1 = (p.priceChange && p.priceChange.h1) ? Number(p.priceChange.h1) : 0;
-              const ch6 = (p.priceChange && p.priceChange.h6) ? Number(p.priceChange.h6) : 0;
-              const baseSym = p.baseToken ? p.baseToken.symbol : (p.token0 ? p.token0.symbol : '');
-              const baseName = p.baseToken ? p.baseToken.name : (p.token0 ? p.token0.name : '');
-              const meme = isMemeLike(baseSym, baseName);
-              const momentum = ch1 > 50 || ch6 > 100;
-              const healthy = liq >= 30000 || vol >= 100000;
-              return meme && healthy && (momentum || scorePair(p) > 30);
-            }
-
-            function makeCard(p) {
-              const chain = chainFromURL(p.url);
-              const baseSymbol = p.baseToken ? p.baseToken.symbol : (p.token0 ? p.token0.symbol : '');
-              const quoteSymbol = p.quoteToken ? p.quoteToken.symbol : (p.token1 ? p.token1.symbol : '');
-              const price = p.priceUsd ? Number(p.priceUsd) : null;
-              const ch5m = p.priceChange && p.priceChange.m5 !== undefined ? Number(p.priceChange.m5) : null;
-              const ch1h = p.priceChange && p.priceChange.h1 !== undefined ? Number(p.priceChange.h1) : null;
-              const ch6h = p.priceChange && p.priceChange.h6 !== undefined ? Number(p.priceChange.h6) : null;
-
-              const hot = isViral(p);
-              const created = p.pairCreatedAt ? Number(p.pairCreatedAt) : null;
-              const createdAgo = created ? Math.max(1, Math.floor((Date.now() - created) / (60 * 1000))) : null;
-
-              const card = document.createElement('article');
-              card.className = 'card';
-              card.innerHTML = `
-          <div class="card-header">
-            <div class="card-title">
-              <span>${baseSymbol}/${quoteSymbol}</span>
-              ${hot ? `<span class="badge hot"><img src="https://api.iconify.design/mdi:trending-up.svg?color=currentColor&width=14&height=14" alt="Trending up"> HOT</span>` : ''}
-            </div>
-            <div class="chain-badge" title="${chain}">
-              <img src="${chainIcon(chain)}" alt="${chain} icon" loading="lazy">
-              <span>${chain.toUpperCase()}</span>
-            </div>
-          </div>
-
-          <div class="metrics">
-            <div class="metric">
-              <span class="metric-label">Price (USD)</span>
-              <span class="metric-value">${price ? '$' + price.toFixed(6) : '—'}</span>
-            </div>
-            <div class="metric">
-              <span class="metric-label">5m</span>
-              <span class="metric-value ${ch5m !== null ? (ch5m >= 0 ? 'positive' : 'negative') : ''}">${formatPct(ch5m)}</span>
-            </div>
-            <div class="metric">
-              <span class="metric-label">1h</span>
-              <span class="metric-value ${ch1h !== null ? (ch1h >= 0 ? 'positive' : 'negative') : ''}">${formatPct(ch1h)}</span>
-            </div>
-            <div class="metric">
-              <span class="metric-label">6h</span>
-              <span class="metric-value ${ch6h !== null ? (ch6h >= 0 ? 'positive' : 'negative') : ''}">${formatPct(ch6h)}</span>
-            </div>
-          </div>
-
-          <div class="footer-row">
-            <div class="volume-liq">
-              <span class="badge"><img src="https://api.iconify.design/mdi:cash.svg?color=currentColor&width=14&height=14" alt="Volume"> ${formatUSD(p.volume && p.volume.h24 ? p.volume.h24 : 0)}</span>
-              <span class="badge"><img src="https://api.iconify.design/mdi:liquid-spot.svg?color=currentColor&width=14&height=14" alt="Liquidity"> ${formatUSD(p.liquidity && p.liquidity.usd ? p.liquidity.usd : 0)}</span>
-              ${createdAgo ? `<span class="badge"><img src="https://api.iconify.design/mdi:clock-outline.svg?color=currentColor&width=14&height=14" alt="Age"> ${createdAgo}m ago</span>` : ''}
-            </div>
-            <a class="action-link gjs-t-button" href="${p.url}" target="_blank" rel="noopener" aria-label="View on DexScreener">
-              <img src="https://api.iconify.design/mdi:open-in-new.svg?color=currentColor&width=18&height=18" alt="Open in new">
-              View
-            </a>
-          </div>
-        `;
-              return card;
-            }
-
-            function makeEmptyState() {
-              const wrap = document.createElement('div');
-              wrap.className = 'empty-state';
-              wrap.innerHTML = `
-          <img src="https://api.iconify.design/mdi:alert-circle-outline.svg?color=currentColor&width=18&height=18" alt="Info">
-          <span>Tidak ada data token tersedia saat ini</span>
-        `;
-              return wrap;
-            }
-
-            async function fetchPairs(query) {
-              const url = `https://api.dexscreener.com/latest/dex/search?q=${encodeURIComponent(query)}`;
-              const res = await fetch(url);
-              if (!res.ok) throw new Error('Network error');
-              const data = await res.json();
-              return Array.isArray(data.pairs) ? data.pairs : [];
-            }
-
-            function dedupeByPairAddress(arr) {
-              const seen = new Set();
-              const out = [];
-              for (const p of arr) {
-                const addr = p.pairAddress || (p.info ? p.info.pairAddress : null) || (p.url ? p.url.split('/').pop() : null);
-                if (!addr) continue;
-                if (!seen.has(addr)) {
-                  seen.add(addr);
-                  out.push(p);
-                }
-              }
-              return out;
-            }
-
-            function updateScanCount(pairs) {
-              const today = Date.now() - (24 * 60 * 60 * 1000);
-              const countToday = pairs.filter(p => p.pairCreatedAt && Number(p.pairCreatedAt) >= today).length;
-              if (els.scanCount) els.scanCount.textContent = countToday;
-            }
-
-            function showToast() {
-              if (!els.toast) return;
-              els.toast.classList.add('show');
-              setTimeout(() => {
-                els.toast.classList.remove('show');
-              }, 2600);
-            }
-
-            function render(pairs) {
-              const fresh = pairs.filter(isFresh).sort((a, b) => Number(b.pairCreatedAt || 0) - Number(a.pairCreatedAt || 0)).slice(0, NEW_LIMIT);
-              const viral = pairs.filter(isViral).sort((a, b) => scorePair(b) - scorePair(a)).slice(0, VIRAL_LIMIT);
-
-              els.viralCards.innerHTML = '';
-              els.newCards.innerHTML = '';
-
-              if (viral.length === 0) {
-                els.viralCards.appendChild(makeEmptyState());
-              } else {
-                viral.forEach(p => {
-                  const card = makeCard(p);
-                  els.viralCards.appendChild(card);
-                  const addr = p.pairAddress || p.url;
-                  if (addr && !shownViral.has(addr)) {
-                    shownViral.add(addr);
-                    showToast();
-                  }
-                });
-              }
-
-              if (fresh.length === 0) {
-                els.newCards.appendChild(makeEmptyState());
-              } else {
-                fresh.forEach(p => {
-                  const card = makeCard(p);
-                  els.newCards.appendChild(card);
-                });
-              }
-
-              els.mobileViral.innerHTML = '';
-              els.mobileNew.innerHTML = '';
-
-              if (viral.length === 0) {
-                els.mobileViral.appendChild(makeEmptyState());
-              } else {
-                viral.forEach(p => els.mobileViral.appendChild(makeCard(p)));
-              }
-
-              if (fresh.length === 0) {
-                els.mobileNew.appendChild(makeEmptyState());
-              } else {
-                fresh.forEach(p => els.mobileNew.appendChild(makeCard(p)));
-              }
-
-              updateScanCount(pairs);
-            }
-
-            async function scan() {
-              if (els.loading) els.loading.style.display = 'flex';
-              try {
-                const results = await Promise.allSettled(SEARCH_QUERIES.map(fetchPairs));
-                let all = [];
-                for (const r of results) {
-                  if (r.status === 'fulfilled' && Array.isArray(r.value)) {
-                    all = all.concat(r.value);
-                  }
-                }
-                const unique = dedupeByPairAddress(all);
-                render(unique);
-              } catch (e) {
-                els.viralCards.innerHTML = '';
-                els.newCards.innerHTML = '';
-                els.mobileViral.innerHTML = '';
-                els.mobileNew.innerHTML = '';
-                const empty = makeEmptyState();
-                els.viralCards.appendChild(empty.cloneNode(true));
-                els.newCards.appendChild(empty.cloneNode(true));
-                els.mobileViral.appendChild(empty.cloneNode(true));
-                els.mobileNew.appendChild(empty.cloneNode(true));
-              } finally {
-                if (els.loading) els.loading.style.display = 'none';
-              }
-            }
-
-            scan();
-            const interval = setInterval(scan, POLL_MS);
-            window.addEventListener('beforeunload', () => clearInterval(interval));
-          })();
-        </script>
+        <div id="mobile-viral-2" class="tab-content active"></div>
+        <div id="mobile-new-2" class="tab-content"></div>
       </section>
-    </header><!-- LOADING --><!-- DESKTOP: 2 COLUMNS -->
-    <section class="desktop-layout container" id="ilucbk"></section><!-- MOBILE: TABS -->
-    <section class="mobile-layout container" id="iw8e8w"></section><!-- NOTIF TOAST -->
-    <div id="toast" class="toast">NEW VIRAL DETECTED! 🚨</div>
-    <footer class="footer" id="i0h8lx">
-      <p id="if6mc1">© 2025 <b id="im835p">Lancips</b> — Fun, absurd, and dangerously early. DYOR </p>
-    </footer>
-    <script src="app.js" id="izr7fi"></script>
-  </body>
+
+      <!-- DESKTOP -->
+      <section class="desktop-layout container">
+        <div class="column viral-column">
+          <h2><img src="https://api.iconify.design/mdi:fire.svg?color=currentColor&width=24&height=24" alt="Fire" /> POTENTIALLY VIRAL</h2>
+          <div id="viral-cards-2" class="cards"></div>
+        </div>
+
+        <div class="column new-column">
+          <h2><img src="https://api.iconify.design/mdi:clock-outline.svg?color=currentColor&width=24&height=24" alt="Clock" /> FRESHLY MINTED</h2>
+          <div id="new-cards-2" class="cards"></div>
+        </div>
+      </section>
+
+      <div id="toast-2" class="toast">NEW VIRAL DETECTED! 🚨</div>
+    </section>
+  </header>
+
+  <footer class="footer">
+    <p>© 2025 <b>Lancips</b> — Fun, absurd, and dangerously early. DYOR.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
 
 </html>
