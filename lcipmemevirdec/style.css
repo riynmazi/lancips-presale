@@ -217,7 +217,7 @@ body {
 }
 
 .card {
-  max-width: 450px; /* Limit di desktop */
+  max-width: 450px;
   margin: 0 auto 1.5rem;
   width: 100%;
   background: var(--bg-card);
@@ -264,7 +264,7 @@ body {
 .token-info {
   flex: 1;
   min-width: 0;
-  max-width: 70%; /* Batasi nama biar gak overlap */
+  max-width: 70%;
 }
 
 .token-name {
@@ -296,7 +296,13 @@ body {
   object-fit: cover;
   border: 2px solid var(--neon);
   flex-shrink: 0;
-  order: 2; /* Logo ke kanan atas */
+  order: 2;
+}
+
+.token-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .badge {
@@ -312,11 +318,10 @@ body {
   animation: glow 2s ease-in-out infinite alternate;
   box-shadow: 0 0 10px rgba(0,255,136,0.3);
   flex-shrink: 0;
-  order: 3; /* Badge di bawah logo */
-  margin-top: 0.5rem; /* Space dari logo */
+  margin-top: 0.5rem;
 }
 
-/* VIRAL SCORE */
+/* VIRAL SCORE & PRICE */
 .viral-score {
   background: linear-gradient(to right, var(--neon), var(--gold));
   height: 4px;
@@ -339,7 +344,6 @@ body {
   margin-top: 0.2rem;
 }
 
-/* PRICE & CHANGE */
 .liquidity, .price {
   font-size: 0.92rem;
   color: var(--gold);
@@ -355,66 +359,73 @@ body {
 .positive { color: var(--success); }
 .negative { color: var(--danger); }
 
-/* X SECTION */
-.x-section {
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-glow);
-  font-size: 0.8rem;
+/* X SECTION & DETAIL (Hanya buat mobile) */
+.detail-section, .x-section {
+  display: none; /* Default hide di desktop */
 }
 
-.x-metric {
-  display: flex;
-  justify-content: space-between;
-  margin: 2px 0;
-}
+@media (max-width: 1024px) {
+  .detail-section {
+    display: block; /* Show di mobile */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.3s ease 0.2s;
+    background: rgba(0, 255, 136, 0.05);
+    border-top: 1px solid var(--border-glow);
+    padding: 0 1.1rem;
+  }
 
-.x-label { color: var(--gray); }
+  .card.expanded .detail-section {
+    max-height: 500px;
+    padding: 1rem 1.1rem;
+  }
 
-.x-value {
-  font-weight: 600;
-  color: var(--neon);
-}
+  .x-section {
+    display: block;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-glow);
+    font-size: 0.8rem;
+  }
 
-.x-engagement { color: var(--gold); }
+  .x-metric {
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0;
+  }
 
-.x-timestamp {
-  margin-top: 4px;
-  font-size: 0.7rem;
-  color: var(--gray-light);
-  text-align: right;
-}
+  .x-label { color: var(--gray); }
 
-/* TOGGLE DETAIL CARD */
-.toggle-btn {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: var(--neon);
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  z-index: 10;
-}
+  .x-value {
+    font-weight: 600;
+    color: var(--neon);
+  }
 
-.card.expanded .toggle-btn i {
-  transform: rotate(180deg);
-}
+  .x-engagement { color: var(--gold); }
 
-.detail-section {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out, padding 0.3s ease;
-  background: rgba(0, 255, 136, 0.05);
-  border-top: 1px solid var(--border-glow);
-  padding: 0 1.1rem;
-}
+  .x-timestamp {
+    margin-top: 4px;
+    font-size: 0.7rem;
+    color: var(--gray-light);
+    text-align: right;
+  }
 
-.card.expanded .detail-section {
-  max-height: 400px;
-  padding: 1rem 1.1rem;
+  .toggle-btn {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--neon);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 20;
+  }
+
+  .card.expanded .toggle-btn i {
+    transform: rotate(180deg);
+  }
 }
 
 .detail-row {
@@ -583,7 +594,6 @@ body {
   .card { padding: 1rem; max-width: 100%; }
   .token-image { width: 35px; height: 35px; }
   .badge { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
-  .toggle-btn { bottom: 0.8rem; right: 0.8rem; font-size: 1.1rem; }
 }
 
 @media (max-width: 768px) {
