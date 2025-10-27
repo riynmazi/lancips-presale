@@ -97,8 +97,8 @@ img {
 /* ===== FILTER BAR ===== */
 .filter-bar {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: right;
+  justify-content: right;
   width: 100%;
   gap: 10px;
   margin-bottom: 20px;
@@ -130,6 +130,7 @@ img {
 
 .search-input::placeholder {
   color: rgba(255,255,255,0.4);
+  background: transparent;
 }
 
 /* ===== LOADING ===== */
