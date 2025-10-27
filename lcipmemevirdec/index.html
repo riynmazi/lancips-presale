@@ -9,82 +9,75 @@
   <meta name="theme-color" content="#0f1220" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/a2e0e6b6a6.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <header class="main-header">
-    <div class="hero-container container">
-      <div class="hero-left-block">
-        <a href="https://www.lancips.xyz" target="_blank" rel="noopener" class="external-link-back-button">
-          <img src="https://api.iconify.design/lucide-arrow-left.svg?color=currentColor&width=18&height=18" alt="Back to Lancips" class="back-icon" />
-          <span>Back to Lancips</span>
-        </a>
-        <span class="dyor-pill">DYOR</span>
+  <!-- ===== TOP BAR ===== -->
+  <header class="top-bar">
+    <button class="back-btn" onclick="window.location.href='https://www.lancips.xyz'">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <h1 class="app-title">Meme Viral Detector</h1>
+  </header>
+
+  <!-- ===== HERO / STATUS ===== -->
+  <section class="status-section container">
+    <div class="live-status">
+      <span class="pulse-dot"></span>
+      <p><span id="scan-count">0</span> tokens scanned today</p>
+    </div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content container">
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <div class="filter-dropdowns">
+        <select id="filter-chain" class="filter-select">
+          <option value="all">All Chains</option>
+          <option value="solana">Solana</option>
+          <option value="bsc">BSC</option>
+        </select>
       </div>
 
-      <div class="live-status">
-        <span class="pulse-dot"></span>
-        <p><span id="scan-count">0</span> tokens scanned today</p>
+      <input type="text" id="search-input" placeholder="Search token..." class="search-input" />
+
+      <div class="filter-dropdowns">
+        <select id="filter-category" class="filter-select">
+          <option value="viral">Viral</option>
+          <option value="top24h">Top 24h</option>
+          <option value="new">New</option>
+        </select>
       </div>
     </div>
 
-    <section id="meme-viral-feature" class="feature-section-wrapper container">
-      <div class="feature-header-label">
-        <h1 class="feature-title">MEME VIRAL DETECTOR</h1>
-        <p class="feature-subtitle">Early clues for the next 1000x meme coin</p>
-      </div>
+    <!-- LOADING -->
+    <div id="loading" class="loading-container hidden">
+      <img src="https://api.iconify.design/lucide-loader-2.svg?color=currentColor&width=22&height=22" alt="Loading" class="loading-spinner-icon" />
+      <span class="loading-label">Searching for hot memes...</span>
+    </div>
 
-      <!-- Loading -->
-      <div id="loading" class="loading-container hidden">
-        <img src="https://api.iconify.design/lucide-loader-2.svg?color=currentColor&width=22&height=22" alt="Loading" class="loading-spinner-icon" />
-        <span class="loading-label">Searching for hot memes...</span>
-      </div>
-
-      <!-- Filter Bar -->
-      <div class="filter-bar">
-        <div class="filter-dropdowns">
-          <select id="filter-chain" class="filter-select">
-            <option value="all">All Chains</option>
-            <option value="solana">Solana</option>
-            <option value="bsc">BSC</option>
-            <option value="ethereum">Ethereum</option>
-          </select>
-        </div>
-
-        <input type="text" id="search-input" placeholder="Search token..." class="search-input" />
-
-        <div class="filter-dropdowns">
-          <select id="filter-category" class="filter-select">
-            <option value="viral">Viral</option>
-            <option value="top24h">Top 24h</option>
-            <option value="new">New</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Token Grid -->
-      <section id="token-grid" class="token-grid">
-        <!-- Populated dynamically by JS -->
-      </section>
-
-      <!-- Toast Notification -->
-      <div id="toast" role="status" aria-live="assertive" class="toast-notification hidden">
-        <span class="toast-label">
-          <img src="https://api.iconify.design/lucide-activity.svg?color=currentColor&width=18&height=18" alt="Alert icon" aria-label="New viral detected" />
-          <strong class="toast-strong-text">NEW VIRAL DETECTED!</strong>
-        </span>
-      </div>
+    <!-- TOKEN GRID -->
+    <section id="token-grid" class="token-grid">
+      <!-- Populated dynamically by JS -->
     </section>
-  </header>
 
-  <main class="main-content-wrapper">
-    <section class="aux-desktop-spacer"></section>
-    <section class="aux-mobile-spacer"></section>
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" role="status" aria-live="assertive" class="toast-notification hidden">
+      <span class="toast-label">
+        <img src="https://api.iconify.design/lucide-activity.svg?color=currentColor&width=18&height=18" alt="Alert icon" />
+        <strong class="toast-strong-text">NEW VIRAL DETECTED!</strong>
+      </span>
+    </div>
+
   </main>
 
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="footer-container container">
-      <p class="footer-text">© 2025 <b>Lancips</b> — Fun, absurd, and dangerously early. DYOR</p>
+      <p class="footer-text">© 2025 <b>Lancips</b> — Fun, absurd, and dangerously early.</p>
     </div>
   </footer>
 
