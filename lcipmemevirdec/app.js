@@ -80,7 +80,7 @@ function getXMetrics(token) {
   return {
     xMentions: token.xMentions || Math.floor(Math.random() * 50) + 10,
     xLikes: token.xLikes || Math.floor(Math.random() * 2000) + 500,
-    xRetweets: token.xRetweets || Math.floor(Math.random() * 200) + 50,
+    xRetweets: token.xRetweets || Math.random() * 200 + 50,
     xEngagement: (token.xLikes || 0) + (token.xRetweets || 0),
     xFetchedAt: token.xFetchedAt || new Date().toISOString()
   };
@@ -155,6 +155,9 @@ function createCard(token, isViral = false) {
     });
   }
 
+  // Conditional toggle buat desktop vs mobile
+  const toggleBtn = window.innerWidth <= 1024 ? '<button class="toggle-btn" data-toggle="true"><i class="fas fa-chevron-down"></i></button>' : '';
+
   return `
     <div class="card" data-address="${address || ''}" style="position: relative;">
       <div class="card-header">
@@ -162,24 +165,28 @@ function createCard(token, isViral = false) {
           <div class="token-name" onclick="window.open('${pairUrl}', '_blank')" style="cursor: pointer;">${name}</div>
           <div><span class="symbol">${symbol}</span> <i class="${getChainIcon(token.chainId)} chain-label">${(token.chainId || 'unknown').toUpperCase()}</i></div>
         </div>
-        <img src="${imgSrc}" alt="${symbol}" class="token-image" loading="lazy">
-        <div class="badge" style="background:${color}20; color:${color}; border:1px solid ${color};">${badge}</div>
+        <div class="token-badges">
+          <img src="${imgSrc}" alt="${symbol}" class="token-image" loading="lazy">
+          <div class="badge" style="background:${color}20; color:${color}; border:1px solid ${color};">${badge}</div>
+        </div>
       </div>
       <div class="price ${isViral ? 'liquidity' : ''}">
         ${isViral ? `$${liqUsd.toLocaleString()} liquidity` : `$${parseFloat(token.priceUsd || 0).toFixed(8)} • ${createdTime}`}
         <span class="price-change ${changeClass}">${changeSign}${change24.toFixed(2)}%</span>
       </div>
       ${viralScoreHtml}
-      <button class="toggle-btn" data-toggle="true"><i class="fas fa-chevron-down"></i></button>
+      ${toggleBtn}
       ${detailSection}
     </div>
   `;
 }
 
-// Global Toggle Listener (Tambah debug log)
+// Global Toggle Listener (Hanya aktif di mobile)
 function initToggle() {
-  document.removeEventListener('click', handleToggle);
-  document.addEventListener('click', handleToggle);
+  if (window.innerWidth <= 1024) {
+    document.removeEventListener('click', handleToggle);
+    document.addEventListener('click', handleToggle);
+  }
 }
 
 function handleToggle(e) {
@@ -192,7 +199,7 @@ function handleToggle(e) {
     card.classList.toggle('expanded');
     const icon = btn.querySelector('i');
     if (icon) icon.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0deg)';
-    console.log('Toggle OK! Expanded now:', !isExpanded); // Debug log – cek F12 Console
+    console.log('Toggle OK! Expanded now:', !isExpanded);
   }
 }
 
@@ -206,7 +213,7 @@ async function load() {
   } catch (e) {
     console.error('API error:', e);
     showToast('API error – using fallback');
-    tokens = []; // Atau load fallback kalau ada
+    tokens = [];
   }
 
   scanCount += tokens.length;
@@ -228,11 +235,17 @@ async function load() {
   mobileViral.innerHTML = viralCards.innerHTML;
   mobileNew.innerHTML = newCards.innerHTML;
 
-  initToggle(); // Re-attach listener
+  initToggle();
 
   if (viral.length > 0) showToast();
   if (loadingEl) loadingEl.style.display = 'none';
 }
+
+// Resize Handler biar toggle adjust pas resize
+window.addEventListener('resize', () => {
+  initToggle();
+  console.log('Resized, re-attached toggle listener if mobile');
+});
 
 // Tabs
 document.querySelectorAll('.tab').forEach(tab => {
@@ -241,7 +254,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('mobile-' + tab.dataset.tab).classList.add('active');
-    setTimeout(initToggle, 100); // Re-attach pas switch tab
+    setTimeout(initToggle, 100);
   });
 });
 
