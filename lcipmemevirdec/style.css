@@ -107,20 +107,20 @@ img {
 .search-bar {
   flex: 0 0 60%; /* lebar tetap 60% dari container */
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: 16px;
   border: 1px solid #444;
   background: #111;
-  color: #fff;
+  color: grey;
 }
 
 .chain-filter,
 .viral-filter {
   flex: 0 0 20%; /* masing-masing 20% */
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 16px;
   border: 1px solid #444;
   background: #111;
-  color: #fff;
+  color: grey;
 }
 
 .filter-select:focus, .search-input:focus {
