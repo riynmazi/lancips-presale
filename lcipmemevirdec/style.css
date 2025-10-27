@@ -378,6 +378,8 @@ img {
   }
 
   .filter-bar {
+    display: flex;
+    justify-content: center;
     grid-template-columns: 1fr;
     gap: 8px;
     margin-top: 20px;
