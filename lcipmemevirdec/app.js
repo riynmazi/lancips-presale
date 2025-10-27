@@ -155,12 +155,10 @@ function createCard(token, isViral = false) {
     });
   }
 
-  // Conditional toggle buat desktop vs mobile
-  const toggleBtn = window.innerWidth <= 1024 ? '<button class="toggle-btn" data-toggle="true"><i class="fas fa-chevron-down"></i></button>' : '';
-
-  return `
-    <div class="card" data-address="${address || ''}" style="position: relative;">
-      <div class="card-header">
+  // Conditional buat desktop vs mobile
+  if (window.innerWidth > 1024) {
+    return `
+      <li class="token-item" data-address="${address || ''}">
         <div class="token-info">
           <div class="token-name" onclick="window.open('${pairUrl}', '_blank')" style="cursor: pointer;">${name}</div>
           <div><span class="symbol">${symbol}</span> <i class="${getChainIcon(token.chainId)} chain-label">${(token.chainId || 'unknown').toUpperCase()}</i></div>
@@ -169,16 +167,38 @@ function createCard(token, isViral = false) {
           <img src="${imgSrc}" alt="${symbol}" class="token-image" loading="lazy">
           <div class="badge" style="background:${color}20; color:${color}; border:1px solid ${color};">${badge}</div>
         </div>
+        <div class="price">
+          ${isViral ? `$${liqUsd.toLocaleString()} liquidity` : `$${parseFloat(token.priceUsd || 0).toFixed(8)} • ${createdTime}`}
+          <span class="price-change ${changeClass}">${changeSign}${change24.toFixed(2)}%</span>
+        </div>
+        ${viralScoreHtml}
+        ${detailSection}
+      </li>
+    `;
+  } else {
+    const toggleBtn = '<button class="toggle-btn" data-toggle="true"><i class="fas fa-chevron-down"></i></button>';
+    return `
+      <div class="card" data-address="${address || ''}" style="position: relative;">
+        <div class="card-header">
+          <div class="token-info">
+            <div class="token-name" onclick="window.open('${pairUrl}', '_blank')" style="cursor: pointer;">${name}</div>
+            <div><span class="symbol">${symbol}</span> <i class="${getChainIcon(token.chainId)} chain-label">${(token.chainId || 'unknown').toUpperCase()}</i></div>
+          </div>
+          <div class="token-badges">
+            <img src="${imgSrc}" alt="${symbol}" class="token-image" loading="lazy">
+            <div class="badge" style="background:${color}20; color:${color}; border:1px solid ${color};">${badge}</div>
+          </div>
+        </div>
+        <div class="price ${isViral ? 'liquidity' : ''}">
+          ${isViral ? `$${liqUsd.toLocaleString()} liquidity` : `$${parseFloat(token.priceUsd || 0).toFixed(8)} • ${createdTime}`}
+          <span class="price-change ${changeClass}">${changeSign}${change24.toFixed(2)}%</span>
+        </div>
+        ${viralScoreHtml}
+        ${toggleBtn}
+        ${detailSection}
       </div>
-      <div class="price ${isViral ? 'liquidity' : ''}">
-        ${isViral ? `$${liqUsd.toLocaleString()} liquidity` : `$${parseFloat(token.priceUsd || 0).toFixed(8)} • ${createdTime}`}
-        <span class="price-change ${changeClass}">${changeSign}${change24.toFixed(2)}%</span>
-      </div>
-      ${viralScoreHtml}
-      ${toggleBtn}
-      ${detailSection}
-    </div>
-  `;
+    `;
+  }
 }
 
 // Global Toggle Listener (Hanya aktif di mobile)
@@ -241,10 +261,14 @@ async function load() {
   if (loadingEl) loadingEl.style.display = 'none';
 }
 
-// Resize Handler biar toggle adjust pas resize
+// Resize Handler biar layout adjust pas resize
 window.addEventListener('resize', () => {
+  viralCards.innerHTML = viralCards.dataset.tokens ? viral.map(t => createCard(t, true)).join('') : '';
+  newCards.innerHTML = newCards.dataset.tokens ? newest.map(t => createCard(t)).join('') : '';
+  mobileViral.innerHTML = viralCards.innerHTML;
+  mobileNew.innerHTML = newCards.innerHTML;
   initToggle();
-  console.log('Resized, re-attached toggle listener if mobile');
+  console.log('Resized, re-rendered and re-attached toggle if mobile');
 });
 
 // Tabs
