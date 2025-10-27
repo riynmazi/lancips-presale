@@ -86,3 +86,44 @@ header.hero .subtitle {
   min-width: 100px;
   text-align: center;
 }
+
+/* === FIX: Tombol View nabrak di mobile === */
+@media (max-width: 480px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-x: hidden;
+  }
+
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .footer-row {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .footer-row .action-link {
+    flex-shrink: 0;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+
+  .volume-liq {
+    flex: 1 1 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  /* Mastiin ga bisa geser ke kanan */
+  html, body {
+    overflow-x: hidden !important;
+  }
+}
