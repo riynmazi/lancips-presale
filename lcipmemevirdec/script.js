@@ -6,7 +6,7 @@
   const POLL_MS = 60000;
   const VIRAL_LIMIT = 12;
   const NEW_LIMIT = 12;
-  const FRESH_WINDOW_MS = 6 * 60 * 60 * 1000;
+  const FRESH_WINDOW_MS = 12 * 60 * 60 * 1000;
 
   const els = {
     scanCount: document.getElementById('scan-count'),
