@@ -76,7 +76,7 @@
       </div>
       <div class="mvd-metrics">
         <div class="mvd-metric">
-          <span class="mvd-metric-label">Harga (USD)</span>
+          <span class="mvd-metric-label">Price (USD)</span>
           <span class="mvd-metric-value">${ price !== '—' ? `$${ price }` : '—' }</span>
         </div>
         <div class="mvd-metric">
@@ -84,11 +84,11 @@
           <span class="mvd-metric-value ${ ch5m >= 0 ? 'mvd-metric-up' : 'mvd-metric-down' }">${ formatPct(ch5m) }</span>
         </div>
         <div class="mvd-metric">
-          <span class="mvd-metric-label">1j</span>
+          <span class="mvd-metric-label">1h</span>
           <span class="mvd-metric-value ${ ch1h >= 0 ? 'mvd-metric-up' : 'mvd-metric-down' }">${ formatPct(ch1h) }</span>
         </div>
         <div class="mvd-metric">
-          <span class="mvd-metric-label">6j</span>
+          <span class="mvd-metric-label">6h</span>
           <span class="mvd-metric-value ${ ch6h >= 0 ? 'mvd-metric-up' : 'mvd-metric-down' }">${ formatPct(ch6h) }</span>
         </div>
       </div>
@@ -96,9 +96,9 @@
         <div class="mvd-chips">
           <span class="mvd-chip">💰 ${ formatUSD(p.volume?.h24 || 0) }</span>
           <span class="mvd-chip">💧 ${ formatUSD(p.liquidity?.usd || 0) }</span>
-          ${ createdAgo ? `<span class="mvd-chip mvd-age">🕒 ${ createdAgo }m lalu</span>` : '' }
+          ${ createdAgo ? `<span class="mvd-chip mvd-age">🕒 ${ createdAgo }m ago</span>` : '' }
         </div>
-        <a class="mvd-view" href="${ p.url || '#' }" target="_blank" rel="noopener">🔗 Lihat</a>
+        <a class="mvd-view" href="${ p.url || '#' }" target="_blank" rel="noopener">🔗 View</a>
       </div>
     `;
     return card;
@@ -107,15 +107,15 @@
   async function fetchTokens() {
     try {
       const res = await fetch(API_URL);
-      if (!res.ok) throw new Error('Gagal ambil token');
+      if (!res.ok) throw new Error('Failed to fetch tokens');
       const data = await res.json();
       return Array.isArray(data) ? data : data.tokens || [];
     } catch (err) {
       console.error('[MVD] Error fetch:', err);
-      els.viralCards.innerHTML = '<div class="mvd-empty">😿 Wah, radar meme kita lagi ngadat! Coba lagi nanti.</div>';
-      els.newCards.innerHTML = '<div class="mvd-empty">😿 Wah, radar meme kita lagi ngadat! Coba lagi nanti.</div>';
-      els.mobileViral.innerHTML = '<div class="mvd-empty">😿 Wah, radar meme kita lagi ngadat! Coba lagi nanti.</div>';
-      els.mobileNew.innerHTML = '<div class="mvd-empty">😿 Wah, radar meme kita lagi ngadat! Coba lagi nanti.</div>';
+      els.viralCards.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
+      els.newCards.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
+      els.mobileViral.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
+      els.mobileNew.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
       return [];
     }
   }
@@ -124,10 +124,10 @@
     const fresh = pairs.filter(isFresh).slice(0, NEW_LIMIT);
     const viral = pairs.filter(isViral).slice(0, VIRAL_LIMIT);
 
-    els.viralCards.innerHTML = viral.length ? '' : '<div class="mvd-empty">😴 Belum ada meme viral!</div>';
-    els.newCards.innerHTML = fresh.length ? '' : '<div class="mvd-empty">🍼 Belum ada meme baru!</div>';
-    els.mobileViral.innerHTML = viral.length ? '' : '<div class="mvd-empty">😴 Belum ada meme viral!</div>';
-    els.mobileNew.innerHTML = fresh.length ? '' : '<div class="mvd-empty">🍼 Belum ada meme baru!</div>';
+    els.viralCards.innerHTML = viral.length ? '' : '<div class="mvd-empty">😴 No viral memes yet!</div>';
+    els.newCards.innerHTML = fresh.length ? '' : '<div class="mvd-empty">🍼 No new memes yet!</div>';
+    els.mobileViral.innerHTML = viral.length ? '' : '<div class="mvd-empty">😴 No viral memes yet!</div>';
+    els.mobileNew.innerHTML = fresh.length ? '' : '<div class="mvd-empty">🍼 No new memes yet!</div>';
 
     viral.forEach(p => {
       els.viralCards.appendChild(makeCard(p));
@@ -145,8 +145,8 @@
     tab.addEventListener('click', () => {
       els.tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
       tab.setAttribute('aria-selected', 'true');
-      els.mobileViral.style.display = tab.getAttribute('data-tab') === 'viral' ? 'block' : 'none';
-      els.mobileNew.style.display = tab.getAttribute('data-tab') === 'new' ? 'block' : 'none';
+      els.mobileViral.classList.toggle('hidden', tab.getAttribute('data-tab') !== 'viral');
+      els.mobileNew.classList.toggle('hidden', tab.getAttribute('data-tab') !== 'new');
     });
   });
 
@@ -156,9 +156,9 @@
   });
 
   async function scan() {
-    els.loading.style.display = 'block';
+    els.loading.classList.remove('hidden');
     const tokens = await fetchTokens();
     render(tokens);
-    els.loading.style.display = 'none';
+    els.loading.classList.add('hidden');
   }
 })();
