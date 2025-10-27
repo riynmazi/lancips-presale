@@ -42,63 +42,34 @@
   function makeCard(p) {
     const card = document.createElement('article');
     card.className = 'mvd-card';
-    const chain = (p.chain || 'unknown').toUpperCase();
+
     const symbol = p.symbol || '—';
     const name = p.name || '—';
-    const price = p.priceUsd ? Number(p.priceUsd).toFixed(6) : '—';
     const liquidity = p.liquidityUsd || 0;
     const volume = p.volumeUsd || 0;
-    const createdAgo = formatTimeAgo(p.createdAt);
-    const memeScore = p.memeScore || 0;
+    const chain = (p.chain || '').toUpperCase();
+    const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
+    const pairUrl = p.pairUrl || '#';
 
     card.innerHTML = `
       <div class="mvd-card-header">
-        <div class="mvd-title-wrap">
-          <span class="mvd-pair">${symbol}</span>
+        <div class="mvd-card-header-left">
+          <img src="${logo}" alt="${symbol}" class="mvd-token-icon" />
+          <div>
+            <div class="mvd-token-name">${name}</div>
+            <div class="mvd-token-symbol">${symbol}</div>
+          </div>
         </div>
-        <span class="mvd-badge mvd-badge--chain">${chain}</span>
-      </div>
-
-      <div class="mvd-info">
-        <span class="mvd-info-label">Name</span>
-        <span class="mvd-info-value">${name}</span>
-        <span class="mvd-info-label">Address</span>
-        <span class="mvd-info-value mvd-info-address">${p.address || '—'}</span>
+        <div class="mvd-arrow">→</div>
       </div>
 
       <div class="mvd-metrics">
-        <div class="mvd-metric">
-          <span class="mvd-metric-label">Price</span>
-          <span class="mvd-metric-value">${price !== '—' ? `$${price}` : '—'}</span>
-        </div>
-        <div class="mvd-metric">
-          <span class="mvd-metric-label">Liquidity</span>
-          <span class="mvd-metric-value">${formatUSD(liquidity)}</span>
-        </div>
-        <div class="mvd-metric">
-          <span class="mvd-metric-label">Volume 24h</span>
-          <span class="mvd-metric-value">${formatUSD(volume)}</span>
-        </div>
-        <div class="mvd-metric">
-          <span class="mvd-metric-label">Meme Score</span>
-          <span class="mvd-metric-value">${memeScore}</span>
-        </div>
-      </div>
-
-      <div class="mvd-social">
-        <div class="mvd-metric"><span class="mvd-metric-label">❤️ Likes</span><span class="mvd-metric-value">${p.xLikes || 0}</span></div>
-        <div class="mvd-metric"><span class="mvd-metric-label">💬 Mentions</span><span class="mvd-metric-value">${p.xMentions || 0}</span></div>
-        <div class="mvd-metric"><span class="mvd-metric-label">🔄 Retweets</span><span class="mvd-metric-value">${p.xRetweets || 0}</span></div>
-        <div class="mvd-metric"><span class="mvd-metric-label">📈 Engagement</span><span class="mvd-metric-value">${p.xEngagement || 0}</span></div>
+        <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
+        <div>Volume <span>${formatUSD(volume)}</span></div>
       </div>
 
       <div class="mvd-footer">
-        <div class="mvd-chips">
-          <span class="mvd-chip">💰 ${formatUSD(volume)}</span>
-          <span class="mvd-chip">💧 ${formatUSD(liquidity)}</span>
-          <span class="mvd-chip">🕒 ${createdAgo}</span>
-        </div>
-        <a class="mvd-view" href="${p.pairUrl || '#'}" target="_blank" rel="noopener">🔗 View</a>
+        <a href="${pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
       </div>
     `;
     return card;
