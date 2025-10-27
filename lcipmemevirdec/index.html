@@ -25,45 +25,96 @@
         <p><span id="scan-count">0</span> tokens scanned today</p>
       </div>
     </div>
+
     <section id="meme-viral-feature" aria-label="Meme Viral Detector Feature" class="feature-section-wrapper container">
       <div class="feature-header-label">
         <h1 class="feature-title">MEME VIRAL DETECTOR</h1>
         <p class="feature-subtitle">Early clues for the next 1000x meme coin</p>
       </div>
+
+      <!-- Loading -->
       <div id="loading" class="loading-container">
         <img src="https://api.iconify.design/lucide-loader-2.svg?color=currentColor&width=22&height=22" alt="Loading" class="loading-spinner-icon">
         <span class="loading-label">Searching for hot memes...</span>
       </div>
-      <section class="mobile-tabs-layout">
-        <div role="tablist" aria-label="Token tabs" class="tabs-control">
-          <button type="button" data-tab="viral" aria-selected="true" role="tab" class="tabs-button-viral">
-            <img src="https://api.iconify.design/lucide-flame.svg?color=currentColor&width=18&height=18" alt="Viral icon" aria-label="Viral tokens">
-            <span>VIRAL</span>
-          </button>
-          <button type="button" data-tab="new" aria-selected="false" role="tab" class="tabs-button-new">
-            <img src="https://api.iconify.design/lucide-clock.svg?color=currentColor&width=18&height=18" alt="New icon" aria-label="New tokens">
-            <span>NEW</span>
-          </button>
+
+      <!-- Filter & Search Bar -->
+      <div class="filter-bar">
+        <input type="text" id="search-token" placeholder="Search token" class="search-input">
+        <div class="filter-dropdowns">
+          <select id="chain-filter">
+            <option value="all">All Chains</option>
+            <option value="solana">Solana</option>
+            <option value="ethereum">Ethereum</option>
+            <option value="bsc">BSC</option>
+          </select>
+          <select id="sort-filter">
+            <option value="trending">Trending</option>
+            <option value="new">New</option>
+            <option value="volume">Top Volume</option>
+            <option value="liquidity">Top Liquidity</option>
+          </select>
         </div>
-        <div id="mobile-viral" role="tabpanel" class="mobile-viral-panel"></div>
-        <div id="mobile-new" role="tabpanel" class="mobile-new-panel hidden"></div>
+      </div>
+
+      <!-- Token Cards Grid -->
+      <section class="token-grid" id="token-grid">
+        <!-- Example static cards (JS can overwrite this) -->
+        <div class="token-card">
+          <img src="https://em-content.zobj.net/source/microsoft-teams/363/grinning-face_1f600.png" alt="Meme" class="token-icon">
+          <h3 class="token-name">Meme</h3>
+          <span class="token-symbol">MEME</span>
+          <p class="token-liquidity">Liquidity: <b>$1,234,567</b></p>
+          <p class="token-volume">Volume: <b>$123,456</b></p>
+          <a href="#" target="_blank" class="dex-link">View on DexScreener</a>
+        </div>
+
+        <div class="token-card">
+          <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="Doge" class="token-icon">
+          <h3 class="token-name">Doge</h3>
+          <span class="token-symbol">DOGE</span>
+          <p class="token-liquidity">Liquidity: <b>$1,234,567</b></p>
+          <p class="token-volume">Volume: <b>$123,456</b></p>
+          <a href="#" target="_blank" class="dex-link">View on DexScreener</a>
+        </div>
+
+        <div class="token-card">
+          <img src="https://cryptologos.cc/logos/pepe-pepe-logo.png" alt="Pepe" class="token-icon">
+          <h3 class="token-name">Pepe</h3>
+          <span class="token-symbol">PEPE</span>
+          <p class="token-liquidity">Liquidity: <b>$1,234,567</b></p>
+          <p class="token-volume">Volume: <b>$123,456</b></p>
+          <a href="#" target="_blank" class="dex-link">View on DexScreener</a>
+        </div>
+
+        <div class="token-card">
+          <img src="https://cryptologos.cc/logos/shiba-inu-shib-logo.png" alt="Shiba Inu" class="token-icon">
+          <h3 class="token-name">Shiba Inu</h3>
+          <span class="token-symbol">SHIB</span>
+          <p class="token-liquidity">Liquidity: <b>$1,234,567</b></p>
+          <p class="token-volume">Volume: <b>$123,456</b></p>
+          <a href="#" target="_blank" class="dex-link">View on DexScreener</a>
+        </div>
+
+        <div class="token-card">
+          <img src="https://em-content.zobj.net/source/microsoft-teams/363/smiling-face_263a-fe0f.png" alt="Dink Doink" class="token-icon">
+          <h3 class="token-name">Dink Doink</h3>
+          <span class="token-symbol">DINK</span>
+          <p class="token-liquidity">Liquidity: <b>$1,234,567</b></p>
+          <p class="token-volume">Volume: <b>$123,456</b></p>
+          <a href="#" target="_blank" class="dex-link">View on DexScreener</a>
+        </div>
+
+        <div class="token-card">
+          <img src="https://cryptologos.cc/logos/baby-doge-coin-babydoge-logo.png" alt="Baby Doge" class="token-icon">
+          <h3 class="token-name">Baby Doge</h3>
+          <span class="token-symbol">BABYDOGE</span>
+          <p class="token-liquidity">Liquidity: <b>$1,234,567</b></p>
+          <p class="token-volume">Volume: <b>$123,456</b></p>
+          <a href="#" target="_blank" class="dex-link">View on DexScreener</a>
+        </div>
       </section>
-      <section class="desktop-two-columns-layout">
-        <div class="viral-column">
-          <h2 class="viral-column-title">
-            <img src="https://api.iconify.design/lucide-flame.svg?color=currentColor&width=24&height=24" alt="Fire icon" aria-label="Potentially viral">
-            <span>POTENTIALLY VIRAL</span>
-          </h2>
-          <div id="viral-cards" aria-live="polite" class="viral-cards-grid"></div>
-        </div>
-        <div class="new-column">
-          <h2 class="new-column-title">
-            <img src="https://api.iconify.design/lucide-clock.svg?color=currentColor&width=24&height=24" alt="Clock icon" aria-label="Freshly minted">
-            <span>NEW ARRIVAL</span>
-          </h2>
-          <div id="new-cards" aria-live="polite" class="new-cards-grid"></div>
-        </div>
-      </section>
+
       <div id="toast" role="status" aria-live="assertive" class="toast-notification hidden">
         <span class="toast-label">
           <img src="https://api.iconify.design/lucide-activity.svg?color=currentColor&width=18&height=18" alt="Alert icon" aria-label="New viral detected">
@@ -72,15 +123,18 @@
       </div>
     </section>
   </header>
+
   <main class="main-content-wrapper">
     <section class="aux-desktop-spacer"></section>
     <section class="aux-mobile-spacer"></section>
   </main>
+
   <footer class="footer">
     <div class="footer-container container">
       <p class="footer-text">© 2025 <b>Lancips</b> — Fun, absurd, and dangerously early. DYOR</p>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
