@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <title>Meme Viral Detector</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Detektor Meme Token Viral – powered by Lancips.">
+  <meta name="description" content="Viral Meme Token Detector – powered by Lancips.">
   <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/coin_1fa99.png">
   <meta name="theme-color" content="#0f1220">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"> <!-- Link ke CSS di atas -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="main-header">
     <div class="hero-container">
       <div class="hero-left-block">
         <a href="https://www.lancips.xyz" target="_blank" rel="noopener" class="external-link-back-button">
-          <img src="https://api.iconify.design/lucide-arrow-left.svg?color=currentColor&width=18&height=18" alt="Kembali ke Lancips" class="back-icon">
-          <span>Kembali ke Lancips</span>
+          <img src="https://api.iconify.design/lucide-arrow-left.svg?color=currentColor&width=18&height=18" alt="Back to Lancips" class="back-icon">
+          <span>Back to Lancips</span>
         </a>
         <span class="dyor-pill">DYOR</span>
       </div>
       <div class="live-status">
         <span class="pulse-dot"></span>
-        <p><span id="scan-count">0</span> token discan hari ini</p>
+        <p><span id="scan-count">0</span> tokens scanned today</p>
       </div>
     </div>
-    <section id="meme-viral-feature" aria-label="Fitur Detektor Meme Viral">
+    <section id="meme-viral-feature" aria-label="Meme Viral Detector Feature">
       <div class="feature-header-label">
         <h1 class="feature-title">MEME VIRAL DETECTOR</h1>
-        <p class="feature-subtitle">Petunjuk awal buat meme coin 1000x berikutnya</p>
+        <p class="feature-subtitle">Early clues for the next 1000x meme coin</p>
       </div>
       <div id="loading" class="loading-container">
         <img src="https://api.iconify.design/lucide-loader-2.svg?color=currentColor&width=22&height=22" alt="Loading" class="loading-spinner-icon">
-        <span class="loading-label">Lagi nyari meme anget...</span>
+        <span class="loading-label">Searching for hot memes...</span>
       </div>
       <section class="mobile-tabs-layout">
-        <div role="tablist" aria-label="Tab token" class="tabs-control">
+        <div role="tablist" aria-label="Token tabs" class="tabs-control">
           <button type="button" data-tab="viral" aria-selected="true" role="tab" class="tabs-button-viral">
-            <img src="https://api.iconify.design/lucide-flame.svg?color=currentColor&width=18&height=18" alt="Ikon viral" aria-label="Token viral">
+            <img src="https://api.iconify.design/lucide-flame.svg?color=currentColor&width=18&height=18" alt="Viral icon" aria-label="Viral tokens">
             <span>VIRAL</span>
           </button>
           <button type="button" data-tab="new" aria-selected="false" role="tab" class="tabs-button-new">
-            <img src="https://api.iconify.design/lucide-clock.svg?color=currentColor&width=18&height=18" alt="Ikon baru" aria-label="Token baru">
-            <span>BARU</span>
+            <img src="https://api.iconify.design/lucide-clock.svg?color=currentColor&width=18&height=18" alt="New icon" aria-label="New tokens">
+            <span>NEW</span>
           </button>
         </div>
         <div id="mobile-viral" role="tabpanel" class="mobile-viral-panel"></div>
@@ -51,23 +51,23 @@
       <section class="desktop-two-columns-layout">
         <div class="viral-column">
           <h2 class="viral-column-title">
-            <img src="https://api.iconify.design/lucide-flame.svg?color=currentColor&width=24&height=24" alt="Ikon api" aria-label="Potensi viral">
-            <span>BERPOTENSI VIRAL</span>
+            <img src="https://api.iconify.design/lucide-flame.svg?color=currentColor&width=24&height=24" alt="Fire icon" aria-label="Potentially viral">
+            <span>POTENTIALLY VIRAL</span>
           </h2>
           <div id="viral-cards" aria-live="polite" class="viral-cards-grid"></div>
         </div>
         <div class="new-column">
           <h2 class="new-column-title">
-            <img src="https://api.iconify.design/lucide-clock.svg?color=currentColor&width=24&height=24" alt="Ikon jam" aria-label="Baru dicetak">
-            <span>BARU DICETAK</span>
+            <img src="https://api.iconify.design/lucide-clock.svg?color=currentColor&width=24&height=24" alt="Clock icon" aria-label="Freshly minted">
+            <span>FRESHLY MINTED</span>
           </h2>
           <div id="new-cards" aria-live="polite" class="new-cards-grid"></div>
         </div>
       </section>
       <div id="toast" role="status" aria-live="assertive" class="toast-notification">
         <span class="toast-label">
-          <img src="https://api.iconify.design/lucide-activity.svg?color=currentColor&width=18&height=18" alt="Ikon alert" aria-label="Viral baru terdeteksi">
-          <strong class="toast-strong-text">VIRAL BARU KEDETEKSI!</strong>
+          <img src="https://api.iconify.design/lucide-activity.svg?color=currentColor&width=18&height=18" alt="Alert icon" aria-label="New viral detected">
+          <strong class="toast-strong-text">NEW VIRAL DETECTED!</strong>
         </span>
       </div>
     </section>
@@ -78,9 +78,9 @@
   </main>
   <footer class="footer">
     <div class="footer-container">
-      <p class="footer-text">© 2025 <b>Lancips</b> — Seru, absurd, dan berbahaya dini. DYOR</p>
+      <p class="footer-text">© 2025 <b>Lancips</b> — Fun, absurd, and dangerously early. DYOR</p>
     </div>
   </footer>
-  <script src="script.js"></script> <!-- Link ke JS di atas -->
+  <script src="script.js"></script>
 </body>
 </html>
