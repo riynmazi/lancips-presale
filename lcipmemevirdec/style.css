@@ -31,7 +31,7 @@ img {
 .top-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
   position: sticky;
   top: 0;
   background: #059d94;
