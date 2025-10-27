@@ -19,6 +19,16 @@
     tabs: document.querySelectorAll('[role="tab"]'),
   };
 
+  // NEW: Cek apakah semua elemen DOM ada
+  for (const [key, el] of Object.entries(els)) {
+    if (!el && key !== 'tabs') {
+      console.error(`[MVD] Element #${key} not found in DOM`);
+    }
+    if (key === 'tabs' && el.length === 0) {
+      console.error('[MVD] No elements with [role="tab"] found');
+    }
+  }
+
   function formatUSD(n) {
     const num = Number(n || 0);
     if (num >= 1e9) return `$${ (num / 1e9).toFixed(2) }B`;
@@ -27,15 +37,10 @@
     return `$${ num.toFixed(2) }`;
   }
 
-  function formatPct(n) {
-    if (n == null || isNaN(n)) return '—';
-    const sign = n > 0 ? '+' : '';
-    return `${ sign }${ n.toFixed(2) }%`;
-  }
-
   function formatTimeAgo(timestamp) {
     if (!timestamp) return '—';
     const diff = Date.now() - new Date(timestamp).getTime();
+    if (isNaN(diff)) return '—'; // NEW: Handle invalid timestamp
     const minutes = Math.max(1, Math.floor(diff / (60 * 1000)));
     if (minutes >= 1440) return `${ Math.floor(minutes / 1440) }d ago`;
     if (minutes >= 60) return `${ Math.floor(minutes / 60) }h ago`;
@@ -50,10 +55,11 @@
   function isViral(p) {
     const vol = Number(p.volumeUsd || 0);
     const liq = Number(p.liquidityUsd || 0);
-    const ch1 = Number(p.priceChange?.h1 || 0);
-    const ch6 = Number(p.priceChange?.h6 || 0);
     const meme = isMemeLike(p.symbol, p.name);
-    const momentum = ch1 > 50 || ch6 > 100 || p.viralScore > 15;
+    const viralScore = Number(p.viralScore || 0);
+    const xEngagement = Number(p.xEngagement || p.x?.engagement || 0);
+    // NEW: Fokus pada volume, liquidity, viralScore, dan engagement karena priceChange nggak ada
+    const momentum = viralScore > 15 || xEngagement > 20;
     const healthy = liq >= 30000 || vol >= 100000;
     return meme && healthy && momentum;
   }
@@ -161,22 +167,42 @@
   async function fetchTokens() {
     try {
       const res = await fetch(API_URL);
-      if (!res.ok) throw new Error('Failed to fetch tokens');
+      if (!res.ok) {
+        console.error(`[MVD] Fetch failed with status: ${res.status}`); // NEW: Log status
+        throw new Error('Failed to fetch tokens');
+      }
       const data = await res.json();
-      return Array.isArray(data) ? data : data.tokens || [];
+      if (!data) {
+        console.error('[MVD] Empty response from API');
+        throw new Error('Empty response');
+      }
+      const tokens = Array.isArray(data) ? data : data.tokens || [];
+      console.log('[MVD] Fetched tokens:', tokens); // NEW: Log data buat debug
+      return tokens;
     } catch (err) {
       console.error('[MVD] Error fetch:', err);
-      els.viralCards.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
-      els.newCards.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
-      els.mobileViral.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
-      els.mobileNew.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
+      if (els.viralCards) els.viralCards.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
+      if (els.newCards) els.newCards.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
+      if (els.mobileViral) els.mobileViral.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
+      if (els.mobileNew) els.mobileNew.innerHTML = '<div class="mvd-empty">😿 Oops, our meme radar is down! Try again later.</div>';
       return [];
     }
   }
 
   function render(pairs) {
+    if (!els.viralCards || !els.newCards || !els.mobileViral || !els.mobileNew || !els.scanCount) {
+      console.error('[MVD] Missing required DOM elements for rendering');
+      return;
+    }
+
     const fresh = pairs.filter(isFresh).slice(0, NEW_LIMIT);
     const viral = pairs.filter(isViral).slice(0, VIRAL_LIMIT);
+
+    // NEW: Trigger toast kalau ada viral baru
+    if (viral.length > 0 && els.toast) {
+      els.toast.classList.remove('hidden');
+      setTimeout(() => els.toast.classList.add('hidden'), 3000);
+    }
 
     els.viralCards.innerHTML = viral.length ? '' : '<div class="mvd-empty">😴 No viral memes yet!</div>';
     els.newCards.innerHTML = fresh.length ? '' : '<div class="mvd-empty">🍼 No new memes yet!</div>';
@@ -184,32 +210,48 @@
     els.mobileNew.innerHTML = fresh.length ? '' : '<div class="mvd-empty">🍼 No new memes yet!</div>';
 
     viral.forEach(p => {
-      els.viralCards.appendChild(makeCard(p));
-      els.mobileViral.appendChild(makeCard(p));
+      const card = makeCard(p);
+      els.viralCards.appendChild(card);
+      els.mobileViral.appendChild(card.cloneNode(true)); // NEW: Clone node biar nggak error DOM
     });
     fresh.forEach(p => {
-      els.newCards.appendChild(makeCard(p));
-      els.mobileNew.appendChild(makeCard(p));
+      const card = makeCard(p);
+      els.newCards.appendChild(card);
+      els.mobileNew.appendChild(card.cloneNode(true)); // NEW: Clone node
     });
 
     els.scanCount.textContent = pairs.filter(p => p.createdAt && (Date.now() - new Date(p.createdAt).getTime()) < 24 * 60 * 60 * 1000).length;
   }
 
-  els.tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      els.tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
-      tab.setAttribute('aria-selected', 'true');
-      els.mobileViral.classList.toggle('hidden', tab.getAttribute('data-tab') !== 'viral');
-      els.mobileNew.classList.toggle('hidden', tab.getAttribute('data-tab') !== 'new');
+  // NEW: Cek apakah tabs ada sebelum tambah event listener
+  if (els.tabs.length > 0) {
+    els.tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        els.tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+        tab.setAttribute('aria-selected', 'true');
+        if (els.mobileViral && els.mobileNew) {
+          els.mobileViral.classList.toggle('hidden', tab.getAttribute('data-tab') !== 'viral');
+          els.mobileNew.classList.toggle('hidden', tab.getAttribute('data-tab') !== 'new');
+        } else {
+          console.error('[MVD] Mobile viral or new panel missing');
+        }
+      });
     });
-  });
+  } else {
+    console.warn('[MVD] No tabs found, skipping tab event listeners');
+  }
 
   document.addEventListener('DOMContentLoaded', () => {
+    console.log('[MVD] DOM loaded, starting scan'); // NEW: Log buat debug
     scan();
     setInterval(scan, POLL_MS);
   });
 
   async function scan() {
+    if (!els.loading) {
+      console.error('[MVD] Loading element missing');
+      return;
+    }
     els.loading.classList.remove('hidden');
     const tokens = await fetchTokens();
     render(tokens);
