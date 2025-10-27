@@ -4,77 +4,71 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MEME VIRAL DETECTOR</title>
-<link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/coin_1fa99.png">
 <style>
-  /* ===== BASIC RESET ===== */
-  * {margin:0;padding:0;box-sizing:border-box;font-family:'Space Grotesk',sans-serif;}
-  body {background:#0f0f23;color:#fff;scroll-behavior:smooth;}
-  a {text-decoration:none;color:inherit;}
-  img {max-width:100%;display:block;}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Space Grotesk',sans-serif;}
+  body{background:#0f0f23;color:#fff;scroll-behavior:smooth;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
 
-  /* ===== HERO HEADER ===== */
-  header.hero {padding:2rem;text-align:center;position:relative;}
-  header .subtitle {font-size:1.2rem;margin-bottom:0.5rem;}
-  header .neon {color:#3B82F6;font-weight:700;}
-  .live-status {display:flex;justify-content:center;align-items:center;gap:0.5rem;margin-bottom:1rem;font-size:0.9rem;}
-  .pulse {width:10px;height:10px;border-radius:50%;background:#3B82F6;animation:pulse 1.2s infinite;}
-  @keyframes pulse {0% {transform:scale(0.8);opacity:0.6;} 50% {transform:scale(1.2);opacity:1;} 100% {transform:scale(0.8);opacity:0.6;}}
+  /* HEADER */
+  header.hero{padding:1rem 2rem;display:flex;align-items:center;gap:1rem;position:relative;background:#0f0f23;}
+  .back-btn{display:inline-block;width:30px;height:30px;background:#3B82F6;border-radius:6px;text-align:center;line-height:30px;color:#fff;font-weight:bold;}
+  .hero-title{font-size:1.5rem;font-weight:700;}
+  .live-status{position:absolute;top:100%;left:2rem;margin-top:0.5rem;display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;}
+  .pulse{width:10px;height:10px;border-radius:50%;background:#3B82F6;animation:pulse 1.2s infinite;}
+  @keyframes pulse{0%{transform:scale(0.8);opacity:0.6;}50%{transform:scale(1.2);opacity:1;}100%{transform:scale(0.8);opacity:0.6;}}
 
-  /* ===== PILL ===== */
-  .pill {display:inline-block;padding:0.3rem 0.6rem;border-radius:12px;background:#3B82F6;font-size:0.8rem;margin:0.2rem;}
+  /* PILL */
+  .pill{display:inline-block;padding:0.3rem 0.6rem;border-radius:12px;background:#3B82F6;font-size:0.8rem;margin:0.2rem;}
 
-  /* ===== CONTAINERS ===== */
-  .container {max-width:1200px;margin:0 auto;padding:0 1rem;}
+  /* CONTAINER */
+  .container{max-width:1200px;margin:0 auto;padding:0 1rem;}
 
-  /* ===== TABS ===== */
-  .tabs {display:flex;justify-content:center;gap:1rem;margin:1rem 0;}
-  .tab {padding:0.5rem 1rem;border-radius:8px;background:#1a1a36;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:0.2s;}
-  .tab.active {background:#3B82F6;color:#fff;}
+  /* TABS */
+  .tabs{display:flex;justify-content:center;gap:1rem;margin:1rem 0;}
+  .tab{padding:0.5rem 1rem;border-radius:8px;background:#1a1a36;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:0.2s;}
+  .tab.active{background:#3B82F6;color:#fff;}
 
-  /* ===== CARD LAYOUT ===== */
-  .desktop-layout {display:flex;gap:1rem;justify-content:center;margin-top:1rem;}
-  .column {flex:1;}
-  .cards {display:flex;flex-direction:column;gap:1rem;}
-  .card {background:#1a1a36;border-radius:12px;padding:1rem;display:flex;flex-direction:column;gap:0.5rem;}
-  .card-header {display:flex;justify-content:space-between;align-items:center;}
-  .card-title {font-weight:700;display:flex;align-items:center;gap:0.5rem;}
-  .badge {background:#3B82F6;padding:0.2rem 0.5rem;border-radius:10px;font-size:0.7rem;display:inline-flex;align-items:center;gap:0.2rem;}
-  .badge.hot {background:#f97316;color:#fff;}
-  .chain-badge {display:flex;align-items:center;gap:0.2rem;font-size:0.7rem;}
-  .metrics {display:flex;gap:1rem;flex-wrap:wrap;}
-  .metric {flex:1;min-width:60px;}
-  .metric-label {display:block;font-size:0.7rem;color:#aaa;}
-  .metric-value.positive {color:#22c55e;}
-  .metric-value.negative {color:#ef4444;}
-  .footer-row {display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;flex-wrap:wrap;}
-  .action-link {display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.6rem;border-radius:8px;background:#3B82F6;font-size:0.8rem;}
+  /* CARD LAYOUT */
+  .desktop-layout{display:flex;gap:1rem;justify-content:center;margin-top:1rem;}
+  .column{flex:1;}
+  .cards{display:flex;flex-direction:column;gap:1rem;}
+  .card{background:#1a1a36;border-radius:12px;padding:1rem;display:flex;flex-direction:column;gap:0.5rem;}
+  .card-header{display:flex;justify-content:space-between;align-items:center;}
+  .card-title{font-weight:700;display:flex;align-items:center;gap:0.5rem;}
+  .badge{background:#3B82F6;padding:0.2rem 0.5rem;border-radius:10px;font-size:0.7rem;display:inline-flex;align-items:center;gap:0.2rem;}
+  .badge.hot{background:#f97316;color:#fff;}
+  .metrics{display:flex;gap:1rem;flex-wrap:wrap;}
+  .metric{flex:1;min-width:60px;}
+  .metric-label{display:block;font-size:0.7rem;color:#aaa;}
+  .metric-value.positive{color:#22c55e;}
+  .metric-value.negative{color:#ef4444;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;flex-wrap:wrap;}
+  .action-link{display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.6rem;border-radius:8px;background:#3B82F6;font-size:0.8rem;}
 
-  /* ===== MOBILE ===== */
-  .mobile-layout {display:none;}
-  .tab-content {display:none;}
-  .tab-content.active {display:block;}
+  /* MOBILE */
+  .mobile-layout{display:none;}
+  .tab-content{display:none;}
+  .tab-content.active{display:block;}
 
-  /* ===== EMPTY STATE ===== */
-  .empty-state {display:flex;align-items:center;gap:0.5rem;justify-content:center;color:#aaa;font-size:0.9rem;}
+  /* EMPTY STATE */
+  .empty-state{display:flex;align-items:center;gap:0.5rem;justify-content:center;color:#aaa;font-size:0.9rem;}
 
-  /* ===== TOAST ===== */
-  .toast {position:fixed;top:1rem;right:1rem;background:#3B82F6;padding:0.5rem 1rem;border-radius:12px;opacity:0;pointer-events:none;transition:0.3s;color:#fff;}
-  .toast.show {opacity:1;pointer-events:auto;}
+  /* TOAST */
+  .toast{position:fixed;top:1rem;right:1rem;background:#3B82F6;padding:0.5rem 1rem;border-radius:12px;opacity:0;pointer-events:none;transition:0.3s;color:#fff;}
+  .toast.show{opacity:1;pointer-events:auto;}
 
-  /* ===== FOOTER ===== */
-  footer.footer {margin-top:2rem;text-align:center;color:#aaa;font-size:0.8rem;}
+  /* FOOTER */
+  footer.footer{margin-top:2rem;text-align:center;color:#aaa;font-size:0.8rem;}
 
-  /* ===== MEDIA ===== */
-  @media(max-width:768px){
-    .desktop-layout {display:none;}
-    .mobile-layout {display:block;}
-    .tabs {flex-wrap:wrap;}
-  }
+  @media(max-width:768px){.desktop-layout{display:none;}.mobile-layout{display:block;}.tabs{flex-wrap:wrap;}}
 </style>
 </head>
 <body>
+
 <header class="hero">
-  <p class="subtitle">Early clue for the <span class="neon">next 1000x meme coin</span></p>
+  <a href="https://www.lancips.xyz" target="_blank" class="back-btn">&#8592;</a>
+  <div class="hero-title">MEME VIRAL DETECTOR</div>
   <div class="live-status"><span class="pulse"></span><span id="scan-count">0</span> tokens scanned today</div>
   <span class="pill">DYOR</span>
 </header>
@@ -102,7 +96,6 @@
 </section>
 
 <div id="toast" class="toast">NEW VIRAL DETECTED! 🚨</div>
-
 <footer class="footer">© 2025 <b>Lancips</b> — Fun, absurd, and dangerously early. DYOR</footer>
 
 <script>
@@ -114,84 +107,58 @@
   const newCards=document.getElementById('new-cards');
   const scanCount=document.getElementById('scan-count');
   const toast=document.getElementById('toast');
-  const SEARCH_QUERIES=['pepe','dog','doge','shib','inu','cat','elon','meme','moon','pump'];
-  const VIRAL_LIMIT=12,NEW_LIMIT=12,FRESH_WINDOW_MS=6*3600*1000,POLL_MS=60000;
+  const API_URL='https://backend-memevirdec.vercel.app/api/fetch-meme-tokens';
+  const POLL_MS=60000;
   const shownViral=new Set();
 
   tabs.forEach(tab=>tab.addEventListener('click',()=>{
-    tabs.forEach(t=>{t.classList.remove('active');});
+    tabs.forEach(t=>t.classList.remove('active'));
     tab.classList.add('active');
-    if(tab.dataset.tab==='viral'){
-      mobileViral.classList.add('active'); mobileNew.classList.remove('active');
-    } else {
-      mobileViral.classList.remove('active'); mobileNew.classList.add('active');
-    }
+    if(tab.dataset.tab==='viral'){mobileViral.classList.add('active');mobileNew.classList.remove('active');}
+    else{mobileViral.classList.remove('active');mobileNew.classList.add('active');}
   }));
 
   function formatUSD(n){n=Number(n||0);if(n>=1e9)return '$'+(n/1e9).toFixed(2)+'B';if(n>=1e6)return '$'+(n/1e6).toFixed(2)+'M';if(n>=1e3)return '$'+(n/1e3).toFixed(2)+'K';return '$'+n.toFixed(2);}
   function formatPct(n){if(n===undefined||n===null||isNaN(n))return'—';return(n>0?'+':'')+n.toFixed(2)+'%';}
-  function isMemeLike(s,n){s=(s||'').toLowerCase();n=(n||'').toLowerCase();const kws=['pepe','dog','doge','shib','inu','cat','elon','meme','moon','pump','wojak','floki','bonk','slerf','pudgy','corgi','kitty'];return kws.some(k=>s.includes(k)||n.includes(k));}
-  function scorePair(p){const vol=Number(p.volume?.h24||0);const liq=Number(p.liquidity?.usd||0);const ch1=Number(p.priceChange?.h1||0);const ch6=Number(p.priceChange?.h6||0);const buys=Number(p.txns?.h1?.buys||0);const sells=Number(p.txns?.h1?.sells||0);const momentum=ch1*1.2+ch6*0.6+(buys-sells)*0.8;return Math.log10(vol+1)*1.5+Math.log10(liq+1)+momentum;}
-  function isFresh(p){return p.pairCreatedAt&&(Date.now()-Number(p.pairCreatedAt))<FRESH_WINDOW_MS;}
-  function isViral(p){const vol=Number(p.volume?.h24||0),liq=Number(p.liquidity?.usd||0),ch1=Number(p.priceChange?.h1||0),ch6=Number(p.priceChange?.h6||0);const meme=isMemeLike(p.baseToken?.symbol,p.baseToken?.name);const momentum=ch1>50||ch6>100;const healthy=liq>=30000||vol>=1e5;return meme&&healthy&&(momentum||scorePair(p)>30);}
-  
-  function chainFromURL(url=''){try{const u=new URL(url);const parts=u.pathname.split('/').filter(Boolean);return parts[0]||'unknown';}catch{return 'unknown';}}
-  function chainIcon(chain){const map={ethereum:'simple-icons:ethereum',eth:'simple-icons:ethereum',bsc:'simple-icons:binance',binance:'simple-icons:binance',solana:'simple-icons:solana',base:'simple-icons:base',arbitrum:'simple-icons:arbitrum',optimism:'simple-icons:optimism',polygon:'simple-icons:polygon',matic:'simple-icons:polygon',avalanche:'simple-icons:avalanche',unknown:'mdi:link-variant'};return`https://api.iconify.design/${map[chain]||'mdi:link-variant'}.svg?color=currentColor&width=16&height=16`; }
-
   function makeCard(p){
     const card=document.createElement('article'); card.className='card';
     const base=p.baseToken?.symbol||p.token0?.symbol||'',quote=p.quoteToken?.symbol||p.token1?.symbol||'',price=p.priceUsd?Number(p.priceUsd):null;
     const ch5m=p.priceChange?.m5?Number(p.priceChange.m5):null,ch1h=p.priceChange?.h1?Number(p.priceChange.h1):null,ch6h=p.priceChange?.h6?Number(p.priceChange.h6):null;
-    const hot=isViral(p),createdAgo=p.pairCreatedAt?Math.floor((Date.now()-Number(p.pairCreatedAt))/60000):null;
+    const hot=false,createdAgo=p.pairCreatedAt?Math.floor((Date.now()-Number(p.pairCreatedAt))/60000):null;
     card.innerHTML=`
-<div class="card-header">
-<div class="card-title"><span>${base}/${quote}</span>${hot?'<span class="badge hot">HOT</span>':''}</div>
-<div class="chain-badge"><img src="${chainIcon(chainFromURL(p.url))}"><span>${chainFromURL(p.url).toUpperCase()}</span></div>
-</div>
+<div class="card-header"><div class="card-title">${base}/${quote}${hot?'<span class="badge hot">HOT</span>':''}</div></div>
 <div class="metrics">
 <div class="metric"><span class="metric-label">Price (USD)</span><span class="metric-value">${price?formatUSD(price):'—'}</span></div>
 <div class="metric"><span class="metric-label">5m</span><span class="metric-value ${ch5m>=0?'positive':'negative'}">${formatPct(ch5m)}</span></div>
 <div class="metric"><span class="metric-label">1h</span><span class="metric-value ${ch1h>=0?'positive':'negative'}">${formatPct(ch1h)}</span></div>
-<div class="metric"><span class="metric-label">6h</span><span class="metric-value ${ch6h>=0?'positive':'negative'}">${formatPct(ch6h)}</span></div>
-</div>
-<div class="footer-row">
-<a class="action-link" href="${p.url}" target="_blank">View</a>
-</div>`;return card;}
-
-  function makeEmptyState(){const d=document.createElement('div');d.className='empty-state';d.textContent='Tidak ada data token tersedia saat ini';return d;}
-
-  async function fetchPairs(q){const r=await fetch(`https://api.dexscreener.com/latest/dex/search?q=${encodeURIComponent(q)}`);if(!r.ok)throw new Error('Network');const j=await r.json();return Array.isArray(j.pairs)?j.pairs:[];}
-  function dedupe(arr){const s=new Set(),o=[];for(const p of arr){const a=p.pairAddress||p.url?.split('/').pop();if(!s.has(a)){s.add(a);o.push(p);}}return o;}
-  function updateScanCount(pairs){const today=Date.now()-86400000;scanCount.textContent=pairs.filter(p=>p.pairCreatedAt&&Number(p.pairCreatedAt)>=today).length;}
-  function showToast(){toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600);}
-
-  function render(pairs){
-    const fresh=pairs.filter(isFresh).slice(0,NEW_LIMIT);
-    const viral=pairs.filter(isViral).slice(0,VIRAL_LIMIT);
-    viralCards.innerHTML=''; newCards.innerHTML=''; mobileViral.innerHTML=''; mobileNew.innerHTML='';
-    if(!viral.length) viralCards.appendChild(makeEmptyState()); else viral.forEach(p=>{viralCards.appendChild(makeCard(p));showToast();});
-    if(!fresh.length) newCards.appendChild(makeEmptyState()); else fresh.forEach(p=>newCards.appendChild(makeCard(p)));
-    if(!viral.length) mobileViral.appendChild(makeEmptyState()); else viral.forEach(p=>mobileViral.appendChild(makeCard(p)));
-    if(!fresh.length) mobileNew.appendChild(makeEmptyState()); else fresh.forEach(p=>mobileNew.appendChild(makeCard(p)));
-    updateScanCount(pairs);
+<div class="metric"><span class="metric-label">6h</span><span class="metric-value ${ch6h>=0?'positive':'negative'}">${formatPct(ch6h)}</span></div></div>
+<div class="footer-row"><a class="action-link" href="${p.url}" target="_blank">View</a></div>`;
+    return card;
   }
+  function makeEmpty(){const d=document.createElement('div');d.className='empty-state';d.textContent='Tidak ada data token tersedia saat ini';return d;}
 
-  async function scan(){
+  async function fetchTokens(){
     try{
-      const results=await Promise.allSettled(SEARCH_QUERIES.map(fetchPairs));
-      let all=[];
-      results.forEach(r=>{if(r.status==='fulfilled')all=all.concat(r.value);});
-      render(dedupe(all));
-    }catch(e){
-      viralCards.appendChild(makeEmptyState());
-      newCards.appendChild(makeEmptyState());
-      mobileViral.appendChild(makeEmptyState());
-      mobileNew.appendChild(makeEmptyState());
-    }
+      const res=await fetch(API_URL);const data=await res.json();return Array.isArray(data.tokens)?data.tokens:[];
+    }catch{return [];}
   }
 
-  scan(); setInterval(scan,POLL_MS);
+  async function render(){
+    const tokens=await fetchTokens();
+    viralCards.innerHTML=''; newCards.innerHTML=''; mobileViral.innerHTML=''; mobileNew.innerHTML='';
+    if(!tokens.length){viralCards.appendChild(makeEmpty());newCards.appendChild(makeEmpty());mobileViral.appendChild(makeEmpty());mobileNew.appendChild(makeEmpty());scanCount.textContent=0;return;}
+    tokens.forEach(p=>{
+      const c=makeCard(p);viralCards.appendChild(c);mobileViral.appendChild(c.cloneNode(true));
+    });
+    tokens.forEach(p=>{
+      const c=makeCard(p);newCards.appendChild(c);mobileNew.appendChild(c.cloneNode(true));
+    });
+    scanCount.textContent=tokens.length;
+  }
+
+  render(); setInterval(render,POLL_MS);
 })();
 </script>
+
 </body>
 </html>
