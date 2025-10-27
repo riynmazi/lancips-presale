@@ -385,24 +385,33 @@ img {
   }
 
   .filter-bar {
-    display: flex;
-    justify-content: center;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    margin-top: 20px;
-    width: 100%;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  width: 100%;
+  align-items: center;
+}
 
-  .search-input {
-    width: 100%;
-    font-size: 0.95rem;
-    padding: 10px 12px;
-  }
+.search-input,
+.filter-select {
+  font-size: 0.95rem;
+  padding: 10px 12px;
+  height: 40px; /* <== tambahkan ini biar tinggi fix sama semua */
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  outline: none;
+}
 
-  .filter-select {
-    font-size: 0.9rem;
-  }
+.search-input {
+  flex: 0 0 60%;
+}
+
+.filter-select {
+  flex: 0 0 20%;
+}
 
   .token-grid {
     grid-template-columns: 1fr;
