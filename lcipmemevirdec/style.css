@@ -383,12 +383,12 @@ img {
 .mvd-token-name {
   font-weight: 600;
   font-size: 16px;
-  color: #111827;
+  color: #fff;
 }
 
 .mvd-token-symbol {
   font-size: 13px;
-  color: #6b7280;
+  color: #fff;
 }
 
 .mvd-arrow {
@@ -405,7 +405,7 @@ img {
 /* Metrics section */
 .mvd-metrics {
   font-size: 14px;
-  color: #374151;
+  color: #fff;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -414,7 +414,7 @@ img {
 
 .mvd-metrics span {
   font-weight: 500;
-  color: #6b7280;
+  color: #fff;
 }
 
 /* Footer link */
