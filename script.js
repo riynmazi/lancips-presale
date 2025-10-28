@@ -342,3 +342,57 @@ function showTab(tabId) {
     darkIcon.style.display = "inline";
     lightIcon.style.display = "none";
   });
+
+
+
+// === 📈 DEMO CHART VIRAL TREND ===
+const ctx = document.getElementById('trend-chart');
+let trendChart;
+
+function renderTrendChart(dataPoints = []) {
+  if (!ctx) return;
+
+  // Hapus chart lama biar ga dobel
+  if (trendChart) {
+    trendChart.destroy();
+  }
+
+  const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 200);
+  gradient.addColorStop(0, '#00ff80'); // hijau atas
+  gradient.addColorStop(1, '#ff4040'); // merah bawah
+
+  trendChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dataPoints.map((_, i) => i + 1),
+      datasets: [{
+        label: 'Meme Viral Energy',
+        data: dataPoints,
+        borderColor: gradient,
+        borderWidth: 3,
+        tension: 0.4, // biar lembut bergelombang
+        pointRadius: 0,
+        fill: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: { display: false },
+        y: { display: false }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `Score: ${ctx.parsed.y}`
+          }
+        }
+      }
+    }
+  });
+}
+
+// Dummy data dulu buat test tampilan
+const dummyData = [10, 14, 12, 18, 25, 20, 28, 32, 29, 35, 40, 37];
+renderTrendChart(dummyData);
