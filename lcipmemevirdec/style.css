@@ -372,7 +372,7 @@ img {
 .mvd-card-header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  margin-left: 24px;
   flex: 0 0 auto; /* logo tetap di kiri */
 }
 
