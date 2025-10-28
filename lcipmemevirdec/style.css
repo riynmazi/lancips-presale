@@ -68,7 +68,9 @@ img {
 /* ===== LIVE STATUS ===== */
 .status-section {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; /* menempel ke kanan */
+  align-items: center;       /* rata vertikal semua flex-item */
+  gap: 12px;                 /* jarak antar item */
   padding: 8px 16px;
   font-size: 0.85rem;
   opacity: 0.85;
@@ -76,8 +78,12 @@ img {
 
 .live-status {
   display: flex;
-  align-items: center;
+  align-items: center;       /* dot + teks rata vertikal */
   gap: 6px;
+}
+
+.live-status p {
+  margin: 0;                 /* hilangkan margin default <p> */
 }
 
 .pulse-dot {
