@@ -2,7 +2,6 @@
   if (window.__MVD_V2_ENABLED__) return;
   window.__MVD_V2_ENABLED__ = true;
 
-  const API_URL = 'https://backend-memevirdec.vercel.app/api/fetch-meme-tokens';
   const POLL_MS = 60000; // refresh tiap 1 menit
 
   const els = {
@@ -15,7 +14,23 @@
     scanCount: document.getElementById('scan-count'),
   };
 
-  let allTokens = [];
+  // ===== Dummy 12 Token =====
+  window.allTokens = Array.from({ length: 12 }, (_, i) => ({
+    symbol: `MEME${i + 1}`,
+    name: `Meme Token ${i + 1}`,
+    liquidityUsd: Math.floor(Math.random() * 200000 + 50000),
+    volumeUsd: Math.floor(Math.random() * 100000 + 10000),
+    chain: i % 2 === 0 ? 'ETH' : 'SOL',
+    logoURI: '',
+    pairUrl: '#',
+    createdAt: new Date(Date.now() - i * 3600 * 1000).toISOString(),
+    xEngagement: Math.floor(Math.random() * 100),
+    address: `0x${Math.random().toString(16).slice(2, 10)}`,
+    mentions: Math.floor(Math.random() * 9000),
+    likes: Math.floor(Math.random() * 5000),
+    retweets: Math.floor(Math.random() * 3000),
+  }));
+
   let activeChain = 'all';
   let activeCategory = 'all';
   let searchQuery = '';
@@ -29,27 +44,12 @@
     return `$${num.toFixed(2)}`;
   }
 
-  /** FETCH DATA **/
-  async function fetchTokens() {
-    if (els.loading) els.loading.classList.remove('hidden');
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      allTokens = Array.isArray(data.tokens) ? data.tokens : [];
-    } catch (err) {
-      console.error('Failed to fetch tokens', err);
-    } finally {
-      if (els.loading) els.loading.classList.add('hidden');
-      applyFilters();
-    }
-  }
-
   /** DETAIL PANEL **/
   window.openDetailPanel = function (index) {
     const panel = document.getElementById("detail-panel");
     if (!panel) return;
 
-    const token = allTokens[index];
+    const token = window.allTokens[index];
     if (!token) return;
 
     const setText = (selector, value) => {
@@ -117,7 +117,6 @@
     // Event listener arrow
     const arrow = card.querySelector('.mvd-arrow');
     if (arrow) {
-      arrow.style.cursor = 'pointer';
       arrow.addEventListener('click', () => window.openDetailPanel(i));
     }
 
@@ -126,7 +125,7 @@
 
   /** FILTER **/
   function applyFilters() {
-    let filtered = [...allTokens];
+    let filtered = [...window.allTokens];
 
     if (activeChain !== 'all') {
       filtered = filtered.filter(t => t.chain.toLowerCase() === activeChain);
@@ -166,8 +165,8 @@
 
   /** INIT **/
   document.addEventListener('DOMContentLoaded', () => {
-    fetchTokens();
-    setInterval(fetchTokens, POLL_MS);
+    applyFilters();
+    setInterval(applyFilters, POLL_MS);
 
     if (els.chainFilter) els.chainFilter.addEventListener('change', e => { activeChain = e.target.value; applyFilters(); });
     if (els.categoryFilter) els.categoryFilter.addEventListener('change', e => { activeCategory = e.target.value; applyFilters(); });
@@ -175,9 +174,6 @@
 
     // Tombol close panel
     const closeBtn = document.getElementById('detail-close-btn');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => window.closeDetailPanel());
-    }
+    if (closeBtn) closeBtn.addEventListener('click', () => window.closeDetailPanel());
   });
-
 })();
