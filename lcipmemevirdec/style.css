@@ -410,14 +410,15 @@ img {
   cursor: pointer;
 }
 
-/* Metrics section */
-/* Metrics section */
+
+/* Metrics section vertical di kanan */
 .mvd-metrics {
   font-size: 14px;
   color: grey;
   display: flex;
-  justify-content: flex-end;  /* isi di kanan */
-  gap: 16px;                  /* jarak antar metrics */
+  flex-direction: column;   /* vertical stack */
+  align-items: flex-end;    /* rata kanan */
+  gap: 4px;                 /* jarak antar metrics */
   margin-bottom: 8px;
 }
 
