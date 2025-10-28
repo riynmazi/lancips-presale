@@ -292,6 +292,11 @@ img {
   opacity: 0.85;
 }
 
+
+
+
+
+
 /* ===== TOAST ===== */
 .toast-notification {
   position: fixed;
@@ -386,7 +391,9 @@ img {
   right: 12px;
   color: #fbbf24;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 10px;
+  transform: rotate(-45deg);
+  cursor: pointer;
 }
 
 /* Metrics section */
