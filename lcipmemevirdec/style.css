@@ -65,6 +65,12 @@ img {
   padding-left: 30 px;
 }
 
+.search-input::placeholder {
+  color: grey;
+}
+
+
+
 /* ===== LIVE STATUS ===== */
 .status-section {
   display: flex;
@@ -134,9 +140,7 @@ img {
   background-color: rgba(255,255,255,0.08);
 }
 
-.search-input::placeholder {
-  color: grey;
-}
+
 
 /* ===== LOADING ===== */
 .loading-container {
