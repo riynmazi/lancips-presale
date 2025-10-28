@@ -29,17 +29,60 @@
     return `$${num.toFixed(2)}`;
   }
 
-  function formatTimeAgo(ts) {
-    if (!ts) return '—';
-    const diff = Date.now() - new Date(ts).getTime();
-    const m = Math.max(1, Math.floor(diff / (60 * 1000)));
-    if (m >= 1440) return `${Math.floor(m / 1440)}d ago`;
-    if (m >= 60) return `${Math.floor(m / 60)}h ago`;
-    return `${m}m ago`;
+  /** FETCH DATA **/
+  async function fetchTokens() {
+    if (els.loading) els.loading.classList.remove('hidden');
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      allTokens = Array.isArray(data.tokens) ? data.tokens : [];
+    } catch (err) {
+      console.error('Failed to fetch tokens', err);
+    } finally {
+      if (els.loading) els.loading.classList.add('hidden');
+      applyFilters();
+    }
   }
 
+  /** DETAIL PANEL **/
+  window.openDetailPanel = function (index) {
+    const panel = document.getElementById("detail-panel");
+    if (!panel) return;
+
+    const token = allTokens[index];
+    if (!token) return;
+
+    const setText = (selector, value) => {
+      const el = panel.querySelector(selector);
+      if (el) el.textContent = value;
+    };
+
+    setText("#detail-name", token.name || "—");
+    setText("#detail-symbol", token.symbol || "—");
+    setText("#detail-network", token.chain || "—");
+    setText("#detail-liquidity", formatUSD(token.liquidityUsd));
+    setText("#detail-vol24", formatUSD(token.volumeUsd));
+    setText("#detail-address", token.address || "—");
+    setText("#detail-mentions", token.mentions);
+    setText("#detail-likes", token.likes);
+    setText("#detail-retweets", token.retweets);
+    setText("#detail-score", `${token.xEngagement}/100`);
+
+    const logoEl = panel.querySelector("#detail-logo");
+    if (logoEl) {
+      logoEl.src = token.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(token.symbol)}&background=random`;
+    }
+
+    panel.classList.add("open");
+  };
+
+  window.closeDetailPanel = function () {
+    const panel = document.getElementById("detail-panel");
+    if (panel) panel.classList.remove("open");
+  };
+
   /** RENDER **/
-  function makeCard(p) {
+  function makeCard(p, i) {
     const card = document.createElement('article');
     card.className = 'mvd-card';
 
@@ -47,9 +90,7 @@
     const name = p.name || '—';
     const liquidity = p.liquidityUsd || 0;
     const volume = p.volumeUsd || 0;
-    const chain = (p.chain || '').toUpperCase();
     const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
-    const pairUrl = p.pairUrl || '#';
 
     card.innerHTML = `
       <div class="mvd-card-header">
@@ -69,26 +110,34 @@
       </div>
 
       <div class="mvd-footer">
-        <a href="${pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
+        <a href="${p.pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
       </div>
     `;
+
+    // Event listener arrow
+    const arrow = card.querySelector('.mvd-arrow');
+    if (arrow) {
+      arrow.style.cursor = 'pointer';
+      arrow.addEventListener('click', () => window.openDetailPanel(i));
+    }
+
     return card;
   }
 
-  /** FILTER LOGIC **/
+  /** FILTER **/
   function applyFilters() {
     let filtered = [...allTokens];
 
     if (activeChain !== 'all') {
-      filtered = filtered.filter(t => t.chain === activeChain);
+      filtered = filtered.filter(t => t.chain.toLowerCase() === activeChain);
     }
 
     if (activeCategory === 'viral') {
-      filtered = filtered.sort((a, b) => b.xEngagement - a.xEngagement);
+      filtered.sort((a, b) => b.xEngagement - a.xEngagement);
     } else if (activeCategory === 'top24h') {
-      filtered = filtered.sort((a, b) => b.volumeUsd - a.volumeUsd);
+      filtered.sort((a, b) => b.volumeUsd - a.volumeUsd);
     } else if (activeCategory === 'new') {
-      filtered = filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     }
 
     if (searchQuery) {
@@ -111,62 +160,24 @@
       return;
     }
 
-    tokens.forEach(t => els.tokenGrid.appendChild(makeCard(t)));
+    tokens.forEach((t, i) => els.tokenGrid.appendChild(makeCard(t, i)));
     if (els.scanCount) els.scanCount.textContent = tokens.length;
-  }
-
-  /** FETCH **/
-  async function fetchTokens() {
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      const tokens = Array.isArray(data) ? data : data.tokens || [];
-      console.log('[MVD] Tokens fetched:', tokens.length, tokens);
-      return tokens;
-    } catch (err) {
-      console.error('[MVD] Fetch error:', err);
-      els.tokenGrid.innerHTML = `<div class="mvd-empty">⚠️ Failed to fetch tokens</div>`;
-      return [];
-    }
-  }
-
-  async function scan() {
-    els.loading?.classList.remove('hidden');
-    allTokens = await fetchTokens();
-    applyFilters();
-    els.loading?.classList.add('hidden');
-
-    if (allTokens.length && els.toast) {
-      els.toast.classList.remove('hidden');
-      setTimeout(() => els.toast.classList.add('hidden'), 2500);
-    }
-  }
-
-  /** EVENTS **/
-  if (els.chainFilter) {
-    els.chainFilter.addEventListener('change', e => {
-      activeChain = e.target.value.toLowerCase();
-      applyFilters();
-    });
-  }
-
-  if (els.categoryFilter) {
-    els.categoryFilter.addEventListener('change', e => {
-      activeCategory = e.target.value.toLowerCase();
-      applyFilters();
-    });
-  }
-
-  if (els.searchInput) {
-    els.searchInput.addEventListener('input', e => {
-      searchQuery = e.target.value.trim();
-      applyFilters();
-    });
   }
 
   /** INIT **/
   document.addEventListener('DOMContentLoaded', () => {
-    scan();
-    setInterval(scan, POLL_MS);
+    fetchTokens();
+    setInterval(fetchTokens, POLL_MS);
+
+    if (els.chainFilter) els.chainFilter.addEventListener('change', e => { activeChain = e.target.value; applyFilters(); });
+    if (els.categoryFilter) els.categoryFilter.addEventListener('change', e => { activeCategory = e.target.value; applyFilters(); });
+    if (els.searchInput) els.searchInput.addEventListener('input', e => { searchQuery = e.target.value; applyFilters(); });
+
+    // Tombol close panel
+    const closeBtn = document.getElementById('detail-close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => window.closeDetailPanel());
+    }
   });
+
 })();
