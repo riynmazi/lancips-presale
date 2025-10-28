@@ -364,12 +364,14 @@ img {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+  position: relative; /* supaya .mvd-arrow tetap bisa absolute */
 }
 
 .mvd-card-header-left {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 0 0 auto; /* logo tetap di kiri */
 }
 
 .mvd-token-icon {
@@ -378,6 +380,11 @@ img {
   border-radius: 50%;
   object-fit: cover;
   background: #f9fafb;
+}
+
+.mvd-card-header-right {
+  flex: 1 1 auto;       /* teks mengisi sisa ruang */
+  text-align: right;    /* nama + simbol rata kanan */
 }
 
 .mvd-token-name {
