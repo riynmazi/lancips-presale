@@ -411,23 +411,25 @@ img {
 }
 
 /* Metrics section */
+/* Metrics section */
 .mvd-metrics {
   font-size: 14px;
   color: grey;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: flex-end;  /* isi di kanan */
+  gap: 16px;                  /* jarak antar metrics */
   margin-bottom: 8px;
 }
 
-.mvd-metrics span {
+.mvd-metrics div span {
   font-weight: 500;
   color: green;
 }
 
 /* Footer link */
 .mvd-footer {
-  margin-top: auto;
+  margin-top: 12px;
+  text-align: center;        /* View on DexScreener di tengah */
 }
 
 .mvd-footer a {
