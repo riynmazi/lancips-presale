@@ -379,6 +379,7 @@ img {
 .mvd-token-icon {
   position: absolute;
   top : 50%;
+  transform: translateY(-50%);
   width: 60px;
   height: 60px;
   border-radius: 50%;
