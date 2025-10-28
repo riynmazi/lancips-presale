@@ -383,12 +383,12 @@ img {
 .mvd-token-name {
   font-weight: 600;
   font-size: 16px;
-  color: #fff;
+  color: #01baa7;
 }
 
 .mvd-token-symbol {
   font-size: 13px;
-  color: #fff;
+  color: grey;
 }
 
 .mvd-arrow {
