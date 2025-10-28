@@ -82,6 +82,7 @@ img {
 /* ===== LIVE STATUS ===== */
 .status-section {
   display: flex;
+  justify-content: space-between;
   align-items: center;       /* rata vertikal semua flex-item */
   gap: 12px;                 /* jarak antar item */
   padding: 8px 16px;
