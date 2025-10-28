@@ -116,15 +116,25 @@ img {
 /* ===== FILTER BAR ===== */
 .filter-bar {
   display: flex;
-  align-items: right;
-  justify-content: right;
+  justify-content: space-between; /* kiri-kanan */
+  align-items: center;            /* rata vertikal */
   width: 100%;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-.search-bar {
-  flex: 0 0 60%; /* lebar tetap 60% dari container */
+.token-section-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.filter-dropdowns {
+  display: flex;
+  gap: 10px; /* jarak antar dropdown */
+}
+
+.filter-select {
   padding: 10px 12px;
   border-radius: 20px;
   border: 1px solid #444;
@@ -132,17 +142,7 @@ img {
   color: grey;
 }
 
-.chain-filter,
-.viral-filter {
-  flex: 0 0 20%; /* masing-masing 20% */
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #444;
-  background: transparent;
-  color: grey;
-}
-
-.filter-select:focus, .search-input:focus {
+.filter-select:focus {
   border-color: #0ff;
   background-color: rgba(255,255,255,0.08);
 }
