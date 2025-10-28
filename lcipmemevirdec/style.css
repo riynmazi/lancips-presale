@@ -373,6 +373,7 @@ img {
   display: flex;
   align-items: center;
   margin-left: 16px;
+  height: 64px;
   flex: 0 0 auto; /* logo tetap di kiri */
 }
 
