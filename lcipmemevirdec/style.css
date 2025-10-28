@@ -336,21 +336,27 @@ img {
 
 /* === MVD Card Style (updated layout only) === */
 .mvd-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  padding: 16px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  background-color: #0d0d0d;          /* card gelap */
+  border-radius: 12px;                 /* sudut melengkung */
+  padding: 16px;                       /* ruang isi */
+  color: #fff;                         /* teks putih */
+  
+  /* border halus untuk efek “premium” */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* efek timbul */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
 }
 
+/* hover efek biar card keliatan lebih “angkat” */
 .mvd-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15); /* border lebih jelas saat hover */
 }
+
+
 
 /* Header: icon + name + arrow */
 .mvd-card-header {
