@@ -154,6 +154,57 @@
     </div>
   </footer>
 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('trend-chart').getContext('2d');
+
+// ⚙️ Data contoh — nanti bisa lo ganti dari backend
+const labels = ['1h', '2h', '3h', '4h', '5h', '6h'];
+const values = [12, 15, 13, 18, 16, 22];
+
+// 🚀 Bikin line chart
+const trendChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels,
+    datasets: [{
+      label: 'Token Trend',
+      data: values,
+      fill: true,
+      borderColor: '#00ff88',
+      backgroundColor: 'rgba(0,255,136,0.1)',
+      tension: 0.3,
+      pointRadius: 0,
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        grid: { color: '#222' },
+        ticks: { color: '#ccc' }
+      },
+      y: {
+        grid: { color: '#222' },
+        ticks: { color: '#ccc' }
+      }
+    },
+    plugins: {
+      legend: { display: false }
+    }
+  }
+});
+</script>
+
+
+
+
+
+
+
   <!-- MAIN SCRIPT -->
   <script src="script.js"></script>
 </body>
