@@ -132,7 +132,7 @@ img {
 }
 
 .loading-spinner-icon {
-  color: #01baa7;
+  color: orange;
   width: 18px;
   height: 18px;
   opacity: 0.8;
