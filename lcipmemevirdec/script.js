@@ -3,6 +3,7 @@
   window.__MVD_V2_ENABLED__ = true;
 
   const POLL_MS = 60000; // refresh tiap 1 menit
+  const API_URL = 'https://backend-memevirdec.vercel.app/api/fetch-meme-tokens';
 
   const els = {
     tokenGrid: document.getElementById('token-grid'),
@@ -14,23 +15,7 @@
     scanCount: document.getElementById('scan-count'),
   };
 
-  // ===== Dummy 12 Token =====
-  window.allTokens = Array.from({ length: 12 }, (_, i) => ({
-    symbol: `MEME${i + 1}`,
-    name: `Meme Token ${i + 1}`,
-    liquidityUsd: Math.floor(Math.random() * 200000 + 50000),
-    volumeUsd: Math.floor(Math.random() * 100000 + 10000),
-    chain: i % 2 === 0 ? 'ETH' : 'SOL',
-    logoURI: '',
-    pairUrl: '#',
-    createdAt: new Date(Date.now() - i * 3600 * 1000).toISOString(),
-    xEngagement: Math.floor(Math.random() * 100),
-    address: `0x${Math.random().toString(16).slice(2, 10)}`,
-    mentions: Math.floor(Math.random() * 9000),
-    likes: Math.floor(Math.random() * 5000),
-    retweets: Math.floor(Math.random() * 3000),
-  }));
-
+  let allTokens = [];
   let activeChain = 'all';
   let activeCategory = 'all';
   let searchQuery = '';
@@ -47,11 +32,9 @@
   /** DETAIL PANEL **/
   window.openDetailPanel = function (index) {
     const panel = document.getElementById("detail-panel");
-    if (!panel) return;
+    if (!panel || !allTokens[index]) return;
 
-    const token = window.allTokens[index];
-    if (!token) return;
-
+    const token = allTokens[index];
     const setText = (selector, value) => {
       const el = panel.querySelector(selector);
       if (el) el.textContent = value;
@@ -125,7 +108,7 @@
 
   /** FILTER **/
   function applyFilters() {
-    let filtered = [...window.allTokens];
+    let filtered = [...allTokens];
 
     if (activeChain !== 'all') {
       filtered = filtered.filter(t => t.chain.toLowerCase() === activeChain);
@@ -163,10 +146,25 @@
     if (els.scanCount) els.scanCount.textContent = tokens.length;
   }
 
+  /** FETCH DATA **/
+  async function fetchTokens() {
+    if (els.loading) els.loading.classList.remove('hidden');
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      allTokens = Array.isArray(data.tokens) ? data.tokens : [];
+      applyFilters();
+    } catch (err) {
+      console.error("Fetch tokens error:", err);
+    } finally {
+      if (els.loading) els.loading.classList.add('hidden');
+    }
+  }
+
   /** INIT **/
   document.addEventListener('DOMContentLoaded', () => {
-    applyFilters();
-    setInterval(applyFilters, POLL_MS);
+    fetchTokens();
+    setInterval(fetchTokens, POLL_MS);
 
     if (els.chainFilter) els.chainFilter.addEventListener('change', e => { activeChain = e.target.value; applyFilters(); });
     if (els.categoryFilter) els.categoryFilter.addEventListener('change', e => { activeCategory = e.target.value; applyFilters(); });
