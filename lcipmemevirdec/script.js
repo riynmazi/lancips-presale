@@ -66,46 +66,42 @@
 
   /** RENDER **/
   function makeCard(p, i) {
-    const card = document.createElement('article');
-    card.className = 'mvd-card';
+  const card = document.createElement('article');
+  card.className = 'mvd-card';
 
-    const symbol = p.symbol || '—';
-    const name = p.name || '—';
-    const liquidity = p.liquidityUsd || 0;
-    const volume = p.volumeUsd || 0;
-    const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
+  const symbol = p.symbol || '—';
+  const name = p.name || '—';
+  const liquidity = p.liquidityUsd || 0;
+  const volume = p.volumeUsd || 0;
+  const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
 
-    card.innerHTML = `
-  <div class="mvd-card-header">
-    <div class="mvd-card-header-left">
-      <img src="${logo}" alt="${symbol}" class="mvd-token-icon" />
+  card.innerHTML = `
+    <div class="mvd-card-header">
+      <div class="mvd-card-header-left">
+        <img src="${logo}" alt="${symbol}" class="mvd-token-icon" />
+      </div>
+      <div class="mvd-card-header-right">
+        <div class="mvd-token-name">${name}</div>
+        <div class="mvd-token-symbol">${symbol}</div>
+      </div>
+      <div class="mvd-arrow">→</div>
     </div>
-    <div class="mvd-card-header-right">
-      <div class="mvd-token-name">${name}</div>
-      <div class="mvd-token-symbol">${symbol}</div>
+
+    <div class="mvd-metrics">
+      <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
+      <div>Volume <span>${formatUSD(volume)}</span></div>
     </div>
-    <div class="mvd-arrow">→</div>
-  </div>
 
-  <div class="mvd-metrics">
-    <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
-    <div>Volume <span>${formatUSD(volume)}</span></div>
-  </div>
+    <div class="mvd-footer">
+      <a href="${p.pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
+    </div>
+  `;
 
-  <div class="mvd-footer">
-    <a href="${p.pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
-  </div>
-    `;
+  const arrow = card.querySelector('.mvd-arrow');
+  if (arrow) arrow.addEventListener('click', () => window.openDetailPanel(i));
 
-    // Event listener arrow
-    const arrow = card.querySelector('.mvd-arrow');
-    if (arrow) {
-      arrow.addEventListener('click', () => window.openDetailPanel(i));
-    }
-
-    return card;
-  }
-
+  return card;
+}
   /** FILTER **/
   function applyFilters() {
     let filtered = [...allTokens];
