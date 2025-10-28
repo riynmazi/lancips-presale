@@ -336,6 +336,7 @@ img {
 
 /* === MVD Card Style (updated layout only) === */
 .mvd-card {
+  position: relative;
   background-color: #0d0d0d;          /* card gelap */
   border-radius: 12px;                 /* sudut melengkung */
   padding: 16px;                       /* ruang isi */
