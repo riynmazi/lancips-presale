@@ -14,17 +14,21 @@
 
 <body>
   <!-- ===== TOP BAR ===== -->
-  <header class="top-bar">
+  <div class="top-bar">
+  <div class="left-group">
     <button class="back-btn" onclick="window.location.href='https://www.lancips.xyz'">
-  <img src="Lancips.png" alt="Back">
+      <img src="lancips.png" alt="Back">
     </button>
-    <h1 class="app-title">Viral Detector</h1>
-     <input type="text"        id="search-input" placeholder="Search token..." class="search-input" />
-  </header>
+    <span class="app-title">VIRAL DETECTOR</span>
+  </div>
+
+  <input type="text" class="search-input" placeholder="Search token...">
+</div>
 
 
 
-  <!-- ===== HERO / STATUS ===== -->
+
+  <!-- ===== LIVE / STATUS ===== -->
   <section class="status-section container">
     <div class="live-status">
       <span class="pulse-dot"></span>
@@ -45,26 +49,25 @@
   <!-- ===== MAIN CONTENT ===== -->
   <main class="main-content container">
      
-<!-- FILTER BAR -->
-    <div class="filter-bar">
-    
-      <h2 class="token-section-title">🔥 TOP FILTERS</h2>
-     
-      <div class="filter-dropdowns">
-        <select id="filter-chain" class="filter-select">
-          <option value="all">All Chains</option>
-          <option value="solana">Solana</option>
-          <option value="bsc">BSC</option>
-        </select>
-      </div>
-      <div class="filter-dropdowns">
-        <select id="filter-category" class="filter-select">
-          <option value="viral">Viral</option>
-          <option value="top24h">Top 24h</option>
-          <option value="new">New</option>
-        </select>
-      </div>
-    </div>
+<div class="filter-bar">
+  <h2 class="token-section-title">🔥 TOP FILTERS</h2>
+
+  <div class="filter-group">
+    <select id="filter-chain" class="filter-select">
+      <option value="all">All Chains</option>
+      <option value="solana">Solana</option>
+      <option value="bsc">BSC</option>
+    </select>
+
+    <select id="filter-category" class="filter-select">
+      <option value="viral">Viral</option>
+      <option value="top24h">Top 24h</option>
+      <option value="new">New</option>
+    </select>
+  </div>
+</div>
+
+
 
     
     
