@@ -76,7 +76,6 @@
     const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
 
     card.innerHTML = `
-      card.innerHTML = `
   <div class="mvd-card-header">
     <div class="mvd-card-header-left">
       <img src="${logo}" alt="${symbol}" class="mvd-token-icon" />
@@ -96,7 +95,6 @@
   <div class="mvd-footer">
     <a href="${p.pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
   </div>
-`;
     `;
 
     // Event listener arrow
