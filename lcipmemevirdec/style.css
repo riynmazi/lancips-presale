@@ -405,7 +405,7 @@ img {
 /* Metrics section */
 .mvd-metrics {
   font-size: 14px;
-  color: #fff;
+  color: grey;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -414,7 +414,7 @@ img {
 
 .mvd-metrics span {
   font-weight: 500;
-  color: #fff;
+  color: green;
 }
 
 /* Footer link */
