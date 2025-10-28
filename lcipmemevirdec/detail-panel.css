@@ -1,0 +1,188 @@
+/* === 🎨 DETAIL PANEL === */
+.detail-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 480px;
+  height: 100vh;
+  background: #0d0d0d;
+  color: #fff;
+  border-left: 2px solid #222;
+  box-shadow: -6px 0 20px rgba(0, 0, 0, 0.6);
+  transition: right 0.4s ease;
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+}
+
+.detail-panel.open {
+  right: 0;
+}
+
+/* === BAR ATAS === */
+.detail-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.detail-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tombol close di pojok kanan atas */
+#detail-close-btn {
+  position: absolute; /* bebas di pojok panel */
+  top: 16px;
+  right: 16px;
+  font-size: 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 20000;
+}
+#detail-close-btn:hover {
+  color: #ff4d4d;
+}
+
+
+
+.detail-topbar-left h2 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  color: #ccc;
+}
+
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.detail-actions i {
+  cursor: pointer;
+  font-size: 20px;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.detail-actions i:hover {
+  color: #fff;
+}
+
+/* === CARD UTAMA === */
+.detail-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+/* Logo tengah */
+.detail-card-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.detail-card-logo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+/* Statistik */
+.detail-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.detail-stats div {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.detail-stats span {
+  display: block;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 4px;
+}
+
+/* Tombol bawah */
+.detail-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.detail-buttons button {
+  flex: 1;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.detail-buttons button:hover {
+  background: #333;
+}
+
+/* === INFO KANAN (TEXT DETAILS) === */
+.detail-info {
+  margin-top: 16px;
+  background: #121212;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.detail-info h3 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  color: #fff;
+}
+
+.detail-info .info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #1e1e1e;
+  font-size: 14px;
+}
+
+.detail-info .info-row:last-child {
+  border-bottom: none;
+}
+
+.detail-info .info-label {
+  color: #999;
+}
+
+.detail-info .info-value {
+  color: #fff;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  .detail-panel {
+    width: 100%;
+  }
+}
