@@ -88,7 +88,7 @@ setText("#detail-likes", token.xLikes || 0);
 
 setText("#detail-retweets", token.xRetweets || 0);
 
-setText("#detail-score", ${token.xEngagement}/100);
+setText("#detail-score", token.xEngagement + "/100");
 
 const logoEl = panel.querySelector("#detail-logo");
 
