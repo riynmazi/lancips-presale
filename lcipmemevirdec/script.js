@@ -30,34 +30,43 @@
   }
 
   /** DETAIL PANEL **/
-  window.openDetailPanel = function (index) {
-    const panel = document.getElementById("detail-panel");
-    if (!panel || !allTokens[index]) return;
+window.openDetailPanel = function (index) {
+  const panel = document.getElementById("detail-panel");
+  if (!panel || !allTokens[index]) return;
 
-    const token = allTokens[index];
-    const setText = (selector, value) => {
-      const el = panel.querySelector(selector);
-      if (el) el.textContent = value;
-    };
-
-    setText("#detail-name", token.name || "—");
-    setText("#detail-symbol", token.symbol || "—");
-    setText("#detail-network", token.chain || "—");
-    setText("#detail-liquidity", formatUSD(token.liquidityUsd));
-    setText("#detail-vol24", formatUSD(token.volumeUsd));
-    setText("#detail-address", token.address || "—");
-    setText("#detail-mentions", token.mentions);
-    setText("#detail-likes", token.likes);
-    setText("#detail-retweets", token.retweets);
-    setText("#detail-score", `${token.xEngagement}/100`);
-
-    const logoEl = panel.querySelector("#detail-logo");
-    if (logoEl) {
-      logoEl.src = token.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(token.symbol)}&background=random`;
-    }
-
-    panel.classList.add("open");
+  const token = allTokens[index];
+  const setText = (selector, value) => {
+    const el = panel.querySelector(selector);
+    if (el) el.textContent = value;
   };
+
+  setText("#detail-name", token.name || "—");
+  setText("#detail-symbol", token.symbol || "—");
+  setText("#detail-network", token.chain || "—");
+  setText("#detail-liquidity", formatUSD(token.liquidityUsd));
+  setText("#detail-vol24", formatUSD(token.volumeUsd));
+  setText("#detail-address", token.address || "—");
+
+  // ⚡ Update sesuai backend
+  setText("#detail-mentions", token.xMentions || 0);
+  setText("#detail-likes", token.xLikes || 0);
+  setText("#detail-retweets", token.xRetweets || 0);
+
+  setText("#detail-score", `${token.xEngagement}/100`);
+
+  const logoEl = panel.querySelector("#detail-logo");
+  if (logoEl) {
+    logoEl.src = token.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(token.symbol)}&background=random`;
+  }
+
+  // 🔥 Update chart sesuai token yang dibuka
+  if (typeof window.renderTrendChart === "function") {
+    window.renderTrendChart(token);
+  }
+
+  panel.classList.add("open");
+};
+
 
   window.closeDetailPanel = function () {
     const panel = document.getElementById("detail-panel");
@@ -66,42 +75,43 @@
 
   /** RENDER **/
   function makeCard(p, i) {
-  const card = document.createElement('article');
-  card.className = 'mvd-card';
+    const card = document.createElement('article');
+    card.className = 'mvd-card';
 
-  const symbol = p.symbol || '—';
-  const name = p.name || '—';
-  const liquidity = p.liquidityUsd || 0;
-  const volume = p.volumeUsd || 0;
-  const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
+    const symbol = p.symbol || '—';
+    const name = p.name || '—';
+    const liquidity = p.liquidityUsd || 0;
+    const volume = p.volumeUsd || 0;
+    const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
 
-  card.innerHTML = `
-    <div class="mvd-card-header">
-      <div class="mvd-card-header-left">
-        <img src="${logo}" alt="${symbol}" class="mvd-token-icon" />
+    card.innerHTML = `
+      <div class="mvd-card-header">
+        <div class="mvd-card-header-left">
+          <img src="${logo}" alt="${symbol}" class="mvd-token-icon" />
+        </div>
+        <div class="mvd-card-header-right">
+          <div class="mvd-token-name">${name}</div>
+          <div class="mvd-token-symbol">${symbol}</div>
+        </div>
+        <div class="mvd-arrow">→</div>
       </div>
-      <div class="mvd-card-header-right">
-        <div class="mvd-token-name">${name}</div>
-        <div class="mvd-token-symbol">${symbol}</div>
+
+      <div class="mvd-metrics">
+        <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
+        <div>Volume <span>${formatUSD(volume)}</span></div>
       </div>
-      <div class="mvd-arrow">→</div>
-    </div>
 
-    <div class="mvd-metrics">
-      <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
-      <div>Volume <span>${formatUSD(volume)}</span></div>
-    </div>
+      <div class="mvd-footer">
+        <a href="${p.pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
+      </div>
+    `;
 
-    <div class="mvd-footer">
-      <a href="${p.pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
-    </div>
-  `;
+    const arrow = card.querySelector('.mvd-arrow');
+    if (arrow) arrow.addEventListener('click', () => window.openDetailPanel(i));
 
-  const arrow = card.querySelector('.mvd-arrow');
-  if (arrow) arrow.addEventListener('click', () => window.openDetailPanel(i));
+    return card;
+  }
 
-  return card;
-}
   /** FILTER **/
   function applyFilters() {
     let filtered = [...allTokens];
@@ -145,13 +155,23 @@
   /** FETCH DATA **/
   async function fetchTokens() {
     if (els.loading) els.loading.classList.remove('hidden');
+
     try {
       const res = await fetch(API_URL);
       const data = await res.json();
       allTokens = Array.isArray(data.tokens) ? data.tokens : [];
+
+      // 🧠 Langsung apply filter dan render tampilan utama
       applyFilters();
+
+      // 🔥 Render chart pakai token paling atas (misal token paling viral)
+      const topToken = allTokens[0];
+      if (topToken && typeof window.renderTrendChart === 'function') {
+        window.renderTrendChart(topToken);
+      }
+
     } catch (err) {
-      console.error("Fetch tokens error:", err);
+      console.error("❌ Fetch tokens error:", err);
     } finally {
       if (els.loading) els.loading.classList.add('hidden');
     }
@@ -162,12 +182,31 @@
     fetchTokens();
     setInterval(fetchTokens, POLL_MS);
 
-    if (els.chainFilter) els.chainFilter.addEventListener('change', e => { activeChain = e.target.value; applyFilters(); });
-    if (els.categoryFilter) els.categoryFilter.addEventListener('change', e => { activeCategory = e.target.value; applyFilters(); });
-    if (els.searchInput) els.searchInput.addEventListener('input', e => { searchQuery = e.target.value; applyFilters(); });
+    if (els.chainFilter) {
+      els.chainFilter.addEventListener('change', e => {
+        activeChain = e.target.value;
+        applyFilters();
+      });
+    }
 
-    // Tombol close panel
+    if (els.categoryFilter) {
+      els.categoryFilter.addEventListener('change', e => {
+        activeCategory = e.target.value;
+        applyFilters();
+      });
+    }
+
+    if (els.searchInput) {
+      els.searchInput.addEventListener('input', e => {
+        searchQuery = e.target.value;
+        applyFilters();
+      });
+    }
+
     const closeBtn = document.getElementById('detail-close-btn');
-    if (closeBtn) closeBtn.addEventListener('click', () => window.closeDetailPanel());
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => window.closeDetailPanel());
+    }
   });
+
 })();
