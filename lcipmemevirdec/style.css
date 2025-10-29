@@ -389,7 +389,7 @@ img {
 .mvd-card-header-right {
   flex: 1 1 auto;       /* teks mengisi sisa ruang */
   text-align: right;    /* nama + simbol rata kanan */
-  position; relative;
+ /* position; relative;*/
 }
 
 .mvd-token-name {
@@ -581,6 +581,5 @@ img {
     padding: 14px;
   }
 }
-
 
 
