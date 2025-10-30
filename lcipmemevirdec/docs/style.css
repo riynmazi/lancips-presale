@@ -86,14 +86,15 @@
   background: #1a1a1a;
   padding: 1rem;
   border-radius: 8px;
-  overflow-x: auto;       /* scroll horizontal kalau kepanjangan */
-  max-width: 100%;        /* jangan keluar viewport */
-  word-wrap: normal;      /* biar tidak dipaksa wrap */
-  white-space: pre;       /* tetap pertahankan formatting asli kode */
+  max-width: 100%;       /* jangan keluar viewport */
+  overflow-x: auto;       /* scroll horizontal kalau perlu */
+  white-space: pre;       /* pertahankan formatting desktop */
   font-size: 0.875rem;
+  word-wrap: normal;
+  word-break: normal;
 }
 
-/* optional: tambahin scrollbar yang lebih rapih */
+/* scrollbar lebih rapih di desktop */
 .howitworks-code pre::-webkit-scrollbar {
   height: 6px;
 }
@@ -107,6 +108,15 @@
   background: rgba(255,255,255,0.05);
 }
 
+/* === Responsif: layar kecil === */
+@media (max-width: 600px) {
+  .howitworks-code pre {
+    white-space: pre-wrap;   /* wrap otomatis */
+    word-break: break-word;   /* jangan overflow */
+    overflow-x: hidden;       /* hilangkan scroll */
+    font-size: 0.8rem;
+  }
+}
 
 
 
