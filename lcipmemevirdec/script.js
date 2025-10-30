@@ -25,7 +25,7 @@ let allTokens = [];
 let activeChain = 'all';
 let activeCategory = 'all';
 let searchQuery = '';
-let topDetectedHidden = true;
+/**let topDetectedHidden = true;**/
 
 /** UTIL **/
 function formatUSD(n) {
