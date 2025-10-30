@@ -86,8 +86,29 @@
   background: #1a1a1a;
   padding: 1rem;
   border-radius: 8px;
-  overflow-x: auto;
+  overflow-x: auto;       /* scroll horizontal kalau kepanjangan */
+  max-width: 100%;        /* jangan keluar viewport */
+  word-wrap: normal;      /* biar tidak dipaksa wrap */
+  white-space: pre;       /* tetap pertahankan formatting asli kode */
+  font-size: 0.875rem;
 }
+
+/* optional: tambahin scrollbar yang lebih rapih */
+.howitworks-code pre::-webkit-scrollbar {
+  height: 6px;
+}
+
+.howitworks-code pre::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+
+.howitworks-code pre::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+
+
+
 
 /* ===== FOOTER ===== */
 .footer {
