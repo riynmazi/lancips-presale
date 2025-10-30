@@ -66,6 +66,26 @@ window.openDetailPanel = function (index) {
   setText("#detail-price", `$${token.priceUsd?.toFixed(6) || '0.000000'}`);
   setText("#detail-hype", `🔥 ${Math.round(token.memeScore || 0)}%`);
 
+
+// === BUY BUTTON ===
+  
+// Helper buka Birdeye
+function openBirdeye(token) {
+  if (!token || !token.address) return;
+  const chainPath = token.chain?.toLowerCase() === "solana" ? "solana"
+                  : token.chain?.toLowerCase() === "bsc" ? "bsc"
+                  : "unknown";
+  window.open(`https://birdeye.so/${chainPath}/token/${token.address}`, "_blank");
+}
+
+// Tombol Buy & Chart
+const [buyBtn, chartBtn] = panel.querySelectorAll(".detail-buttons button:nth-child(-n+2)");
+if (buyBtn) buyBtn.onclick = () => openBirdeye(token);
+if (chartBtn) chartBtn.onclick = () => openBirdeye(token);
+
+
+
+
   // === Copy tombol di detail-buttons ===
   const copyBtn = panel.querySelector(".detail-buttons button:nth-child(3)");
   if(copyBtn && token.address) {
@@ -156,9 +176,6 @@ function makeCard(p, i) {
       <div>Volume <span>${formatUSD(volume)}</span></div>
     </div>
 
-    <div class="mvd-footer">
-      <a href="${p.pairUrl}" target="_blank" rel="noopener">View on DexScreener</a>
-    </div>
   `;
 
   // Copy address aktif di card
