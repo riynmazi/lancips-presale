@@ -1,7 +1,6 @@
 (function () {
 
 if (window.MVD_V2_ENABLED) return;
-
 window.MVD_V2_ENABLED = true;
 
 const POLL_MS = 60000; // refresh tiap 1 menit
@@ -15,12 +14,18 @@ const els = {
   categoryFilter: document.getElementById('filter-category'),
   searchInput: document.getElementById('search-input'),
   scanCount: document.getElementById('scan-count'),
+
+  // tambahan untuk viral/top detected
+  viralTop: document.getElementById('viral-top'),
+  topDetected: document.getElementById('token-grid'),
+  topDetectedControls: document.getElementById('top-detected-controls'),
 };
 
 let allTokens = [];
 let activeChain = 'all';
 let activeCategory = 'all';
 let searchQuery = '';
+let topDetectedHidden = true;
 
 /** UTIL **/
 function formatUSD(n) {
@@ -42,9 +47,7 @@ function copyToClipboardWithToast(el, text) {
     const original = el.textContent;
     el.textContent = "Copied!";
     setTimeout(() => { el.textContent = original; }, 1500);
-  }).catch(err => {
-    console.error("Copy failed:", err);
-  });
+  }).catch(err => console.error("Copy failed:", err));
 }
 
 /** DETAIL PANEL **/
@@ -66,27 +69,19 @@ window.openDetailPanel = function (index) {
   setText("#detail-price", `$${token.priceUsd?.toFixed(6) || '0.000000'}`);
   setText("#detail-hype", `🔥 ${Math.round(token.memeScore || 0)}%`);
 
+  // Tombol Buy & Chart
+  const [buyBtn, chartBtn] = panel.querySelectorAll(".detail-buttons button:nth-child(-n+2)");
+  const openBirdeye = (token) => {
+    if (!token || !token.address) return;
+    const chainPath = token.chain?.toLowerCase() === "solana" ? "solana"
+                    : token.chain?.toLowerCase() === "bsc" ? "bsc"
+                    : "unknown";
+    window.open(`https://birdeye.so/${chainPath}/token/${token.address}`, "_blank");
+  };
+  if(buyBtn) buyBtn.onclick = () => openBirdeye(token);
+  if(chartBtn) chartBtn.onclick = () => openBirdeye(token);
 
-// === BUY BUTTON ===
-  
-// Helper buka Birdeye
-function openBirdeye(token) {
-  if (!token || !token.address) return;
-  const chainPath = token.chain?.toLowerCase() === "solana" ? "solana"
-                  : token.chain?.toLowerCase() === "bsc" ? "bsc"
-                  : "unknown";
-  window.open(`https://birdeye.so/${chainPath}/token/${token.address}`, "_blank");
-}
-
-// Tombol Buy & Chart
-const [buyBtn, chartBtn] = panel.querySelectorAll(".detail-buttons button:nth-child(-n+2)");
-if (buyBtn) buyBtn.onclick = () => openBirdeye(token);
-if (chartBtn) chartBtn.onclick = () => openBirdeye(token);
-
-
-
-
-  // === Copy tombol di detail-buttons ===
+  // Copy address tombol
   const copyBtn = panel.querySelector(".detail-buttons button:nth-child(3)");
   if(copyBtn && token.address) {
     copyBtn.onclick = () => {
@@ -98,11 +93,10 @@ if (chartBtn) chartBtn.onclick = () => openBirdeye(token);
     };
   }
 
-  // === Copy icon di samping address ===
+  // Copy icon di samping address
   const addrContainer = panel.querySelector("#detail-address");
   if(addrContainer && token.address) {
     addrContainer.textContent = token.address;
-    // Hapus dulu icon jika ada
     const existingIcon = addrContainer.querySelector(".copy-icon");
     if(existingIcon) existingIcon.remove();
 
@@ -110,20 +104,17 @@ if (chartBtn) chartBtn.onclick = () => openBirdeye(token);
     icon.className = "copy-icon";
     icon.style.cursor = "pointer";
     icon.style.marginLeft = "6px";
-    icon.textContent = "📋"; // bisa ganti ke icon lain
+    icon.textContent = "📋";
     icon.title = "Copy address";
-
     icon.onclick = () => {
       navigator.clipboard.writeText(token.address).then(() => {
         icon.textContent = "✅";
         setTimeout(() => icon.textContent = "📋", 1500);
       }).catch(err => console.error("Copy failed:", err));
     };
-
     addrContainer.appendChild(icon);
 
-    // Jika alamat terlalu panjang, tambahkan "..." di tengah
-    const maxLen = 18; // maksimal tampilan
+    const maxLen = 18;
     if(token.address.length > maxLen) {
       addrContainer.firstChild.textContent =
         token.address.slice(0, 8) + "..." + token.address.slice(-6);
@@ -142,13 +133,12 @@ if (chartBtn) chartBtn.onclick = () => openBirdeye(token);
   panel.classList.add("open");
 };
 
-
 window.closeDetailPanel = function () {
   const panel = document.getElementById("detail-panel");
   if (panel) panel.classList.remove("open");
 };
 
-/** RENDER **/
+/** RENDER CARD **/
 function makeCard(p, i) {
   const card = document.createElement('article');
   card.className = 'mvd-card';
@@ -170,21 +160,11 @@ function makeCard(p, i) {
       </div>
       <div class="mvd-arrow">→</div>
     </div>
-
     <div class="mvd-metrics">
       <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
       <div>Volume <span>${formatUSD(volume)}</span></div>
     </div>
-
   `;
-
-  // Copy address aktif di card
-  const addrEl = card.querySelector('.mvd-token-address');
-  if(addrEl && p.address) {
-    addrEl.style.cursor = "pointer";
-    addrEl.title = "Click to copy";
-    addrEl.addEventListener('click', () => copyToClipboardWithToast(addrEl, p.address));
-  }
 
   const arrow = card.querySelector('.mvd-arrow');
   if (arrow) arrow.addEventListener('click', () => window.openDetailPanel(i));
@@ -192,43 +172,93 @@ function makeCard(p, i) {
   return card;
 }
 
-/** FILTER **/
+/** RENDER GRID TOKENS **/
+function renderTokens(tokens) {
+  if(!els.tokenGrid) return;
+  els.tokenGrid.innerHTML = '';
+  if(!tokens || !tokens.length){
+    els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens found</div>`;
+    return;
+  }
+  tokens.forEach((t,i)=> els.tokenGrid.appendChild(makeCard(t,i)));
+  if(els.scanCount) els.scanCount.textContent = tokens.length;
+}
+
+/** RENDER VIRAL TOP 3 **/
+function renderViralTop(tokens) {
+  if(!els.viralTop) return;
+  els.viralTop.innerHTML = '';
+
+  const top3 = tokens.slice(0,3);
+  top3.forEach((t,i) => {
+    const div = document.createElement('div');
+    div.className = 'viral-top-card';
+    div.innerHTML = `<span>${i+1}.</span> <strong>${t.symbol}</strong> - Hype: 🔥 ${Math.round(t.memeScore || 0)}%`;
+    div.onclick = () => window.openDetailPanel(allTokens.indexOf(t));
+    els.viralTop.appendChild(div);
+  });
+}
+
+/** RENDER TOP DETECTED (pakai elemen yang sudah ada di markup) 
+function renderTopDetected(tokens) {
+  if (!els.topDetected) return;
+
+  // Tampilkan 8 token jika hidden, semua kalau show
+  const displayTokens = topDetectedHidden ? tokens.slice(0, 8) : tokens;
+
+  els.topDetected.innerHTML = '';
+  displayTokens.forEach(t => {
+    const div = document.createElement('div');
+    div.className = 'top-detected-card';
+    div.innerHTML = `
+      <strong>${t.symbol}</strong> - Vol24h: ${formatUSD(t.volumeUsd)} - Liquidity: ${formatUSD(t.liquidityUsd)}
+    `;
+    div.onclick = () => window.openDetailPanel(allTokens.indexOf(t));
+    els.topDetected.appendChild(div);
+  });
+
+  // tombol Hide / All
+  const controlsEl = els.topDetectedControls;
+  if (controlsEl) {
+    controlsEl.innerHTML = '';
+    if (tokens.length > 8) {
+      const btn = document.createElement('button');
+      btn.textContent = topDetectedHidden ? 'All' : 'Hide';
+      btn.onclick = () => {
+        topDetectedHidden = !topDetectedHidden;
+        renderTopDetected(tokens);
+      };
+      controlsEl.appendChild(btn);
+    }
+  }
+}
+
+
+
+/** APPLY FILTERS **/
 function applyFilters() {
   let filtered = [...allTokens];
 
-  if (activeChain !== 'all') {
-    filtered = filtered.filter(t => t.chain.toLowerCase() === activeChain);
-  }
+  if (activeChain !== 'all') filtered = filtered.filter(t => t.chain.toLowerCase() === activeChain);
 
   if (activeCategory === 'viral') {
-    filtered.sort((a, b) => b.xEngagement - a.xEngagement);
+    filtered.sort((a,b)=> (b.memeScore||0) - (a.memeScore||0));
   } else if (activeCategory === 'top24h') {
-    filtered.sort((a, b) => b.volumeUsd - a.volumeUsd);
+    filtered.sort((a,b)=> (b.volumeUsd||0) - (a.volumeUsd||0));
   } else if (activeCategory === 'new') {
-    filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    filtered.sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt));
   }
 
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
-    filtered = filtered.filter(
-      t => t.symbol?.toLowerCase().includes(q) ||
-           t.name?.toLowerCase().includes(q) ||
-           t.address?.toLowerCase().includes(q)
-    );
+    filtered = filtered.filter(t => t.symbol?.toLowerCase().includes(q) ||
+                                    t.name?.toLowerCase().includes(q) ||
+                                    t.address?.toLowerCase().includes(q));
   }
 
+  renderViralTop(filtered);
+  renderTopDetected(filtered);
   renderTokens(filtered);
-}
-
-function renderTokens(tokens) {
-  els.tokenGrid.innerHTML = '';
-  if (!tokens || !tokens.length) {
-    els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens found</div>`;
-    return;
-  }
-
-  tokens.forEach((t, i) => els.tokenGrid.appendChild(makeCard(t, i)));
-  if (els.scanCount) els.scanCount.textContent = tokens.length;
 }
 
 /** FETCH DATA **/
@@ -241,46 +271,35 @@ async function fetchTokens() {
     allTokens = Array.isArray(data.tokens) ? data.tokens : [];
 
     applyFilters();
-
-    const topToken = allTokens[0];
-    if (topToken && typeof window.renderTrendChart === 'function') {
-      window.renderTrendChart(topToken);
-    }
-  } catch (err) {
+  } catch(err){
     console.error("❌ Fetch tokens error:", err);
   } finally {
-    if (els.loading) els.loading.classList.add('hidden');
+    if(els.loading) els.loading.classList.add('hidden');
   }
 }
 
 /** INIT **/
 document.addEventListener('DOMContentLoaded', () => {
   fetchTokens();
-  setInterval(fetchTokens, POLL_MS);
+  setInterval(fetchTokens,POLL_MS);
 
-  if (els.chainFilter) {
-    els.chainFilter.addEventListener('change', e => {
-      activeChain = e.target.value;
-      applyFilters();
-    });
-  }
+  if(els.chainFilter) els.chainFilter.addEventListener('change', e => {
+    activeChain = e.target.value;
+    applyFilters();
+  });
 
-  if (els.categoryFilter) {
-    els.categoryFilter.addEventListener('change', e => {
-      activeCategory = e.target.value;
-      applyFilters();
-    });
-  }
+  if(els.categoryFilter) els.categoryFilter.addEventListener('change', e => {
+    activeCategory = e.target.value;
+    applyFilters();
+  });
 
-  if (els.searchInput) {
-    els.searchInput.addEventListener('input', e => {
-      searchQuery = e.target.value;
-      applyFilters();
-    });
-  }
+  if(els.searchInput) els.searchInput.addEventListener('input', e => {
+    searchQuery = e.target.value;
+    applyFilters();
+  });
 
   const closeBtn = document.getElementById('detail-close-btn');
-  if (closeBtn) closeBtn.addEventListener('click', () => window.closeDetailPanel());
+  if(closeBtn) closeBtn.addEventListener('click', () => window.closeDetailPanel());
 });
 
 })();
