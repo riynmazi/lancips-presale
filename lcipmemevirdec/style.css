@@ -667,6 +667,12 @@ img {
   margin-top: 40px;
 }
 
+#viral-top-section h2 {
+  text-align: center;
+  font-weight: 600; /* optional, biar tegas */
+  margin-bottom: 16px; /* kasih jarak ke daftar di bawahnya */
+}
+
 
 .viral-top-card {
   display: flex;
