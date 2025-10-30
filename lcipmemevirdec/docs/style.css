@@ -1,3 +1,31 @@
+
+
+.howitworks-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.howitworks-text p {
+  color: #aaa;
+}
+.howitworks-code pre {
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
 /* ===== FOOTER ===== */
 .footer {
   background-color: #000;
