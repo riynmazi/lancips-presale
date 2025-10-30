@@ -199,39 +199,6 @@ function renderViralTop(tokens) {
   });
 }
 
-/** RENDER TOP DETECTED (pakai elemen yang sudah ada di markup) 
-function renderTopDetected(tokens) {
-  if (!els.topDetected) return;
-
-  // Tampilkan 8 token jika hidden, semua kalau show
-  const displayTokens = topDetectedHidden ? tokens.slice(0, 8) : tokens;
-
-  els.topDetected.innerHTML = '';
-  displayTokens.forEach(t => {
-    const div = document.createElement('div');
-    div.className = 'top-detected-card';
-    div.innerHTML = `
-      <strong>${t.symbol}</strong> - Vol24h: ${formatUSD(t.volumeUsd)} - Liquidity: ${formatUSD(t.liquidityUsd)}
-    `;
-    div.onclick = () => window.openDetailPanel(allTokens.indexOf(t));
-    els.topDetected.appendChild(div);
-  });
-
-  // tombol Hide / All
-  const controlsEl = els.topDetectedControls;
-  if (controlsEl) {
-    controlsEl.innerHTML = '';
-    if (tokens.length > 8) {
-      const btn = document.createElement('button');
-      btn.textContent = topDetectedHidden ? 'All' : 'Hide';
-      btn.onclick = () => {
-        topDetectedHidden = !topDetectedHidden;
-        renderTopDetected(tokens);
-      };
-      controlsEl.appendChild(btn);
-    }
-  }
-}
 
 
 
