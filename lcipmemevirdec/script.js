@@ -5,7 +5,7 @@
 
   const POLL_MS = 60000; // refresh tiap 1 menit
   const API_URL = 'https://backend-memevirdec.vercel.app/api/fetch-meme-tokens';
-  const TOKENS_PER_PAGE = 8;
+  const TOKENS_PER_PAGE = 9;
 
   const els = {
     tokenGrid: document.getElementById('token-grid'),
