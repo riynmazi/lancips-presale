@@ -17,7 +17,7 @@ const els = {
 
   // tambahan untuk viral/top detected
   viralTop: document.getElementById('viral-top'),
-  topDetected: document.getElementById('token-grid'),
+  topDetected: document.getElementById(''),
   topDetectedControls: document.getElementById('top-detected-controls'),
 };
 
