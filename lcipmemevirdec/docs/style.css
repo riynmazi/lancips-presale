@@ -10,6 +10,7 @@
   z-index: 50;
   height: 64px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto; /* Tambahan supaya tidak keluar viewport */
 }
 
 /* === Kiri: gambar + judul === */
@@ -17,6 +18,7 @@
   display: flex;
   align-items: center;
   gap: 8px; /* jarak antara gambar dan teks */
+  flex-shrink: 0; /* jangan menyusut */
 }
 
 .back-btn {
@@ -26,6 +28,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .back-btn img {
@@ -40,31 +43,51 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: #01baa7;
+  white-space: nowrap; /* supaya teks tidak wrap */
 }
 
+/* === Right group: tabs / buttons === */
+.right-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
 
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
 
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
 
+/* === How It Works Section === */
 .howitworks-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: start;
 }
+
 .howitworks-text p {
   color: #aaa;
 }
+
 .howitworks-code pre {
   background: #1a1a1a;
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
 }
-
-
-
-
-
 
 /* ===== FOOTER ===== */
 .footer {
@@ -125,7 +148,26 @@
   padding-top: 20px;
 }
 
-/* Responsif */
+/* === Responsif === */
+@media (max-width: 900px) {
+  .howitworks-section {
+    grid-template-columns: 1fr;
+  }
+
+  .top-bar {
+    padding: 0 12px;
+  }
+
+  .app-title {
+    font-size: 1rem;
+  }
+
+  .tab-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 600px) {
   .footer {
     padding: 40px 20px;
