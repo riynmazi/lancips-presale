@@ -651,3 +651,59 @@ img {
   }
 }
 
+
+
+
+/* ===== VIRAL TOP 3 ===== */
+.viral-top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 24px 16px 0 16px;
+}
+
+.viral-top-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viral-top-card:hover {
+  background: #222;
+  transform: translateY(-2px);
+}
+
+.viral-top-card span:first-child {
+  color: #ff8c00; /* nomor urut */
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.viral-top-card strong {
+  color: #01baa7; /* simbol token */
+  font-weight: 600;
+}
+
+.viral-top-card .hype {
+  color: #ff4444; /* warna hype 🔥 */
+  font-weight: 500;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .viral-top {
+    margin: 16px 8px 0 8px;
+  }
+
+  .viral-top-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
