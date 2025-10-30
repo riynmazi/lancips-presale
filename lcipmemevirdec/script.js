@@ -5,6 +5,7 @@
 
   const POLL_MS = 60000; // refresh tiap 1 menit
   const API_URL = 'https://backend-memevirdec.vercel.app/api/fetch-meme-tokens';
+  const TOKENS_PER_PAGE = 50;
 
   const els = {
     tokenGrid: document.getElementById('token-grid'),
@@ -18,9 +19,11 @@
   };
 
   let allTokens = [];
+  let filteredTokens = [];
   let activeChain = 'all';
   let activeCategory = 'all';
   let searchQuery = '';
+  let currentPage = 1;
 
   /** UTIL **/
   function formatUSD(n) {
@@ -111,7 +114,6 @@
 
       const maxLen = 18;
       if (token.address.length > maxLen) {
-        // firstChild might be a text node depending on DOM; be defensive
         if (addrContainer.firstChild && addrContainer.firstChild.nodeType === Node.TEXT_NODE) {
           addrContainer.firstChild.textContent = token.address.slice(0, 8) + "..." + token.address.slice(-6);
         } else {
@@ -166,45 +168,65 @@
       </div>
     `;
 
-    const addrEl = card.querySelector('.mvd-token-address');
-    if (addrEl && p.address) {
-      addrEl.style.cursor = "pointer";
-      addrEl.title = "Click to copy";
-      addrEl.addEventListener('click', () => copyToClipboardWithToast(addrEl, p.address));
-    }
-
     const arrow = card.querySelector('.mvd-arrow');
     if (arrow) arrow.addEventListener('click', () => window.openDetailPanel(i));
 
     return card;
   }
 
-  /** RENDER VIRAL TOP 3 **/
-  function renderViralTop(tokens) {
-    if (!els.viralTop) return;
-    els.viralTop.innerHTML = '';
+  function renderTokens(tokens) {
+    if (!els.tokenGrid) return;
+    els.tokenGrid.innerHTML = '';
 
     if (!tokens || !tokens.length) {
-      els.viralTop.innerHTML = `<div class="viral-empty">—</div>`;
+      els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens found</div>`;
+      if (els.scanCount) els.scanCount.textContent = '0';
       return;
     }
 
-    // If tokens passed are not sorted by memeScore, sort a copy by memeScore desc
-    const sorted = [...tokens].sort((a, b) => (b.memeScore || 0) - (a.memeScore || 0));
-    const top3 = sorted.slice(0, 3);
+    tokens.forEach((t, i) => els.tokenGrid.appendChild(makeCard(t, i)));
+    if (els.scanCount) els.scanCount.textContent = tokens.length;
+  }
 
-    top3.forEach((t, i) => {
-      const div = document.createElement('div');
-      div.className = 'viral-top-card';
-      div.innerHTML = `<span class="viral-rank">${i + 1}.</span> <strong class="viral-symbol">${t.symbol || '—'}</strong> <span class="viral-hype">- 🔥 ${Math.round(t.memeScore || 0)}%</span>`;
-      div.style.cursor = 'pointer';
-      div.onclick = () => {
-        // open detail for the token: find its index in allTokens (original source)
-        const idx = allTokens.indexOf(t);
-        if (idx !== -1) window.openDetailPanel(idx);
-      };
-      els.viralTop.appendChild(div);
-    });
+  /** PAGINATION **/
+  function renderPaginatedTokens() {
+    const start = (currentPage - 1) * TOKENS_PER_PAGE;
+    const end = start + TOKENS_PER_PAGE;
+    const tokensToShow = filteredTokens.slice(start, end);
+    renderTokens(tokensToShow);
+
+    const pageInfo = document.getElementById("page-info");
+    if (pageInfo) {
+      pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(filteredTokens.length / TOKENS_PER_PAGE)}`;
+    }
+
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    if (prevBtn) prevBtn.disabled = currentPage === 1;
+    if (nextBtn) nextBtn.disabled = end >= filteredTokens.length;
+  }
+
+  function setupPaginationButtons() {
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPaginatedTokens();
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        if (currentPage * TOKENS_PER_PAGE < filteredTokens.length) {
+          currentPage++;
+          renderPaginatedTokens();
+        }
+      });
+    }
   }
 
   /** FILTER **/
@@ -232,43 +254,46 @@
       );
     }
 
-    renderTokens(filtered);
-
-    // update Viral Top based on currently filtered list (so it matches filters/search)
-    // If you prefer always showing global top, change to renderViralTop(allTokens)
+    filteredTokens = filtered;
+    currentPage = 1;
+    renderPaginatedTokens();
     renderViralTop(filtered);
   }
 
-  function renderTokens(tokens) {
-    if (!els.tokenGrid) return;
-    els.tokenGrid.innerHTML = '';
+  /** RENDER VIRAL TOP **/
+  function renderViralTop(tokens) {
+    if (!els.viralTop) return;
+    els.viralTop.innerHTML = '';
 
     if (!tokens || !tokens.length) {
-      els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens found</div>`;
-      if (els.scanCount) els.scanCount.textContent = '0';
+      els.viralTop.innerHTML = `<div class="viral-empty">—</div>`;
       return;
     }
 
-    tokens.forEach((t, i) => els.tokenGrid.appendChild(makeCard(t, i)));
+    const sorted = [...tokens].sort((a, b) => (b.memeScore || 0) - (a.memeScore || 0));
+    const top3 = sorted.slice(0, 3);
 
-    if (els.scanCount) els.scanCount.textContent = tokens.length;
+    top3.forEach((t, i) => {
+      const div = document.createElement('div');
+      div.className = 'viral-top-card';
+      div.innerHTML = `<span class="viral-rank">${i + 1}.</span> <strong class="viral-symbol">${t.symbol || '—'}</strong> <span class="viral-hype">- 🔥 ${Math.round(t.memeScore || 0)}%</span>`;
+      div.style.cursor = 'pointer';
+      div.onclick = () => {
+        const idx = allTokens.indexOf(t);
+        if (idx !== -1) window.openDetailPanel(idx);
+      };
+      els.viralTop.appendChild(div);
+    });
   }
 
-  /** FETCH DATA **/
+  /** FETCH **/
   async function fetchTokens() {
     if (els.loading) els.loading.classList.remove('hidden');
     try {
       const res = await fetch(API_URL);
       const data = await res.json();
       allTokens = Array.isArray(data.tokens) ? data.tokens : [];
-
       applyFilters();
-
-      // Tambahan: pastikan Viral Top juga diupdate dengan data terbaru (global)
-      // Jika kamu mau Viral Top selalu berdasarkan seluruh dataset (bukan filter),
-      // gunakan renderViralTop(allTokens) di sini. Saat ini applyFilters() sudah memanggil renderViralTop(filtered).
-      // Untuk safety, kita panggil juga renderViralTop(allTokens) setelah fetch agar jika applyFilters belum ter-trigger,
-      // viral tetap tampil.
       renderViralTop(allTokens);
 
       const topToken = allTokens[0];
@@ -286,6 +311,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     fetchTokens();
     setInterval(fetchTokens, POLL_MS);
+    setupPaginationButtons();
 
     if (els.chainFilter) {
       els.chainFilter.addEventListener('change', e => {
