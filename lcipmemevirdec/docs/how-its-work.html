@@ -1,120 +1,183 @@
 <!doctype html>
 
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>How It Works — Dokumentasi</title>
+  <title>Cipstrack — How It Works</title>
+  <meta name="description" content="Cipstrack (Lancips / $LCIP) — how it works: data flow, viral scoring, integrations, security, and roadmap." />
   <style>
-    :root{--bg:#0f1724;--card:#111827;--muted:#9ca3af;--accent:#60a5fa;--glass:rgba(255,255,255,0.03)}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:linear-gradient(180deg,var(--bg),#071129); color:#e6eef8}
-    .wrap{max-width:980px;margin:40px auto;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,0.6)}
-    header h1{margin:0 0 6px;font-size:28px}
-    header p{margin:0;color:var(--muted)}
-    nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-    nav a{color:var(--accent);text-decoration:none;padding:6px 10px;border-radius:8px;background:var(--glass);font-size:13px}
-    section{margin:18px 0;padding:18px;background:rgba(255,255,255,0.01);border-radius:10px}
-    h2{margin:0 0 10px}
-    pre{background:#041022;padding:12px;border-radius:8px;overflow:auto;color:#bfe3ff}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:16px}
-    aside{background:rgba(255,255,255,0.01);padding:12px;border-radius:10px}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.03)}
-    .muted{color:var(--muted);font-size:13px}
-    .kbd{background:#0b1220;padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,0.02)}
+    :root{
+      --bg:#071029; --panel:#0d1624; --muted:#9aa6b2; --accent:#60a5fa; --glass: rgba(255,255,255,0.02);
+      --card-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      --radius:12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Segoe UI Mono', monospace;
+    }
+    html,body{height:100%;}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:linear-gradient(180deg,var(--bg),#041026); color:#e8f0fb; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    .container{max-width:1050px;margin:36px auto;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:var(--radius);box-shadow:var(--card-shadow)}header{display:flex;align-items:center;gap:16px}
+header h1{margin:0;font-size:26px}
+header p{margin:0;color:var(--muted);font-size:14px}
+
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+nav a{color:var(--accent);text-decoration:none;padding:8px 12px;border-radius:10px;background:var(--glass);font-size:13px}
+
+.layout{display:grid;grid-template-columns:1fr 320px;gap:18px}
+main{min-width:0}
+section{background:rgba(255,255,255,0.01);padding:18px;border-radius:10px;margin-bottom:12px}
+h2{margin:0 0 10px}
+.muted{color:var(--muted);font-size:14px}
+ul{margin:8px 0 0 18px}
+ol{margin:8px 0 0 18px}
+pre{background:#041022;padding:12px;border-radius:8px;overflow:auto;color:#bfe3ff;font-family:var(--mono);font-size:13px}
+code{font-family:var(--mono)}
+
+aside{background:rgba(255,255,255,0.01);padding:16px;border-radius:10px}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-size:13px}
+
+footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+/* Responsive */
+@media (max-width:920px){
+  .layout{grid-template-columns:1fr}
+  aside{order:2}
+}
+
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
     <header>
-      <h1>How It Works</h1>
-      <p class="muted">Panduan singkat: arsitektur, alur data, contoh integrasi, dan troubleshooting.</p>
+      <div style="display:flex;flex-direction:column">
+        <h1>Cipstrack — How It Works</h1>
+        <p class="muted">Cipstrack is a core feature of the Lancips / <strong>$LCIP</strong> ecosystem. This page explains what Cipstrack does, how it collects and scores viral signals, and how users can interact with the platform.</p>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <span class="badge">Last updated: 30 Oct 2025</span>
+      </div>
     </header><nav>
   <a href="#overview">Overview</a>
-  <a href="#architecture">Arsitektur</a>
-  <a href="#api">API</a>
-  <a href="#examples">Contoh</a>
-  <a href="#faq">FAQ & Troubleshoot</a>
-  <a href="#contact">Kontak</a>
+  <a href="#core">Core Concept</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#scoring">Viral Scoring</a>
+  <a href="#updates">Updates</a>
+  <a href="#usage">User Interaction</a>
+  <a href="#security">Security</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#contact">Contact</a>
 </nav>
 
-<div class="grid">
+<div class="layout">
   <main>
     <section id="overview">
       <h2>Overview</h2>
-      <p class="muted">Dokumen ini menjelaskan alur utama aplikasi: bagaimana data diambil dari sumber (mis. API DexScreener), diproses di backend, lalu dirender di frontend.</p>
+      <p class="muted">Cipstrack detects and highlights newly emerging tokens with viral potential by analyzing social and on-chain signals in near real-time. It is designed to help traders, meme hunters, and researchers spot trends quickly — while reminding users that data insights are not investment advice.</p>
+      <p><strong>Purpose:</strong> provide fast, data-driven visibility into tokens gaining traction across social channels and chains.</p>
+    </section>
+
+    <section id="core">
+      <h2>Core Concept / Mission</h2>
+      <p class="muted">Cipstrack's mission is to surface early signals of token virality to the community. By aggregating engagement metrics and combining them with on-chain activity, Cipstrack produces a transparent "hype value" useful for monitoring trends.</p>
       <ul>
-        <li>Data source: API pihak ketiga atau database internal.</li>
-        <li>Backend: service yang melakukan fetch, normalisasi, caching, dan scoring.</li>
-        <li>Frontend: menampilkan card, filter, dan visualisasi; re-render saat data baru masuk.</li>
+        <li>Target audience: traders, meme hunters, data analysts, and researchers.</li>
+        <li>Value: faster discovery of high-engagement tokens and consolidated social + on-chain context.</li>
       </ul>
     </section>
 
     <section id="architecture">
-      <h2>Arsitektur</h2>
-      <p class="muted">Ringkasan komponen dan tanggung jawabnya.</p>
+      <h2>Data Sources & Architecture</h2>
+      <p class="muted">Cipstrack aggregates data from verified APIs and platforms to create a reliable multi-source signal pipeline.</p>
       <ol>
-        <li><strong>Fetcher</strong> — cron job / worker yang memanggil API eksternal setiap interval (mis. 30s–1m) lalu menyimpan hasil ke cache/DB.</li>
-        <li><strong>Processor</strong> — menghitung metrik (volume, liquidity, score viral), menormalisasi field, dan menyiapkan payload untuk frontend.</li>
-        <li><strong>API / Gateway</strong> — endpoint publik/privat untuk frontend mengambil data (REST / GraphQL / websocket untuk realtime).</li>
-        <li><strong>Frontend</strong> — UI yang mengambil data, mendukung filter, search, dan rendering card. Gunakan debounce pada search dan pagination/virtualization untuk performa.</li>
+        <li><strong>Fetch</strong> — collect public data from integrations such as <em>Birdeye</em>, <em>Dexscreener</em>, <em>Twitter</em>, and additional platforms as we expand.</li>
+        <li><strong>Analyze</strong> — normalize, deduplicate, and enrich raw metrics (mentions, likes, retweets, on-chain volume, liquidity, etc.).</li>
+        <li><strong>Score</strong> — compute viral and sentiment-based rankings using composite metrics.</li>
+        <li><strong>Output</strong> — serve results to the dashboard, charts, and ranking endpoints (and future public API).</li>
       </ol>
-      <p class="muted">Tip performa: aktifkan caching (Redis), gunakan worker queue (Bull, RabbitMQ), dan batasi payload yang dikirim ke frontend.</p>
+      <p class="muted">Outputs are presented on a user-friendly dashboard with charts and ranking tables to make trend signals actionable.</p>
     </section>
 
-    <section id="api">
-      <h2>API — contoh endpoint</h2>
-      <p class="muted">Contoh minimal endpoint yang diharapkan frontend panggil.</p>
-      <pre><code>GET /api/v1/memes?chain=bsc&page=1&limit=20
-
-Response: { "data": [ {"symbol":"DOGE","name":"Doge","volume_24h":136000,"liquidity":12000,"score":87,"meta":{...}}, ... ], "meta": {"page":1,"limit":20,"total":124} } </code></pre>
-
-<p class="muted">Jika butuh realtime: sediakan WebSocket / SSE yang mengirimkan perubahan (patch) agar frontend cukup apply diffs dan tidak harus re-fetch seluruh halaman.</p>
+    <section id="scoring">
+      <h2>Viral Score Calculation</h2>
+      <p class="muted">The Viral Score is a composite metric derived from social engagement signals and on-chain activity. It is intended to indicate momentum and hype, not fundamental value.</p>
+      <p><strong>Factors include:</strong></p>
+      <ul>
+        <li>Trading volume (on-chain)</li>
+        <li>Mentions and name-drops (social platforms)</li>
+        <li>Likes, retweets, and comments</li>
+        <li>Engagement velocity (how fast mentions & interactions grow)</li>
+        <li>Cross-chain reach and liquidity signals</li>
+      </ul>
+      <p class="muted">We avoid publishing the exact proprietary formula, but the scoring engine uses multi-source normalization to reduce single-source manipulation.</p>
     </section>
 
-    <section id="examples">
-      <h2>Contoh integrasi (fetch + render)</h2>
-      <p class="muted">Snippet fetch sederhana (frontend).</p>
-      <pre><code>async function loadMemes(chain = 'bsc') {
-
-const res = await fetch(/api/v1/memes?chain=${chain}&limit=30); const json = await res.json(); renderCards(json.data); } </code></pre>
-
-<p class="muted">Contoh minimal card HTML yang responsive — grafis dan styling dipisah di CSS.</p>
+    <section id="updates">
+      <h2>Update Frequency & Performance</h2>
+      <p class="muted">Cipstrack refreshes aggregated data every <strong>1 minute</strong>, providing near real-time visibility into fast-moving trends. To maintain performance we use caching and queue-based workers to prevent overload on both internal systems and third-party APIs.</p>
     </section>
 
-    <section id="faq">
-      <h2>FAQ & Troubleshoot</h2>
-      <table>
-        <tr><th>Masalah</th><th>Solusi singkat</th></tr>
-        <tr><td>Data tidak muncul</td><td>Periksa CORS, console error, dan endpoint API (status 200). Pastikan cache tidak mengembalikan stale response.</td></tr>
-        <tr><td>Render lambat</td><td>Gunakan pagination, lazy-loading gambar, dan virtual scroll.</td></tr>
-        <tr><td>Score viral aneh</td><td>Periksa formula scoring—pastikan normalisasi (z-score atau min-max) berlaku terhadap window waktu yang konsisten.</td></tr>
-      </table>
+    <section id="usage">
+      <h2>User Interaction</h2>
+      <p class="muted">Users can interact with Cipstrack via the dashboard and soon via public API endpoints. Key interactions include:</p>
+      <ul>
+        <li><strong>Search</strong> for tokens or chains</li>
+        <li><strong>Filter</strong> by score, volume, chain, or category</li>
+        <li><strong>Viral news</strong> feed highlighting tokens with rapid engagement growth</li>
+        <li><strong>Rankings</strong> and token detail views with combined social + on-chain context</li>
+      </ul>
+    </section>
+
+    <section id="security">
+      <h2>Security, Transparency & The $LCIP Token</h2>
+      <p class="muted">Cipstrack is a core feature of the <strong>Lancips / $LCIP</strong> ecosystem and is powered by the official $LCIP token. While $LCIP supports platform utility, Cipstrack itself operates as an analytical service — not an investment product.</p>
+
+      <h3 style="margin-top:10px">Security Practices</h3>
+      <ol>
+        <li><strong>Verified data sources:</strong> Only trusted APIs (Birdeye, Dexscreener, Twitter, etc.) are used to reduce risk from anonymous or manipulated feeds.</li>
+        <li><strong>Read-only data flow:</strong> Cipstrack performs read-only aggregation of public data and does not execute transactions or access user wallets.</li>
+        <li><strong>API gateway protection:</strong> Rate limiting, authentication for internal endpoints, and monitoring to prevent abuse and DDoS.</li>
+        <li><strong>Data integrity & anti-manipulation:</strong> Cross-source validation and signal weighting reduce impact of isolated fake engagement.</li>
+        <li><strong>Transparency:</strong> Source attribution and update timestamps are shown where possible; $LCIP is not used to alter scoring outcomes.</li>
+      </ol>
+
+      <p class="muted">In summary: Cipstrack focuses on secure, verifiable signals and protects platform availability while making scoring decisions transparent and auditable for users.</p>
+    </section>
+
+    <section id="roadmap">
+      <h2>Roadmap & Upcoming Features</h2>
+      <ul>
+        <li><strong>AI Trend Prediction</strong> — machine learning models to detect early pattern signals across multi-source data.</li>
+        <li><strong>Public API</strong> — developer-friendly endpoints for integrations and bots.</li>
+        <li>Expanded integrations with more analytics and social platforms.</li>
+        <li>Alerting & notification system (webhooks, Telegram / Discord integrations).</li>
+      </ul>
     </section>
 
     <section id="contact">
-      <h2>Kontak & Catatan</h2>
-      <p class="muted">Butuh penjelasan lebih detail, contoh code, atau deploy guide? Hubungi: <span class="kbd">support@yourdomain.com</span> atau buka repo & documentation di internal tools.</p>
+      <h2>Contact & Support</h2>
+      <p class="muted">For questions, collaborations, or technical support, reach out on Telegram: <a href="https://t.me/lancips_account" style="color:var(--accent)">@lancips_account</a>.</p>
     </section>
   </main>
 
   <aside>
-    <h3>Ringkasan Cepat</h3>
-    <p class="muted">Flow: <strong>Fetcher → Processor → Cache/DB → API → Frontend</strong></p>
-    <h4>Check list sebelum deploy</h4>
+    <h3>Quick Summary</h3>
+    <p class="muted"><strong>Flow:</strong> Fetch → Analyze → Score → Dashboard</p>
+    <h4 style="margin-top:10px">Key facts</h4>
     <ul>
-      <li>Rate limit & retry (fetcher)</li>
-      <li>Caching (Redis)</li>
-      <li>Observability (logs, metrics)</li>
-      <li>Security (CORS, auth)</li>
+      <li>Data sources: Birdeye, Dexscreener, Twitter + more</li>
+      <li>Update interval: 1 minute</li>
+      <li>Audience: traders, meme hunters, devs</li>
+      <li>Token: $LCIP — platform utility (not investment advice)</li>
     </ul>
-    <h4>Versi</h4>
-    <p class="muted">Dokumen dibuat: 30 Oct 2025</p>
+    <h4 style="margin-top:12px">Deploy checklist</h4>
+    <ul>
+      <li>Rate limiting & retries for fetchers</li>
+      <li>Caching & worker queues for performance</li>
+      <li>Monitoring and source attribution</li>
+    </ul>
   </aside>
 </div>
 
-<footer style="margin-top:18px;text-align:center;color:var(--muted);font-size:13px">© Your Project — How it works</footer>
+<footer>© Lancips — Cipstrack • Made for the community</footer>
 
   </div>
 </body>
