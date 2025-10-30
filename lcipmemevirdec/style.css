@@ -662,6 +662,12 @@ img {
   margin: 24px 16px 0 16px;
 }
 
+
+#viral-top-section {
+  margin-top: 40px;
+}
+
+
 .viral-top-card {
   display: flex;
   justify-content: space-between;
