@@ -520,50 +520,21 @@ img {
 
 
 /*CHART*/
+
 #chart-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  background: #0d0d0d;
-  border-radius: 16px;
-  padding: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 128, 0.1);
+width: 100%;
+max-width: 600px;
+margin: 20px auto;
+background: #0d0d0d;
+border-radius: 16px;
+padding: 12px;
+box-shadow: 0 0 20px rgba(0, 255, 128, 0.1);
 }
 
-/* Canvas default chart (chart utama / legacy) */
 #trend-chart {
-  width: 100%;
-  height: 200px;
+width: 100%;
+height: 200px;
 }
-
-/* === Tambahan untuk Swiper slide === */
-.swiper-container {
-  width: 100%;
-  height: 200px; /* sama seperti chart height */
-}
-
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* Navigasi tombol next/prev */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #00ff88;
-}
-
-/* Pagination titik */
-.swiper-pagination-bullet {
-  background: #00ff88;
-}
-
 
 
 
