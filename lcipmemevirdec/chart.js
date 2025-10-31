@@ -5,9 +5,9 @@ function renderTrendChart(token) {
 
   const labels = ['Mentions', 'Likes', 'Retweets'];
   const values = [
-    token.mentions || 0,
-    token.likes || 0,
-    token.retweets || 0
+    token.xMentions || 0,
+    token.xLikes || 0,
+    token.xRetweets || 0
   ];
 
   // Hapus chart lama kalau ada
