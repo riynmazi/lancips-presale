@@ -1,223 +1,382 @@
-/* =======================================
-   GLOBAL STYLES
-======================================= */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+/* =====================================================
+   style.css — LANCIPS Presale (clean, landing-style)
+   Theme: Light base (accent: #ffb300), font: Poppins
+   Only selectors present in provided HTML — no sampah
+   ===================================================== */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ========== IMPORT FONT ========== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: #ffffff;
-  color: #222;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Link & Button */
-a {
-  color: #ffb300;
-  text-decoration: none;
-  transition: 0.2s ease;
-}
-a:hover {
-  color: #e19d00;
+/* ========== CSS VARIABLES ========== */
+:root{
+  --bg: #ffffff;
+  --text: #111827;         /* dark text */
+  --muted: #6b7280;
+  --accent: #ffb300;      /* main accent */
+  --accent-600: #e19d00;
+  --surface: #f8fafc;     /* light surface */
+  --card: #ffffff;
+  --border: #e6e9ef;
+  --shadow: 0 6px 24px rgba(17,24,39,0.06);
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --max-width: 1100px;
 }
 
-button {
-  border: none;
-  cursor: pointer;
-  background: #ffb300;
-  color: #fff;
-  font-weight: 500;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  transition: 0.2s ease;
-}
-button:hover {
-  background: #e19d00;
+/* ========== RESET & BASE ========== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.55;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-/* =======================================
-   NAVBAR
-======================================= */
+/* Utility */
+.container { width:100%; max-width:var(--max-width); margin:0 auto; padding:32px 20px; }
+
+/* Links & buttons */
+a { color:var(--accent); text-decoration:none; transition:color .18s ease; }
+a:hover { color:var(--accent-600); text-decoration:underline; }
+
+button{
+  font-family:inherit;
+  border:0;
+  background:var(--accent);
+  color:#fff;
+  padding:10px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  transition:background .15s ease, transform .12s ease, box-shadow .12s ease;
+}
+button:hover{ background:var(--accent-600); transform:translateY(-1px); }
+
+/* ========== NAVBAR WRAPPER & INNER ========== */
+/* Note: HTML uses .navbar-wrapper > .navbar-inner + nav.navbar */
+.navbar-wrapper{
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:1100;
+  background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.88));
+  backdrop-filter: blur(4px);
+  border-bottom:1px solid var(--border);
+  box-shadow: 0 4px 18px rgba(15,23,42,0.03);
+}
+
+.navbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:10px 20px;
+}
+
+/* left area contains toggle buttons */
+.navbar-left {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* menu toggle and close buttons (SVGs inside in HTML) */
+.menu-toggle,
+.menu-close{
+  width:44px;
+  height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  border-radius:8px;
+  border:1px solid transparent;
+  cursor:pointer;
+}
+.menu-toggle:hover,
+.menu-close:hover{ background:rgba(0,0,0,0.03) }
+
+/* hide close button by default (JS may toggle) */
+.menu-close{ display:none }
+
+/* icons at right (menu image + theme toggle images) */
+.navbar-icon{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* menu-right image (HTML has image/menu.png) */
+.menu-right{
+  width:36px;
+  height:36px;
+  object-fit:contain;
+  display:block;
+  cursor:pointer;
+}
+
+/* theme icons */
+.nav-icon{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  display:block;
+  cursor:pointer;
+}
+
+/* ========== NAV (mobile-first hidden list) ========== */
+/* HTML: <nav class="navbar"><ul class="nav-links">... */
 .navbar {
-  width: 100%;
+  width:100%;
+}
+.nav-links{
+  list-style:none;
+  margin:0;
+  padding:12px 20px;
+  display:none;            /* hidden by default (mobile menu) */
+  background:var(--card);
+  border-top:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+.nav-links li{ margin:8px 0; }
+.nav-links a{
+  display:block;
+  padding:10px 6px;
+  color:var(--text);
+  font-weight:500;
+  border-radius:8px;
+}
+.nav-links a:hover{ background:rgba(255,179,0,0.06); color:var(--accent) }
+
+/* class applied by JS when menu opens */
+.nav-links.active { display:block; }
+
+/* On wider screens, show nav inline */
+@media (min-width: 880px){
+  .nav-links{
+    display:flex !important;
+    gap:20px;
+    align-items:center;
+    background:transparent;
+    padding:0;
+    border-top:0;
+    box-shadow:none;
+  }
+  .nav-links li{ margin:0; }
+  .nav-links a{ padding:6px 0; }
+  .menu-toggle{ display:none; }
+  .menu-close{ display:none; }
+}
+
+/* ========== MEME QUOTE MARQUEE ========== */
+/* HTML: .meme-quote-container > .meme-quote-marquee (with hidden .meme-quotes list) */
+.meme-quote-container{
+  width:100%;
+  margin-top:84px; /* push below navbar */
+  overflow:hidden;
+  padding:10px 0;
+  background:linear-gradient(180deg, rgba(255,243,205,0.9), rgba(255,255,255,0.0));
+  border-bottom:1px solid rgba(0,0,0,0.02);
+}
+.meme-quote-marquee{
+  display:flex;
+  gap:48px;
+  padding:8px 20px;
+  align-items:center;
+  white-space:nowrap;
+  overflow:hidden;
+  font-weight:600;
+  color:var(--accent-600);
+  font-size:15px;
+}
+
+/* Note: animation optional — user wanted polos; keep subtle translation on hover */
+.meme-quote-marquee:hover{ transform:translateX(-4px) }
+
+/* ========== LOGO CONTAINER (centered brand) ========== */
+/* HTML: .logo-container > .logo-wrapper > img.logo + .star-particles */
+.logo-container{ position:relative; width:100%; height:auto; pointer-events:none; margin-top:18px; }
+.logo-wrapper{
+  max-width:400px;
+  margin:0 auto;
+  text-align:center;
+  padding:12px;
+  pointer-events:auto;
+}
+.logo{
+  width:160px;
+  height:auto;
+  display:block;
+  margin:0 auto;
+  cursor:pointer;
+  filter:drop-shadow(0 6px 18px rgba(17,24,39,0.08));
+}
+
+/* simple star-particles holder (no generated stars here) */
+.star-particles{ position:relative; width:100%; height:6px; margin-top:6px; }
+
+/* ========== MAIN CONTAINER (hero + content) ========== */
+/* HTML uses single .container with .logo-banner, .description, .token-info, .buy-on-orca-wrapper, .roadmap, .tokenomics */
+.container{
+  max-width:var(--max-width);
+  margin:20px auto 48px;
+  padding:28px 20px;
+}
+
+/* logo-banner */
+.logo-banner{ text-align:center; margin-bottom:18px; }
+.logo-banner img{ width:280px; max-width:90%; height:auto; display:inline-block }
+
+/* description card */
+.description{
+  background: linear-gradient(180deg, rgba(255,255,255,1), rgba(249,250,251,0.85));
+  border:1px solid var(--border);
+  padding:20px;
+  border-radius:var(--radius-md);
+  box-shadow: var(--shadow);
+  color:var(--text);
+  text-align:center;
+  margin-bottom:18px;
+}
+.description p{ margin:8px 0; font-size:15px; color:var(--muted) }
+.description strong{ color:var(--text); font-weight:600 }
+
+/* token-info */
+.token-info{
   background: #fff;
-  border-bottom: 1px solid #eee;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  border:1px solid var(--border);
+  padding:16px;
+  border-radius:14px;
+  box-shadow: 0 10px 30px rgba(17,24,39,0.03);
+  text-align:center;
+  margin:18px auto;
+  max-width:560px;
+}
+.token-info p{ margin:8px 0; color:var(--text); font-weight:500; font-size:15px; }
+.token-info a{ color:var(--accent); font-weight:600 }
+.token-info a:hover{ color:var(--accent-600) }
+
+/* buy on orca button area (center) */
+.buy-on-orca-wrapper{ display:flex; justify-content:center; margin:18px 0; }
+.buy-on-orca{ display:inline-flex; align-items:center; gap:12px; padding:8px 12px; border-radius:12px; background:#111; text-decoration:none; }
+.buy-on-orca img{ display:block; width:120px; height:auto; object-fit:contain }
+
+/* ========== ROADMAP & TOKENOMICS SECTIONS ========== */
+.roadmap, .tokenomics{
+  max-width:760px;
+  margin:26px auto;
+  padding:20px;
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,249,230,1), rgba(255,255,255,1));
+  border:1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(17,24,39,0.03);
+}
+.roadmap h2, .tokenomics h2{
+  font-size:20px;
+  margin-bottom:12px;
+  text-align:center;
+  color:var(--text);
+}
+.roadmap ul, .tokenomics ul{ list-style:none; padding-left:0; margin:0; }
+.roadmap li, .tokenomics li{
+  margin:10px 0;
+  padding:6px 8px;
+  color:var(--muted);
+  font-weight:600;
+  font-size:15px;
 }
 
-.navbar .logo {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #111;
+/* ========== FOOTER ========== */
+/* HTML: footer.footer > .footer-container (grid) */
+.footer{
+  background:#fff;
+  border-top:1px solid var(--border);
+  padding:36px 20px;
+  margin-top:36px;
+}
+.footer-container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:22px;
+  align-items:start;
+}
+.footer-column h3{
+  font-size:15px; margin-bottom:10px; color:var(--text); font-weight:600;
+}
+.footer-column ul{ list-style:none; padding:0; margin:0; }
+.footer-column li{ margin-bottom:8px; }
+.footer-column a{ color:var(--muted); font-size:14px; }
+.footer-column a:hover{ color:var(--accent) }
+
+.footer-bottom{
+  max-width:var(--max-width);
+  margin:20px auto 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  padding-top:18px;
+  border-top:1px solid rgba(0,0,0,0.03);
 }
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
+/* Social icons inline (HTML includes <i class="fab ..."> but if fontawesome not loaded, keep spacing) */
+.social-links li a{ display:flex; align-items:center; gap:10px; color:var(--muted) }
+
+/* ========== DARK MODE (override when class applied) ========== */
+body.dark-mode{
+  --bg: #0b1220;
+  --text: #e6f6ff;
+  --muted: #9fb9cf;
+  --card: #07101a;
+  --surface: #07101a;
+  --border: rgba(255,255,255,0.04);
+  background: #07101a;
+  color:var(--text);
+}
+body.dark-mode .navbar-wrapper{ background:linear-gradient(180deg, rgba(7,16,26,0.98), rgba(7,16,26,0.98)); border-bottom:1px solid rgba(255,255,255,0.03) }
+body.dark-mode .nav-links a{ color:var(--text) }
+body.dark-mode .meme-quote-container{ background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0)); border-bottom:1px solid rgba(255,255,255,0.02) }
+body.dark-mode .description, body.dark-mode .token-info, body.dark-mode .roadmap, body.dark-mode .tokenomics, body.dark-mode .footer{
+  background: var(--card);
+  border:1px solid var(--border);
+  box-shadow: none;
+}
+body.dark-mode .footer-column a{ color:var(--muted) }
+
+/* ========== RESPONSIVE TWEAKS ========== */
+@media (max-width: 880px){
+  .logo{ width:120px }
+  .logo-banner img{ width:220px }
+  .container{ padding:20px 16px }
+  .meme-quote-container{ margin-top:72px }
+  .roadmap, .tokenomics{ padding:16px }
 }
 
-.navbar ul li a {
-  font-weight: 500;
-  color: #333;
+@media (max-width: 480px){
+  .navbar-inner{ padding:8px 12px }
+  .menu-toggle{ width:40px; height:40px }
+  .menu-right{ width:32px; height:32px }
+  .logo{ width:110px }
+  .logo-banner img{ width:180px }
+  .container{ padding:16px 12px }
+  .description{ padding:14px }
+  .token-info{ padding:12px }
+  .roadmap li, .tokenomics li{ font-size:14px }
+  .footer-container{ gap:14px; grid-template-columns: 1fr; }
 }
 
-.navbar ul li a:hover {
-  color: #ffb300;
-}
+/* ========== ACCESSIBILITY ========== */
+a:focus, button:focus, .menu-toggle:focus { outline: 3px solid rgba(255,179,0,0.18); outline-offset: 3px; }
 
-/* =======================================
-   MAIN CONTAINER
-======================================= */
-.container {
-  flex: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-}
-
-.section {
-  margin-bottom: 3rem;
-}
-
-.section h2 {
-  font-size: 1.8rem;
-  color: #111;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.section p {
-  text-align: center;
-  color: #444;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/* =======================================
-   FOOTER
-======================================= */
-.footer {
-  background: #f9f9f9;
-  border-top: 1px solid #eee;
-  padding: 3rem 1.5rem;
-  color: #333;
-}
-
-.footer-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2rem;
-}
-
-.footer-column h3 {
-  font-size: 1rem;
-  color: #111;
-  margin-bottom: 1rem;
-}
-
-.footer-column ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-column ul li {
-  margin-bottom: 0.6rem;
-}
-
-.footer-column ul li a {
-  color: #555;
-  font-size: 0.95rem;
-}
-
-.footer-column ul li a:hover {
-  color: #ffb300;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: #777;
-}
-
-/* =======================================
-   DARK MODE
-======================================= */
-body.dark-mode {
-  background: #0d0d0d;
-  color: #eee;
-}
-
-body.dark-mode a {
-  color: #ffb300;
-}
-
-body.dark-mode .navbar {
-  background: #111;
-  border-bottom: 1px solid #222;
-}
-
-body.dark-mode .footer {
-  background: #111;
-  border-top: 1px solid #222;
-}
-
-body.dark-mode .footer-column h3 {
-  color: #fff;
-}
-
-body.dark-mode .footer-column ul li a {
-  color: #ccc;
-}
-body.dark-mode .footer-column ul li a:hover {
-  color: #ffb300;
-}
-
-/* =======================================
-   RESPONSIVE DESIGN
-======================================= */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar ul {
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 0.5rem;
-  }
-
-  .container {
-    padding: 2rem 1rem;
-  }
-
-  .section h2 {
-    font-size: 1.5rem;
-  }
-
-  .footer-container {
-    grid-template-columns: 1fr;
-  }
-
-  .footer {
-    text-align: center;
-  }
-}
+/* EOF */
