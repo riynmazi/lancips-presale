@@ -676,14 +676,55 @@ img {
 
 .viral-top-card {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  text-align: left;
   background: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 10px 14px;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.viral-symbol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Area chart (wadah kosong + isi) */
+.viral-chart {
+  display: inline-block;
+  width: 80px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Isi chart-nya */
+.viral-chart::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: calc(var(--w, 0) * 1%);
+  background: linear-gradient(90deg, #ff8a00, #ffda47);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 6px rgba(255, 180, 0, 0.6);
+}
+
+/* Hype (🔥 118%) */
+.viral-hype {
+  white-space: nowrap;
+  color: #ffb84d;
+  font-weight: bold;
 }
 
 .viral-top-card:hover {
