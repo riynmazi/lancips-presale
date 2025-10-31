@@ -142,40 +142,6 @@
 
 
 
-<!-- === LCIP WEIRDSNAKE SECTION === -->
-
-<!--
-<section class="lcipweirdsnake-section" id="weirdsnake">
-  <div class="lcipweirdsnake-inner">
-    <h2 class="lcipweirdsnake-title">🎮 LCIP-Weirdsnake</h2>
-    <p class="lcipweirdsnake-text"></p>
-
-   <iframe 
-  src="game/lcipweirdsnake/lcipweirdsnake.html" 
-  class="lcipweirdsnake-frame">
-   </iframe>
-  </div>
-</section>
--->
-
-
-
-
-<!--
-<div class="chart-container">
-  <iframe id="geckoterminal-embed"
-    title="GeckoTerminal Embed"
-    src="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX?embed=1&info=1&swaps=1&grayscale=0&light_chart=0&chart_type=price&resolution=15m"
-    frameborder="0"   allow="clipboard-write"
-    allowfullscreen>
-  </iframe>
-</div>
--->
-
-
-
-
-
 <div class="logo-section">
   <video autoplay muted loop playsinline class="logo-video">
     <source src="video/background.mp4" type="video/mp4">
@@ -265,39 +231,6 @@
 -->
 
 
-<!-- Buy card 
-
-<div class="wallet-card">
-  <p id="wallet-address">Wallet not connected</p>
-  <button id="copy-address">Send $10 Now</button>
-</div>
-
--->
-
-<script>
-  const walletAddressEl = document.getElementById("wallet-address");
-  const copyBtn = document.getElementById("copy-address");
-
- 
-  let walletAddress = "7VJHv1UNSCoxdNmboxLrjMj1FgyaGdSELK9Eo4iaPVC8";
-
-  
-  function shortenAddress(addr) {
-    return addr.slice(0, 4) + "..." + addr.slice(-4);
-  }
-
-  // address
-  walletAddressEl.textContent = shortenAddress(walletAddress);
-
-  // copy full address
-  copyBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(walletAddress).then(() => {
-      alert("Wallet address copied!\n" + walletAddress);
-    });
-  });
-</script>
-
-
 
 <!-- Roadmap -->
 <div class="roadmap fade-left" id="roadmap">  
@@ -329,25 +262,6 @@
 -->
 
   </div>
-
-
-<!-- DEV TEAM -->
-
-<div id="team" style="display: flex; justify-content: center; padding: 40px 0;">
-  <div class="member-card">
-    <a href="https://x.com/aurinawan?t=eUt_EgdcrGsg8WC7UbdJ4g&s=09" target="_blank">
-      <img src="image/Dev.jpg" alt="Dev" class="member-img">
-    </a>
-    <div class="member-name">Riyn_mazi</div>
-    <div class="member-role">Core</div>
-    <div class="member-bio">
-      <a href="https://x.com/aurinawan?t=eUt_EgdcrGsg8WC7UbdJ4g&s=09" target="_blank" style="color:#00ffe7; text-decoration:none;">
-        X
-      </a>
-    </div>
-  </div>
-</div>
-
 
 
 <!-- ===== FOOTER ===== -->
