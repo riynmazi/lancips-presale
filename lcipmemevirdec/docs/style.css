@@ -171,6 +171,7 @@
 }
 
 .footer-bottom {
+  align-item: center;
   text-align: center;
   font-size: 13px;
   color: #777;
