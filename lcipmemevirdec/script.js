@@ -129,19 +129,32 @@
     }
 
 
-if (typeof window.renderTrendChart === "function") {  
-  window.renderTrendChart(token);  
-}  
 
-panel.classList.add("open");
-
-};
-
+// ==== CLOSE PANEL GLOBAL ====
 window.closeDetailPanel = function () {
-const panel = document.getElementById("detail-panel");
-if (panel) panel.classList.remove("open");
+  const panel = document.getElementById("detail-panel");
+  if (panel) panel.classList.remove("open");
 };
 
+// ==== OPEN PANEL ====
+window.openDetailPanel = function (index) {
+  const panel = document.getElementById("detail-panel");
+  if (!panel || !allTokens[index]) return;
+  const token = allTokens[index];
+
+  // set teks & logo
+  ...
+
+  panel.classList.add("open");
+
+  // render chart
+  if (typeof window.renderTrendChart === "function") {
+    ['chart-0','chart-1','chart-2'].forEach((id, idx) => {
+      const canvas = panel.querySelector(`#${id}`);
+      if (canvas) window.renderTrendChart(token, canvas, idx);
+    });
+  }
+};
 
   /** RENDER **/
   function makeCard(p, i) {
