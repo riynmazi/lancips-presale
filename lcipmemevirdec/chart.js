@@ -1,6 +1,5 @@
 // chart render
 
-
 function renderTrendChart(token) {
   if (!token) return;
 
