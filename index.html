@@ -1,328 +1,258 @@
-<!DOCTYPE html><html lang="en">  
-<head>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LANCIPS Presale</title>
+
   <!-- CSS & Fonts -->
-  <link rel="stylesheet" href="style.css" />  
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
+
   <!-- ✅ Buffer Polyfill -->
-  <script>  
-    (function () {  
-      function base64ToBytes(str) {  
-        const binary = atob(str);  
-        const len = binary.length;  
-        const bytes = new Uint8Array(len);  
-        for (let i = 0; i < len; i++) {  
-          bytes[i] = binary.charCodeAt(i);  
-        }  
-        return bytes;  
-      }  
-      function utf8ToBytes(str) {  
-        return new TextEncoder().encode(str);  
-      }  
-      function hexToBytes(hex) {  
-        if (hex.length % 2 !== 0) throw new Error("Invalid hex string");  
-        const bytes = new Uint8Array(hex.length / 2);  
-        for (let i = 0; i < hex.length; i += 2) {  
-          bytes[i / 2] = parseInt(hex.substr(i, 2), 16);  
-        }  
-        return bytes;  
-      }  
-      window.Buffer = {  
-        from: function (input, encoding) {  
-          if (encoding === "base64") return base64ToBytes(input);  
-          if (encoding === "utf8" || encoding === "utf-8") return utf8ToBytes(input);  
-          if (encoding === "hex") return hexToBytes(input);  
-          throw new Error("Unsupported encoding: " + encoding);  
-        }  
-      };  
-    })();  
-  </script>  
-  <!-- ✅ Solana Web3 -->  
+  <script>
+    (function () {
+      function base64ToBytes(str) {
+        const binary = atob(str);
+        const len = binary.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
+        return bytes;
+      }
+      function utf8ToBytes(str) {
+        return new TextEncoder().encode(str);
+      }
+      function hexToBytes(hex) {
+        if (hex.length % 2 !== 0) throw new Error("Invalid hex string");
+        const bytes = new Uint8Array(hex.length / 2);
+        for (let i = 0; i < hex.length; i += 2) {
+          bytes[i / 2] = parseInt(hex.substr(i, 2), 16);
+        }
+        return bytes;
+      }
+      window.Buffer = {
+        from: function (input, encoding) {
+          if (encoding === "base64") return base64ToBytes(input);
+          if (encoding === "utf8" || encoding === "utf-8") return utf8ToBytes(input);
+          if (encoding === "hex") return hexToBytes(input);
+          throw new Error("Unsupported encoding: " + encoding);
+        }
+      };
+    })();
+  </script>
+
+  <!-- ✅ Solana Web3 -->
   <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
-
-
-
-
 </head>
+
 <body>
-  <!-- Bubble background -->  
-  <div class="bubbles">  
-    <div class="bubble"></div>  
-    <div class="bubble"></div>  
-    <div class="bubble"></div>  
-    <div class="bubble"></div>  
-    <div class="bubble"></div>  
-    <div class="bubble"></div>  
+  <!-- Bubble background -->
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
   </div>
 
+  <!-- === Header Strip (Background Menu Bar) === -->
+  <div class="navbar-wrapper">
+    <div class="navbar-inner">
 
-<!-- === Header Strip (Background Menu Bar) === -->
-<div class="navbar-wrapper">
-  <div class="navbar-inner">
+      <!-- Kiri -->
+      <div class="navbar-left">
+        <!-- Menu Toggle (☰) -->
+        <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-label="Open Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="#f1f5f9" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
 
-    <!-- Kiri -->
-    <div class="navbar-left">
-     <!-- Menu Toggle (☰) -->
-<button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-label="Open Menu">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M4 6h16M4 12h16M4 18h16" stroke="#f1f5f9" stroke-width="2" stroke-linecap="round" />
-  </svg>
-</button>
+        <!-- Menu Close (✖) -->
+        <button class="menu-close" id="menuClose" onclick="toggleMenu()" aria-label="Close Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6l12 12M6 18L18 6" stroke="#f1f5f9" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
 
-<!-- Menu Close (✖) -->
-<button class="menu-close" id="menuClose" onclick="toggleMenu()" aria-label="Close Menu">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M6 6l12 12M6 18L18 6" stroke="#f1f5f9" stroke-width="2" stroke-linecap="round" />
-  </svg>
-</button>
+      <!-- Kanan -->
+      <div class="navbar-icon">
+        <img src="image/menu.png" alt="LCIP Menu" class="menu-right" onclick="screamAlert()" />
+        <img src="image/dark.png" id="darkModeIcon" class="nav-icon" style="cursor: pointer;" alt="Dark Mode" />
+        <img src="image/light.png" id="lightModeIcon" class="nav-icon" style="display: none; cursor: pointer;" alt="Light Mode" />
+      </div>
+
+    </div> <!-- ✅ Tutup navbar-inner -->
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/data%2Fabout.md" target="_blank" rel="noopener noreferrer">About</a></li>
+        <li><a href="https://www.orca.so/?tokenIn=So11111111111111111111111111111111111111112&tokenOut=6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK" target="_blank" rel="noopener noreferrer">Buy on Orca</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#tokenomics">Tokenomics</a></li>
+        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/data%2Fwhitepaper.pdf" target="_blank" rel="noopener noreferrer">Whitepaper</a></li>
+        <li><a href="https://forms.gle/65TbvRgtL7Si1Jsf9" target="_blank" rel="noopener noreferrer">Airdrop</a></li>
+        <li><a href="#weird-tabs">Fake Feature</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="/lcipmemevirdec/" target="_blank" rel="noopener noreferrer">Cipstrack</a></li>
+        <li><a href="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX" target="_blank" rel="noopener noreferrer">Gecko Terminal</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Meme Quotes -->
+  <div class="meme-quote-container">
+    <div id="quote-display" class="meme-quote-marquee">
+      <span id="marquee-text"></span>
+      <span id="marquee-text-clone"></span>
     </div>
 
-
-  <div class="navbar-icon">
-
-  <img src="image/menu.png" alt="LCIP Logo" class="menu-right" onclick="screamAlert()" />
-
-<!-- Icon untuk toggle ke mode gelap -->
-  <img src="image/dark.png" id="darkModeIcon" class="nav-icon" style="cursor: pointer;" />
-
-  <!-- Icon untuk toggle ke mode terang (disembunyikan dulu) -->
-  <img src="image/light.png" id="lightModeIcon" class="nav-icon" style="display: none; cursor: pointer;" />
-  
+    <div class="meme-quotes" style="display: none;">
+      <div>"Buy the dip? I bought the chips." – Warren Snackfet 🔥</div>
+      <div>"Buy the dip," they said. Now I'm living in one. 🕳️</div>
+      <div>My wallet's so empty, even hackers skip it. 🏚️</div>
+      <div>LCIP: The only rug I willingly sleep on. 🧶💤</div>
+      <div>"This coin will 100x" – Some guy with 2 followers. 📈👀</div>
+      <div>Crypto turned me into a philosopher: I just stare and reflect. 🧘‍♂️📉</div>
+      <div>Diamond hands? Bro, I’m holding with trauma. 💎🤕</div>
+      <div>I bought high, sold low. Just practicing generosity. 🎁😅</div>
+      <div>LANCIPS isn’t a coin, it’s a cry for help. 🚨🐈</div>
+      <div>In LCIP we trust. In banks we owe. 🏦💸</div>
+      <div>Financial freedom? I just want to afford 🍜 😭.</div>
+    </div>
   </div>
 
-
-</div>
-
- 
-
- <!-- Navigation -->
-  <nav class="navbar">
-    <ul class="nav-links">
-      <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/data%2Fabout.md"target="_blank">About</a></li>
-      <li><a href="https://www.orca.so/?tokenIn=So11111111111111111111111111111111111111112&tokenOut=6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK">Buy on orca</a></li>
-      <li><a href="#roadmap">Roadmap</a></li>
-      <li><a href="#roadmap">Tokenomics</a></li>
-      <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/data%2Fwhitepaper.pdf"target="_blank">Whitepaper</a></li>
-      <li><a href="https://forms.gle/65TbvRgtL7Si1Jsf9" target="_blank">Airdrop</a></li>
-     <li><a href="#weird-tabs">Fake feature</a></li>
-     <li><a href="#team">Team</a></li>
-      <li><a href="/lcipmemevirdec/" target="_blank">Cipstrack</a></li>
-     <li><a href="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX" target="_blank">Gecko terminal</a></li>
-      <li><a
-    </ul>
-  </nav>
-</div>
-
-
-
-<div class="meme-quote-container">
-  <div id="quote-display" class="meme-quote-marquee">
-    <span id="marquee-text"></span>
-    <span id="marquee-text-clone"></span>
+  <!-- Logo Section -->
+  <div class="logo-section">
+    <video autoplay muted loop playsinline class="logo-video">
+      <source src="video/background.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
-
-  <div class="meme-quotes" style="display: none;">
-    <div>"Buy the dip? I bought the chips." – Warren Snackfet 🔥</div>
-    <div>"Buy the dip," they said. Now I'm living in one. 🕳️</div>
-    <div>My wallet's so empty, even hackers skip it. 🏚️</div>
-    <div>LCIP: The only rug I willingly sleep on. 🧶💤</div>
-    <div>"This coin will 100x" – Some guy with 2 followers. 📈👀</div>
-    <div>Crypto turned me into a philosopher: I just stare and reflect. 🧘‍♂️📉</div>
-    <div>Diamond hands? Bro, I’m holding with trauma. 💎🤕</div>
-    <div>I bought high, sold low. Just practicing generosity. 🎁😅</div>
-    <div>LANCIPS isn’t a coin, it’s a cry for help. 🚨🐈</div>
-    <div>In LCIP we trust. In banks we owe. 🏦💸</div>
-    <div>Financial freedom? I just want to afford 🍜 😭.</div>
-  </div>
-</div>
-
-
-
-<div class="logo-section">
-  <video autoplay muted loop playsinline class="logo-video">
-    <source src="video/background.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
-
-
 
   <div class="logo-container">
     <div class="logo-wrapper">
       <img src="logo.png" alt="Lancips Logo" class="logo" />
-
-  <!-- Star particle container -->
-    <div class="star-particles"></div>
+      <div class="star-particles"></div>
+    </div>
   </div>
- </div>
 
+  <!-- Main Container -->
+  <div class="container fade-in-up">
 
-<!--
-<div class="logo-container">
-  <div class="logo-wrapper">
-    <video
-      src="logo_2.mp4"
-      class="logo"
-      autoplay
-      muted
-      loop
-      playsinline
-    ></video>
-  </div>
-</div>
--->
-
-
-
-<div class="container fade-in-up">  
-    
     <div class="logo-banner">
-  <img src="image/lancips.png" alt="LANCIPS logo">
-</div>
+      <img src="image/lancips.png" alt="LANCIPS logo">
+    </div>
 
-<div class="description">  
-  <p><strong>LANCIPS</strong> LANCIPS is a meme coin born from the collective trauma of crypto life, rugged dreams, vanishing bags, and ghosting shillers.
-</p>  
-  <p>It’s not just a coin, it’s a coping mechanism. Fueled by irony, frustration, and just enough hope to click “Buy.”</p>  
-  
-</div>
+    <div class="description">
+      <p><strong>LANCIPS</strong> is a meme coin born from the collective trauma of crypto life, rugged dreams, vanishing bags, and ghosting shillers.</p>
+      <p>It’s not just a coin, it’s a coping mechanism. Fueled by irony, frustration, and just enough hope to click “Buy.”</p>
+    </div>
 
+    <div class="token-info fade-in-up">
+      <p><strong>Max Supply:</strong> 2,188,999 LANCIPS</p>
+      <p><strong>Circulating Supply:</strong> 1,188,999 LANCIPS</p>
+      <p><strong>Burns 98%:</strong>
+        <a href="https://solscan.io/tx/RC1phMTomSB81N59JgvcB9MsAoLkauCnjQVVTZdo8X45mzrSUTpBZpCxeDGVZGL97nqKA7LhXC4guKmnke8MAkT" target="_blank" rel="noopener noreferrer">Hash 1</a>
+        <a href="https://solscan.io/tx/4Hm1tCT65QK1HpxK9FNBgtwPE5XfGMpzS4bSBmjqXidkaaGU9v26ywyB6qCLZ2pPbx72XcovEGWzXoPQZnYHr8fc" target="_blank" rel="noopener noreferrer">Hash 2</a>
+      </p>
+      <p><strong>Network:</strong> Solana</p>
+      <p><strong>Token Address:</strong>
+        <a href="https://solscan.io/token/6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK" target="_blank" rel="noopener noreferrer">Token Address</a>
+      </p>
+    </div>
 
+    <div class="buy-on-orca-wrapper">
+      <a class="buy-on-orca"
+         href="https://www.orca.so/?tokenIn=So11111111111111111111111111111111111111112&tokenOut=6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK"
+         target="_blank" rel="noopener noreferrer">
+        <img src="icon/orca.png" alt="Buy on Orca">
+      </a>
+    </div>
 
-<div class="token-info fade-in-up">
-  <p><strong>Max Supply:</strong> 2,188,999 LANCIPS</p>
-<p><strong>Circulating Supply:</strong> 1,188,999 LANCIPS</p>
- <p><strong>Burns 98%:</strong> 
-    <a href="https://solscan.io/tx/RC1phMTomSB81N59JgvcB9MsAoLkauCnjQVVTZdo8X45mzrSUTpBZpCxeDGVZGL97nqKA7LhXC4guKmnke8MAkT" target="_blank">
-     Hash 1
-    </a>
-<a href="https://solscan.io/tx/4Hm1tCT65QK1HpxK9FNBgtwPE5XfGMpzS4bSBmjqXidkaaGU9v26ywyB6qCLZ2pPbx72XcovEGWzXoPQZnYHr8fc" target="_blank">
-     Hash 2
-    </a>
-  </p>
-  <p><strong>Network:</strong> Solana</p>
-  <p><strong>Token Address:</strong> 
-    <a href="https://solscan.io/token/6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK" target="_blank">
-     Token address
-    </a>
-  </p>
-</div>
+    <!-- Roadmap -->
+    <div class="roadmap fade-left" id="roadmap">
+      <h2>🗘️ Roadmap</h2>
+      <ul>
+        <li><strong>Stage 1:</strong> 🐣 Born from boredom, launched by chaos</li>
+        <li><strong>Stage 2:</strong> 🤯 Meme outbreak — logic fades</li>
+        <li><strong>Stage 3:</strong> 💤 Dev disappears (maybe just napping)</li>
+        <li><strong>Stage 4:</strong> 🧙 Forgotten purpose becomes legend</li>
+        <li><strong>Stage 5:</strong> 🚀 The community ascends, coin stays weird</li>
+      </ul>
+    </div>
 
-
-
-<div class="buy-on-orca-wrapper">
-  <a class="buy-on-orca" 
-     href="https://www.orca.so/?tokenIn=So11111111111111111111111111111111111111112&tokenOut=6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK" 
-     target="_blank">
-    <img src="icon/orca.png">
-  </a>
-</div>
-
-
-
-<!--
-<a class="cheap-alert" href="https://www.orca.so/?tokenIn=So11111111111111111111111111111111111111112&tokenOut=6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK">
-  Buy buy buy
-</a>
--->
-
-
-
-<!-- Roadmap -->
-<div class="roadmap fade-left" id="roadmap">  
-  <h2>🗘️ Roadmap</h2>  
-   <ul>  
-  <li><strong>Stage 1:</strong> 🐣 Born from boredom, launched by chaos</li>  
-  <li><strong>Stage 2:</strong> 🤯 Meme outbreak — logic fades</li>  
-  <li><strong>Stage 3:</strong> 💤 Dev disappears (maybe just napping)</li>  
-  <li><strong>Stage 4:</strong> 🧙 Forgotten purpose becomes legend</li>  
-  <li><strong>Stage 5:</strong> 🚀 The community ascends, coin stays weird</li>
-   </ul>
-</div>
-
-<!-- Tokenomics -->  
-<div class="tokenomics fade-right" id="tokenomics">  
-  <h2>📊 Tokenomic</h2>  
-  <ul>  
-    <li><strong>54%</strong> 👧 Public</li>  
-    <li><strong>46%</strong> 💰 Team costs & dev</li>
-  </ul>  
-</div>
-
-<!-- Whitepaper   
-<div class="whitepaper" id="whitepaper">
-  <button class="whitepaper-btn" onclick="window.open('https://drive.google.com/file/d/1TmQNxHcuTOkBehN8-k1iGohiasy48XJx/view?usp=drivesdk', '_blank')">  
-    WHITEPAPER BRO !  
-  </button>  
-</div>  
--->
-
+    <!-- Tokenomics -->
+    <div class="tokenomics fade-right" id="tokenomics">
+      <h2>📊 Tokenomics</h2>
+      <ul>
+        <li><strong>54%</strong> 👧 Public</li>
+        <li><strong>46%</strong> 💰 Team costs & dev</li>
+      </ul>
+    </div>
   </div>
 
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <div class="footer-container">
+      <!-- Products -->
+      <div class="footer-column">
+        <h3>Products</h3>
+        <ul>
+          <li><a href="https://www.lancips.xyz/lcipmemevirdec/" target="_blank" rel="noopener noreferrer">Cipstrack</a></li>
+          <li><a href="#">NFT</a></li>
+          <li><a href="#weird-tabs">Weird Station</a></li>
+        </ul>
+      </div>
 
-    <!-- Products -->
-    <div class="footer-column">
-      <h3>Products</h3>
-      <ul>
-        <li><a href="https://www.lancips.xyz/lcipmemevirdec/" target="_blank" rel="noopener noreferrer">Cipstrack</a></li>
-        <li><a href="#">Nft</a></li>
-        <li><a href="#weird-tabs">Weird station</a></li>
-      </ul>
+      <!-- Resources -->
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Guides</a></li>
+          <li><a href="#">Help</a></li>
+          <li><a href="https://docs.birdeye.so/reference/get-defi-price" target="_blank" rel="noopener noreferrer">Integrations</a></li>
+          <li><a href="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX" target="_blank" rel="noopener noreferrer">Price</a></li>
+          <li><a href="#">Investor</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-column">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="https://www.lancips.xyz/" target="_blank" rel="noopener noreferrer">Home</a></li>
+          <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md" target="_blank" rel="noopener noreferrer">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="https://t.me/lancips_account" target="_blank" rel="noopener noreferrer">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Social -->
+      <div class="footer-column">
+        <h3>Social</h3>
+        <ul class="social-links">
+          <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a></li>
+          <li><a href="https://x.com/Lan_cips?t=eIUl-6r5gRxJ0lW2vpRDwg&s=09" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> X</a></li>
+          <li><a href="https://t.me/lancips_account" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> Telegram</a></li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Resources -->
-    <div class="footer-column">
-      <h3>Resources</h3>
-      <ul>
-        <li><a href="#">Docs</a></li>
-        <li><a href="#">Guides</a></li>
-        <li><a href="#">Help</a></li>
-        <li><a href="https://docs.birdeye.so/reference/get-defi-price" target="_blank" rel="noopener noreferrer">Integrations</a></li>
-        <li><a href="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX" target="_blank" rel="noopener noreferrer">Price</a></li>
-        <li><a href="#">Investor</a></li>
-      </ul>
+    <div class="footer-bottom">
+      © 2025 Lancips. All rights reserved.
     </div>
+  </footer>
 
-    <!-- Company -->
-    <div class="footer-column">
-      <h3>Company</h3>
-      <ul>
-        <li><a href="https://www.lancips.xyz/" target="_blank" rel="noopener noreferrer">Home</a></li>
-        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md">About</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="https://t.me/lancips_account">Contact Us</a></li>
-      </ul>
-    </div>
-
-    <!-- Social -->
-    <div class="footer-column">
-      <h3>Social</h3>
-      <ul class="social-links">
-        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md"><i class="fab fa-github"></i>GitHub</a></li>
-        <li><a href="https://x.com/Lan_cips?t=eIUl-6r5gRxJ0lW2vpRDwg&s=09"><i class="fab fa-twitter"></i>X</a></li>
-        <li><a href="https://t.me/lancips_account"><i class="fab fa-telegram"></i>Telegram</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    © 2025 Lancips. All rights reserved.
-  </div>
-</footer>
-
-
-<script src="script.js" defer></script>
-
-<!-- Your App Logic -->
-<script src="app.js"></script>
+  <script src="script.js" defer></script>
+  <script src="app.js"></script>
 </body>
 </html>
