@@ -3,9 +3,8 @@ function renderTrendChart(token) {
   const ctx = document.getElementById('trend-chart');
   if (!ctx || !token) return;
 
-  const labels = ['Volume', 'Mentions', 'Likes', 'Retweets'];
+  const labels = ['Mentions', 'Likes', 'Retweets'];
   const values = [
-    token.volumeUsd || 0,
     token.mentions || 0,
     token.likes || 0,
     token.retweets || 0
