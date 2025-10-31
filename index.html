@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LANCIPS Presale</title>
 
-  <!-- CSS & Fonts -->
+  <!-- ===== CSS & Font ===== -->
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon -->
+  <!-- ===== Favicon ===== -->
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- ✅ Buffer Polyfill -->
+  <!-- ===== Buffer Polyfill (untuk Solana Web3) ===== -->
   <script>
     (function () {
       function base64ToBytes(str) {
@@ -44,12 +44,12 @@
     })();
   </script>
 
-  <!-- ✅ Solana Web3 -->
+  <!-- ===== Solana Web3 ===== -->
   <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
 </head>
 
 <body>
-  <!-- Bubble background -->
+  <!-- ===== Background Effect ===== -->
   <div class="bubbles">
     <div class="bubble"></div>
     <div class="bubble"></div>
@@ -59,134 +59,94 @@
     <div class="bubble"></div>
   </div>
 
-  <!-- === Header Strip (Background Menu Bar) === -->
+  <!-- ===== Navbar Wrapper ===== -->
   <div class="navbar-wrapper">
     <div class="navbar-inner">
-      <!-- Kanan -->
+      <!-- 🔘 Dark Mode Toggle -->
       <div class="navbar-icon">
         <img src="image/dark.png" id="darkModeIcon" class="nav-icon" style="cursor: pointer;" alt="Dark Mode" />
         <img src="image/light.png" id="lightModeIcon" class="nav-icon" style="display: none; cursor: pointer;" alt="Light Mode" />
       </div>
+    </div>
 
-    </div> <!-- ✅ Tutup navbar-inner -->
-
-
-
-
-
-    <!-- Navigation -->
+    <!-- ===== Navigation Links ===== -->
     <nav class="navbar">
       <ul class="nav-links">
-        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/data%2Fabout.md" target="_blank" rel="noopener noreferrer">About</a></li>
-        <li><a href="https://www.orca.so/?tokenIn=So11111111111111111111111111111111111111112&tokenOut=6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK" target="_blank" rel="noopener noreferrer">Buy on Orca</a></li>
+        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/data%2Fabout.md" target="_blank">About</a></li>
+        <li><a href="https://www.orca.so/?tokenIn=So11111111111111111111111111111111111111112&tokenOut=6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK" target="_blank">Buy on Orca</a></li>
         <li><a href="#roadmap">Roadmap</a></li>
         <li><a href="#tokenomics">Tokenomics</a></li>
-        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/data%2Fwhitepaper.pdf" target="_blank" rel="noopener noreferrer">Whitepaper</a></li>
-        <li><a href="https://forms.gle/65TbvRgtL7Si1Jsf9" target="_blank" rel="noopener noreferrer">Airdrop</a></li>
+        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/data%2Fwhitepaper.pdf" target="_blank">Whitepaper</a></li>
+        <li><a href="https://forms.gle/65TbvRgtL7Si1Jsf9" target="_blank">Airdrop</a></li>
         <li><a href="#team">Team</a></li>
-        <li><a href="/lcipmemevirdec/" target="_blank" rel="noopener noreferrer">Cipstrack</a></li>
-        <li><a href="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX" target="_blank" rel="noopener noreferrer">Price</a></li>
+        <li><a href="/lcipmemevirdec/" target="_blank">Cipstrack</a></li>
+        <li><a href="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX" target="_blank">Price</a></li>
       </ul>
     </nav>
   </div>
 
-  <!-- Meme Quotes -->
-  <div class="meme-quote-container">
-    <div id="quote-display" class="meme-quote-marquee">
-      <span id="marquee-text"></span>
-      <span id="marquee-text-clone"></span>
-    </div>
-
-    <div class="meme-quotes" style="display: none;">
-      <div>"Buy the dip? I bought the chips." – Warren Snackfet 🔥</div>
-      <div>"Buy the dip," they said. Now I'm living in one. 🕳️</div>
-      <div>My wallet's so empty, even hackers skip it. 🏚️</div>
-      <div>LCIP: The only rug I willingly sleep on. 🧶💤</div>
-      <div>"This coin will 100x" – Some guy with 2 followers. 📈👀</div>
-      <div>Crypto turned me into a philosopher: I just stare and reflect. 🧘‍♂️📉</div>
-      <div>Diamond hands? Bro, I’m holding with trauma. 💎🤕</div>
-      <div>I bought high, sold low. Just practicing generosity. 🎁😅</div>
-      <div>LANCIPS isn’t a coin, it’s a cry for help. 🚨🐈</div>
-      <div>In LCIP we trust. In banks we owe. 🏦💸</div>
-      <div>Financial freedom? I just want to afford 🍜 😭.</div>
-    </div>
-  </div>
-
-
+  <!-- ===== Logo Section ===== -->
   <div class="logo-container">
     <div class="logo-wrapper">
       <img src="logo.png" alt="Lancips Logo" class="logo" />
-      <div class="star-particles"></div>
     </div>
   </div>
 
-  <!-- Main Container -->
+  <!-- ===== Main Container ===== -->
   <div class="container fade-in-up">
 
+    <!-- Logo Banner -->
     <div class="logo-banner">
       <img src="image/lancips.png" alt="LANCIPS logo">
     </div>
 
+    <!-- Deskripsi Proyek -->
     <div class="description">
       <p><strong>LANCIPS</strong> is a meme coin born from the collective trauma of crypto life, rugged dreams, vanishing bags, and ghosting shillers.</p>
       <p>It’s not just a coin, it’s a coping mechanism. Fueled by irony, frustration, and just enough hope to click “Buy.”</p>
     </div>
 
+    <!-- Informasi Token -->
     <div class="token-info fade-in-up">
       <p><strong>Max Supply:</strong> 2,188,999 LANCIPS</p>
       <p><strong>Circulating Supply:</strong> 1,188,999 LANCIPS</p>
       <p><strong>Burns 98%:</strong>
-        <a href="https://solscan.io/tx/RC1phMTomSB81N59JgvcB9MsAoLkauCnjQVVTZdo8X45mzrSUTpBZpCxeDGVZGL97nqKA7LhXC4guKmnke8MAkT" target="_blank" rel="noopener noreferrer">Hash 1</a>
-        <a href="https://solscan.io/tx/4Hm1tCT65QK1HpxK9FNBgtwPE5XfGMpzS4bSBmjqXidkaaGU9v26ywyB6qCLZ2pPbx72XcovEGWzXoPQZnYHr8fc" target="_blank" rel="noopener noreferrer">Hash 2</a>
+        <a href="https://solscan.io/tx/RC1phMTomSB81N59JgvcB9MsAoLkauCnjQVVTZdo8X45mzrSUTpBZpCxeDGVZGL97nqKA7LhXC4guKmnke8MAkT" target="_blank">Hash 1</a>
+        <a href="https://solscan.io/tx/4Hm1tCT65QK1HpxK9FNBgtwPE5XfGMpzS4bSBmjqXidkaaGU9v26ywyB6qCLZ2pPbx72XcovEGWzXoPQZnYHr8fc" target="_blank">Hash 2</a>
       </p>
       <p><strong>Network:</strong> Solana</p>
       <p><strong>Token Address:</strong>
-        <a href="https://solscan.io/token/6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK" target="_blank" rel="noopener noreferrer">Token Address</a>
+        <a href="https://solscan.io/token/6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK" target="_blank">Token Address</a>
       </p>
     </div>
 
+    <!-- Tombol Buy -->
     <div class="buy-on-orca-wrapper">
       <a class="buy-on-orca"
          href="https://www.orca.so/?tokenIn=So11111111111111111111111111111111111111112&tokenOut=6ycUdE8C5r7Fhvujw2neRXCkxu4Xw4MdSeqy3UkSgmWK"
-         target="_blank" rel="noopener noreferrer">
+         target="_blank">
         <img src="icon/orca.png" alt="Buy on Orca">
       </a>
     </div>
 
-
-
-
-   <!-- Roadmap -->
-<div class="roadmap fade-left" id="roadmap">
-  <h2>🗺️ Roadmap</h2>
-  <ul>
-    <li>
-      <strong>Stage 1:</strong> 🧩 Meme Awakening — Launch LANCIPS, burn 98%, and embrace the chaos responsibly.
-    </li>
-    <li>
-      <strong>Stage 2:</strong> ⚙️ Utility Begins — Integrate <a href="https://www.lancips.xyz/lcipmemevirdec/" target="_blank" rel="noopener noreferrer">Cipstrack</a> for on-chain + social analysis.
-    </li>
-    <li>
-      <strong>Stage 3:</strong> 💬 Community Power — Open Telegram missions, meme tasks, and early supporter rewards.
-    </li>
-    <li>
-      <strong>Stage 4:</strong> 🌍 Expansion — Cross-chain analytics + NFT integration for reputation tracking.
-    </li>
-    <li>
-      <strong>Stage 5:</strong> 🚀 Sustainable Chaos — DAO voting, holder utilities, and ongoing meme research.
-    </li>
-  </ul>
-</div>
-
-
-
+    <!-- Roadmap -->
+    <div class="roadmap fade-left" id="roadmap">
+      <h2>🗺️ Roadmap</h2>
+      <ul>
+        <li><strong>Stage 1:</strong> 🧩 Meme Awakening — Launch LANCIPS, burn 98%, and embrace the chaos responsibly.</li>
+        <li><strong>Stage 2:</strong> ⚙️ Utility Begins — Integrate <a href="https://www.lancips.xyz/lcipmemevirdec/" target="_blank">Cipstrack</a> for on-chain + social analysis.</li>
+        <li><strong>Stage 3:</strong> 💬 Community Power — Open Telegram missions, meme tasks, and early supporter rewards.</li>
+        <li><strong>Stage 4:</strong> 🌍 Expansion — Cross-chain analytics + NFT integration for reputation tracking.</li>
+        <li><strong>Stage 5:</strong> 🚀 Sustainable Chaos — DAO voting, holder utilities, and ongoing meme research.</li>
+      </ul>
+    </div>
 
     <!-- Tokenomics -->
     <div class="tokenomics fade-right" id="tokenomics">
       <h2>📊 Tokenomics</h2>
       <ul>
         <li><strong>90%</strong> 👧 Public</li>
-        <li><strong>10%</strong> 💰 Team costs & dev</li>
+        <li><strong>10%</strong> 💰 Team & Dev</li>
       </ul>
     </div>
   </div>
@@ -194,26 +154,25 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="footer-container">
-
-      <!-- Products -->
+      <!-- Produk -->
       <div class="footer-column">
         <h3>Products</h3>
         <ul>
-          <li><a href="https://www.lancips.xyz/lcipmemevirdec/" target="_blank" rel="noopener noreferrer">Cipstrack</a></li>
+          <li><a href="https://www.lancips.xyz/lcipmemevirdec/" target="_blank">Cipstrack</a></li>
           <li><a href="#">NFT</a></li>
-          <li><a href="#weird-tabs">Weird Station</a></li>
+          <li><a href="#">Weird Station</a></li>
         </ul>
       </div>
 
-      <!-- Resources -->
+      <!-- Resource -->
       <div class="footer-column">
         <h3>Resources</h3>
         <ul>
           <li><a href="#">Docs</a></li>
           <li><a href="#">Guides</a></li>
           <li><a href="#">Help</a></li>
-          <li><a href="https://docs.birdeye.so/reference/get-defi-price" target="_blank" rel="noopener noreferrer">Integrations</a></li>
-          <li><a href="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX" target="_blank" rel="noopener noreferrer">Price</a></li>
+          <li><a href="https://docs.birdeye.so/reference/get-defi-price" target="_blank">Integrations</a></li>
+          <li><a href="https://www.geckoterminal.com/solana/pools/7QFSPvTRxqLcmYnTjrQ7CtfB7fdnSrfGzYs8vA4dLLJX" target="_blank">Price</a></li>
           <li><a href="#">Investor</a></li>
         </ul>
       </div>
@@ -222,10 +181,10 @@
       <div class="footer-column">
         <h3>Company</h3>
         <ul>
-          <li><a href="#navbar-inner">Home</a></li>
-          <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md" target="_blank" rel="noopener noreferrer">About</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md" target="_blank">About</a></li>
           <li><a href="#">Blog</a></li>
-          <li><a href="https://t.me/lancips_account" target="_blank" rel="noopener noreferrer">Contact Us</a></li>
+          <li><a href="https://t.me/lancips_account" target="_blank">Contact</a></li>
         </ul>
       </div>
 
@@ -233,9 +192,9 @@
       <div class="footer-column">
         <h3>Social</h3>
         <ul class="social-links">
-          <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a></li>
-          <li><a href="https://x.com/Lan_cips?t=eIUl-6r5gRxJ0lW2vpRDwg&s=09" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> X</a></li>
-          <li><a href="https://t.me/lancips_account" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> Telegram</a></li>
+          <li><a href="https://github.com/riynmazi/lancips-presale" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+          <li><a href="https://x.com/Lan_cips" target="_blank"><i class="fab fa-twitter"></i> X</a></li>
+          <li><a href="https://t.me/lancips_account" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
         </ul>
       </div>
     </div>
@@ -245,6 +204,7 @@
     </div>
   </footer>
 
+  <!-- ===== Scripts ===== -->
   <script src="script.js" defer></script>
   <script src="app.js"></script>
 </body>
