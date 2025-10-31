@@ -59,6 +59,63 @@ button{
 }
 button:hover{ background:var(--accent-600); transform:translateY(-1px); }
 
+
+
+
+
+/* ===== LOGO BACK , JUDUL VIRAL DETECTOR, SEARCH BAR ===== */
+.top-bar {
+  display: flex;
+  justify-content: space-between; /* kiri-kanan */
+  align-items: center;
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  background: #141414;
+  backdrop-filter: blur(6px);
+  z-index: 50;
+  height: 64px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* === Kiri: gambar + judul === */
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* jarak antara gambar dan teks */
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.back-btn img {
+  width: 28px;
+  height: 28px;
+}
+
+.app-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #01baa7;
+}
+
+
+
+
+
+
+
+
+
 /* ========== NAVBAR WRAPPER & INNER ========== */
 /* Note: HTML uses .navbar-wrapper > .navbar-inner + nav.navbar */
 .navbar-wrapper{
