@@ -11,41 +11,6 @@
 
   <!-- ===== Favicon ===== -->
   <link rel="icon" type="image/png" href="favicon.png">
-
-  <!-- ===== Buffer Polyfill (untuk Solana Web3) ===== -->
-  <script>
-    (function () {
-      function base64ToBytes(str) {
-        const binary = atob(str);
-        const len = binary.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
-        return bytes;
-      }
-      function utf8ToBytes(str) {
-        return new TextEncoder().encode(str);
-      }
-      function hexToBytes(hex) {
-        if (hex.length % 2 !== 0) throw new Error("Invalid hex string");
-        const bytes = new Uint8Array(hex.length / 2);
-        for (let i = 0; i < hex.length; i += 2) {
-          bytes[i / 2] = parseInt(hex.substr(i, 2), 16);
-        }
-        return bytes;
-      }
-      window.Buffer = {
-        from: function (input, encoding) {
-          if (encoding === "base64") return base64ToBytes(input);
-          if (encoding === "utf8" || encoding === "utf-8") return utf8ToBytes(input);
-          if (encoding === "hex") return hexToBytes(input);
-          throw new Error("Unsupported encoding: " + encoding);
-        }
-      };
-    })();
-  </script>
-
-  <!-- ===== Solana Web3 ===== -->
-  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
 </head>
 
 <body>
