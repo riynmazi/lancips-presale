@@ -128,41 +128,17 @@
       logoEl.src = token.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(token.symbol)}&background=random`;
     }
 
+    if (typeof window.renderTrendChart === "function") {
+      window.renderTrendChart(token);
+    }
 
+    panel.classList.add("open");
+  };
 
-// ==== CLOSE PANEL GLOBAL ====
-window.closeDetailPanel = function () {
-  const panel = document.getElementById("detail-panel");
-  if (panel) panel.classList.remove("open");
-};
-
-// ==== OPEN PANEL ====
-window.openDetailPanel = function (index) {
-  const panel = document.getElementById("detail-panel");
-  if (!panel || !allTokens[index]) return;
-  const token = allTokens[index];
-
-  // set teks & logo
-  ...
-
-  panel.classList.add("open");
-
-  // render chart
-  if (typeof window.renderTrendChart === "function") {  
-  window.renderTrendChart(token);  
-}  
-
-panel.classList.add("open");
-
-};
-
-window.closeDetailPanel = function () {
-const panel = document.getElementById("detail-panel");
-if (panel) panel.classList.remove("open");
-};
-
-
-
+  window.closeDetailPanel = function () {
+    const panel = document.getElementById("detail-panel");
+    if (panel) panel.classList.remove("open");
+  };
 
   /** RENDER **/
   function makeCard(p, i) {
