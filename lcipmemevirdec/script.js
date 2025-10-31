@@ -128,7 +128,8 @@
       logoEl.src = token.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(token.symbol)}&background=random`;
     }
 
-    if (typeof window.renderTrendChart === "function") {
+
+if (typeof window.renderTrendChart === "function") {
   const charts = ['chart-0', 'chart-1', 'chart-2']; // dst, bisa nambah
   charts.forEach((id, idx) => {
     const canvas = panel.querySelector(`#${id}`);
@@ -140,6 +141,10 @@
 
 panel.classList.add("open");
 
+window.closeDetailPanel = function () {
+const panel = document.getElementById("detail-panel");
+if (panel) panel.classList.remove("open");
+};
 
 
 
