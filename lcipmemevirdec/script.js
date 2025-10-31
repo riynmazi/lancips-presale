@@ -148,13 +148,21 @@ window.openDetailPanel = function (index) {
   panel.classList.add("open");
 
   // render chart
-  if (typeof window.renderTrendChart === "function") {
-    ['chart-0','chart-1','chart-2'].forEach((id, idx) => {
-      const canvas = panel.querySelector(`#${id}`);
-      if (canvas) window.renderTrendChart(token, canvas, idx);
-    });
-  }
+  if (typeof window.renderTrendChart === "function") {  
+  window.renderTrendChart(token);  
+}  
+
+panel.classList.add("open");
+
 };
+
+window.closeDetailPanel = function () {
+const panel = document.getElementById("detail-panel");
+if (panel) panel.classList.remove("open");
+};
+
+
+
 
   /** RENDER **/
   function makeCard(p, i) {
