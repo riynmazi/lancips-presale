@@ -276,7 +276,16 @@
     top3.forEach((t, i) => {
       const div = document.createElement('div');
       div.className = 'viral-top-card';
-      div.innerHTML = `<span class="viral-rank">${i + 1}.</span> <strong class="viral-symbol">${t.symbol || '—'}</strong> <span class="viral-hype">- 🔥 ${Math.round(t.memeScore || 0)}%</span>`;
+      div.innerHTML = `
+  <span class="viral-rank">${i + 1}.</span>
+  <strong class="viral-symbol">
+    ${t.symbol || '—'}
+    <span class="viral-chart" style="--w:${Math.min(Math.round(t.memeScore || 0),100)}"></span>
+    <span class="viral-hype">🔥 ${Math.round(t.memeScore || 0)}%</span>
+  </strong>
+`;
+console.log('Render viral:', t.symbol, t.memeScore);
+
       div.style.cursor = 'pointer';
       div.onclick = () => {
         const idx = allTokens.indexOf(t);
