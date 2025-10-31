@@ -64,11 +64,12 @@ button:hover{ background:var(--accent-600); transform:translateY(-1px); }
 
 
 /* ===== LOGO BACK , JUDUL VIRAL DETECTOR, SEARCH BAR ===== */
+/* ===== TOP BAR: LOGO, JUDUL, TEKS KANAN ===== */
 .top-bar {
   display: flex;
   justify-content: space-between; /* kiri-kanan */
   align-items: center;
-  padding: 0 16px;
+  padding: 0 20px;
   position: sticky;
   top: 0;
   background: #141414;
@@ -78,14 +79,12 @@ button:hover{ background:var(--accent-600); transform:translateY(-1px); }
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* === Kiri: gambar + judul === */
+/* === KIRI: logo + judul === */
 .left-group {
   display: flex;
   align-items: center;
-  gap: 10px; /* jarak antara gambar dan teks */
+  gap: 10px; /* jarak antara logo dan teks */
 }
-
-
 
 .back-btn {
   background: none;
@@ -94,13 +93,15 @@ button:hover{ background:var(--accent-600); transform:translateY(-1px); }
   cursor: pointer;
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .back-btn img {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
 }
 
+/* === TEKS UTAMA (LANCIPS) === */
 .app-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.2rem;
@@ -109,21 +110,30 @@ button:hover{ background:var(--accent-600); transform:translateY(-1px); }
   text-transform: uppercase;
   text-decoration: none;
   color: #01baa7;
+  line-height: 1;
 }
 
-/* kanan */
+/* === KANAN: teks di pojok === */
+.right-group {
+  display: flex;
+  align-items: center;
+}
+
 .right-group .right-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;  /* <-- typo koma diganti titik */
+  font-weight: 700;
   color: #01baa7;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 1,2rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1;
+  transition: opacity 0.2s ease;
 }
 
 .right-group .right-text:hover {
   opacity: 0.8;
 }
-
-
 
 
 
