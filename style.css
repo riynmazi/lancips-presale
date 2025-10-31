@@ -82,8 +82,10 @@ button:hover{ background:var(--accent-600); transform:translateY(-1px); }
 .left-group {
   display: flex;
   align-items: center;
-  gap: 8px; /* jarak antara gambar dan teks */
+  gap: 10px; /* jarak antara gambar dan teks */
 }
+
+
 
 .back-btn {
   background: none;
@@ -105,9 +107,21 @@ button:hover{ background:var(--accent-600); transform:translateY(-1px); }
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  text-decoration: none;
   color: #01baa7;
 }
 
+/* kanan */
+.right-group .right-text {
+  color: #01baa7;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1,2rem;
+}
+
+.right-group .right-text:hover {
+  opacity: 0.8;
+}
 
 
 
