@@ -60,13 +60,38 @@ const chartDataSets = [
         }]
       },
       options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { color: '#222' }, ticks: { color: '#ccc' } },
-          y: { grid: { color: '#222' }, ticks: { color: '#ccc' } }
+  responsive: true,
+  scales: {
+    x: {
+      grid: { color: '#222' },
+      ticks: {
+        color: '#ccc',
+        font: {
+          size: 10  // 🔥 kecilin label bawah (Mentions, Likes, dll)
         }
       }
+    },
+    y: {
+      grid: { color: '#222' },
+      ticks: {
+        color: '#ccc',
+        font: {
+          size: 10  // 🔥 kecilin angka kiri (nilai)
+        }
+      }
+    }
+  },
+  plugins: {
+    legend: { display: false }, // ❌ legend dimatiin
+    title: {
+      display: true, // ✅ tampilkan judul di atas chart
+      text: '',      // nanti diisi per chart
+      color: '#fff',
+      font: { size: 12 } // 🔥 ukuran judul kecil
+    }
+  }
+}
+
     });
   });
 }
