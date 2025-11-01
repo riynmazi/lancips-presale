@@ -173,7 +173,7 @@
     `;
 
     const arrow = card.querySelector('.mvd-arrow');
-    if (arrow) arrow.addEventListener('click', () => window.openDetailPanel(i));
+    if (arrow) arrow.addEventListener('click', () => window.openDetailPanel(globalIndex));
 
     return card;
   }
