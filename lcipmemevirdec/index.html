@@ -10,6 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="detail-panel.css" />
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
   <script src="https://kit.fontawesome.com/a2e0e6b6a6.js" crossorigin="anonymous"></script>
 </head>
 
@@ -131,9 +135,27 @@
     </div>
 
 
-<div id="chart-container">
-  <canvas id="trend-chart"></canvas>
+<!-- Chart Swiper Container -->
+<div id="chart-container" class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="chart-title">Performance accumulation</div>
+      <canvas id="chart-0"></canvas>
+    </div>
+    <div class="swiper-slide">
+      <div class="chart-title">X performance</div>
+      <canvas id="chart-1"></canvas>
+    </div>
+    <div class="swiper-slide">
+      <div class="chart-title">Reddit performance</div>
+      <canvas id="chart-2"></canvas>
+    </div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-pagination"></div>
 </div>
+
 
 
     <div class="detail-stats">
@@ -206,6 +228,7 @@
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="chart.js"></script>
 <!-- Script utama kamu -->
 <script src="script.js"></script>
