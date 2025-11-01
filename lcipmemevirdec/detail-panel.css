@@ -11,15 +11,24 @@
   box-shadow: -6px 0 20px rgba(0, 0, 0, 0.6);
   transition: right 0.4s ease;
   z-index: 9999;
-  overflow-y: auto;
+  overflow-y: auto; /* scroll vertikal */
+  overflow-x: hidden; /* hilangkan scroll horizontal */
   padding: 20px;
   display: flex;
   flex-direction: column;
   font-family: "Inter", sans-serif;
 }
 
+/* Biar panel muncul */
 .detail-panel.open {
   right: 0;
+}
+
+/* Canvas chart menyesuaikan ukuran panel */
+.detail-panel canvas {
+  max-width: 100%;
+  display: block;
+  height: auto;
 }
 
 /* === BAR ATAS === */
