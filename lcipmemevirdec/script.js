@@ -172,8 +172,12 @@
       </div>
     `;
 
-    const arrow = card.querySelector('.mvd-arrow');
-    if (arrow) arrow.addEventListener('click', () => window.openDetailPanel(i));
+    card.addEventListener('click', () => window.openDetailPanel(i));
+const arrow = card.querySelector('.mvd-arrow');
+if (arrow) arrow.addEventListener('click', (e) => {
+  e.stopPropagation(); // mencegah double trigger
+  window.openDetailPanel(i);
+});
 
     return card;
   }
