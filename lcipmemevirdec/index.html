@@ -11,9 +11,9 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="detail-panel.css" />
   <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
   <script src="https://kit.fontawesome.com/a2e0e6b6a6.js" crossorigin="anonymous"></script>
 </head>
 
@@ -41,8 +41,7 @@
     </div>
   </section>
 
-
-<!-- ===== VIRAL ===== -->
+  <!-- ===== VIRAL ===== -->
   <section id="viral-top-section" class="container">
     <h2>🔥 Viral</h2>
     <div id="viral-top" class="token-list">
@@ -50,9 +49,6 @@
     </div>
   </section>
 
-
-
-  
   <!-- ===== FILTER BAR ===== -->
   <div class="filter-bar">
     <h2 class="token-section-title">🔥 Top Detected</h2>
@@ -76,12 +72,12 @@
       <!-- Populated dynamically -->
     </section>
 
-      <!-- Pagination controls -->
-  <div class="pagination">
-    <button id="prev-btn">Prev</button>
-    <span id="page-info"></span>
-    <button id="next-btn">Next</button>
-  </div>
+    <!-- Pagination controls -->
+    <div class="pagination">
+      <button id="prev-btn">Prev</button>
+      <span id="page-info"></span>
+      <button id="next-btn">Next</button>
+    </div>
 
     <div id="toast" role="status" aria-live="assertive" class="toast-notification hidden">
       <span class="toast-label">
@@ -114,126 +110,108 @@
   </section>
 
   <!-- ===== DETAIL PANEL SLIDE ===== -->
-<div id="detail-panel" class="detail-panel">
-  <button id="detail-close-btn"><</button>
-  <div class="detail-topbar">
-    <div class="detail-topbar-left">
-      <!-- Tombol close jelas -->
-      
-      <h2>CIPSTRACK</h2>
+  <div id="detail-panel" class="detail-panel">
+    <button id="detail-close-btn">&lt;</button>
+    <div class="detail-topbar">
+      <div class="detail-topbar-left">
+        <h2>CIPSTRACK</h2>
+      </div>
+      <div class="detail-actions">
+        <i class="fa-solid fa-rocket"></i>
+        <i class="fa-solid fa-heart"></i>
+        <i class="fa-solid fa-share-nodes"></i>
+      </div>
     </div>
-    <div class="detail-actions">
-      <i class="fa-solid fa-rocket"></i>
-      <i class="fa-solid fa-heart"></i>
-      <i class="fa-solid fa-share-nodes"></i>
+
+    <div class="detail-card">
+      <div class="detail-card-logo">
+        <img id="detail-logo" src="https://ui-avatars.com/api/?name=MEME+X" alt="logo" />
+      </div>
+
+      <!-- Chart Swiper Container -->
+      <div id="chart-container" class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="chart-title">Performance accumulation</div>
+            <canvas id="chart-0"></canvas>
+          </div>
+          <div class="swiper-slide">
+            <div class="chart-title">X performance</div>
+            <canvas id="chart-1"></canvas>
+          </div>
+          <div class="swiper-slide">
+            <div class="chart-title">Reddit performance</div>
+            <canvas id="chart-2"></canvas>
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+      <div class="detail-stats">
+        <div>Price <span id="detail-price">$0.00042</span></div>
+        <div>Volume <span id="detail-vol24">$125K</span></div>
+        <div>Hype <span id="detail-hype">🔥 89%</span></div>
+        <div>Liquidity <span id="detail-liquidity">$210K</span></div>
+      </div>
+      <div class="detail-buttons">
+        <button>Buy</button>
+        <button>Chart</button>
+        <button>Copy</button>
+      </div>
+    </div>
+
+    <div class="detail-info">
+      <h3 id="detail-name">MemeX Token</h3>
+      <div class="info-row">Symbol: <span id="detail-symbol">MEMEX</span></div>
+      <div class="info-row">Chain: <span id="detail-network">Solana</span></div>
+      <div class="info-row">Liquidity (24h): <span id="detail-liquidity">$210K</span></div>
+      <div class="info-row">Volume (24h): <span id="detail-vol24">$125K</span></div>
+      <div class="info-row">Address: <span id="detail-address">So1aNa0X82...</span></div>
+      <div class="info-row">Mentions: <span id="detail-mentions">8,000</span></div>
+      <div class="info-row">Likes: <span id="detail-likes">3,000</span></div>
+      <div class="info-row">Retweets: <span id="detail-retweets">1,000</span></div>
+      <div class="info-row">Engagement Score: <span id="detail-score">90 / 100</span></div>
     </div>
   </div>
-
-  <div class="detail-card">
-    <div class="detail-card-logo">
-      <img id="detail-logo" src="https://ui-avatars.com/api/?name=MEME+X" alt="logo" />
-    </div>
-
-
-<!-- Chart Swiper Container -->
-<div id="chart-container" class="swiper-container">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide">
-      <div class="chart-title">Performance accumulation</div>
-      <canvas id="chart-0"></canvas>
-    </div>
-    <div class="swiper-slide">
-      <div class="chart-title">X performance</div>
-      <canvas id="chart-1"></canvas>
-    </div>
-    <div class="swiper-slide">
-      <div class="chart-title">Reddit performance</div>
-      <canvas id="chart-2"></canvas>
-    </div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-pagination"></div>
-</div>
-
-
-
-    <div class="detail-stats">
-      <div>Price <span id="detail-price">$0.00042</span></div>
-      <div>Volume <span id="detail-vol24">$125K</span></div>
-      <div>Hype <span id="detail-hype">🔥 89%</span></div>
-      <div>Liquidity <span id="detail-liquidity">$210K</span></div>
-    </div>
-    <div class="detail-buttons">
-      <button>Buy</button>
-      <button>Chart</button>
-      <button>Copy</button>
-    </div>
-  </div>
-
-  <div class="detail-info">
-    <h3 id="detail-name">MemeX Token</h3>
-    <div class="info-row">Symbol: <span id="detail-symbol">MEMEX</span></div>
-    <div class="info-row">Chain: <span id="detail-network">Solana</span></div>
-    <div class="info-row">Liquidity (24h): <span id="detail-liquidity">$210K</span></div>
-    <div class="info-row">Volume (24h): <span id="detail-vol24">$125K</span></div>
-    <div class="info-row">Address: <span id="detail-address">So1aNa0X82...</span></div>
-    <div class="info-row">Mentions: <span id="detail-mentions">8,000</span></div>
-    <div class="info-row">Likes: <span id="detail-likes">3,000</span></div>
-    <div class="info-row">Retweets: <span id="detail-retweets">1,000</span></div>
-    <div class="info-row">Engagement Score: <span id="detail-score">90 / 100</span></div>
-  </div>
-</div>
-
 
   <!-- ===== TWITTER SCRIPT ===== -->
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-
-
-
-   <!-- ===== FOOTER ===== -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
-  <div class="footer-container">
+    <div class="footer-container">
 
-    <!-- Resources -->
-    <div class="footer-column">
-      <h3>Resources</h3>
-      <ul>
-        <li><a href="https://www.lancips.xyz/lcipmemevirdec/docs/how-its-work.html">How its work</a></li>           
-      </ul>
-    </div
+      <!-- Resources -->
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="https://www.lancips.xyz/lcipmemevirdec/docs/how-its-work.html">How its work</a></li>
+        </ul>
+      </div>
 
-    <!-- Social -->
-    <div class="footer-column">
-      <h3>Social</h3>
-      <ul class="social-links">
-        <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md"><i class="fab fa-github"></i> GitHub</a></li>
+      <!-- Social -->
+      <div class="footer-column">
+        <h3>Social</h3>
+        <ul class="social-links">
+          <li><a href="https://github.com/riynmazi/lancips-presale/blob/main/readme.md"><i class="fab fa-github"></i> GitHub</a></li>
+          <li><a href="https://x.com/Lan_cips?t=eIUl-6r5gRxJ0lW2vpRDwg&s=09"><i class="fab fa-twitter"></i> Twitter</a></li>
+          <li><a href="https://t.me/lancips_account"><i class="fab fa-telegram"></i> Telegram</a></li>
+        </ul>
+      </div>
 
-        <li><a href="https://x.com/Lan_cips?t=eIUl-6r5gRxJ0lW2vpRDwg&s=09"><i class="fab fa-twitter"></i> Twitter</a></li>
-
-        <li><a href="https://t.me/lancips_account"><i class="fab fa-telegram"></i> Telegram</a></li>
-      </ul>
     </div>
 
-  </div>
+    <div class="footer-bottom">
+      © 2025 Lancips. All rights reserved.
+    </div>
+  </footer>
 
-  <div class="footer-bottom">
-    © 2025 Lancips. All rights reserved.
-  </div>
-</footer>
-
-
-
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="chart.js"></script>
-<!-- Script utama kamu -->
-<script src="script.js"></script>
-</body>
-</html>
-
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="chart.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
