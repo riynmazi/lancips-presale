@@ -1,874 +1,128 @@
-/* ===== BASE RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-  background-color: #141414;
-  color: white;
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-/* ===== LOGO BACK , JUDUL VIRAL DETECTOR, SEARCH BAR ===== */
-.top-bar {
-  display: flex;
-  justify-content: space-between; /* kiri-kanan */
-  align-items: center;
-  padding: 0 16px;
-  position: sticky;
-  top: 0;
-  background: #141414;
-  backdrop-filter: blur(6px);
-  z-index: 50;
-  height: 64px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* === Kiri: gambar + judul === */
-.left-group {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* jarak antara gambar dan teks */
-}
-
-.back-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.back-btn img {
-  width: 28px;
-  height: 28px;
-}
-
-.app-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #01baa7;
-}
-
-/* === Kanan: search bar === */
-.search-input {
-  width: 40%;
-  height: 40px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-}
-
-.search-input::placeholder {
-  color: #eee;
-}
-
-
-
-/* ================================
-   🔵 LIVE STATUS SECTION
-================================ */
-.status-section {
-  display: flex;
-  align-items: center;       /* sejajarkan semua item vertikal */
-  gap: 12px;                 /* jarak antar blok (status & loading) */
-  padding: 8px 16px;
-  font-size: 0.85rem;
-  opacity: 0.85;
-  line-height: 1;
-}
-
-.live-status {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.live-status p {
-  margin: 0;
-  line-height: 1;
-}
-
-.pulse-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #ff4444;
-  box-shadow: 0 0 6px #ff4444;
-  animation: pulse 1.2s infinite;
-}
-
-/* ================================
-   🌀 LOADING (INLINE)
-================================ */
-.loading-container {
-  display: flex;
-  align-items: center;       /* sejajarkan ikon & teks vertikal */
-  gap: 6px;
-}
-
-.loading-spinner-icon {
-  color: orange;
-  width: 18px;
-  height: 18px;
-  opacity: 0.8;
-  vertical-align: middle;
-  animation: spin 1.2s linear infinite;
-}
-
-.loading-label {
-  margin: 0;
-  line-height: 1;
-  color: white;
-}
-
-
-/* ================================
-   🎬 ANIMATIONS
-================================ */
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
-}
-
-
-
-
-/* ================================
-   🎯 FILTER BAR
-================================ */
-.filter-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* center vertikal */
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 0 16px;
-}
-
-.token-section-title {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  line-height: 1;
-  height: 38px; /* kasih tinggi sama kayak dropdown */
-}
-
-/* grup dropdown di kanan */
-.filter-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* style dropdown */
-.filter-select {
-  display: flex;
-  align-items: center;  /* biar teks di dalam dropdown center juga */
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.06);
-  color: #ddd;
-  font-size: 0.9rem;
-  line-height: 1;
-  height: 38px; /* sama dengan judul 🔥 */
-  cursor: pointer;
-  transition: all 0.2s ease;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-/* hover & fokus */
-.filter-select:hover {
-  background-color: rgba(255,255,255,0.12);
-}
-
-.filter-select:focus {
-  outline: none;
-  border-color: #00ffe5;
-  background-color: rgba(255,255,255,0.15);
-  color: #fff;
-}
-
-
-
-
-
-
-
-
-
-/*===Judul grid===*/
-
-.token-section-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: white;
-  margin-top: 40px;
-  margin-bottom: 16px;
-  padding-left: 8px;
-  letter-spacing: 0.3px;
-}
-
-
-/* ===== TOKEN GRID ===== */
-.token-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 16px;
-  margin-top: 32px;
-  padding-bottom: 80px;
-}
-
-.token-card {
-  background-color: #685d2e;
-  border-radius: 16px;
-  padding: 16px;
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  overflow: hidden;
-}
-
-.token-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255,255,255,0.25);
-}
-
-.token-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.token-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.token-symbol {
-  opacity: 0.7;
-  font-size: 0.9rem;
-}
-
-.token-stats {
-  margin-top: 8px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  opacity: 0.85;
-}
-
-
-
-
-
-
-/* ===== TOAST ===== */
-.toast-notification {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: red;
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 12px 18px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  z-index: 100;
-}
-
-.toast-notification.hidden {
-  opacity: 0;
-  transform: translate(-50%, 30px);
-  pointer-events: none;
-}
-
-/* ===== FOOTER ===== */
-.footer {
-  background-color: #000;
-  color: #ccc;
-  padding: 60px 30px;
-  font-family: Arial, sans-serif;
-}
-
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-column h3 {
-  color: #fff;
-  font-size: 16px;
-  margin-bottom: 16px;
-  font-weight: 600;
-}
-
-.footer-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-column ul li {
-  margin-bottom: 8px;
-}
-
-.footer-column ul li a {
-  text-decoration: none;
-  color: #aaa;
-  font-size: 14px;
-  transition: color 0.2s ease;
-}
-
-.footer-column ul li a:hover {
-  color: #fff;
-}
-
-.social-links li a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer-bottom {
-  text-align: center;
-  font-size: 13px;
-  color: #777;
-  margin-top: 40px;
-  border-top: 1px solid #222;
-  padding-top: 20px;
-}
-
-/* Responsif */
-@media (max-width: 600px) {
-  .footer {
-    padding: 40px 20px;
+// === 📈 Render 3 Trend Charts ===
+function renderTrendChart(token) {
+  if (!token) return;
+
+  const chartIds = ['chart-0', 'chart-1', 'chart-2'];
+const chartDataSets = [
+  {
+    // Chart 0: Performance Accumulation
+    label: `${token.symbol} Performance Accumulation`,
+    labels: ['Liquidity', 'Volume', 'Likes', 'Mentions', 'Retweets'],
+    data: [
+      token.liquidityUsd || 0,
+      token.volumeUsd || 0,
+      token.xLikes || 0,
+      token.xMentions || 0,
+      token.xRetweets || 0
+    ],
+    color: '#00ff88'
+  },
+  {
+    // Chart 1: X Performance
+    label: `${token.symbol} X Performance`,
+    labels: ['Likes', 'Mentions', 'Retweets'],
+    data: [
+      token.xLikes || 0,
+      token.xMentions || 0,
+      token.xRetweets || 0
+    ],
+    color: '#00bfff'
+  },
+  {
+    // Chart 2: Kosong dulu
+    label: `${token.symbol} Reserved Chart`,
+    labels: [],
+    data: [],
+    color: '#ff8800'
   }
+];
 
-  .footer-container {
-    gap: 20px;
-  }
 
-  .footer-column h3 {
-    font-size: 15px;
-  }
+  chartIds.forEach((id, index) => {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
 
-  .footer-column ul li a {
-    font-size: 13px;
+    // Hapus chart lama kalau ada
+    if (ctx.chartInstance) ctx.chartInstance.destroy();
+
+    const dataset = chartDataSets[index];
+
+    ctx.chartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: dataset.labels,
+        datasets: [{
+          label: dataset.label,
+          data: dataset.data,
+          backgroundColor: dataset.color + '55',
+          borderColor: dataset.color,
+          borderWidth: 2,
+        }]
+      },
+      options: {
+  responsive: true,
+  scales: {
+    x: {
+      grid: { color: '#222' },
+      ticks: {
+        color: '#ccc',
+        font: {
+          size: 10  // 🔥 kecilin label bawah (Mentions, Likes, dll)
+        }
+      }
+    },
+    y: {
+      grid: { color: '#222' },
+      ticks: {
+        color: '#ccc',
+        font: {
+          size: 10  // 🔥 kecilin angka kiri (nilai)
+        }
+      }
+    }
+  },
+  plugins: {
+    legend: { display: false }, // ❌ legend dimatiin
+    title: {
+      display: true, // ✅ tampilkan judul di atas chart
+      text: '',      // nanti diisi per chart
+      color: '#fff',
+      font: { size: 12 } // 🔥 ukuran judul kecil
+    }
   }
 }
 
-
-
-
-/* === MVD Card Style (updated layout only) === */
-.mvd-card {
-  position: relative;
-  background-color: #0d0d0d;          /* card gelap */
-  border-radius: 12px;                 /* sudut melengkung */
-  padding: 16px;                       /* ruang isi */
-  color: #fff;                         /* teks putih */
-  
-  /* border halus untuk efek “premium” */
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  /* efek timbul */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-  transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+    });
+  });
 }
 
-/* hover efek biar card keliatan lebih “angkat” */
-.mvd-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-  border: 1px solid rgba(255, 255, 255, 0.15); /* border lebih jelas saat hover */
-}
+// biar bisa dipanggil global dari script utama
+window.renderTrendChart = renderTrendChart;
 
 
+// === 🌀 SWIPER INIT ===
+let trendSwiper;
 
-/* Header: icon + name + arrow */
-.mvd-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  position: relative; /* supaya .mvd-arrow tetap bisa absolute */
-}
-
-.mvd-card-header-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 16px;
-  height: 64px;
-  flex: 0 0 auto; /* logo tetap di kiri */
-}
-
-.mvd-token-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #f9fafb;
-}
-
-.mvd-card-header-right {
-  flex: 1 1 auto;       /* teks mengisi sisa ruang */
-  text-align: right;    /* nama + simbol rata kanan */
- /* position; relative;*/
-}
-
-.mvd-token-name {
-  font-weight: 600;
-  font-size: 16px;
-  color: #01baa7;
-}
-
-.mvd-token-symbol {
-  font-size: 13px;
-  color: grey;
-}
-
-.mvd-arrow {
-  position: absolute;
-  top: -10px;
-  right: -8px;
-  color: white;
-  font-weight: bold;
-  font-size: 10px;
-  transform: rotate(-45deg);
-  cursor: pointer;
-}
-
-
-/* Metrics section vertical di kanan */
-.mvd-metrics {
-  font-size: 14px;
-  color: grey;
-  display: flex;
-  flex-direction: column;   /* vertical stack */
-  align-items: flex-end;    /* rata kanan */
-  gap: 4px;                 /* jarak antar metrics */
-  margin-bottom: 8px;
-}
-
-.mvd-metrics div span {
-  font-weight: 500;
-  color: green;
-}
-
-/* Footer link */
-.mvd-footer {
-  margin-top: 12px;
-  text-align: center;        /* View on DexScreener di tengah */
-}
-
-.mvd-footer a {
-  color: #2563eb;
-  font-weight: 500;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.mvd-footer a:hover {
-  text-decoration: underline;
-}
-
-
-#chart-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  background: #0d0d0d;
-  border-radius: 16px;
-  padding: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 128, 0.1);
-}
-
-/* === SWIPER STYLE === */
-.swiper-container {
-  width: 100%;
-  height: 280px;
-  margin-top: 20px;
-  position: relative;
-}
-
-/* Wrapper slide biar rapi */
-.swiper-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-/* Tiap slide canvas */
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-}
-
-/* Canvas ukuran responsif */
-.swiper-slide canvas {
-  width: 100% !important;
-  height: 240px !important;
-}
-
-/* Panah navigasi */
-.swiper-button-next,
-.swiper-button-prev {
-  color: #fff !important;          /* warna putih */
-  transition: opacity 0.2s ease;
-  opacity: 0.7;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  opacity: 1;
-}
-
-/* Pagination bullet (dot) */
-.swiper-pagination-bullet {
-  background: #fff !important;
-  opacity: 0.5;
-}
-
-.swiper-pagination-bullet-active {
-  background: #fff !important;
-  opacity: 1;
-}
-
-/* Posisi pagination */
-.swiper-pagination {
-  bottom: 10px !important;
-}
-
-
-
-
-
-/* ===TWEET SECTION === */
-.tweet-section {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 20px;
-  margin-top: 24px;
-  text-align: left;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.tweet-section h2 {
-  color: #fff;
-  font-size: 1.3rem;
-  margin-bottom: 16px;
-  text-align: left;
-}
-
-.tweet-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: flex-start;
-}
-
-/* Tweet Style */
-.twitter-tweet {
-  width: 50% !important;       /* 🖥️ Desktop: dua kolom */
-  margin: 10px 0 !important;   /* Hilangkan centering bawaan */
-  min-width: 320px;            /* Supaya gak terlalu kecil di layar besar */
-}
-
-/* 📱 Mobile: 1 kolom penuh */
-@media (max-width: 768px) {
-  .twitter-tweet {
-    width: 100% !important;
-  }
-}
-
-
-/* ===== RESPONSIVE ===== */
-
-/* Small tablets */
-@media (max-width: 768px) {
-  .filter-bar {
-    grid-template-columns: 1fr;
-    gap: 10px;
+function initTrendSwiper() {
+  // Hapus dulu swiper lama biar gak dobel
+  if (trendSwiper) {
+    trendSwiper.destroy(true, true);
   }
 
-  .search-input {
-    font-size: 1rem;
-    padding: 12px 14px;
-  }
-
-  .token-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
-
-  .app-title {
-    font-size: 1rem;
-  }
+  trendSwiper = new Swiper("#chart-container", {
+    loop: false,
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
 }
 
-/* Mobile phones */
-@media (max-width: 480px) {
-  html, body {
-    overflow-x: hidden;
-  }
-
-  .top-bar {
-    height: 56px;
-  }
-
-  .back-btn {
-    left: 12px;
-    font-size: 1rem;
-  }
-
-  .filter-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
-  width: 100%;
-  padding: 0 10px;
-  flex-wrap: wrap;
-}
-
-.filter-select {
-  font-size: 0.95rem;
-  padding: 10px 12px;
-  height: 40px;
-  border: 1px solid #444;
-  border-radius: 8px;
-  background: #111;
-  color: #fff;
-  outline: none;
-}
-
-
-
-.filter-select {
-  flex: 1 1 20%;
-}
-
-  .token-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .token-card {
-    padding: 14px;
-  }
-}
-
-
-
-
-/* ===== VIRAL TOP 3 ===== */
-.viral-top {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 24px 16px 0 16px;
-}
-
-
-#viral-top-section {
-  margin-top: 40px;
-}
-
-#viral-top-section h2 {
-  text-align: center;
-  font-weight: 600; /* optional, biar tegas */
-  margin-bottom: 16px; /* kasih jarak ke daftar di bawahnya */
-}
-
-
-.viral-top-card {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: left;
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 10px 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.viral-symbol {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* Area chart (wadah kosong + isi) */
-.viral-chart {
-  display: inline-block;
-  width: 80px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Isi chart-nya */
-.viral-chart::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: calc(var(--w, 0) * 1%);
-  background: linear-gradient(90deg, #ff8a00, #ffda47);
-  border-radius: 3px;
-  transition: width 0.4s ease;
-  box-shadow: 0 0 6px rgba(255, 180, 0, 0.6);
-}
-
-/* Hype (🔥 118%) */
-.viral-hype {
-  white-space: nowrap;
-  color: #ffb84d;
-  font-weight: bold;
-}
-
-.viral-top-card:hover {
-  background: #222;
-  transform: translateY(-2px);
-}
-
-.viral-top-card span:first-child {
-  color: #ff8c00; /* nomor urut */
-  font-weight: 600;
-  margin-right: 8px;
-}
-
-.viral-top-card strong {
-  color: #01baa7; /* simbol token */
-  font-weight: 600;
-}
-
-.viral-top-card .hype {
-  color: #ff4444; /* warna hype 🔥 */
-  font-weight: 500;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-  .viral-top {
-    margin: 16px 8px 0 8px;
-  }
-
-  .viral-top-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-}
-
-
-
-/* === PAGINATION STYLE === */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 30px auto 40px;
-  font-family: "Inter", sans-serif;
-}
-
-.pagination button {
-  background: #1e1e1e;
-  color: #eee;
-  border: 1px solid #333;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.pagination button:hover {
-  background: #2e2e2e;
-  border-color: #555;
-  transform: translateY(-2px);
-}
-
-.pagination button:disabled {
-  background: #111;
-  color: #555;
-  cursor: not-allowed;
-  border-color: #222;
-  transform: none;
-}
-
-.pagination span {
-  color: #aaa;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .pagination {
-    gap: 8px;
-  }
-  .pagination button {
-    padding: 6px 10px;
-    font-size: 13px;
-  }
-  .pagination span {
-    font-size: 13px;
-  }
-}
+// jalankan otomatis saat panel dibuka dan chart sudah dirender
+window.initTrendSwiper = initTrendSwiper;
