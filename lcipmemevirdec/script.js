@@ -188,7 +188,7 @@
       return;
     }
 
-    tokens.forEach((t, i) => els.tokenGrid.appendChild(makeCard(t, i)));
+    tokens.forEach((t, i) => els.tokenGrid.appendChild(makeCard(t, globalIndex)));
     if (els.scanCount) els.scanCount.textContent = tokens.length;
   }
 
