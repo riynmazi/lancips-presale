@@ -178,19 +178,25 @@
     return card;
   }
 
-  function renderTokens(tokens) {
-    if (!els.tokenGrid) return;
-    els.tokenGrid.innerHTML = '';
+  function renderTokens(tokensToShow) {
+  if (!els.tokenGrid) return;
+  els.tokenGrid.innerHTML = '';
 
-    if (!tokens || !tokens.length) {
-      els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens found</div>`;
-      if (els.scanCount) els.scanCount.textContent = '0';
-      return;
-    }
-
-    tokens.forEach((t, i) => els.tokenGrid.appendChild(makeCard(t, i)));
-    if (els.scanCount) els.scanCount.textContent = tokens.length;
+  if (!tokensToShow || !tokensToShow.length) {
+    els.tokenGrid.innerHTML = `<div class="mvd-empty">😿 No tokens found</div>`;
+    if (els.scanCount) els.scanCount.textContent = '0';
+    return;
   }
+
+  tokensToShow.forEach((t) => {
+    const globalIndex = filteredTokens.indexOf(t); // posisi token asli di filteredTokens
+    els.tokenGrid.appendChild(makeCard(t, globalIndex));
+  });
+
+  if (els.scanCount) els.scanCount.textContent = filteredTokens.length;
+}
+
+
 
   /** PAGINATION **/
   function renderPaginatedTokens() {
