@@ -132,6 +132,10 @@
       window.renderTrendChart(token);
     }
 
+    if (typeof window.initTrendSwiper === "function") {
+  setTimeout(() => window.initTrendSwiper(), 300); // kasih jeda biar chart ready
+    }
+
     panel.classList.add("open");
   };
 
