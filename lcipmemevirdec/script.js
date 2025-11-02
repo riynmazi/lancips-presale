@@ -51,98 +51,140 @@
   }
 
   /** DETAIL PANEL **/
-  window.openDetailPanel = function (index) {
-    const panel = document.getElementById("detail-panel");
-    if (!panel || !allTokens[index]) return;
-    const token = allTokens[index];
-    const setText = (selector, value) => {
-      const el = panel.querySelector(selector);
-      if (el) el.textContent = value;
-    };
-    setText("#detail-name", token.name || "—");
-    setText("#detail-symbol", token.symbol || "—");
-    setText("#detail-network", token.chain || "—");
-    setText("#detail-liquidity", formatUSD(token.liquidityUsd));
-    setText("#detail-vol24", formatUSD(token.volumeUsd));
-    setText("#detail-price", '$' + (token.priceUsd?.toFixed(6) || '0.000000'));
-    setText("#detail-hype", '🔥 ' + Math.round(token.memeScore || 0) + '%');
+window.openDetailPanel = function (index) {
+  const panel = document.getElementById("detail-panel");
+  if (!panel || !allTokens[index]) return;
+  const token = allTokens[index];
 
-    function openBirdeye(token) {
-      if (!token || !token.address) return;
-      const chainPath = token.chain?.toLowerCase() === "solana" ? "solana"
-        : token.chain?.toLowerCase() === "bsc" ? "bsc"
+  const setText = (selector, value) => {
+    const el = panel.querySelector(selector);
+    if (el) el.textContent = value ?? "—";
+  };
+
+  // === Data utama ===
+  setText("#detail-name", token.name || "—");
+  setText("#detail-symbol", token.symbol || "—");
+  setText("#detail-network", token.chain || "—");
+  setText("#detail-liquidity-info", formatUSD(token.liquidityUsd));
+  setText("#detail-vol24-info", formatUSD(token.volumeUsd));
+  setText("#detail-price", "$" + (token.priceUsd?.toFixed(6) || "0.000000"));
+  setText("#detail-hype", "🔥 " + Math.round(token.memeScore || 0) + "%");
+
+  // === 🆕 Data sosial (X/Twitter) ===
+  setText("#detail-xmentions", formatNumber(token.xMentions));
+  setText("#detail-xlikes", formatNumber(token.xLikes));
+  setText("#detail-xretweets", formatNumber(token.xRetweets));
+  setText("#detail-xengagement", formatNumber(token.xEngagement));
+
+  // === 🆕 Data Reddit ===
+  setText("#detail-reddit-posts", formatNumber(token.redditPostsCount));
+  setText("#detail-reddit-comments", formatNumber(token.redditTotalComments));
+  setText("#detail-reddit-ups", formatNumber(token.redditTotalUps));
+  setText("#detail-reddit-engagement", formatNumber(token.redditEngagement));
+
+  // === 🆕 Total Score ===
+  setText("#detail-score", token.memeScore ? token.memeScore.toFixed(1) + " / 1000" : "—");
+
+  // === Tombol aksi ===
+  function openBirdeye(token) {
+    if (!token || !token.address) return;
+    const chainPath =
+      token.chain?.toLowerCase() === "solana"
+        ? "solana"
+        : token.chain?.toLowerCase() === "bsc"
+        ? "bsc"
         : "unknown";
-      window.open(`https://birdeye.so/${chainPath}/token/${token.address}`, "_blank");
-    }
+    window.open(`https://birdeye.so/${chainPath}/token/${token.address}`, "_blank");
+  }
 
-    const [buyBtn, chartBtn] = panel.querySelectorAll(".detail-buttons button:nth-child(-n+2)");
-    if (buyBtn) buyBtn.onclick = () => openBirdeye(token);
-    if (chartBtn) chartBtn.onclick = () => openBirdeye(token);
+  const [buyBtn, chartBtn] = panel.querySelectorAll(".detail-buttons button:nth-child(-n+2)");
+  if (buyBtn) buyBtn.onclick = () => openBirdeye(token);
+  if (chartBtn) chartBtn.onclick = () => openBirdeye(token);
 
-    const copyBtn = panel.querySelector(".detail-buttons button:nth-child(3)");
-    if (copyBtn && token.address) {
-      copyBtn.onclick = () => {
-        navigator.clipboard.writeText(token.address).then(() => {
+  const copyBtn = panel.querySelector(".detail-buttons button:nth-child(3)");
+  if (copyBtn && token.address) {
+    copyBtn.onclick = () => {
+      navigator.clipboard
+        .writeText(token.address)
+        .then(() => {
           const original = copyBtn.textContent;
           copyBtn.textContent = "Copied!";
-          setTimeout(() => copyBtn.textContent = original, 1500);
-        }).catch(err => console.error("Copy failed:", err));
-      };
-    }
+          setTimeout(() => (copyBtn.textContent = original), 1500);
+        })
+        .catch((err) => console.error("Copy failed:", err));
+    };
+  }
 
-    const addrContainer = panel.querySelector("#detail-address");
-    if (addrContainer && token.address) {
-      addrContainer.textContent = token.address;
-      const existingIcon = addrContainer.querySelector(".copy-icon");
-      if (existingIcon) existingIcon.remove();
+  const addrContainer = panel.querySelector("#detail-address");
+  if (addrContainer && token.address) {
+    addrContainer.textContent = token.address;
+    const existingIcon = addrContainer.querySelector(".copy-icon");
+    if (existingIcon) existingIcon.remove();
 
-      const icon = document.createElement("span");
-      icon.className = "copy-icon";
-      icon.style.cursor = "pointer";
-      icon.style.marginLeft = "6px";
-      icon.textContent = "📋";
-      icon.title = "Copy address";
+    const icon = document.createElement("span");
+    icon.className = "copy-icon";
+    icon.style.cursor = "pointer";
+    icon.style.marginLeft = "6px";
+    icon.textContent = "📋";
+    icon.title = "Copy address";
 
-      icon.onclick = () => {
-        navigator.clipboard.writeText(token.address).then(() => {
+    icon.onclick = () => {
+      navigator.clipboard
+        .writeText(token.address)
+        .then(() => {
           icon.textContent = "✅";
-          setTimeout(() => icon.textContent = "📋", 1500);
-        }).catch(err => console.error("Copy failed:", err));
-      };
+          setTimeout(() => (icon.textContent = "📋"), 1500);
+        })
+        .catch((err) => console.error("Copy failed:", err));
+    };
 
-      addrContainer.appendChild(icon);
+    addrContainer.appendChild(icon);
 
-      const maxLen = 18;
-      if (token.address.length > maxLen) {
-        if (addrContainer.firstChild && addrContainer.firstChild.nodeType === Node.TEXT_NODE) {
-          addrContainer.firstChild.textContent = token.address.slice(0, 8) + "..." + token.address.slice(-6);
-        } else {
-          addrContainer.textContent = token.address.slice(0, 8) + "..." + token.address.slice(-6);
-          addrContainer.appendChild(icon);
-        }
+    const maxLen = 18;
+    if (token.address.length > maxLen) {
+      if (addrContainer.firstChild && addrContainer.firstChild.nodeType === Node.TEXT_NODE) {
+        addrContainer.firstChild.textContent =
+          token.address.slice(0, 8) + "..." + token.address.slice(-6);
+      } else {
+        addrContainer.textContent =
+          token.address.slice(0, 8) + "..." + token.address.slice(-6);
+        addrContainer.appendChild(icon);
       }
     }
+  }
 
-    const logoEl = panel.querySelector("#detail-logo");
-    if (logoEl) {
-      logoEl.src = token.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(token.symbol)}&background=random`;
-    }
+  const logoEl = panel.querySelector("#detail-logo");
+  if (logoEl) {
+    logoEl.src =
+      token.logoURI ||
+      `https://ui-avatars.com/api/?name=${encodeURIComponent(token.symbol)}&background=random`;
+  }
 
-    if (typeof window.renderTrendChart === "function") {
-      window.renderTrendChart(token);
-    }
+  if (typeof window.renderTrendChart === "function") {
+    window.renderTrendChart(token);
+  }
 
-    if (typeof window.initTrendSwiper === "function") {
-  setTimeout(() => window.initTrendSwiper(), 300); // kasih jeda biar chart ready
-    }
+  if (typeof window.initTrendSwiper === "function") {
+    setTimeout(() => window.initTrendSwiper(), 300); // kasih jeda biar chart ready
+  }
 
-    panel.classList.add("open");
-  };
+  panel.classList.add("open");
+};
 
-  window.closeDetailPanel = function () {
-    const panel = document.getElementById("detail-panel");
-    if (panel) panel.classList.remove("open");
-  };
+window.closeDetailPanel = function () {
+  const panel = document.getElementById("detail-panel");
+  if (panel) panel.classList.remove("open");
+};
+
+// === 🧩 Helper Functions ===
+function formatNumber(num) {
+  if (num === null || num === undefined) return "—";
+  if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
+  if (num >= 1_000) return (num / 1_000).toFixed(1) + "K";
+  return num.toString();
+}
+
+
 
   /** RENDER **/
   function makeCard(p, i) {
