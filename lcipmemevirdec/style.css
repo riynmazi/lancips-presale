@@ -429,6 +429,28 @@ img {
 
 
 
+.mvd-reddit-buzz {
+  font-size: 0.85rem;
+  color: #dc2626;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mvd-reddit-link {
+  color: #dc2626;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.mvd-reddit-link:hover {
+  color: #b91c1c;
+}
+
+
+
+
 /* Header: icon + name + arrow */
 .mvd-card-header {
   display: flex;
