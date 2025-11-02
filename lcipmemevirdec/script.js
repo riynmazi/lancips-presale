@@ -187,42 +187,57 @@ function formatNumber(num) {
 
 
   /** RENDER **/
-  function makeCard(p, i) {
-    const card = document.createElement('article');
-    card.className = 'mvd-card';
-    const symbol = p.symbol || '—';
-    const name = p.name || '—';
-    const liquidity = p.liquidityUsd || 0;
-    const volume = p.volumeUsd || 0;
-    const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
+function makeCard(p, i) {
+  const card = document.createElement('article');
+  card.className = 'mvd-card';
+  const symbol = p.symbol || '—';
+  const name = p.name || '—';
+  const liquidity = p.liquidityUsd || 0;
+  const volume = p.volumeUsd || 0;
+  const logo = p.logoURI || `https://ui-avatars.com/api/?name=${encodeURIComponent(symbol)}&background=random`;
 
-    card.innerHTML = `
-      <div class="mvd-card-header">
-        <div class="mvd-card-header-left">
-          <img src="${logo}" alt="${symbol}" class="mvd-token-icon" />
-        </div>
-        <div class="mvd-card-header-right">
-          <div class="mvd-token-name">${name}</div>
-          <div class="mvd-token-symbol">${symbol}</div>
-        </div>
-        <div class="mvd-arrow">→</div>
+  // TAMBAH: Reddit data
+  const redditEngagement = p.redditEngagement || 0;
+  const redditQueryUrl = p.redditQueryUrl || null;
+
+  card.innerHTML = `
+    <div class="mvd-card-header">
+      <div class="mvd-card-header-left">
+        <img src="${logo}" alt="${symbol}" class="mvd-token-icon" />
       </div>
-
-      <div class="mvd-metrics">
-        <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
-        <div>Volume <span>${formatUSD(volume)}</span></div>
+      <div class="mvd-card-header-right">
+        <div class="mvd-token-name">${name}</div>
+        <div class="mvd-token-symbol">${symbol}</div>
       </div>
-    `;
+      <div class="mvd-arrow">→</div>
+    </div>
 
-    card.addEventListener('click', () => window.openDetailPanel(i));
-const arrow = card.querySelector('.mvd-arrow');
-if (arrow) arrow.addEventListener('click', (e) => {
-  e.stopPropagation(); // mencegah double trigger
-  window.openDetailPanel(i);
-});
+    <div class="mvd-metrics">
+      <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
+      <div>Volume <span>${formatUSD(volume)}</span></div>
+      <!-- TAMBAH REDDIT BUZZ -->
+      <div class="mvd-reddit-buzz">
+  <img src="reddit.png" alt="Reddit" style="width:16px; height:16px; vertical-align:middle; margin-right:4px;" />
+  <span>${redditEngagement.toLocaleString()}</span>
+  ${redditQueryUrl ? `
+    <a href="${redditQueryUrl}" target="_blank" class="mvd-reddit-link" onclick="event.stopPropagation()">
+      verify
+    </a>
+  ` : ''}
+</div>
 
-    return card;
-  }
+    </div>
+  `;
+
+  card.addEventListener('click', () => window.openDetailPanel(i));
+  const arrow = card.querySelector('.mvd-arrow');
+  if (arrow) arrow.addEventListener('click', (e) => {
+    e.stopPropagation();
+    window.openDetailPanel(i);
+  });
+
+  return card;
+}
 
   function renderTokens(tokensToShow) {
   if (!els.tokenGrid) return;
