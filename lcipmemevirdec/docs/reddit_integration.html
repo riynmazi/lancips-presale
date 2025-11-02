@@ -1,0 +1,221 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cipstrack — Reddit Integration Guide</title>
+  <meta name="description" content="Cipstrack (Lancips / $LCIP) — Reddit Integration Guide: setup, flow, regex, scoring, and best practices." />
+  <style>
+    :root{
+      --bg:#071029; --panel:#0d1624; --muted:#9aa6b2; --accent:#60a5fa; --glass: rgba(255,255,255,0.02);
+      --card-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      --radius:12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Segoe UI Mono', monospace;
+    }
+    html,body{height:100%;}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0; background:linear-gradient(180deg,var(--bg),#041026); color:#e8f0fb; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    .container{max-width:1050px;margin:36px auto;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:var(--radius);box-shadow:var(--card-shadow)}
+    header{display:flex;align-items:center;gap:16px}
+    header h1{margin:0;font-size:26px}
+    header p{margin:0;color:var(--muted);font-size:14px}
+    nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+    nav a{color:var(--accent);text-decoration:none;padding:8px 12px;border-radius:10px;background:var(--glass);font-size:13px}
+    .layout{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    main{min-width:0}
+    section{background:rgba(255,255,255,0.01);padding:18px;border-radius:10px;margin-bottom:12px}
+    h2{margin:0 0 10px}
+    .muted{color:var(--muted);font-size:14px}
+    ul{margin:8px 0 0 18px}
+    ol{margin:8px 0 0 18px}
+    pre{background:#041022;padding:12px;border-radius:8px;overflow:auto;color:#bfe3ff;font-family:var(--mono);font-size:13px}
+    code{font-family:var(--mono)}
+    aside{background:rgba(255,255,255,0.01);padding:16px;border-radius:10px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-size:13px}
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    @media (max-width:920px){
+      .layout{grid-template-columns:1fr}
+      aside{order:2}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <div class="top-bar">
+    <div class="left-group">
+      <button class="back-btn" onclick="window.location.href='https://www.lancips.xyz/lcipmemevirdec/docs/how-its-work.html'">
+        <img src="faq.png" alt="Back" />
+      </button>
+      <span class="app-title">CIPSTRACK</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div style="display:flex;flex-direction:column">
+        <h1>Cipstrack — Reddit Integration Guide</h1>
+        <p class="muted">This page explains how Cipstrack integrates Reddit data to detect token buzz and engagement, with setup instructions, data flow, regex filtering, and best practices for developers.</p>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <span class="badge">Last updated: Nov 02, 2025</span>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#setup">Setup & Configuration</a>
+      <a href="#flow">Data Flow</a>
+      <a href="#regex">Advanced Regex</a>
+      <a href="#firestore">Firestore Schema</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+      <a href="#updates">Updates</a>
+    </nav>
+
+    <div class="layout">
+      <main>
+
+        <section id="overview">
+          <h2>Overview</h2>
+          <p class="muted">The Reddit integration detects community buzz for crypto tokens, primarily meme coins. It searches for token symbols (e.g., $SOL) or wallet addresses and calculates engagement based on upvotes and comments.</p>
+          <ul>
+            <li>Filter tokens with viral potential based on Reddit hype.</li>
+            <li>Enhance credibility: store search URL for manual verification.</li>
+            <li>Cache results for 5 minutes to improve efficiency while keeping data fresh.</li>
+          </ul>
+        </section>
+
+        <section id="setup">
+          <h2>Setup & Configuration</h2>
+          <ol>
+            <li><strong>Create a Reddit App:</strong> Go to <a href="https://www.reddit.com/prefs/apps" style="color:var(--accent)">Reddit Apps</a> and create a "script" type app. Save <code>client_id</code> and <code>client_secret</code>. Set a unique User-Agent, e.g., <code>my_token_tracker/1.0 (by /u/yourusername)</code>.</li>
+            <li><strong>Environment Variables:</strong>
+              <pre><code>REDDIT_CLIENT_ID=your_client_id_here
+REDDIT_CLIENT_SECRET=your_client_secret_here
+REDDIT_THRESHOLD=5</code></pre>
+              Use secrets for deployment. Do not commit sensitive keys.
+            </li>
+            <li><strong>Install Dependencies:</strong> <code>npm install axios</code></li>
+            <li><strong>Deploy & Test:</strong> Trigger the cron job manually and verify results in Firestore under <code>tokens/{address}</code>.</li>
+          </ol>
+        </section>
+
+        <section id="flow">
+          <h2>Data Flow</h2>
+          <pre><code>
+Cron Trigger → Fetch Tokens from Birdeye
+              ↓
+For each Token: Authenticate Reddit OAuth
+              ↓
+Build Query → /search API
+              ↓
+Filter Posts → Calculate Engagement
+              ↓
+If engagement ≥ threshold → Save to Firestore
+          </code></pre>
+          <p class="muted">Engagement is calculated as <strong>upvotes + comments</strong>. Only posts matching regex patterns are considered.</p>
+        </section>
+
+        <section id="regex">
+          <h2>Advanced Regex Filtering</h2>
+          <p class="muted">Use regex to match token symbols and names accurately while avoiding false positives. Example patterns:</p>
+          <ul>
+            <li><code>\b${symbol}\b</code> — exact word match</li>
+            <li><code>\$${symbol}\b</code> — ticker style</li>
+            <li><code>\b${name}\b</code> — token name fallback</li>
+            <li>Context-aware hype match: <code>(?:pump|moon|buy|hodl|bull)\s+\$${symbol}</code></li>
+            <li>Negative lookahead: <code>(?!scam|rug|dump)\b${symbol}\b</code></li>
+          </ul>
+          <pre><code>
+function buildTokenPatterns(symbol, name) {
+  return [
+    new RegExp(`\\b${symbol}\\b(?!\\s*(?:scam|rug))`, 'i'),
+    new RegExp(`\\$${symbol}\\b(?=\\s*(?:pump|moon|to\\s+the))`, 'i'),
+    new RegExp(`\\b${name}\\b`, 'i')
+  ];
+}
+          </code></pre>
+        </section>
+
+        <section id="firestore">
+          <h2>Firestore Schema</h2>
+          <p class="muted">Each token document stores Reddit engagement metrics:</p>
+          <ul>
+            <li><strong>redditPostsCount:</strong> number of matched posts</li>
+            <li><strong>redditTotalUps:</strong> total upvotes</li>
+            <li><strong>redditTotalComments:</strong> total comments</li>
+            <li><strong>redditEngagement:</strong> sum of ups + comments</li>
+            <li><strong>redditTopPost:</strong> object with title, url, ups, comments, score, created</li>
+            <li><strong>redditQueryUrl:</strong> full Reddit search URL</li>
+          </ul>
+          <pre><code>
+{
+  "redditEngagement": 12,
+  "redditPostsCount": 3,
+  "redditTopPost": {
+    "title": "Why $SOL is mooning this week!",
+    "url": "https://reddit.com/r/cryptocurrency/comments/abc123/...",
+    "ups": 7,
+    "comments": 5,
+    "score": 12,
+    "created": "2025-11-02T10:00:00.000Z"
+  },
+  "redditQueryUrl": "https://www.reddit.com/search?q=%22SOL%22+OR+%223WzD...&sort=new&t=month"
+}
+          </code></pre>
+        </section>
+
+        <section id="troubleshooting">
+          <h2>Troubleshooting & Best Practices</h2>
+          <ul>
+            <li><strong>Invalid credentials:</strong> check client_id/secret and regenerate app if needed</li>
+            <li><strong>Rate limits:</strong> free tier ~100 queries/hour, add delays</li>
+            <li><strong>False positives/negatives:</strong> tweak regex patterns</li>
+            <li><strong>No token data:</strong> fallback is safe, but log warning</li>
+            <li><strong>Monitoring:</strong> check logs for "Reddit: {symbol} → SAVED/SKIP"</li>
+          </ul>
+        </section>
+
+        <section id="updates">
+          <h2>Updates</h2>
+          <ul>
+            <li><strong>v1.1 (Nov 02, 2025):</strong> Added advanced regex filtering with examples and testing tips</li>
+            <li><strong>v1.0 (Nov 02, 2025):</strong> Initial integration with Reddit query URL verification</li>
+          </ul>
+        </section>
+
+      </main>
+
+      <aside>
+        <h3>Quick Summary</h3>
+        <p class="muted"><strong>Flow:</strong> Fetch → Analyze → Filter → Save</p>
+        <h4 style="margin-top:10px">Key Points</h4>
+        <ul>
+          <li>Reddit OAuth integration</li>
+          <li>Threshold engagement: 5+ for saving</li>
+          <li>Advanced regex filtering for context-aware matches</li>
+          <li>Data cached 5 minutes for efficiency</li>
+        </ul>
+        <h4 style="margin-top:12px">Deployment Notes</h4>
+        <ul>
+          <li>Use Vercel secrets for credentials</li>
+          <li>Monitor rate limits</li>
+          <li>Check logs regularly for skipped tokens</li>
+        </ul>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <ul>
+            <li><a href="https://www.lancips.xyz/lcipmemevirdec/">Try CIPSTRACK</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
