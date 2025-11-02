@@ -218,3 +218,12 @@
     font-size: 13px;
   }
 }
+
+
+.layout main, .layout aside {
+  max-height: calc(100vh - 180px); /* viewport minus header/footer */
+  overflow-y: auto;
+  overflow-x: auto; /* horizontal scroll kalo terlalu lebar */
+  padding-right: 12px;
+  word-break: break-word; /* kata panjang tetap rapi */
+}
