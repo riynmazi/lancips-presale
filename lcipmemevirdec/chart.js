@@ -30,9 +30,13 @@ const chartDataSets = [
   },
   {
     // Chart 2: Kosong dulu
-    label: `${token.symbol} Reserved Chart`,
-    labels: [],
-    data: [],
+    label: `${token.symbol} Reddit performance`,
+    labels: ['Engagement', 'Total Comments', 'Total Ups'],
+    data: [
+      token.redditEngagement || 0,
+      token.redditTotalComments || 0,
+      token.redditTotalUps || 0
+    ],
     color: '#ff8800'
   }
 ];
