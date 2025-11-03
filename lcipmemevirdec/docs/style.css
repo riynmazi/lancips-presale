@@ -47,6 +47,10 @@
   text-decoration: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* === Right group: tabs / buttons === */
 .right-group {
   display: flex;
