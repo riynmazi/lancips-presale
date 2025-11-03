@@ -213,8 +213,12 @@ function makeCard(p, i) {
     </div>
 
     <div class="mvd-metrics">
-      <div>Liquidity <span>${formatUSD(liquidity)}</span></div>
-      <div>Volume <span>${formatUSD(volume)}</span></div>
+  <div>Sc🔥re<span>${Math.round(p.memeScore || 0)}</span></div>
+  <div>Volume <span>${formatUSD(volume)}</span></div>
+</div>
+
+
+
       <!-- TAMBAH REDDIT BUZZ -->
       <div class="mvd-reddit-buzz">
   <img src="reddit.png" alt="Reddit" style="width:16px; height:16px; vertical-align:middle; margin-right:4px;" />
