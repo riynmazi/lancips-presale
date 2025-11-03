@@ -212,8 +212,15 @@ function makeCard(p, i) {
       <div class="mvd-arrow">→</div>
     </div>
 
-    <div class="mvd-metrics">
-  <div>Sc🔥re<span>${Math.round(p.memeScore || 0)}</span></div>
+ 
+
+   <div class="mvd-metrics">
+  <div>
+    Meme Score 
+    <span style="color: ${Math.round(p.memeScore || 0) >= 500 ? 'green' : 'red'};">
+      ${Math.round(p.memeScore || 0)} / 1000
+    </span>
+  </div>
   <div>Volume <span>${formatUSD(volume)}</span></div>
 </div>
 
