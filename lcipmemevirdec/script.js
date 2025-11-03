@@ -53,8 +53,11 @@
   /** DETAIL PANEL **/
 window.openDetailPanel = function (index) {
   const panel = document.getElementById("detail-panel");
-  if (!panel || !allTokens[index]) return;
-  const token = allTokens[index];
+  if (!panel) return;
+
+  // Ambil token dari filteredTokens dulu
+  const token = filteredTokens[index] || allTokens[index];
+  if (!token) return;
 
   const setText = (selector, value) => {
     const el = panel.querySelector(selector);
