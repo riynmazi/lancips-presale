@@ -72,6 +72,12 @@ img {
   color: #01baa7;
 }
 
+a {
+  text-decoration: none;
+}
+
+
+
 /* === Kanan: search bar === */
 .search-input {
   width: 40%;
