@@ -111,6 +111,7 @@ button:hover{ background:var(--accent-600); transform:translateY(-1px); }
   text-decoration: none;
   color: #01baa7;
   line-height: 1;
+  text-decoration: none;
 }
 
 /* === KANAN: teks di pojok === */
