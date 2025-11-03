@@ -83,7 +83,7 @@ window.openDetailPanel = function (index) {
   setText("#detail-reddit-engagement", formatNumber(token.redditEngagement));
 
   // === 🆕 Total Score ===
-  setText("#detail-score", token.memeScore ? token.memeScore.toFixed(1) + " / 1000" : "—");
+  setText("#detail-score", token.memeScore ? token.memeScore.toFixed(1) : "—");
 
   // === Tombol aksi ===
   function openBirdeye(token) {
