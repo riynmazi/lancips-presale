@@ -218,7 +218,7 @@ function makeCard(p, i) {
   <div>
     🔥 
     <span style="color: ${Math.round(p.memeScore || 0) >= 500 ? 'green' : 'red'};">
-      ${Math.round(p.memeScore || 0)} / 1000
+      ${Math.round(p.memeScore || 0)}
     </span>
   </div>
   <div>Volume <span>${formatUSD(volume)}</span></div>
