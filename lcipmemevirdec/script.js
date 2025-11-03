@@ -363,7 +363,7 @@ function makeCard(p, i) {
   <strong class="viral-symbol">
     ${t.symbol || '—'}
     <span class="viral-chart" style="--w:${Math.min(Math.round(t.memeScore || 0),100)}"></span>
-    <span class="viral-hype">🔥 ${Math.round(t.memeScore || 0)}%</span>
+    <span class="viral-hype">🔥 ${Math.round(t.memeScore || 0)}/1000</span>
   </strong>
 `;
 console.log('Render viral:', t.symbol, t.memeScore);
