@@ -44,6 +44,7 @@
   text-transform: uppercase;
   color: #01baa7;
   white-space: nowrap; /* supaya teks tidak wrap */
+  text-decoration: none;
 }
 
 /* === Right group: tabs / buttons === */
